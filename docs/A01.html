@@ -11,7 +11,7 @@
 
 
 
-<title>Syllabus</title>
+<title>Assignment 01</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,10 +19,11 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -236,6 +237,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -243,6 +313,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -306,67 +386,17 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Syllabus</h1>
+<h1 class="title toc-ignore">Assignment 01</h1>
 
 </div>
 
 
-<hr />
-<p><strong>ESE 335 Environmental Data Analysis</strong><br />
-Monday/Wednesday (odd week only), 14:00-15:50<br />
-303, Building #2, Li Yuan<br />
-<a href="https://zhu-group.github.io/ese335/Schedule.html">Schedule for 2021 Spring</a></p>
-<hr />
-<p><strong>Course Website</strong><br />
-<a href="https://zhu-group.github.io/ese335" class="uri">https://zhu-group.github.io/ese335</a></p>
-<p><strong>Instructor</strong><br />
-Lei Zhu<br />
-School of Environmental Science and Engineering<br />
-Office: 429, Taizhou Hall<br />
-Email: <a href="mailto:zhul3@sustech.edu.cn" class="email">zhul3@sustech.edu.cn</a><br />
-Office Hours: By appointment</p>
-<p><strong>Teaching Assistant (TA)</strong><br />
-Dongchuan Pu<br />
-School of Environmental Science and Engineering<br />
-Office: 401-5, Taizhou Hall<br />
-Email: <a href="mailto:pudc2020@mail.sustech.edu.cn" class="email">pudc2020@mail.sustech.edu.cn</a><br />
-Office Hours: TBD</p>
-<p><strong>Credit</strong><br />
-The course has a credit of 3.0, with a total class hour of 48</p>
-<p><strong>Course Description</strong><br />
-As an interdisciplinary field, environmental science gains insights from various data sets of field studies, lab experiments, remote sensing, and model simulations. Analyzing and visualizing data sets has become one of the most critical skills for carrying out environmental science studies. However, senior ESE undergraduate students often find their opportunities to access such courses confined, and specific training toward developing desired skills limited.</p>
-<p>This course will teach students how to apply suitable statistical methods and visualization tools to analyze environmental data sets. Topics include basics of statistics, features of environmental data sets, checking data sets, comparisons between two groups, comparisons among several groups, correlation tests, simple linear regression, multiple linear regression, and logistic regression. Students will also learn how to conduct data analysis and visualization properly using the R language.</p>
-<p><strong>Course Objectives</strong><br />
-This course will facilitate student learning with pre-class readings, examples, lectures, in-class exercises, assignments, midterm exam, final project, and one-on-one interactions. Students should be able to analyze and visualize environmental data sets using suitable statistical methods and R tools. This course would also boost students’ programming skills, broadly applicable in their later study and research.</p>
-<p><strong>Pre-requisites</strong><br />
-Statistics or permission of the instructor</p>
-<p><strong>Textbooks</strong></p>
-<ul>
-<li><p><strong>[FPP]</strong> Freedman D., R. Pisani, and R. Purves, <em>Statistics</em>, W. W. Norton &amp; Company, 4<sup>th</sup> Edition (February 13, 2007), 720 pages, ISBN-10: 0393929728, ISBN-13: 978-0393929720.</p></li>
-<li><p><strong>[RS]</strong> Ramsey F. and D. Schafer, <em>The Statistical Sleuth: A Course in Methods of Data Analysis</em>, Cengage Learning, 3<sup>rd</sup> Edition (May 2, 2012), 784 pages, ISBN-10: 1133490670, ISBN-13: 978-1133490678.</p></li>
-<li><p>Other readings will be freely available from online resources and made available through the course website.</p></li>
-</ul>
-<p><strong>Course Requirements</strong></p>
-<ul>
-<li><p>Pre-class readings - Students are required to study the assigned readings prior to the class.</p></li>
-<li><p>Laptop - Bring laptops to the class to learn R programming.</p></li>
-<li><p>In-class exercises - You will be asked to finish 2-3 in-class exercises at the end of each section.</p></li>
-<li><p>Assignments - Bi-weekly assignments will be posted on this website. Assignments are due in class. As such, no late assignments will be accepted.</p></li>
-<li><p>Midterm exam - The midterm will be an in-class test. You will be allowed to bring a two-page (A4) cheat sheet.</p></li>
-<li><p>Final project - Each student will choose a question/topic of interest to study. Each student will be asked to make a poster and present it to the whole class.</p></li>
-<li><p>Participation - Participation in discussions is encouraged. You are also welcome to Office Hours held by the instructor and TA for specific questions.</p></li>
-</ul>
-<p><strong>Grading</strong></p>
-<ul>
-<li><p>Bi-weekly assignments (30%)</p></li>
-<li><p>Midterm exam (30%)</p></li>
-<li><p>Final project - poster presentation (30%)</p></li>
-<li><p>Class participation (10%)</p></li>
-<li><p>Academic dishonesty - Just don’t. If you’re not interested in learning and doing the work, don’t do it. But, please don’t cheat or plagiarize. It’s insulting to both you and the instructor and no good comes from it.</p></li>
-</ul>
+<p>TBD</p>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -399,6 +429,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
