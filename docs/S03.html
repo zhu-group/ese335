@@ -562,16 +562,16 @@ div.tocify {
 <p><img src="S03_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Check the average and sd</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw">mean</span>(sample1)</span></code></pre></div>
-<pre><code>## [1] -0.07902331</code></pre>
+<pre><code>## [1] 0.06940826</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">sd</span>(sample1)</span></code></pre></div>
-<pre><code>## [1] 1.05488</code></pre>
+<pre><code>## [1] 1.024931</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Compute the skewness, here we need load the moments package</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="kw">library</span>(moments)</span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="kw">skewness</span>(sample1)</span></code></pre></div>
-<pre><code>## [1] 0.03665175</code></pre>
+<pre><code>## [1] -0.3479788</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Compute the kurtosis</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="kw">kurtosis</span>(sample1)</span></code></pre></div>
-<pre><code>## [1] 2.923209</code></pre>
+<pre><code>## [1] 3.63755</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">#--------------------------------</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="co"># Make a log-normal</span></span>
 <span id="cb10-3"><a href="#cb10-3"></a>sample2 &lt;-<span class="st"> </span><span class="kw">exp</span>(sample1<span class="op">+</span><span class="dv">1</span>)</span>
@@ -580,13 +580,13 @@ div.tocify {
 <span id="cb10-6"><a href="#cb10-6"></a><span class="kw">hist</span>(sample2)</span></code></pre></div>
 <p><img src="S03_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">mean</span>(sample2)</span></code></pre></div>
-<pre><code>## [1] 4.328664</code></pre>
+<pre><code>## [1] 4.764972</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">sd</span>(sample2)</span></code></pre></div>
-<pre><code>## [1] 5.247153</code></pre>
+<pre><code>## [1] 6.575852</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">skewness</span>(sample2)</span></code></pre></div>
-<pre><code>## [1] 2.456485</code></pre>
+<pre><code>## [1] 5.610176</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">kurtosis</span>(sample2)</span></code></pre></div>
-<pre><code>## [1] 9.722147</code></pre>
+<pre><code>## [1] 43.74294</code></pre>
 <hr />
 </div>
 </div>
