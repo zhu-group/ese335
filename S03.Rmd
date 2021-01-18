@@ -132,6 +132,15 @@ kurtosis(sample2)
 
 Can you create a left-skewed sample? Can you repeat we did in the above example?
 
+**Solution:**
+```{r}
+z <- c( rnorm(10,0,1), runif(50, 1, 2) )
+hist(z)
+mean(z)
+sd(z)
+skewness(z)
+```
+
 ## Exercise #2
 
 One of the most important theorems in all of statistics is called the *Central Limit Theorem* or the *Law of Large Numbers*.  
@@ -141,4 +150,33 @@ It states that given a sufficiently large sample size from a population with a f
 Furthermore, as you increase the number of samples and the sample size, the distribution of all of the sample means will approximate a normal distribution even if the original variables themselves are not normally distributed.
 
 Can you demonstrate the two statements using R?
+
+**Solution:**
+```{r}
+
+# Central Limit Theorem 
+Simulations <- 10000
+Samle_size  <- 1000
+Sample_mean <- c()
+
+# We draw samples form a unifrom distribution
+sample <- runif(Samle_size, min = 0, max = 10)
+
+for(i in 1:Simulations){
+  # Sample from a distribution
+  sample <- runif(Samle_size, min = 0, max = 10)
+  # Compute the sample average
+  average <- mean(sample)
+  # Store the sample average
+  Sample_mean <- c(Sample_mean, average)
+}
+
+# Plot hist of sample averages
+hist(Sample_mean)
+
+# Check mean, sd, and skewness
+mean(Sample_mean)
+sd(Sample_mean)
+skewness(Sample_mean)
+```
 
