@@ -10,10 +10,6 @@ output:
 
 ***
 
-*The notes below are modified from the excellent [Dataframe Manipulation](http://swcarpentry.github.io/r-novice-gapminder/) and freely available on the Software Carpentry website.*
-
-***
-
 # Prerequisites
 
 Install the following packages:
@@ -28,6 +24,22 @@ library(tidyr)
 library(dplyr)
 library(ggplot2)
 ```
+
+***
+
+# Section Example: weather data at the BaoAn airport
+
+Environment data, expecially raw observations, are really messy. Here we  take a look at the hourly weather data measured at the BaoAn International Airport during the past 10 years. The data set is download from [NOAA Integrated Surface Dataset](https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc%3AC00532/html).
+
+Download the file [2281305.zip](https://zhu-group.github.io/ese335/download/2281305.zip), where the number 2281305 is the site ID.
+
+Extract the zip file, you should see a file named `2281305.csv`. 
+
+Open the file, you see many columns and even more lines, with no clear meaning and definitions. This is very often you would encounter when work with environmental data. As Hadley Wickham puts it, “Tidy datasets are all alike, but every messy dataset is messy in its own way.”  
+
+***
+
+*The notes below are modified from the excellent [Dataframe Manipulation](http://swcarpentry.github.io/r-novice-gapminder/) and freely available on the Software Carpentry website.*
 
 ***
 
