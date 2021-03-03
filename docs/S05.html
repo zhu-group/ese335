@@ -571,7 +571,7 @@ div.tocify {
 <p>Here we’re going to cover commonly used functions as well as using pipes <code>%&gt;%</code> to combine them.</p>
 <div id="using-select" class="section level2">
 <h2>Using <code>select()</code></h2>
-<p>Use the <code>select()</code> function to keep only the variables (cplumns) you select.</p>
+<p>Use the <code>select()</code> function to keep only the variables (columns) you select.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">select</span>(Keeling_Data_tbl,year,co2,quality)</span></code></pre></div>
 <pre><code>## # A tibble: 754 x 3
 ##     year   co2 quality
@@ -623,7 +623,7 @@ div.tocify {
 ##  9  1958  313.       1
 ## 10  1958  315.       1
 ## # ... with 744 more rows</code></pre>
-<p>The above lines mean we first call the <code>Keeling_Data_tbl</code> tibble and pass it on, using the <strong>pipe symbol</strong> <code>%&gt;%</code>, to the next step, which is the <code>select()</code> function. In this case, we don’t specify which <strong>data object</strong> we use in the <code>select()</code> function since in gets that from the previous pipe. The <code>select()</code> function then takes what it gets from the pipe, in this case the <code>Keeling_Data_tbl</code> tibble, as its <strong>first argument</strong>. By using pipe, we can take output of the previous step as input for the next one, so that we can avoid defining and calling unnecessary temporary variables. You will start to see the power of <code>pipe</code> later.</p>
+<p>The above lines mean we first call the <code>Keeling_Data_tbl</code> tibble and pass it on, using the <strong>pipe symbol</strong> <code>%&gt;%</code>, to the next step, which is the <code>select()</code> function. In this case, we don’t specify which <strong>data object</strong> we use in the <code>select()</code> function since in gets that from the previous pipe. The <code>select()</code> function then takes what it gets from the pipe, in this case the <code>Keeling_Data_tbl</code> tibble, as its <strong>first argument</strong>. By using pipe, we can take output of the previous step as input for the next one, so that we can avoid defining and calling unnecessary temporary variables. You will start to see the power of pipe later.</p>
 </div>
 <div id="using-filter" class="section level2">
 <h2>Using <code>filter()</code></h2>
@@ -667,7 +667,7 @@ div.tocify {
 </div>
 <div id="using-group_by-and-summarize" class="section level2">
 <h2>Using <code>group_by()</code> and <code>summarize()</code></h2>
-<p>Now try to ‘group’ monthly data using the <code>group_by()</code> function, notice how the ouput tibble changes:</p>
+<p>Now try to group monthly data using the <code>group_by()</code> function, notice how the output tibble changes:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb16-3"><a href="#cb16-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -847,6 +847,7 @@ div.tocify {
 <span id="cb37-6"><a href="#cb37-6"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>month)</span></code></pre></div>
 <pre><code>## Warning: Removed 2 row(s) containing missing values (geom_path).</code></pre>
 <p><img src="S05_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>OK, that is enough for data wrangling We will learn more about <code>ggplot2</code> in future sections.</p>
 <hr />
 </div>
 </div>
@@ -883,7 +884,8 @@ div.tocify {
 </div>
 <div id="boxplots" class="section level2">
 <h2>Boxplots</h2>
-<p>To visualize the relationship between a numerical and categorical variable, we will use a <code>boxplot</code>. In the <code>Keeling_Data_tbl</code> dataset, the <code>month</code> is a categorical variable. First, note that we can use a single boxplot as an alternative to a histogram for visualizing a single numerical variable. To do so in R, we use the <code>boxplot()</code> function.</p>
+<p>To visualize the relationship between a numerical and categorical variable, we will use a <code>boxplot</code>. A boxplot is usful in checking the center, spread, and skewness of a sample.</p>
+<p>In the <code>Keeling_Data_tbl</code> dataset, the <code>month</code> is a categorical variable. First, note that we can use a single boxplot as an alternative to a histogram for visualizing a single numerical variable. To do so in R, we use the <code>boxplot()</code> function.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="kw">boxplot</span>(Month_CO2)</span></code></pre></div>
 <p><img src="S05_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>Or try to plot the raw data:</p>
@@ -923,9 +925,9 @@ div.tocify {
 <h1>In-class exercises</h1>
 <div id="exercise-1" class="section level2">
 <h2>Exercise #1</h2>
-<p>Give the following observations, draw two boxplots (with and without outliers):</p>
+<p>Give the following observations:</p>
 <p><code>1, 1, 6, 13, 13, 14, 14, 14, 16, 17, 18, 18, 19, 19, 20, 21, 22</code>.</p>
-<p>Then make a boxplot with R, compare it with your hand-drawing boxplots.</p>
+<p>Make a boxplot with R. What is the IQR? Can you explain why <code>1</code> is marked as outliers?</p>
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
