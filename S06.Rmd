@@ -29,9 +29,9 @@ library(geoR)
 
 # Section Example: Sleep duration of SUSTech students
 
-This section starts with a poll. Suppose we want to know how many hours SUSTech undergraduates generally sleep every day. Let's further assume that ESE335 students are representative of the whole population.
+This section starts with a poll. Suppose we want to know how many hours SUSTech undergraduates generally sleep every day. Let's further assume that ESE335 students are representative of the whole population (SUSTech undergraduates).
 
-Now count the number of students for each of the following intervals:
+Now let's count the number of students for each of the following intervals:
 
 + less than 5 hours
 
@@ -115,7 +115,7 @@ If the data set follows the normal distribution, it is easier to predict with hi
 
 If we found that the distribution of our data is not normal, we have to choose a **non-parametric** statistical test (e.g. Mann-Whitney test, Spearman’s correlation coefficient) or so-called distribution-free tests. 
 
-There are several possibilities to check normality, including visual inspections, such as normal plots/histograms,  Q-Q (quartile-quartile) plot, and statistical tests, such as Sapiro-Wilk test and Lillifors (Kolmogorov–Smirnov) test.
+There are several possibilities to check normality, including visual inspections, such as normal plots/histograms,  Q-Q (quartile-quartile) plot, and statistical tests, such as Shapiro-Wilk test and Lilliefors (Kolmogorov–Smirnov) test.
 
 ## Density plot
 
@@ -157,11 +157,11 @@ ggqqplot(sample2)
 
 Here the gray area shows the acceptable deviation from the normal line. 
 
-## Sapiro-Wilk test
+## Shapiro-Wilk test
 
 The above visual observations are just sanity checks. To have a more reliable result, one needs to do a statistical test of the normality. Here the sample distribution is compared with the normal distribution. The null hypothesis of these tests is the sample distribution is normal. If we fail to reject the null hypothesis, the sample is normal. If the test is significant/we reject the null hypothesis, the sample distribution is non-normal.  
 
-The Sapiro-Wilk method is widely used to check normality of a **small sample** (size less than `30`). In R, the test is done with `shapiro.test()`.
+The Shapiro-Wilk method is widely used to check normality of a **small sample** (size less than `30`). In R, the test is done with `shapiro.test()`.
 
 ```{r}
 # Sample 3 is from a normal distribution
@@ -170,26 +170,26 @@ sample3  <- sample1[1:25]
 # Sample 4 is from a uniform distribution
 sample4  <- sample2[1:25]
 
-# Sapiro-Wilk test of sample 3
+# Shapiro-Wilk test of sample 3
 shapiro.test(sample3)
 ```
 
 From the output, the p-value > 0.05 shows that we fail to reject the null hypothesis, which means the distribution of our data is not significantly different from the normal distribution. In other words, the distribution of our data is normal. 
 
 ```{r}
-# Sapiro-Wilk test of sample 4
+# Shapiro-Wilk test of sample 4
 shapiro.test(sample4)
 ```
 
-## Lillifors test
+## Lilliefors test
 
-The Kolmogorov-Smirnov (K-S) test is used to test whether or not or not a sample comes from a certain distribution. The Lillifors test is an improvement on the K-S test — correcting the K-S for small values at the tails of probability distributions — and is therefore sometimes called the K-S D test. The Lillifors test can be conducted with the `lillie.test()` function from the `nortest` package:
+The Kolmogorov-Smirnov (K-S) test is used to test whether or not or not a sample comes from a certain distribution. The Lilliefors test is an improvement on the K-S test — correcting the K-S for small values at the tails of probability distributions — and is therefore sometimes called the K-S D test. The Lilliefors test can be conducted with the `lillie.test()` function from the `nortest` package:
 
 ```{r}
-# Lillifors test of sample 1
+# Lilliefors test of sample 1
 lillie.test(sample1)
 
-# Lillifors test of sample 2
+# Lilliefors test of sample 2
 lillie.test(sample2)
 ```
 
@@ -245,7 +245,7 @@ ggdensity(y,main = "Density plot of sample", xlab = "x")
 # Plot Q-Q plot
 ggqqplot(y)
 
-# Lillifors test 
+# Lilliefors test 
 lillie.test(y)
 
 # BOX-COX transformation, get lambda
@@ -260,7 +260,7 @@ ggdensity(y_new,main = "Density plot of sample", xlab = "x")
 # Plot Q-Q plot
 ggqqplot(y_new)
 
-# Lillifors test 
+# Lilliefors test 
 lillie.test(y_new)
 ```
 
@@ -308,7 +308,7 @@ Now conduct the BOX-COX transformation for the sample, and for the new sample:
 
 + 3.6 Test the normality 
 
-## Exercise #3
+## Exercise #4
 
 Suppose you have a sample, which is from 2 populations:
 
