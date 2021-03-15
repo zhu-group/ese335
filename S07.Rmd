@@ -22,19 +22,19 @@ library(nortest)
 
 # Section Example: Span calibration 
 
-Suppose we want to determine the concentration of CO (carbon monoxide) near freeways with various conditions of traffic flow. The basic technique involves capturing air samples in special bags, and then determine the CO concentrations in a bag using an instrument called spectrophotometer. The spectrophotometers are quite delicate and have to be calibrated every day. This is done by measuring CO concentration in a *span gas*, where the concentration is precisely controlled at `70` ppm. If the spectrophotometer reads close to 70 ppm on the span gas, it's ready for use; otherwise, it has to be adjusted. 
+Suppose we want to determine the concentration of CO (carbon monoxide) near freeways with various conditions of traffic flow. The basic technique involves capturing air samples in special bags, and then determine the CO concentrations in a bag using an instrument called spectrophotometer. The spectrophotometers are quite delicate and have to be calibrated every day. This is done by measuring CO concentration in a *span gas*, where the concentration is precisely controlled at `70` ppm. If the spectrophotometer reads close to `70` ppm on the span gas, it's ready for use; otherwise, it has to be adjusted. 
 
 One day, we make five readings on span gas, and get:
 
 `78, 83, 68, 72, 88`
 
-So 4 out of 5 of these numbers are higher than `70`, and some of them by quite a bit. Can this be explained on the basis of chance variation? Or does it show bias?
+So `4` out of `5` of these numbers are higher than `70`, and some of them by quite a bit. Can this be explained on the basis of chance variation? Or does it show bias?
 
 ***
 
 # The Z-Ratio
 
-We also know that the spectrophotometer can measure CO concentration up to 100 ppm with an instrument error of `10` ppm (1 $\sigma$). Instrument error generally follows a normal distribution. In this case, let's now assume that the error follows a normal distribution $N(\mu , 10)$, where $\mu$ is unknown. With this set-up, we can write:
+We also know that the spectrophotometer can measure CO concentration up to `100` ppm with an instrument error of `10` ppm (`1` $\sigma$). Instrument error generally follows a normal distribution. In this case, let's now assume that the error follows a normal distribution $N(\mu , 10)$, where $\mu$ is unknown. With this set-up, we can write:
 
 + H0: The instrument has no bias ($\mu = 0$)
 
@@ -49,15 +49,15 @@ For our job, it is then specified as:
 
 $$Z=\frac {\overline{X} - \mu} {\sigma}  $$
 
-Basically, Z-Ration describes  how far do the observations deviate from the assumed mean. 
+Basically, Z-Ratio describes how far do the observations deviate from the assumed mean. 
 
 ***
 
 # One sample Z-test
 
-In this case, $\overline X$ is `7.8`, as the mean of `8, 13, -2, 2, 18`,  and $\sigma$ is `10`. Assuming H0 is true, we get $Z=0.78$.
+In this case, $\overline X$ is `7.8`, as the mean of `8, 13, -2, 2, 18`,  and $\sigma$ is `10`. Assuming H0 is true, we get $Z$ is `0.78`.
 
-If the sampling distribution of the estimate is normal, then the sampling distribution of $Z$ follows standard distribution by definition. Then with R, we can compute the p-value:
+If the sampling distribution of the estimate is normal, then the sampling distribution of $Z$ follows standard normal distribution by definition. Then with R, we can compute the p-value:
 
 ```{r}
 # Sample
@@ -105,7 +105,7 @@ $$SE(\overline {X})=\frac {s} {\sqrt{n}}$$
 And we have:
 
 $$t=\frac {\overline{X} - \mu} { {s} / {\sqrt{n}}}  $$
-If $\overline {X}$ is the average in a random sample of size $n$ from a normal population, the sampling   distribution of its t-Ratio follows a Student's t-distribution on $n-1$ degrees of freedom (df). 
+If $\overline {X}$ is the average in a random sample of size $n$ from a normal population, the sampling distribution of its t-Ratio follows a Student's t-distribution on $n-1$ degrees of freedom (df). 
 
 The mathematical form of the PDF of a Student's t distribution is very complicated. With R, we can easily plot different PDFs with the `dt()` function.
 
@@ -142,7 +142,7 @@ text(-4, 0.25, "t (df=2)", col="red", cex=2)
 
 ```
 
-As the sample size increases, the Student's t distribution becomes more like a standard normal distribution ($n>30$). 
+As the sample size increases, the Student's t distribution becomes more like a standard normal distribution (`n > 30`). 
 
 ```{r}
 
@@ -154,7 +154,7 @@ plot(x, density1, col="purple", xlab="", ylab="Density",
 
 # Compute and plot the density from the normal distribution
 density4  <- dnorm(x, mean = 0, sd = 1)
-lines(x, density4, col="black", xlab="", ylab="Density", 
+lines(x, density4, col="red", xlab="", ylab="Density", 
       type="l", lwd=3, cex=2)
 
 text(-4, 0.35, "t (df=30)", col="purple",   cex=2)
@@ -172,7 +172,7 @@ Let's use the observations again, but conduct a one-sample t-test.
 
 + H1: The instrument has a positive bias ($\mu > 0$)
 
-In this case, $\overline X$ is again `7.8`, $SE(\overline X)$ is Assuming H0 is true, we get $t=2.16$.
+In this case, $\overline X$ is again `7.8`, $SE(\overline X)$ is Assuming H0 is true, we get $t$=`2.16`.
 
 Then with R, we can compute the p-value:
 
@@ -213,7 +213,7 @@ Now, we have a probability of about `4.84%` getting a statistic ($t$) as extreme
 
 # One sample t-test with R
 
-It turns out you can perform the previous one-sample t-test simaply as:
+It turns out you can perform the previous one-sample t-test simply as:
 
 + H0: The instrument has no bias ($\mu = 70$)
 

@@ -494,15 +494,15 @@ div.tocify {
 </div>
 <div id="section-example-span-calibration" class="section level1">
 <h1>Section Example: Span calibration</h1>
-<p>Suppose we want to determine the concentration of CO (carbon monoxide) near freeways with various conditions of traffic flow. The basic technique involves capturing air samples in special bags, and then determine the CO concentrations in a bag using an instrument called spectrophotometer. The spectrophotometers are quite delicate and have to be calibrated every day. This is done by measuring CO concentration in a <em>span gas</em>, where the concentration is precisely controlled at <code>70</code> ppm. If the spectrophotometer reads close to 70 ppm on the span gas, it’s ready for use; otherwise, it has to be adjusted.</p>
+<p>Suppose we want to determine the concentration of CO (carbon monoxide) near freeways with various conditions of traffic flow. The basic technique involves capturing air samples in special bags, and then determine the CO concentrations in a bag using an instrument called spectrophotometer. The spectrophotometers are quite delicate and have to be calibrated every day. This is done by measuring CO concentration in a <em>span gas</em>, where the concentration is precisely controlled at <code>70</code> ppm. If the spectrophotometer reads close to <code>70</code> ppm on the span gas, it’s ready for use; otherwise, it has to be adjusted.</p>
 <p>One day, we make five readings on span gas, and get:</p>
 <p><code>78, 83, 68, 72, 88</code></p>
-<p>So 4 out of 5 of these numbers are higher than <code>70</code>, and some of them by quite a bit. Can this be explained on the basis of chance variation? Or does it show bias?</p>
+<p>So <code>4</code> out of <code>5</code> of these numbers are higher than <code>70</code>, and some of them by quite a bit. Can this be explained on the basis of chance variation? Or does it show bias?</p>
 <hr />
 </div>
 <div id="the-z-ratio" class="section level1">
 <h1>The Z-Ratio</h1>
-<p>We also know that the spectrophotometer can measure CO concentration up to 100 ppm with an instrument error of <code>10</code> ppm (1 <span class="math inline">\(\sigma\)</span>). Instrument error generally follows a normal distribution. In this case, let’s now assume that the error follows a normal distribution <span class="math inline">\(N(\mu , 10)\)</span>, where <span class="math inline">\(\mu\)</span> is unknown. With this set-up, we can write:</p>
+<p>We also know that the spectrophotometer can measure CO concentration up to <code>100</code> ppm with an instrument error of <code>10</code> ppm (<code>1</code> <span class="math inline">\(\sigma\)</span>). Instrument error generally follows a normal distribution. In this case, let’s now assume that the error follows a normal distribution <span class="math inline">\(N(\mu , 10)\)</span>, where <span class="math inline">\(\mu\)</span> is unknown. With this set-up, we can write:</p>
 <ul>
 <li><p>H0: The instrument has no bias (<span class="math inline">\(\mu = 0\)</span>)</p></li>
 <li><p>H1: The instrument has a positive bias (<span class="math inline">\(\mu &gt; 0\)</span>)</p></li>
@@ -511,13 +511,13 @@ div.tocify {
 <p><span class="math display">\[Z=\frac {Estimate - Parameter} {SD(Estimate)}  \]</span> In this case, <span class="math inline">\(Estimate\)</span> is the sample average (<span class="math inline">\(\overline{X}\)</span>), and <span class="math inline">\(Parameter\)</span> is the population mean (<span class="math inline">\(\mu\)</span>). Since the sample if from the population with a known SD (<span class="math inline">\(\sigma\)</span>), the SD of average (<span class="math inline">\(\overline{X}\)</span>) is also <span class="math inline">\(\sigma\)</span>.</p>
 <p>For our job, it is then specified as:</p>
 <p><span class="math display">\[Z=\frac {\overline{X} - \mu} {\sigma}  \]</span></p>
-<p>Basically, Z-Ration describes how far do the observations deviate from the assumed mean.</p>
+<p>Basically, Z-Ratio describes how far do the observations deviate from the assumed mean.</p>
 <hr />
 </div>
 <div id="one-sample-z-test" class="section level1">
 <h1>One sample Z-test</h1>
-<p>In this case, <span class="math inline">\(\overline X\)</span> is <code>7.8</code>, as the mean of <code>8, 13, -2, 2, 18</code>, and <span class="math inline">\(\sigma\)</span> is <code>10</code>. Assuming H0 is true, we get <span class="math inline">\(Z=0.78\)</span>.</p>
-<p>If the sampling distribution of the estimate is normal, then the sampling distribution of <span class="math inline">\(Z\)</span> follows standard distribution by definition. Then with R, we can compute the p-value:</p>
+<p>In this case, <span class="math inline">\(\overline X\)</span> is <code>7.8</code>, as the mean of <code>8, 13, -2, 2, 18</code>, and <span class="math inline">\(\sigma\)</span> is <code>10</code>. Assuming H0 is true, we get <span class="math inline">\(Z\)</span> is <code>0.78</code>.</p>
+<p>If the sampling distribution of the estimate is normal, then the sampling distribution of <span class="math inline">\(Z\)</span> follows standard normal distribution by definition. Then with R, we can compute the p-value:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Sample</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>Sample   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">78</span>, <span class="dv">83</span>, <span class="dv">68</span>, <span class="dv">72</span>, <span class="dv">88</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a></span>
@@ -584,7 +584,7 @@ div.tocify {
 <span id="cb4-27"><a href="#cb4-27"></a><span class="kw">text</span>(<span class="op">-</span><span class="dv">4</span>, <span class="fl">0.30</span>, <span class="st">&quot;t (df=5)&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,  <span class="dt">cex=</span><span class="dv">2</span>)</span>
 <span id="cb4-28"><a href="#cb4-28"></a><span class="kw">text</span>(<span class="op">-</span><span class="dv">4</span>, <span class="fl">0.25</span>, <span class="st">&quot;t (df=2)&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">cex=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="S07_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>As the sample size increases, the Student’s t distribution becomes more like a standard normal distribution (<span class="math inline">\(n&gt;30\)</span>).</p>
+<p>As the sample size increases, the Student’s t distribution becomes more like a standard normal distribution (<code>n &gt; 30</code>).</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Plot Density</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="kw">plot</span>(x, density1, <span class="dt">col=</span><span class="st">&quot;purple&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
 <span id="cb5-3"><a href="#cb5-3"></a>     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="dv">2</span>, </span>
@@ -593,7 +593,7 @@ div.tocify {
 <span id="cb5-6"><a href="#cb5-6"></a></span>
 <span id="cb5-7"><a href="#cb5-7"></a><span class="co"># Compute and plot the density from the normal distribution</span></span>
 <span id="cb5-8"><a href="#cb5-8"></a>density4  &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="kw">lines</span>(x, density4, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="kw">lines</span>(x, density4, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
 <span id="cb5-10"><a href="#cb5-10"></a>      <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="dv">2</span>)</span>
 <span id="cb5-11"><a href="#cb5-11"></a></span>
 <span id="cb5-12"><a href="#cb5-12"></a><span class="kw">text</span>(<span class="op">-</span><span class="dv">4</span>, <span class="fl">0.35</span>, <span class="st">&quot;t (df=30)&quot;</span>, <span class="dt">col=</span><span class="st">&quot;purple&quot;</span>,   <span class="dt">cex=</span><span class="dv">2</span>)</span>
@@ -608,7 +608,7 @@ div.tocify {
 <li><p>H0: The instrument has no bias (<span class="math inline">\(\mu = 0\)</span>)</p></li>
 <li><p>H1: The instrument has a positive bias (<span class="math inline">\(\mu &gt; 0\)</span>)</p></li>
 </ul>
-<p>In this case, <span class="math inline">\(\overline X\)</span> is again <code>7.8</code>, <span class="math inline">\(SE(\overline X)\)</span> is Assuming H0 is true, we get <span class="math inline">\(t=2.16\)</span>.</p>
+<p>In this case, <span class="math inline">\(\overline X\)</span> is again <code>7.8</code>, <span class="math inline">\(SE(\overline X)\)</span> is Assuming H0 is true, we get <span class="math inline">\(t\)</span>=<code>2.16</code>.</p>
 <p>Then with R, we can compute the p-value:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Sample</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>Sample   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">78</span>, <span class="dv">83</span>, <span class="dv">68</span>, <span class="dv">72</span>, <span class="dv">88</span>)</span>
@@ -644,7 +644,7 @@ div.tocify {
 </div>
 <div id="one-sample-t-test-with-r" class="section level1">
 <h1>One sample t-test with R</h1>
-<p>It turns out you can perform the previous one-sample t-test simaply as:</p>
+<p>It turns out you can perform the previous one-sample t-test simply as:</p>
 <ul>
 <li><p>H0: The instrument has no bias (<span class="math inline">\(\mu = 70\)</span>)</p></li>
 <li><p>H1: The instrument has a positive bias (<span class="math inline">\(\mu &gt; 70\)</span>)</p></li>
