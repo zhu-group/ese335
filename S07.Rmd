@@ -43,11 +43,11 @@ We also know that the spectrophotometer can measure CO concentration up to `100`
 To test the hypothesis (H0), let's calculate the p-value assuming H0 is true. Here we will use *Z-Ratio*, which is defined as:
 
 $$Z=\frac {Estimate - Parameter} {SD(Estimate)}  $$
-In this case, $Estimate$ is the sample average ($\overline{X}$), and $Parameter$ is the population mean ($\mu$). Since the sample if from the population with a known SD ($\sigma$), the SD of average ($\overline{X}$) is also $\sigma$. 
+In this case, $Estimate$ is the sample average ($\overline{X}$), and $Parameter$ is the population mean ($\mu$). Since the sample is from a normal population with a known ($\sigma$), the SD of the sample average ($\overline{X}$) is then $\ {\sigma} / {\sqrt{n}}$. 
 
 For our job, it is then specified as:
 
-$$Z=\frac {\overline{X} - \mu} {\sigma}  $$
+$$Z=\frac {\overline{X} - \mu} {\sigma / \sqrt{n}}   $$
 
 Basically, Z-Ratio describes how far do the observations deviate from the assumed mean. 
 
@@ -55,7 +55,7 @@ Basically, Z-Ratio describes how far do the observations deviate from the assume
 
 # One sample Z-test
 
-In this case, $\overline X$ is `7.8`, as the mean of `8, 13, -2, 2, 18`,  and $\sigma$ is `10`. Assuming H0 is true, we get $Z$ is `0.78`.
+In this case, $\overline X$ is `7.8`, as the mean of `8, 13, -2, 2, 18`,  and $\sigma$ is `10`. Assuming H0 is true, we get $Z$ is `1.74`.
 
 If the sampling distribution of the estimate is normal, then the sampling distribution of $Z$ follows standard normal distribution by definition. Then with R, we can compute the p-value:
 
@@ -73,22 +73,21 @@ Error    <- Sample - Baseline
 SD       <- 10
 
 # Get Z-ratio
-Z        <- mean(Error)/SD
+Z        <- mean(Error)/(SD/sqrt(length(Error)))
 
 # Find the one-side p-value
 # The pnorm function gives the Cumulative Distribution Function (CDF) 
 # of the Normal distribution in R, which is the probability that 
 # the variable takes a value lower or equal to a threshold (here Z).
-# Here we that 1-pnorm to get the probability that the 
+# Here we use 1-pnorm to get the probability that the 
 # variable takes a value higher than the threshold (Z).
 P_value   <- 1 - pnorm(Z, mean=0, sd=1)
 
 print(P_value)
 ```
+OK, we have a probability of about `4.06%` getting a statistic ($Z$) as extreme or more extreme than the observed statistic (`1.74`), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, the instrument has bias based on the observations.
 
-OK, we have a probability of about `21.77%` getting a statistic ($Z$) as extreme or more extreme than the observed statistic (`0.78`), assuming H0 is true. This is not a small probability, and is not likely due to chance. We can not reject H0 given the observations. Thus, the instrument has no bias based on the observations.
-
-Now change the instrument error to `2.0` and repeat the above steps. Can you explain what happens?
+Now change the instrument error to `20` and repeat the above steps. Can you explain what happens?
 
 ***
 
@@ -172,7 +171,7 @@ Let's use the observations again, but conduct a one-sample t-test.
 
 + H1: The instrument has a positive bias ($\mu > 0$)
 
-In this case, $\overline X$ is again `7.8`, $SE(\overline X)$ is Assuming H0 is true, we get $t$=`2.16`.
+In this case, $\overline X$ is again `7.8`, $SE(\overline X)$ is `3.16` ,assuming H0 is true, we get $t$=`2.16`.
 
 Then with R, we can compute the p-value:
 
@@ -219,7 +218,7 @@ It turns out you can perform the previous one-sample t-test simply as:
 
 + H1: The instrument has a positive bias ($\mu > 70$)
 
-In R simply, this is done by:
+In R, this is done by:
 
 ```{r}
 # Sample

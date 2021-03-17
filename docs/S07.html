@@ -508,15 +508,15 @@ div.tocify {
 <li><p>H1: The instrument has a positive bias (<span class="math inline">\(\mu &gt; 0\)</span>)</p></li>
 </ul>
 <p>To test the hypothesis (H0), let’s calculate the p-value assuming H0 is true. Here we will use <em>Z-Ratio</em>, which is defined as:</p>
-<p><span class="math display">\[Z=\frac {Estimate - Parameter} {SD(Estimate)}  \]</span> In this case, <span class="math inline">\(Estimate\)</span> is the sample average (<span class="math inline">\(\overline{X}\)</span>), and <span class="math inline">\(Parameter\)</span> is the population mean (<span class="math inline">\(\mu\)</span>). Since the sample if from the population with a known SD (<span class="math inline">\(\sigma\)</span>), the SD of average (<span class="math inline">\(\overline{X}\)</span>) is also <span class="math inline">\(\sigma\)</span>.</p>
+<p><span class="math display">\[Z=\frac {Estimate - Parameter} {SD(Estimate)}  \]</span> In this case, <span class="math inline">\(Estimate\)</span> is the sample average (<span class="math inline">\(\overline{X}\)</span>), and <span class="math inline">\(Parameter\)</span> is the population mean (<span class="math inline">\(\mu\)</span>). Since the sample is from a normal population with a known (<span class="math inline">\(\sigma\)</span>), the SD of the sample average (<span class="math inline">\(\overline{X}\)</span>) is then <span class="math inline">\(\ {\sigma} / {\sqrt{n}}\)</span>.</p>
 <p>For our job, it is then specified as:</p>
-<p><span class="math display">\[Z=\frac {\overline{X} - \mu} {\sigma}  \]</span></p>
+<p><span class="math display">\[Z=\frac {\overline{X} - \mu} {\sigma / \sqrt{n}}   \]</span></p>
 <p>Basically, Z-Ratio describes how far do the observations deviate from the assumed mean.</p>
 <hr />
 </div>
 <div id="one-sample-z-test" class="section level1">
 <h1>One sample Z-test</h1>
-<p>In this case, <span class="math inline">\(\overline X\)</span> is <code>7.8</code>, as the mean of <code>8, 13, -2, 2, 18</code>, and <span class="math inline">\(\sigma\)</span> is <code>10</code>. Assuming H0 is true, we get <span class="math inline">\(Z\)</span> is <code>0.78</code>.</p>
+<p>In this case, <span class="math inline">\(\overline X\)</span> is <code>7.8</code>, as the mean of <code>8, 13, -2, 2, 18</code>, and <span class="math inline">\(\sigma\)</span> is <code>10</code>. Assuming H0 is true, we get <span class="math inline">\(Z\)</span> is <code>1.74</code>.</p>
 <p>If the sampling distribution of the estimate is normal, then the sampling distribution of <span class="math inline">\(Z\)</span> follows standard normal distribution by definition. Then with R, we can compute the p-value:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Sample</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>Sample   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">78</span>, <span class="dv">83</span>, <span class="dv">68</span>, <span class="dv">72</span>, <span class="dv">88</span>)</span>
@@ -531,20 +531,20 @@ div.tocify {
 <span id="cb2-11"><a href="#cb2-11"></a>SD       &lt;-<span class="st"> </span><span class="dv">10</span></span>
 <span id="cb2-12"><a href="#cb2-12"></a></span>
 <span id="cb2-13"><a href="#cb2-13"></a><span class="co"># Get Z-ratio</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>Z        &lt;-<span class="st"> </span><span class="kw">mean</span>(Error)<span class="op">/</span>SD</span>
+<span id="cb2-14"><a href="#cb2-14"></a>Z        &lt;-<span class="st"> </span><span class="kw">mean</span>(Error)<span class="op">/</span>(SD<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">length</span>(Error)))</span>
 <span id="cb2-15"><a href="#cb2-15"></a></span>
 <span id="cb2-16"><a href="#cb2-16"></a><span class="co"># Find the one-side p-value</span></span>
 <span id="cb2-17"><a href="#cb2-17"></a><span class="co"># The pnorm function gives the Cumulative Distribution Function (CDF) </span></span>
 <span id="cb2-18"><a href="#cb2-18"></a><span class="co"># of the Normal distribution in R, which is the probability that </span></span>
 <span id="cb2-19"><a href="#cb2-19"></a><span class="co"># the variable takes a value lower or equal to a threshold (here Z).</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="co"># Here we that 1-pnorm to get the probability that the </span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="co"># Here we use 1-pnorm to get the probability that the </span></span>
 <span id="cb2-21"><a href="#cb2-21"></a><span class="co"># variable takes a value higher than the threshold (Z).</span></span>
 <span id="cb2-22"><a href="#cb2-22"></a>P_value   &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pnorm</span>(Z, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)</span>
 <span id="cb2-23"><a href="#cb2-23"></a></span>
 <span id="cb2-24"><a href="#cb2-24"></a><span class="kw">print</span>(P_value)</span></code></pre></div>
-<pre><code>## [1] 0.2176954</code></pre>
-<p>OK, we have a probability of about <code>21.77%</code> getting a statistic (<span class="math inline">\(Z\)</span>) as extreme or more extreme than the observed statistic (<code>0.78</code>), assuming H0 is true. This is not a small probability, and is not likely due to chance. We can not reject H0 given the observations. Thus, the instrument has no bias based on the observations.</p>
-<p>Now change the instrument error to <code>2.0</code> and repeat the above steps. Can you explain what happens?</p>
+<pre><code>## [1] 0.04056795</code></pre>
+<p>OK, we have a probability of about <code>4.06%</code> getting a statistic (<span class="math inline">\(Z\)</span>) as extreme or more extreme than the observed statistic (<code>1.74</code>), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, the instrument has bias based on the observations.</p>
+<p>Now change the instrument error to <code>20</code> and repeat the above steps. Can you explain what happens?</p>
 <hr />
 </div>
 <div id="the-t-ratio" class="section level1">
@@ -608,7 +608,7 @@ div.tocify {
 <li><p>H0: The instrument has no bias (<span class="math inline">\(\mu = 0\)</span>)</p></li>
 <li><p>H1: The instrument has a positive bias (<span class="math inline">\(\mu &gt; 0\)</span>)</p></li>
 </ul>
-<p>In this case, <span class="math inline">\(\overline X\)</span> is again <code>7.8</code>, <span class="math inline">\(SE(\overline X)\)</span> is Assuming H0 is true, we get <span class="math inline">\(t\)</span>=<code>2.16</code>.</p>
+<p>In this case, <span class="math inline">\(\overline X\)</span> is again <code>7.8</code>, <span class="math inline">\(SE(\overline X)\)</span> is <code>3.16</code> ,assuming H0 is true, we get <span class="math inline">\(t\)</span>=<code>2.16</code>.</p>
 <p>Then with R, we can compute the p-value:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Sample</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>Sample   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">78</span>, <span class="dv">83</span>, <span class="dv">68</span>, <span class="dv">72</span>, <span class="dv">88</span>)</span>
@@ -649,7 +649,7 @@ div.tocify {
 <li><p>H0: The instrument has no bias (<span class="math inline">\(\mu = 70\)</span>)</p></li>
 <li><p>H1: The instrument has a positive bias (<span class="math inline">\(\mu &gt; 70\)</span>)</p></li>
 </ul>
-<p>In R simply, this is done by:</p>
+<p>In R, this is done by:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Sample</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>Sample   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">78</span>, <span class="dv">83</span>, <span class="dv">68</span>, <span class="dv">72</span>, <span class="dv">88</span>)</span>
 <span id="cb8-3"><a href="#cb8-3"></a></span>
