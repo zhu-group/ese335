@@ -11,7 +11,7 @@
 
 
 
-<title>Section 07 Two-sample Z-test and t-test</title>
+<title>Section 08 Two-sample Z-test and t-test</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -479,7 +479,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Section 07 Two-sample Z-test and t-test</h1>
+<h1 class="title toc-ignore">Section 08 Two-sample Z-test and t-test</h1>
 
 </div>
 
@@ -496,8 +496,10 @@ div.tocify {
 <div id="section-example-pm2.5-in-shenzhen-and-guangzhou" class="section level1">
 <h1>Section Example: PM2.5 in Shenzhen and Guangzhou</h1>
 <p>Suppose we want to compare PM2.5 levels in Shenzhen and Guangzhou. To do so, PM2.5 concentrations are measured by two groups with the same instrument.</p>
-<p>In 2020, <code>10</code> observations are made in Shenzhen: <code>25.6, 23.7, 21.9, 26.0, 24.5, 22.4, 26.7, 24.6, 22.7, 23.8</code></p>
-<p>and <code>12</code> observations are made in Guangzhou: <code>27.1, 24.2, 27.9, 33.3, 26.4, 28.7, 25.6, 23.2, 24.0, 27.1, 26.2, 24.4</code></p>
+<p>In 2020, <code>10</code> observations are made in Shenzhen:</p>
+<p><code>25.6, 23.7, 21.9, 26.0, 24.5, 22.4, 26.7, 24.6, 22.7, 23.8</code></p>
+<p>and <code>12</code> observations are made in Guangzhou:</p>
+<p><code>27.1, 24.2, 27.9, 33.3, 26.4, 28.7, 25.6, 23.2, 24.0, 27.1, 26.2, 24.4</code></p>
 <p>We know from previous data that PM2.5 levels in the two cities generally follow normal distributions. And the standard deviation for Shenzhen and Guangzhou is <code>2.0</code> ug/m<sup>3</sup> and <code>3.0</code> ug/m<sup>3</sup>, respectively.</p>
 <p>It seems Shenzhen has a lower PM2.5 level than Guangzhou. Can such a difference be explained on the basis of chance variation? Can you explain why the spread of the data also contributes to the difference?</p>
 <hr />
@@ -506,7 +508,7 @@ div.tocify {
 <h1>The Z-test</h1>
 <p>Recall the definition of Z-Ratio:</p>
 <p><span class="math display">\[Z=\frac {Estimate - Parameter} {SD(Estimate)}  \]</span></p>
-<p>Since the task is to compare PM2.5 in the two cities, in the statistical framework it would be:</p>
+<p>Since the task is to compare PM2.5 in the two cities, in the statistical framework, it would be:</p>
 <ul>
 <li><p>H0: Mean PM2.5 level in Shenzhen is the same as that in Guangzhou (<span class="math inline">\(\mu_1 = \mu_2\)</span>)</p></li>
 <li><p>H1: Mean PM2.5 level in Shenzhen is not the same as that in Guangzhou (<span class="math inline">\(\mu_1 \ne \mu_2\)</span>)</p></li>
@@ -516,7 +518,7 @@ div.tocify {
 <p><span class="math display">\[Z=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {SD(\overline{X_1} - \overline{X_2}) }   \]</span> If the two samples are from two <strong>normal</strong> distributions, <span class="math inline">\(SD(\overline{X1} - \overline{X_2})\)</span> can be determined as:</p>
 <p><span class="math display">\[ SD(\overline{X_1} - \overline{X_2}) = \sqrt { \frac{\sigma_1^2} {n_1} +  \frac{\sigma_2^2} {n_2} }   \]</span> where <span class="math inline">\(\sigma_1\)</span> and <span class="math inline">\(\sigma_2\)</span> is the standard deviation of the two populations, and <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> is the size of the two samples. Now we have:</p>
 <p><span class="math display">\[Z=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {\sqrt { \frac{\sigma_1^2} {n_1} +  \frac{\sigma_2^2} {n_2} } }   \]</span> and <span class="math inline">\(Z \sim N(0,1)\)</span>.</p>
-<p>Assuming H0 is true, we get <span class="math inline">\(Z\)</span> is <code>-2.16</code>. Then with R, we can compute two-side p-value for the statistic:</p>
+<p>Assuming H0 is true, we get <span class="math inline">\(Z\)</span> is <code>-2.16</code>. Then with R, we can compute the two-side p-value for this statistic:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Shenzhen </span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>SZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">25.6</span>, <span class="fl">23.7</span>, <span class="fl">21.9</span>, <span class="fl">26.0</span>, <span class="fl">24.5</span>, <span class="fl">22.4</span>, <span class="fl">26.7</span>, <span class="fl">24.6</span>, <span class="fl">22.7</span>, <span class="fl">23.8</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>SZ_n      &lt;-<span class="st"> </span><span class="kw">length</span>(SZ_PM2<span class="fl">.5</span>)</span>
@@ -571,7 +573,7 @@ div.tocify {
 <span id="cb10-10"><a href="#cb10-10"></a></span>
 <span id="cb10-11"><a href="#cb10-11"></a><span class="kw">print</span>(P_value)</span></code></pre></div>
 <pre><code>## [1] 0.0306292</code></pre>
-<p>OK, we have a probability of about <code>3.06%</code> getting a statistic (<span class="math inline">\(Z\)</span>) as extreme or more extreme than the observed statistic (<code>-2.16</code>), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, mean PM2.5 level in Shenzhen is not the same as that in Guangzhou.</p>
+<p>OK, we have a probability of about <code>3.06%</code> getting a statistic (<span class="math inline">\(Z\)</span>) as extreme or more extreme than the observed statistic (<code>-2.16</code>), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, the mean PM2.5 level in Shenzhen is not the same as that in Guangzhou.</p>
 <hr />
 </div>
 <div id="independent-two-sample-t-test" class="section level1">
@@ -621,7 +623,7 @@ div.tocify {
 <span id="cb14-21"><a href="#cb14-21"></a></span>
 <span id="cb14-22"><a href="#cb14-22"></a><span class="kw">print</span>(P_value)</span></code></pre></div>
 <pre><code>## [1] 0.02796399</code></pre>
-<p>Now, we have a probability of about <code>2.80%</code> getting a statistic (<span class="math inline">\(t\)</span>) as extreme or more extreme than the observed statistic (<code>-2.37</code>), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, mean PM2.5 level in Shenzhen is not the same as that in Guangzhou.</p>
+<p>Now, we have a probability of about <code>2.80%</code> getting a statistic (<span class="math inline">\(t\)</span>) as extreme or more extreme than the observed statistic (<code>-2.37</code>), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, the mean PM2.5 level in Shenzhen is not the same as that in Guangzhou.</p>
 <hr />
 </div>
 <div id="independent-two-sample-t-test-with-r" class="section level1">
@@ -654,7 +656,7 @@ div.tocify {
 ## sample estimates:
 ## mean of x mean of y 
 ##  24.19000  26.50833</code></pre>
-<p>As you may notice, here we set <code>var.equal = T</code> when call the <code>t.test()</code> function. By doing so, we assume an “equal SD” method, please see page <code>40</code> in [R.S] for more. By default, R use the “unequal SD” method, which would returns a slightly different t statistic and d.f. We will look at this in the future.</p>
+<p>As you may notice, here we set <code>var.equal = T</code> when call the <code>t.test()</code> function. By doing so, we assume an “equal SD” method, please see page <code>40</code> in [R.S] for more. By default, R uses the “unequal SD” method, which returns a slightly different t statistic and d.f. We will look at this in the future.</p>
 <hr />
 </div>
 <div id="in-class-exercises" class="section level1">
@@ -675,7 +677,7 @@ div.tocify {
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
-<p>A local environmental officer wants to compare two rivers to see if there are any difference in COD. From river A, the officer randomly collected <code>15</code> water bottles, and COD are measured as follows:</p>
+<p>A local environmental officer wants to compare two rivers to see if there are any difference in COD. From river A, the officer randomly collected <code>15</code> water bottles, and COD is measured as follows:</p>
 <p><code>915.4, 789.3, 828.2, 811.4, 832.4, 841.7, 871.6, 830.8, 884.5, 847.5, 841.4, 936.7, 977.0, 825.2, 707.9</code></p>
 <p>From river B, the officer randomly collected <code>10</code> water bottles with COD read as:</p>
 <p><code>804.0, 779.8, 749.3, 877.4, 753.8, 778.6, 807.5, 913.3, 784.8, 659.7</code></p>

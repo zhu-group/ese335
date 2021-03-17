@@ -1,5 +1,5 @@
 ---
-title: "Section 07 Two-sample Z-test and t-test"
+title: "Section 08 Two-sample Z-test and t-test"
 output:
   html_document:
     toc: true
@@ -26,9 +26,11 @@ library(ggplot2)
 Suppose we want to compare PM2.5 levels in Shenzhen and Guangzhou. To do so, PM2.5 concentrations are measured by two groups with the same instrument. 
 
 In 2020, `10` observations are made in Shenzhen:
+
 `25.6, 23.7, 21.9, 26.0, 24.5, 22.4, 26.7, 24.6, 22.7, 23.8`
 
 and `12` observations are made in Guangzhou:
+
 `27.1, 24.2, 27.9, 33.3, 26.4, 28.7, 25.6, 23.2, 24.0, 27.1, 26.2, 24.4`
 
 We know from previous data that PM2.5 levels in the two cities generally follow normal distributions. And the standard deviation for Shenzhen and Guangzhou is `2.0` ug/m^3^ and `3.0` ug/m^3^, respectively.
@@ -43,7 +45,7 @@ Recall the definition of Z-Ratio:
 
 $$Z=\frac {Estimate - Parameter} {SD(Estimate)}  $$
 
-Since the task is to compare PM2.5 in the two cities, in the statistical framework it would be: 
+Since the task is to compare PM2.5 in the two cities, in the statistical framework, it would be: 
 
 + H0: Mean PM2.5 level in Shenzhen is the same as that in Guangzhou ($\mu_1 = \mu_2$)
 
@@ -63,7 +65,7 @@ where $\sigma_1$ and $\sigma_2$ is the standard deviation of the two populations
 $$Z=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {\sqrt { \frac{\sigma_1^2} {n_1} +  \frac{\sigma_2^2} {n_2} } }   $$
 and $Z \sim N(0,1)$.
 
-Assuming H0 is true, we get $Z$ is `-2.16`. Then with R, we can compute two-side p-value for the statistic:
+Assuming H0 is true, we get $Z$ is `-2.16`. Then with R, we can compute the two-side p-value for this statistic:
 
 ```{r}
 # Shenzhen 
@@ -111,7 +113,7 @@ P_value   <- (1-pnorm(abs(Z), mean=0, sd=1))*2
 
 print(P_value)
 ```
-OK, we have a probability of about `3.06%` getting a statistic ($Z$) as extreme or more extreme than the observed statistic (`-2.16`), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, mean PM2.5 level in Shenzhen is not the same as that in Guangzhou.
+OK, we have a probability of about `3.06%` getting a statistic ($Z$) as extreme or more extreme than the observed statistic (`-2.16`), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, the mean PM2.5 level in Shenzhen is not the same as that in Guangzhou.
 
 ***
 
@@ -178,7 +180,7 @@ P_value  <- (1-pt(abs(t), df=df1+df2))*2
 print(P_value)
 ```
 
-Now, we have a probability of about `2.80%` getting a statistic ($t$) as extreme or more extreme than the observed statistic (`-2.37`), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus,  mean PM2.5 level in Shenzhen is not the same as that in Guangzhou.
+Now, we have a probability of about `2.80%` getting a statistic ($t$) as extreme or more extreme than the observed statistic (`-2.37`), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, the mean PM2.5 level in Shenzhen is not the same as that in Guangzhou.
 
 ***
 
@@ -206,7 +208,7 @@ GZ_PM2.5  <- c(27.1, 24.2, 27.9, 33.3, 26.4, 28.7, 25.6, 23.2, 24.0, 27.1, 26.2,
 # we need to compute the one-side p-value
 t.test(SZ_PM2.5, GZ_PM2.5, alternative="two.sided", var.equal=T)
 ```
-As you may notice, here we set `var.equal = T` when call the `t.test()` function. By doing so, we assume an "equal SD" method, please see page `40` in [R.S] for more. By default, R use the "unequal SD" method, which would returns a slightly different t statistic and d.f. We will look at this in the future.
+As you may notice, here we set `var.equal = T` when call the `t.test()` function. By doing so, we assume an "equal SD" method, please see page `40` in [R.S] for more. By default, R uses the "unequal SD" method, which returns a slightly different t statistic and d.f. We will look at this in the future.
 
 ***
 
@@ -230,7 +232,7 @@ Based on the data, are results from the two labs consistent?
 
 ## Exercise #2
 
-A local environmental officer wants to compare two rivers to see if there are any difference in COD. From river A, the officer randomly collected `15` water bottles, and COD are measured as follows:
+A local environmental officer wants to compare two rivers to see if there are any difference in COD. From river A, the officer randomly collected `15` water bottles, and COD is measured as follows:
 
 `915.4, 789.3, 828.2, 811.4, 832.4, 841.7, 871.6, 830.8, 884.5, 847.5, 841.4, 936.7, 977.0, 825.2, 707.9`
 
