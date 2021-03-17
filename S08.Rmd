@@ -65,7 +65,9 @@ where $\sigma_1$ and $\sigma_2$ is the standard deviation of the two populations
 $$Z=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {\sqrt { \frac{\sigma_1^2} {n_1} +  \frac{\sigma_2^2} {n_2} } }   $$
 and $Z \sim N(0,1)$.
 
-Assuming H0 is true, we get $Z$ is `-2.16`. Then with R, we can compute the two-side p-value for this statistic:
+Assuming H0 is true, we get $Z$ is `-2.16`. Then with R, we can compute the two-side p-value for this statistic.
+
+Before computing $Z$, let's check the data first.
 
 ```{r}
 # Shenzhen 
@@ -119,9 +121,9 @@ OK, we have a probability of about `3.06%` getting a statistic ($Z$) as extreme 
 
 # Independent two-sample t-test
 
-As we saw from the last Section, SD of populations ($\sigma_1$ and $\sigma_2$) are generally unknown. And we need to use sample SE as an estimate of the population SD, and the the proceeding Z test becomes the t test:
+As we saw from the last Section, SDs of populations ($\sigma_1$ and $\sigma_2$) are generally unknown. And we need to use sample SE as an estimate of the population SD, and the the proceeding Z test becomes the t test:
 
-$$ Z=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {SE(\overline{X_1} - \overline{X_2}) } $$
+$$ t =\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {SE(\overline{X_1} - \overline{X_2}) } $$
 For a independent two-sample t-test (Note: we use the "equal SD" method in here, see page 40 in [R.S.] for more):
 
 $$ SE(\overline{X_1} - \overline{X_2}) = s_p \sqrt { \frac{1} {n_1} +  \frac{1} {n_2} }   $$
@@ -133,9 +135,9 @@ where $s_1$ and $s_2$ is the standard deviation of the two samples. And the numb
 Finally, we have the $t$ statistic from an independent two-sample t-test being:
 
 $$t=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } { \sqrt { \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2} {n_1 + n_2 -2} (\frac{n_1+n_2} {n_1n_2}) }} $$
-And $t$ statistic follows a Student's t distribution on $n_1 + n_2 - 2$. degrees of freedom. 
+And $t$ statistic follows a Student's t distribution on $n_1 + n_2 - 2$ degrees of freedom. 
 
-Let's use the observations again, but conduct an independent two-sample t-test. 
+Let's use the observations again, but now we have no information about the population SDs. Therefore, we need to conduct an independent two-sample t-test. 
 
 + H0: Mean PM2.5 level in Shenzhen is the same as that in Guangzhou ($\mu_1 = \mu_2$)
 
@@ -143,7 +145,7 @@ Let's use the observations again, but conduct an independent two-sample t-test.
 
 In this case, $\overline X_1 - \overline X_2$ is again `-2.32`, $SE(\overline{X_1} - \overline{X_2})$ is `0.98`, assuming H0 is true ($\mu_1 - \mu_2 = 0$), we have $t$=`-2.37`.
 
-Then with R, we can compute the p-value:
+Then the p-value can be calculated manually:
 
 ```{r}
 

@@ -518,7 +518,8 @@ div.tocify {
 <p><span class="math display">\[Z=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {SD(\overline{X_1} - \overline{X_2}) }   \]</span> If the two samples are from two <strong>normal</strong> distributions, <span class="math inline">\(SD(\overline{X1} - \overline{X_2})\)</span> can be determined as:</p>
 <p><span class="math display">\[ SD(\overline{X_1} - \overline{X_2}) = \sqrt { \frac{\sigma_1^2} {n_1} +  \frac{\sigma_2^2} {n_2} }   \]</span> where <span class="math inline">\(\sigma_1\)</span> and <span class="math inline">\(\sigma_2\)</span> is the standard deviation of the two populations, and <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> is the size of the two samples. Now we have:</p>
 <p><span class="math display">\[Z=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {\sqrt { \frac{\sigma_1^2} {n_1} +  \frac{\sigma_2^2} {n_2} } }   \]</span> and <span class="math inline">\(Z \sim N(0,1)\)</span>.</p>
-<p>Assuming H0 is true, we get <span class="math inline">\(Z\)</span> is <code>-2.16</code>. Then with R, we can compute the two-side p-value for this statistic:</p>
+<p>Assuming H0 is true, we get <span class="math inline">\(Z\)</span> is <code>-2.16</code>. Then with R, we can compute the two-side p-value for this statistic.</p>
+<p>Before computing <span class="math inline">\(Z\)</span>, let’s check the data first.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Shenzhen </span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>SZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">25.6</span>, <span class="fl">23.7</span>, <span class="fl">21.9</span>, <span class="fl">26.0</span>, <span class="fl">24.5</span>, <span class="fl">22.4</span>, <span class="fl">26.7</span>, <span class="fl">24.6</span>, <span class="fl">22.7</span>, <span class="fl">23.8</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>SZ_n      &lt;-<span class="st"> </span><span class="kw">length</span>(SZ_PM2<span class="fl">.5</span>)</span>
@@ -578,19 +579,19 @@ div.tocify {
 </div>
 <div id="independent-two-sample-t-test" class="section level1">
 <h1>Independent two-sample t-test</h1>
-<p>As we saw from the last Section, SD of populations (<span class="math inline">\(\sigma_1\)</span> and <span class="math inline">\(\sigma_2\)</span>) are generally unknown. And we need to use sample SE as an estimate of the population SD, and the the proceeding Z test becomes the t test:</p>
-<p><span class="math display">\[ Z=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {SE(\overline{X_1} - \overline{X_2}) } \]</span> For a independent two-sample t-test (Note: we use the “equal SD” method in here, see page 40 in [R.S.] for more):</p>
+<p>As we saw from the last Section, SDs of populations (<span class="math inline">\(\sigma_1\)</span> and <span class="math inline">\(\sigma_2\)</span>) are generally unknown. And we need to use sample SE as an estimate of the population SD, and the the proceeding Z test becomes the t test:</p>
+<p><span class="math display">\[ t =\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {SE(\overline{X_1} - \overline{X_2}) } \]</span> For a independent two-sample t-test (Note: we use the “equal SD” method in here, see page 40 in [R.S.] for more):</p>
 <p><span class="math display">\[ SE(\overline{X_1} - \overline{X_2}) = s_p \sqrt { \frac{1} {n_1} +  \frac{1} {n_2} }   \]</span> <span class="math inline">\(s_p\)</span> is <em>pooled SD</em>, or pooled estimate of standard deviation.</p>
 <p><span class="math display">\[ s_p = \sqrt { \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2} {n_1 + n_2 -2} }\]</span> where <span class="math inline">\(s_1\)</span> and <span class="math inline">\(s_2\)</span> is the standard deviation of the two samples. And the number of degrees of freedom associated with <span class="math inline">\(s_p\)</span> is the sum of degrees of freedom from the individual estimates.</p>
 <p>Finally, we have the <span class="math inline">\(t\)</span> statistic from an independent two-sample t-test being:</p>
-<p><span class="math display">\[t=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } { \sqrt { \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2} {n_1 + n_2 -2} (\frac{n_1+n_2} {n_1n_2}) }} \]</span> And <span class="math inline">\(t\)</span> statistic follows a Student’s t distribution on <span class="math inline">\(n_1 + n_2 - 2\)</span>. degrees of freedom.</p>
-<p>Let’s use the observations again, but conduct an independent two-sample t-test.</p>
+<p><span class="math display">\[t=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } { \sqrt { \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2} {n_1 + n_2 -2} (\frac{n_1+n_2} {n_1n_2}) }} \]</span> And <span class="math inline">\(t\)</span> statistic follows a Student’s t distribution on <span class="math inline">\(n_1 + n_2 - 2\)</span> degrees of freedom.</p>
+<p>Let’s use the observations again, but now we have no information about the population SDs. Therefore, we need to conduct an independent two-sample t-test.</p>
 <ul>
 <li><p>H0: Mean PM2.5 level in Shenzhen is the same as that in Guangzhou (<span class="math inline">\(\mu_1 = \mu_2\)</span>)</p></li>
 <li><p>H1: Mean PM2.5 level in Shenzhen is not the same as that in Guangzhou (<span class="math inline">\(\mu_1 \ne \mu_2\)</span>)</p></li>
 </ul>
 <p>In this case, <span class="math inline">\(\overline X_1 - \overline X_2\)</span> is again <code>-2.32</code>, <span class="math inline">\(SE(\overline{X_1} - \overline{X_2})\)</span> is <code>0.98</code>, assuming H0 is true (<span class="math inline">\(\mu_1 - \mu_2 = 0\)</span>), we have <span class="math inline">\(t\)</span>=<code>-2.37</code>.</p>
-<p>Then with R, we can compute the p-value:</p>
+<p>Then the p-value can be calculated manually:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Shenzhen </span></span>
 <span id="cb12-2"><a href="#cb12-2"></a>SZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">25.6</span>, <span class="fl">23.7</span>, <span class="fl">21.9</span>, <span class="fl">26.0</span>, <span class="fl">24.5</span>, <span class="fl">22.4</span>, <span class="fl">26.7</span>, <span class="fl">24.6</span>, <span class="fl">22.7</span>, <span class="fl">23.8</span>)</span>
 <span id="cb12-3"><a href="#cb12-3"></a></span>
