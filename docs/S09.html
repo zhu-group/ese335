@@ -613,7 +613,7 @@ div.tocify {
 </div>
 <div id="the-paired-sample-t-test" class="section level1">
 <h1>The paired-sample t-test</h1>
-<p>A <em>paired sample t-test</em>, also called the <strong>dependent</strong> sample t-test, is used to compare two population means in the case of two samples that are <strong>correlated</strong>. Two measurements are paired when they come from the same observational unit. Pairing has nothing to do with the actual data values but, rather, with the way the data values are obtained. Examples of where this might occur are:</p>
+<p>A <em>paired sample t-test</em>, also called the <strong>dependent</strong> sample t-test, is used to compare two population means in the case of two samples that are <strong>correlated</strong>. Two measurements are paired when they come from the same observational unit. The pairing has nothing to do with the actual data values but, rather, with the way the data values are obtained. Examples of where this might occur are:</p>
 <ul>
 <li><p>Before-and-after observations on the same subjects (e.g. pollutant levels before and after a particular treatment).</p></li>
 <li><p>A comparison of two different methods of measurement or two different treatments where the measurements/treatments are applied to the same subjects (e.g. pollutant measurements using a remote sensing method and a <em>in situ</em> technology).</p></li>
@@ -678,7 +678,7 @@ div.tocify {
 <span id="cb6-12"><a href="#cb6-12"></a></span>
 <span id="cb6-13"><a href="#cb6-13"></a><span class="kw">print</span>(P_value)</span></code></pre></div>
 <pre><code>## [1] 0.01635031</code></pre>
-<p>Now, we have a probability of about <code>1.6%</code> getting a statistic (<span class="math inline">\(t\)</span>) as extreme or more extreme than the observed statistic (<code>-2.73</code>), assuming H0 is true. This is a small probability, and is likely due to chance. We therefore reject H0 given the observations. Thus, mean PM2.5 in the Feb. of 2020 is <strong>statistically significant</strong> different from than that in 2019 in the given cities. The observations <strong>suggest</strong> that the massive lockdown in China during 2020 Feb. may lead to a lower PM2.5 level, compared with the same period in 2019.</p>
+<p>Now, we have a probability of about <code>1.6%</code> getting a statistic (<span class="math inline">\(t\)</span>) as extreme or more extreme than the observed statistic (<code>-2.73</code>), assuming H0 is true. This is a small probability, and is likely due to chance. We, therefore, reject H0 given the observations. Thus, mean PM2.5 in the Feb. of 2020 is <strong>statistically significant</strong> different from that in 2019 in the given cities. The observations <strong>suggest</strong> that the massive lockdown in China during 2020 Feb. may lead to a lower PM2.5 level, compared with the same period in 2019.</p>
 <hr />
 </div>
 <div id="paired-sample-t-test-with-r" class="section level1">
@@ -750,28 +750,40 @@ div.tocify {
 <p><span class="math display">\[ -2.14 \le \frac { \overline{D}  - \mu_D } { {s} / \sqrt{n} } \le 2.14  \]</span> which is equivalent to say that, <code>9500</code> of the <code>10000</code> times the unknown population mean (<span class="math inline">\(\mu_D\)</span>) would be within the following interval:</p>
 <p><span class="math display">\[ \overline{D} - 2.14 * \frac {s} {\sqrt{n}} \le \mu_D \le \overline{D} + 2.14 * \frac {s} {\sqrt{n}}  \]</span> and we have:</p>
 <p><span class="math display">\[ -16.9 \le \mu_D \le -2.0  \]</span> This is exactly the same as the R output. Now, we understand that this range represents that <code>95%</code> of the time the unknown population mean (<span class="math inline">\(\mu_D\)</span>) would fall within the range between <code>-16.9</code> and <code>-2.0</code>. As such, mean PM2.5 level in 2020 Feb. is lower than that in 2019 by <code>16.9</code> to <code>2.0</code> ug m<sup>-3</sup> (95% CI). Or another way to put it, PM2.5 level in 2020 Feb. on average is lower than that in 2019 by <code>16.9</code> to <code>2.0</code> ug m<sup>-3</sup> (95% CI).</p>
-<p>In fact, we have seen CI as default R output from the <a href="https://zhu-group.github.io/ese335/S07.html#One_sample_t-test_with_R">one-sample t-test</a> and <a href="https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test_with_R">independent two-sample t-test</a>. You should be able to explain the meaning of each CI Please try. ***</p>
+<p>In fact, we have seen CI as default R output from the <a href="https://zhu-group.github.io/ese335/S07.html#One_sample_t-test_with_R">one-sample t-test</a> and <a href="https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test_with_R">independent two-sample t-test</a>. You should be able to explain the meaning of each CI. Please try.</p>
+<hr />
 </div>
 <div id="in-class-exercises" class="section level1">
 <h1>In-class exercises</h1>
 <div id="exercise-1" class="section level2">
 <h2>Exercise #1</h2>
-<p>To reduce traffic noise, city X brings in a new regulation of not using horn within a certain area. A research group measures noise levels (L<sub>90</sub>) from <code>8</code> representative locations within this area, before and after the regulation (unit: dB).</p>
+<p>To reduce traffic noise, city X brings in a new regulation of not using horns within a certain area. A research group measures noise levels (L<sub>90</sub>) from <code>8</code> representative locations within this area, before and after the regulation (unit: dB).</p>
 <ul>
 <li><p>Before the regulation: <code>51, 48, 52, 62, 64, 51, 55, 60</code></p></li>
 <li><p>After the regulation: <code>46, 45, 53, 48, 57, 55, 42, 50</code></p></li>
 </ul>
-<p>Based on the observations, is the regulation effective in reducing noise of this area?</p>
-<ul>
-<li><p>1.1 Which test will you use?</p></li>
-<li><p>1.2 What is the H0 and H1?</p></li>
-<li><p>1.3 Do you use one-sided or two-sided p-value?</p></li>
-<li><p>1.4 Is the regulation effective in reducing noise of this area? Here use a <strong>significant level</strong> of <code>0.05</code>.</p></li>
-<li><p>1.5 If the regulation is effective in reducing noise of this area, then by how much? Report your results using a <strong>confidence level</strong> of <code>95%</code>.</p></li>
-</ul>
+<p>Based on the observations, is the regulation effective in reducing the noise of this area?</p>
+<p>1.1 Which test will you use?</p>
+<p>1.2 What is the H0 and H1?</p>
+<p>1.3 Do you use one-sided or two-sided p-value?</p>
+<p>1.4 Is the regulation effective in reducing the noise of this area? Here use a <strong>significant level</strong> of <code>0.05</code>.</p>
+<p>1.5 If the regulation is effective in reducing the noise of this area, then by how much? Report your results using a <strong>confidence level</strong> of <code>95%</code>.</p>
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
+<p>Suppose we want to test the reliability of a remote sensing method in measuring CO<sub>2</sub>. For a given location, the in situ measurements (ppm) for <code>10</code> days read as:</p>
+<ul>
+<li>In situ: <code>415, 385, 378, 398, 413, 359, 391, 410, 390, 402</code></li>
+</ul>
+<p>Meanwhile, the corresponding remote sensing results for the same day are:</p>
+<ul>
+<li>Remote sensing: <code>412, 361, 401, 432, 413, 385, 378, 412, 420, 400</code></li>
+</ul>
+<p>2.1 Is this remote sensing method reliable in measuring CO<sub>2</sub>?</p>
+<p>2.2 Report the CI for the difference. Does the 95% CI contain <code>0</code>? What does that mean in term of determining a significant difference between the two population means?</p>
+</div>
+<div id="exercise-3" class="section level2">
+<h2>Exercise #3</h2>
 <p>Recall the <a href="https://zhu-group.github.io/ese335/S08.html#Exercise_2">Exercise #2</a>, compute the <code>90%</code>, <code>95%</code>, and <code>99%</code> CI for the difference between mean COD from the two rivers. Can you explain why CI is wider for a higher confidence level?</p>
 </div>
 </div>
