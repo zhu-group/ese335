@@ -60,7 +60,7 @@ A *paired sample t-test*, also called the **dependent** sample t-test, is used t
 
 + A comparison of two different methods of measurement or two different treatments where the measurements/treatments are applied to the same subjects (e.g. pollutant measurements using a remote sensing method and a *in situ* technology).
 
-The paired-sample t-test is the same as the [one-sample t-test](https://zhu-group.github.io/ese335/S07.html#One_sample_t-test) as the difference ($D$) between the two samples ($X_1$ and $X_2$) is tested against zero.
+The paired-sample t-test is the same as the [one-sample t-test](https://zhu-group.github.io/ese335/S07.html#One_sample_t-test) as the difference ($D$) between the two populations ($X_1$ and $X_2$) is tested against zero.
 
 Recall the definition of t-Ratio:
 
@@ -109,10 +109,10 @@ PM2.5_data %>%
   geom_boxplot(fill="steelblue") +
   labs(title="PM2.5 Distribution by Year", x="Year", y="ug/m3")
 
-# Check normality qqplot
+# Check normality, qqplot
 ggqqplot(Diff)
 
-# Check normality Shapiro-Wilk test
+# Check normality, Shapiro-Wilk test
 shapiro.test(Diff)
 
 # SE of the difference
@@ -167,12 +167,12 @@ Here we set `paired=T` when call the `t.test()` function. By doing so, R knows w
 
 As you may notice, another thing comes out from the proceeding t-test is a range (`-16.9` to `-2.0`), called *95 percent confidence interval*. A confidence interval (CI) refers to **the probability that a population parameter will fall between a set of values for a certain proportion of times**. 
 
-Confidence intervals measure the degree of uncertainty or certainty in a sampling method. They can take any number of probability limits, with the most common being a `95%` or `99%` **confidence level**. From the proceeding t-test, the `95%` CI can be stated as: `95%` of times $\mu_D$ will fall between the range between `-16.9` and `-2.0`. 
+Confidence intervals measure the degree of uncertainty or certainty in a sampling method. They can take any number of probability limits, with the most common being a `95%` or `99%` **confidence level**. From the proceeding t-test, the `95%` CI can be stated as: `95%` of times $\mu_D$ will fall within the range between `-16.9` and `-2.0`. 
 
-Let's use the definition of $t$ again to understand the confidence intervals. 
+Let's use the definition of $t$ ratio to understand the confidence intervals. 
 
 $$ t =\frac { \overline{D}  - \mu_D } { {s} / \sqrt{n} } \sim t_{df=n-1} $$
-For a given t distribution on the degrees of freedom of n-1, `95%` of values in this distribution will fall between two endpoints that make the corresponding probability of `95%`. In this case, it's `-2.14` and `2.14`:
+For a given t distribution on the degrees of freedom of n-1, `95%` of values in this distribution will fall between two endpoints that make the corresponding probability of `95%`. In this case (d.f.=`14`), it's `-2.14` and `2.14`:
 
 ```{r}
 # Make a vector from -5 to 5, with a step of 0.01 
@@ -186,7 +186,7 @@ density <- dt(x, df=14)
 plot(x, density, col="black", xlab="", ylab="Density", 
      type="l", lwd=3, cex=2, 
      xlim=c(-5.0, 5.0),
-     main="PDF of t distributions")
+     main="PDF of t (d.f. = 14) distribution")
 
 # Get the 2.5th percentile
 p_2.5th  <- qt(0.025,df=14)
@@ -202,7 +202,7 @@ text(p_97.5th+1, 0.1, as.character(round(p_97.5th,2)), col="red", cex=1.5)
 
 ```
 
-That is, if we randomly draw `10000` samples ($X_1 -X_2$), `9500` of those samples would have a $t$ ratio that falls between `-2.14` and `2.14` in theory, and `500` of those samples would fall outside the interval. For the `9500` samples that with $t$ ratios  between `-2.14` and `2.14, we have:
+That is, if we randomly draw `10000` samples ($X_1 -X_2$), `9500` of those samples would have a $t$ ratio that falls between `-2.14` and `2.14` in theory, and `500` of those samples would fall outside the interval. For the `9500` samples that with $t$ ratio between `-2.14` and `2.14, so we have:
 
 $$ -2.14 \le \frac { \overline{D}  - \mu_D } { {s} / \sqrt{n} } \le 2.14  $$
 which is equivalent to say that, `9500` of the `10000` times the unknown population mean ($\mu_D$) would be within the following interval:
@@ -212,6 +212,11 @@ and we have:
 
 $$ -16.9 \le \mu_D \le -2.0  $$
 This is exactly the same as the R output. Now, we understand that this range represents that `95%` of the time the unknown population mean ($\mu_D$) would fall within the range between `-16.9` and `-2.0`. As such, mean PM2.5 level in 2020 Feb. is lower than that in 2019 by `16.9` to `2.0` ug m^-3^ (95% CI). Or another way to put it, PM2.5 level in 2020 Feb. on average is lower than that in 2019 by `16.9` to `2.0` ug m^-3^ (95% CI).
+
+A general way to write the CI ($100(1-x)%$ confidence level) of the unknown population mean ($\mu_D$) would be:
+
+$$ \overline{D} - t_{df=n-1}(1-0.5x) \frac {s} {\sqrt{n}} \le \mu_D \le \overline{D} + t_{df=n-1}(1-0.5x) \frac {s} {\sqrt{n}}  $$
+where $t_{df=n-1}(1-0.5x)$ is the $100(1-0.5x)$th percentile of the t distribution on $n-1$ degrees of freedom.
 
 In fact, we have seen CI as default R output from the [one-sample t-test](https://zhu-group.github.io/ese335/S07.html#One_sample_t-test_with_R) and [ independent two-sample t-test](https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test_with_R). You should be able to explain the meaning of each CI. Please try. 
 
