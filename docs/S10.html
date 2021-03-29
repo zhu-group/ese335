@@ -552,7 +552,7 @@ div.tocify {
 </div>
 <div id="normality" class="section level1">
 <h1>Normality</h1>
-<p>Even though we have been emphasizing that normality is the key assumption of t-tools (one-sample, independent two-sample, and paired samples). It turns out t-tools are <strong>very robust</strong> to samples from non-normal populations, as long as the sample sizes are reasonably large (&gt; <code>50</code>, this is arbitrary, but generally should be larger than <code>30</code>). To test this, run the following R scripts:</p>
+<p>Even though we have been emphasizing that normality is the key assumption of t-tools (<a href="https://zhu-group.github.io/ese335/S07.html#One_sample_t-test">one-sample</a>, <a href="https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test">independent two-sample</a>, and <a href="https://zhu-group.github.io/ese335/S09.html#The_paired_sample_t-test">paired samples</a>). It turns out t-tools are <strong>very robust</strong> to samples from non-normal populations, as long as the sample sizes are reasonably large (&gt; <code>50</code>, this is arbitrary, but generally should be larger than <code>30</code>). To test this, run the following R scripts:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Total simulations</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>Total_simulations &lt;-<span class="st"> </span><span class="dv">1000</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a></span>
@@ -563,9 +563,9 @@ div.tocify {
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  pop1
-## W = 0.98051, p-value &lt; 2.2e-16</code></pre>
+## W = 0.98335, p-value &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">skewness</span>(pop1)</span></code></pre></div>
-<pre><code>## [1] 0.609245</code></pre>
+<pre><code>## [1] 0.5358578</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Population 2, form a log normal distribution</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a>pop2 &lt;-<span class="st"> </span><span class="kw">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="kw">shapiro.test</span>(pop2)</span></code></pre></div>
@@ -573,9 +573,9 @@ div.tocify {
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  pop2
-## W = 0.22554, p-value &lt; 2.2e-16</code></pre>
+## W = 0.17384, p-value &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">skewness</span>(pop2)</span></code></pre></div>
-<pre><code>## [1] 12.70677</code></pre>
+<pre><code>## [1] 18.50247</code></pre>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Sample size</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a>N1 &lt;-<span class="st"> </span><span class="dv">100</span></span>
 <span id="cb14-3"><a href="#cb14-3"></a>N2 &lt;-<span class="st"> </span><span class="dv">100</span></span>
@@ -595,16 +595,16 @@ div.tocify {
 <span id="cb14-17"><a href="#cb14-17"></a></span>
 <span id="cb14-18"><a href="#cb14-18"></a><span class="co"># Check the robustness</span></span>
 <span id="cb14-19"><a href="#cb14-19"></a><span class="kw">length</span>(<span class="kw">which</span>(p_value<span class="op">&lt;</span><span class="fl">0.05</span>))<span class="op">/</span>Total_simulations</span></code></pre></div>
-<pre><code>## [1] 0.942</code></pre>
+<pre><code>## [1] 0.929</code></pre>
 <p>For small samples, t-tools are also robust if the skewness in the populations differs not too much.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Population 1, form a log normal distribution</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a>pop1 &lt;-<span class="st"> </span><span class="kw">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">1</span>, <span class="fl">0.2</span>)</span>
 <span id="cb16-3"><a href="#cb16-3"></a><span class="kw">skewness</span>(pop1)</span></code></pre></div>
-<pre><code>## [1] 0.632611</code></pre>
+<pre><code>## [1] 0.597273</code></pre>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Population 2, form a log normal distribution</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a>pop2 &lt;-<span class="st"> </span><span class="kw">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">2</span>, <span class="fl">0.6</span>)</span>
 <span id="cb18-3"><a href="#cb18-3"></a><span class="kw">skewness</span>(pop2)</span></code></pre></div>
-<pre><code>## [1] 1.772372</code></pre>
+<pre><code>## [1] 3.003573</code></pre>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Sample size</span></span>
 <span id="cb20-2"><a href="#cb20-2"></a>N1 &lt;-<span class="st"> </span><span class="dv">10</span></span>
 <span id="cb20-3"><a href="#cb20-3"></a>N2 &lt;-<span class="st"> </span><span class="dv">20</span></span>
@@ -624,19 +624,20 @@ div.tocify {
 <span id="cb20-17"><a href="#cb20-17"></a></span>
 <span id="cb20-18"><a href="#cb20-18"></a><span class="co"># Check the robustness</span></span>
 <span id="cb20-19"><a href="#cb20-19"></a><span class="kw">length</span>(<span class="kw">which</span>(p_value<span class="op">&lt;</span><span class="fl">0.05</span>))<span class="op">/</span>Total_simulations</span></code></pre></div>
-<pre><code>## [1] 0.998</code></pre>
-<p><strong>The bottom line is:</strong> when the skewness in the populations differs too much <strong>and</strong> the sample sizes are small, the t-tools are not robust, thus may result in misleading outputs.</p>
+<pre><code>## [1] 0.985</code></pre>
+<p><strong>The bottom line is:</strong></p>
+<p>When the skewness in the populations differs too much <strong>and</strong> the sample sizes are small, the t-tools are not robust, thus may result in misleading outputs.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Total simulations</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a>Total_simulations &lt;-<span class="st"> </span><span class="dv">1000</span></span>
 <span id="cb22-3"><a href="#cb22-3"></a></span>
 <span id="cb22-4"><a href="#cb22-4"></a><span class="co"># Population 1, form a log normal distribution</span></span>
 <span id="cb22-5"><a href="#cb22-5"></a>pop1 &lt;-<span class="st"> </span><span class="kw">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">1</span>, <span class="fl">0.2</span>)</span>
 <span id="cb22-6"><a href="#cb22-6"></a><span class="kw">skewness</span>(pop1)</span></code></pre></div>
-<pre><code>## [1] 0.5986887</code></pre>
+<pre><code>## [1] 0.6193919</code></pre>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Population 2, form a log normal distribution</span></span>
 <span id="cb24-2"><a href="#cb24-2"></a>pop2 &lt;-<span class="st"> </span><span class="kw">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
 <span id="cb24-3"><a href="#cb24-3"></a><span class="kw">skewness</span>(pop2)</span></code></pre></div>
-<pre><code>## [1] 23.12017</code></pre>
+<pre><code>## [1] 40.6598</code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Sample size</span></span>
 <span id="cb26-2"><a href="#cb26-2"></a>N1 &lt;-<span class="st"> </span><span class="dv">10</span></span>
 <span id="cb26-3"><a href="#cb26-3"></a>N2 &lt;-<span class="st"> </span><span class="dv">20</span></span>
@@ -656,14 +657,14 @@ div.tocify {
 <span id="cb26-17"><a href="#cb26-17"></a></span>
 <span id="cb26-18"><a href="#cb26-18"></a><span class="co"># Check the robustness</span></span>
 <span id="cb26-19"><a href="#cb26-19"></a><span class="kw">length</span>(<span class="kw">which</span>(p_value<span class="op">&lt;</span><span class="fl">0.05</span>))<span class="op">/</span>Total_simulations</span></code></pre></div>
-<pre><code>## [1] 0.082</code></pre>
+<pre><code>## [1] 0.074</code></pre>
 <hr />
 </div>
 <div id="equal-variance-of-populations" class="section level1">
 <h1>Equal variance of populations</h1>
 <div id="welch-t-ratio" class="section level2">
 <h2>Welch t-ratio</h2>
-<p>The independent two-sample t-test requires the two populations to have the same variance, and sample SD s<sub>1</sub> and s<sub>2</sub> are independent estimates. However, such an assumption is not necessarily the case in reality. One may employ the individual sample SD as separate estimates of their respective population standard deviations, rather than polling to obtain a single estimate of a population SD. The standard error of the difference in two population means is then:</p>
+<p>The <a href="https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test">independent two-sample t-test</a> requires the two populations to have the same variance, and sample SD s<sub>1</sub> and s<sub>2</sub> are independent estimates. However, such an assumption is not necessarily the case in reality. One may employ the individual sample SD as separate estimates of their respective population standard deviations, rather than polling to obtain a single estimate of a population SD. The standard error of the difference in two population means is then:</p>
 <p><span class="math display">\[ SE(\overline{X_1} - \overline{X_2}) =  \sqrt { \frac{s_1^2} {n_1} + \frac{s_2^2} {n_2} }   \]</span> This ends up the <em>Welch t-ratio</em>:</p>
 <p><span class="math display">\[t=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } { \sqrt { \frac{s_1^2} {n_1} + \frac{s_2^2} {n_2} } } \]</span></p>
 <p>which approximately follows a t-distribution with d.f.<sub>W</sub> degrees of freedom:</p>
@@ -974,7 +975,7 @@ div.tocify {
 <td align="center"><span class="math inline">\(n \ge 220 ^*\)</span></td>
 <td align="center">Yes</td>
 <td align="center"><code>walsh.test()</code></td>
-<td align="center"><a href="https://zhu-group.github.io/ese335/S10.html#Walsh&#39;s_test">See above</a></td>
+<td align="center"><a href="https://zhu-group.github.io/ese335/S10.html#Outliers">See above</a></td>
 </tr>
 </tbody>
 </table>

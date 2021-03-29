@@ -82,7 +82,7 @@ runs.test(Sample2)
 
 # Normality
 
-Even though we have been emphasizing that normality is the key assumption of t-tools (one-sample, independent two-sample, and paired samples). It turns out t-tools are **very robust** to samples from non-normal populations, as long as the sample sizes are reasonably large (> `50`, this is arbitrary, but generally should be larger than `30`). To test this, run the following R scripts:
+Even though we have been emphasizing that normality is the key assumption of t-tools ([one-sample](https://zhu-group.github.io/ese335/S07.html#One_sample_t-test), [independent two-sample](https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test), and [paired samples](https://zhu-group.github.io/ese335/S09.html#The_paired_sample_t-test)). It turns out t-tools are **very robust** to samples from non-normal populations, as long as the sample sizes are reasonably large (> `50`, this is arbitrary, but generally should be larger than `30`). To test this, run the following R scripts:
 
 ```{r}
 # Total simulations
@@ -151,7 +151,9 @@ for(i in 1:Total_simulations){
 length(which(p_value<0.05))/Total_simulations
 ```
 
-**The bottom line is:** when the skewness in the populations differs too much **and** the sample sizes are small, the t-tools are not robust, thus may result in misleading outputs.
+**The bottom line is:** 
+
+When the skewness in the populations differs too much **and** the sample sizes are small, the t-tools are not robust, thus may result in misleading outputs.
 
 ```{r}
 # Total simulations
@@ -192,7 +194,7 @@ length(which(p_value<0.05))/Total_simulations
 
 ## Welch t-ratio
 
-The independent two-sample t-test requires the two populations to have the same variance, and sample SD s~1~ and s~2~ are independent estimates. However, such an assumption is not necessarily the case in reality. One may employ the individual sample SD as separate estimates of their respective population standard deviations, rather than polling to obtain a single estimate of a population SD. The standard error of the difference in two population means is then:
+The [independent two-sample t-test](https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test) requires the two populations to have the same variance, and sample SD s~1~ and s~2~ are independent estimates. However, such an assumption is not necessarily the case in reality. One may employ the individual sample SD as separate estimates of their respective population standard deviations, rather than polling to obtain a single estimate of a population SD. The standard error of the difference in two population means is then:
 
 $$ SE(\overline{X_1} - \overline{X_2}) =  \sqrt { \frac{s_1^2} {n_1} + \frac{s_2^2} {n_2} }   $$
 This ends up the *Welch t-ratio*:
@@ -409,7 +411,7 @@ Test           |Normal population |Sample size    |Detect several outliers | R f
 |Grubbs' test  |Yes               |$n \ge 6$      | No                     | `grubbs.test()`|`outliers`|
 |Dixon's test  |Yes               |$n \le 25$     | No                     | `dixon.test()` |`outliers`|
 |Rosner's test |Yes               |$n \ge 20$     | Yes                    | `rosnerTest()` |`EnvStats`|
-|Walsh's test  |No                |$n \ge 220 ^*$ | Yes                    | `walsh.test()` | [See above](https://zhu-group.github.io/ese335/S10.html#Walsh's_test)     |
+|Walsh's test  |No                |$n \ge 220 ^*$ | Yes                    | `walsh.test()` | [See above](https://zhu-group.github.io/ese335/S10.html#Outliers)     |
 $^*$For a significant level of $\alpha$, $Trunc(\sqrt{2n})>1+\frac {1} {\alpha}$, where $Trunc()$ returns the ceiling.
 
 ## Dealing with outliers
