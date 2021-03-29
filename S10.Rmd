@@ -1,5 +1,5 @@
 ---
-title: "Section 10 Assumptions for the t tests"
+title: "Section 10 Assumptions for t tests"
 output:
   html_document:
     toc: true
@@ -29,9 +29,9 @@ Cloud seeding is the process where substances like dry ice and silver iodide are
 
 [^1]: [Source](https://dekhnews.com/wp-content/uploads/2016/11/cloud-seeding.png)
 
-<img src="figs/cloudseeding.jpg" alt="drawing" width="800"/>
+<img src="figs/cloudseeding.jpg" alt="drawing" width="600"/>
 
-The case study in 3.1 [RS] provides an example of cloud seeding. Rainfall (acre-feet) was measured before and after the seeding. See page `59-60` for more.
+The case study in [RS] 3.1 provides an example of cloud seeding. Rainfall (acre-feet) were measured before and after the seeding. See page `59-60` for more.
 
 + Rainfall from Unseeded Days (n=`26`):
 
@@ -45,24 +45,26 @@ The case study in 3.1 [RS] provides an example of cloud seeding. Rainfall (acre-
 
 `242.5, 200.7, 198.6, 129.6, 119.0, 118.3, 115.3, 92.4, 40.6, 32.7, 31.4, 17.5, 7.7, 4.1`
 
-Did cloud seeding have an effect on rainfall in this experiment? If so, how much?
+Suppose we want to know whether cloud seeding has an effect on rainfall in this experiment. If so, by how much?
 
 Let's look at the data first:
 
-
 ```{r}
 # Samples
-Unseeded <- c(1202.6, 830.1, 372.4, 345.5, 321.2, 244.3, 163.0, 147.8, 95.0, 87.0, 81.2, 68.5, 47.3,
-              41.1, 36.6, 29.0, 28.6, 26.3, 26.0, 24.4, 21.4, 17.3, 11.5, 4.9, 4.9, 1.0)
+Unseeded <- c(1202.6, 830.1, 372.4, 345.5, 321.2, 244.3, 163.0, 147.8, 95.0, 87.0, 
+              81.2, 68.5, 47.3, 41.1, 36.6, 29.0, 28.6, 26.3, 26.0, 24.4, 21.4, 
+              17.3, 11.5, 4.9, 4.9, 1.0)
 shapiro.test(Unseeded)
 
-Seeded   <- c(2745.6, 1697.1, 1656.4, 978.0, 703.4, 489.1, 430.0, 334.1, 302.8, 274.7, 274.7, 255.0,
-              242.5, 200.7, 198.6, 129.6, 119.0, 118.3, 115.3, 92.4, 40.6, 32.7, 31.4, 17.5, 7.7, 4.1)
+Seeded   <- c(2745.6, 1697.1, 1656.4, 978.0, 703.4, 489.1, 430.0, 334.1, 302.8, 
+              274.7, 274.7, 255.0, 242.5, 200.7, 198.6, 129.6, 119.0, 118.3, 
+              115.3, 92.4, 40.6, 32.7, 31.4, 17.5, 7.7, 4.1)
 shapiro.test(Seeded)
 
 # Make data frame
 Rainfall_data <- data.frame(Rainfall = c(Unseeded, Seeded),
-                            Seeded= c(rep("No",length(Unseeded)),rep("Yes",length(Seeded))))
+                            Seeded= c(rep("No",length(Unseeded)),
+                                      rep("Yes",length(Seeded))))
 
 # Compare boxplots
 ggplot(Rainfall_data, aes(x=as.character(Seeded), y=Rainfall)) +

@@ -11,7 +11,7 @@
 
 
 
-<title>Section 10 Assumptions for the t tests</title>
+<title>Section 10 Assumptions for t tests</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -482,7 +482,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Section 10 Assumptions for the t tests</h1>
+<h1 class="title toc-ignore">Section 10 Assumptions for t tests</h1>
 
 </div>
 
@@ -501,8 +501,8 @@ div.tocify {
 <div id="section-example-cloud-seeding-to-increase-rainfall" class="section level1">
 <h1>Section Example: Cloud seeding to increase rainfall</h1>
 <p>Cloud seeding is the process where substances like dry ice and silver iodide are put into clouds in an attempt to make precipitation fall. Cloud seeding has also been used to dissipate fog and weaken some storms. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<p><img src="figs/cloudseeding.jpg" alt="drawing" width="800"/></p>
-<p>The case study in 3.1 [RS] provides an example of cloud seeding. Rainfall (acre-feet) was measured before and after the seeding. See page <code>59-60</code> for more.</p>
+<p><img src="figs/cloudseeding.jpg" alt="drawing" width="600"/></p>
+<p>The case study in [RS] 3.1 provides an example of cloud seeding. Rainfall (acre-feet) were measured before and after the seeding. See page <code>59-60</code> for more.</p>
 <ul>
 <li>Rainfall from Unseeded Days (n=<code>26</code>):</li>
 </ul>
@@ -513,20 +513,22 @@ div.tocify {
 </ul>
 <p><code>2745.6, 1697.1, 1656.4, 978.0, 703.4, 489.1, 430.0, 334.1, 302.8, 274.7, 274.7, 255.0</code></p>
 <p><code>242.5, 200.7, 198.6, 129.6, 119.0, 118.3, 115.3, 92.4, 40.6, 32.7, 31.4, 17.5, 7.7, 4.1</code></p>
-<p>Did cloud seeding have an effect on rainfall in this experiment? If so, how much?</p>
+<p>Suppose we want to know whether cloud seeding has an effect on rainfall in this experiment. If so, by how much?</p>
 <p>Let’s look at the data first:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Samples</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>Unseeded &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1202.6</span>, <span class="fl">830.1</span>, <span class="fl">372.4</span>, <span class="fl">345.5</span>, <span class="fl">321.2</span>, <span class="fl">244.3</span>, <span class="fl">163.0</span>, <span class="fl">147.8</span>, <span class="fl">95.0</span>, <span class="fl">87.0</span>, <span class="fl">81.2</span>, <span class="fl">68.5</span>, <span class="fl">47.3</span>,</span>
-<span id="cb2-3"><a href="#cb2-3"></a>              <span class="fl">41.1</span>, <span class="fl">36.6</span>, <span class="fl">29.0</span>, <span class="fl">28.6</span>, <span class="fl">26.3</span>, <span class="fl">26.0</span>, <span class="fl">24.4</span>, <span class="fl">21.4</span>, <span class="fl">17.3</span>, <span class="fl">11.5</span>, <span class="fl">4.9</span>, <span class="fl">4.9</span>, <span class="fl">1.0</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">shapiro.test</span>(Unseeded)</span></code></pre></div>
+<span id="cb2-2"><a href="#cb2-2"></a>Unseeded &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1202.6</span>, <span class="fl">830.1</span>, <span class="fl">372.4</span>, <span class="fl">345.5</span>, <span class="fl">321.2</span>, <span class="fl">244.3</span>, <span class="fl">163.0</span>, <span class="fl">147.8</span>, <span class="fl">95.0</span>, <span class="fl">87.0</span>, </span>
+<span id="cb2-3"><a href="#cb2-3"></a>              <span class="fl">81.2</span>, <span class="fl">68.5</span>, <span class="fl">47.3</span>, <span class="fl">41.1</span>, <span class="fl">36.6</span>, <span class="fl">29.0</span>, <span class="fl">28.6</span>, <span class="fl">26.3</span>, <span class="fl">26.0</span>, <span class="fl">24.4</span>, <span class="fl">21.4</span>, </span>
+<span id="cb2-4"><a href="#cb2-4"></a>              <span class="fl">17.3</span>, <span class="fl">11.5</span>, <span class="fl">4.9</span>, <span class="fl">4.9</span>, <span class="fl">1.0</span>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">shapiro.test</span>(Unseeded)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  Unseeded
 ## W = 0.60219, p-value = 3.134e-07</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>Seeded   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2745.6</span>, <span class="fl">1697.1</span>, <span class="fl">1656.4</span>, <span class="fl">978.0</span>, <span class="fl">703.4</span>, <span class="fl">489.1</span>, <span class="fl">430.0</span>, <span class="fl">334.1</span>, <span class="fl">302.8</span>, <span class="fl">274.7</span>, <span class="fl">274.7</span>, <span class="fl">255.0</span>,</span>
-<span id="cb4-2"><a href="#cb4-2"></a>              <span class="fl">242.5</span>, <span class="fl">200.7</span>, <span class="fl">198.6</span>, <span class="fl">129.6</span>, <span class="fl">119.0</span>, <span class="fl">118.3</span>, <span class="fl">115.3</span>, <span class="fl">92.4</span>, <span class="fl">40.6</span>, <span class="fl">32.7</span>, <span class="fl">31.4</span>, <span class="fl">17.5</span>, <span class="fl">7.7</span>, <span class="fl">4.1</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">shapiro.test</span>(Seeded)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>Seeded   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2745.6</span>, <span class="fl">1697.1</span>, <span class="fl">1656.4</span>, <span class="fl">978.0</span>, <span class="fl">703.4</span>, <span class="fl">489.1</span>, <span class="fl">430.0</span>, <span class="fl">334.1</span>, <span class="fl">302.8</span>, </span>
+<span id="cb4-2"><a href="#cb4-2"></a>              <span class="fl">274.7</span>, <span class="fl">274.7</span>, <span class="fl">255.0</span>, <span class="fl">242.5</span>, <span class="fl">200.7</span>, <span class="fl">198.6</span>, <span class="fl">129.6</span>, <span class="fl">119.0</span>, <span class="fl">118.3</span>, </span>
+<span id="cb4-3"><a href="#cb4-3"></a>              <span class="fl">115.3</span>, <span class="fl">92.4</span>, <span class="fl">40.6</span>, <span class="fl">32.7</span>, <span class="fl">31.4</span>, <span class="fl">17.5</span>, <span class="fl">7.7</span>, <span class="fl">4.1</span>)</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">shapiro.test</span>(Seeded)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -534,12 +536,13 @@ div.tocify {
 ## W = 0.65626, p-value = 1.411e-06</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Make data frame</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>Rainfall_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Rainfall =</span> <span class="kw">c</span>(Unseeded, Seeded),</span>
-<span id="cb6-3"><a href="#cb6-3"></a>                            <span class="dt">Seeded=</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;No&quot;</span>,<span class="kw">length</span>(Unseeded)),<span class="kw">rep</span>(<span class="st">&quot;Yes&quot;</span>,<span class="kw">length</span>(Seeded))))</span>
-<span id="cb6-4"><a href="#cb6-4"></a></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># Compare boxplots</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="kw">ggplot</span>(Rainfall_data, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">as.character</span>(Seeded), <span class="dt">y=</span>Rainfall)) <span class="op">+</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="kw">geom_boxplot</span>(<span class="dt">fill=</span><span class="st">&quot;steelblue&quot;</span>) <span class="op">+</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Rainfall Distribution&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Seeded&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Rainfall [acre-feet]&quot;</span>)</span></code></pre></div>
+<span id="cb6-3"><a href="#cb6-3"></a>                            <span class="dt">Seeded=</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;No&quot;</span>,<span class="kw">length</span>(Unseeded)),</span>
+<span id="cb6-4"><a href="#cb6-4"></a>                                      <span class="kw">rep</span>(<span class="st">&quot;Yes&quot;</span>,<span class="kw">length</span>(Seeded))))</span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co"># Compare boxplots</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="kw">ggplot</span>(Rainfall_data, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">as.character</span>(Seeded), <span class="dt">y=</span>Rainfall)) <span class="op">+</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="kw">geom_boxplot</span>(<span class="dt">fill=</span><span class="st">&quot;steelblue&quot;</span>) <span class="op">+</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Rainfall Distribution&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Seeded&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Rainfall [acre-feet]&quot;</span>)</span></code></pre></div>
 <p><img src="S10_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>What do you observe? Are the samples from normal distributions?</p>
 <hr />
@@ -592,9 +595,9 @@ div.tocify {
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  pop1
-## W = 0.97546, p-value &lt; 2.2e-16</code></pre>
+## W = 0.97359, p-value &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">skewness</span>(pop1)</span></code></pre></div>
-<pre><code>## [1] 0.6865439</code></pre>
+<pre><code>## [1] 0.7189075</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Population 2, form a log normal distribution</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a>pop2 &lt;-<span class="st"> </span><span class="kw">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
 <span id="cb15-3"><a href="#cb15-3"></a><span class="kw">shapiro.test</span>(pop2)</span></code></pre></div>
@@ -602,9 +605,9 @@ div.tocify {
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  pop2
-## W = 0.12213, p-value &lt; 2.2e-16</code></pre>
+## W = 0.12479, p-value &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">skewness</span>(pop2)</span></code></pre></div>
-<pre><code>## [1] 23.31805</code></pre>
+<pre><code>## [1] 18.64106</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Sample size</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a>N1 &lt;-<span class="st"> </span><span class="dv">100</span></span>
 <span id="cb19-3"><a href="#cb19-3"></a>N2 &lt;-<span class="st"> </span><span class="dv">100</span></span>
@@ -624,16 +627,16 @@ div.tocify {
 <span id="cb19-17"><a href="#cb19-17"></a></span>
 <span id="cb19-18"><a href="#cb19-18"></a><span class="co"># Check the robustness</span></span>
 <span id="cb19-19"><a href="#cb19-19"></a><span class="kw">length</span>(<span class="kw">which</span>(p_value<span class="op">&lt;</span><span class="fl">0.05</span>))<span class="op">/</span>Total_simulations</span></code></pre></div>
-<pre><code>## [1] 0.895</code></pre>
+<pre><code>## [1] 0.817</code></pre>
 <p>For small samples, t-tools are also robust if the skewness in the populations differs not much.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Population 1, form a log normal distribution</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a>pop1 &lt;-<span class="st"> </span><span class="kw">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">1</span>, <span class="fl">0.2</span>)</span>
 <span id="cb21-3"><a href="#cb21-3"></a><span class="kw">skewness</span>(pop1)</span></code></pre></div>
-<pre><code>## [1] 0.5961847</code></pre>
+<pre><code>## [1] 0.4725102</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Population 2, form a log normal distribution</span></span>
 <span id="cb23-2"><a href="#cb23-2"></a>pop2 &lt;-<span class="st"> </span><span class="kw">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">2</span>, <span class="fl">0.6</span>)</span>
 <span id="cb23-3"><a href="#cb23-3"></a><span class="kw">skewness</span>(pop2)</span></code></pre></div>
-<pre><code>## [1] 2.2487</code></pre>
+<pre><code>## [1] 1.780844</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Sample size</span></span>
 <span id="cb25-2"><a href="#cb25-2"></a>N1 &lt;-<span class="st"> </span><span class="dv">10</span></span>
 <span id="cb25-3"><a href="#cb25-3"></a>N2 &lt;-<span class="st"> </span><span class="dv">20</span></span>
@@ -653,7 +656,7 @@ div.tocify {
 <span id="cb25-17"><a href="#cb25-17"></a></span>
 <span id="cb25-18"><a href="#cb25-18"></a><span class="co"># Check the robustness</span></span>
 <span id="cb25-19"><a href="#cb25-19"></a><span class="kw">length</span>(<span class="kw">which</span>(p_value<span class="op">&lt;</span><span class="fl">0.05</span>))<span class="op">/</span>Total_simulations</span></code></pre></div>
-<pre><code>## [1] 0.99</code></pre>
+<pre><code>## [1] 0.997</code></pre>
 <p><strong>The bottom line is:</strong></p>
 <p>When the skewness in the populations differs too much <strong>and</strong> the sample sizes are small, the t-tools are not robust, thus may result in misleading outputs.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Total simulations</span></span>
@@ -662,11 +665,11 @@ div.tocify {
 <span id="cb27-4"><a href="#cb27-4"></a><span class="co"># Population 1, form a log normal distribution</span></span>
 <span id="cb27-5"><a href="#cb27-5"></a>pop1 &lt;-<span class="st"> </span><span class="kw">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">1</span>, <span class="fl">0.2</span>)</span>
 <span id="cb27-6"><a href="#cb27-6"></a><span class="kw">skewness</span>(pop1)</span></code></pre></div>
-<pre><code>## [1] 0.576276</code></pre>
+<pre><code>## [1] 0.6567547</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Population 2, form a log normal distribution</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a>pop2 &lt;-<span class="st"> </span><span class="kw">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
 <span id="cb29-3"><a href="#cb29-3"></a><span class="kw">skewness</span>(pop2)</span></code></pre></div>
-<pre><code>## [1] 13.91842</code></pre>
+<pre><code>## [1] 22.97104</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Sample size</span></span>
 <span id="cb31-2"><a href="#cb31-2"></a>N1 &lt;-<span class="st"> </span><span class="dv">10</span></span>
 <span id="cb31-3"><a href="#cb31-3"></a>N2 &lt;-<span class="st"> </span><span class="dv">20</span></span>
@@ -686,7 +689,7 @@ div.tocify {
 <span id="cb31-17"><a href="#cb31-17"></a></span>
 <span id="cb31-18"><a href="#cb31-18"></a><span class="co"># Check the robustness</span></span>
 <span id="cb31-19"><a href="#cb31-19"></a><span class="kw">length</span>(<span class="kw">which</span>(p_value<span class="op">&lt;</span><span class="fl">0.05</span>))<span class="op">/</span>Total_simulations</span></code></pre></div>
-<pre><code>## [1] 0.1</code></pre>
+<pre><code>## [1] 0.086</code></pre>
 <hr />
 </div>
 <div id="equal-variance-of-populations" class="section level1">
@@ -886,8 +889,7 @@ div.tocify {
 ## [1] &quot;Rosner&#39;s Test for Outliers&quot;
 ## 
 ## $data
-##  [1] -0.4  0.6 -0.6  0.2 -7.0 -0.8  0.6 -0.3 -1.3  1.4 -0.8 -1.2  1.4 -0.5 -0.5 -1.2 -0.8 -2.5  0.1 -1.7  0.6  0.3 -2.3  0.6 -0.1  0.3
-## [27]  8.3
+##  [1] -0.4  0.6 -0.6  0.2 -7.0 -0.8  0.6 -0.3 -1.3  1.4 -0.8 -1.2  1.4 -0.5 -0.5 -1.2 -0.8 -2.5  0.1 -1.7  0.6  0.3 -2.3  0.6 -0.1  0.3  8.3
 ## 
 ## $data.name
 ## [1] &quot;Sample2&quot;
