@@ -645,10 +645,9 @@ div.tocify {
 <span id="cb16-5"><a href="#cb16-5"></a>GZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">27.1</span>, <span class="fl">24.2</span>, <span class="fl">27.9</span>, <span class="fl">33.3</span>, <span class="fl">26.4</span>, <span class="fl">28.7</span>, <span class="fl">25.6</span>, <span class="fl">23.2</span>, <span class="fl">24.0</span>, <span class="fl">27.1</span>, <span class="fl">26.2</span>, <span class="fl">24.4</span>)</span>
 <span id="cb16-6"><a href="#cb16-6"></a></span>
 <span id="cb16-7"><a href="#cb16-7"></a><span class="co"># Call t.test function</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="co"># Here we compare the sample average with a known mean (70)</span></span>
-<span id="cb16-9"><a href="#cb16-9"></a><span class="co"># Since H1 states a less PM2.5 value in Shenzhen, </span></span>
-<span id="cb16-10"><a href="#cb16-10"></a><span class="co"># we need to compute the one-side p-value</span></span>
-<span id="cb16-11"><a href="#cb16-11"></a><span class="kw">t.test</span>(SZ_PM2<span class="fl">.5</span>, GZ_PM2<span class="fl">.5</span>, <span class="dt">alternative=</span><span class="st">&quot;two.sided&quot;</span>, <span class="dt">var.equal=</span>T)</span></code></pre></div>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="co"># Since H1 states a different PM2.5 value in Shenzhen, </span></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="co"># we need to compute the two-sided p-value</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="kw">t.test</span>(SZ_PM2<span class="fl">.5</span>, GZ_PM2<span class="fl">.5</span>, <span class="dt">alternative=</span><span class="st">&quot;two.sided&quot;</span>, <span class="dt">var.equal=</span>T)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 

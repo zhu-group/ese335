@@ -205,9 +205,8 @@ SZ_PM2.5  <- c(25.6, 23.7, 21.9, 26.0, 24.5, 22.4, 26.7, 24.6, 22.7, 23.8)
 GZ_PM2.5  <- c(27.1, 24.2, 27.9, 33.3, 26.4, 28.7, 25.6, 23.2, 24.0, 27.1, 26.2, 24.4)
 
 # Call t.test function
-# Here we compare the sample average with a known mean (70)
-# Since H1 states a less PM2.5 value in Shenzhen, 
-# we need to compute the one-side p-value
+# Since H1 states a different PM2.5 value in Shenzhen, 
+# we need to compute the two-sided p-value
 t.test(SZ_PM2.5, GZ_PM2.5, alternative="two.sided", var.equal=T)
 ```
 As you may notice, here we set `var.equal = T` when call the `t.test()` function. By doing so, we assume an "equal SD" method, please see page `40` in [R.S] for more. By default, R uses the "unequal SD" method, which returns a slightly different t statistic and d.f. We will look at this in the future.
