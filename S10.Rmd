@@ -14,6 +14,7 @@ output:
 
 Load the libraries with R:
 ```{r}
+library(ggplot2)
 library(randtests)
 library(moments)
 library(outliers)
@@ -32,13 +33,13 @@ Cloud seeding is the process where substances like dry ice and silver iodide are
 
 The case study in 3.1 [RS] provides an example of cloud seeding. Rainfall (acre-feet) was measured before and after the seeding. See page `59-60` for more.
 
-+ Rainfall from Unseeded Days (n=26):
++ Rainfall from Unseeded Days (n=`26`):
 
 `1202.6, 830.1, 372.4, 345.5, 321.2, 244.3, 163.0, 147.8, 95.0, 87.0, 81.2, 68.5, 47.3` 
 
 `41.1, 36.6, 29.0, 28.6, 26.3, 26.0, 24.4, 21.4, 17.3, 11.5, 4.9, 4.9, 1.0`
 
-+ Rainfall from Seeded Days (n=26):
++ Rainfall from Seeded Days (n=`26`):
 
 `2745.6, 1697.1, 1656.4, 978.0, 703.4, 489.1, 430.0, 334.1, 302.8, 274.7, 274.7, 255.0` 
 
@@ -46,11 +47,37 @@ The case study in 3.1 [RS] provides an example of cloud seeding. Rainfall (acre-
 
 Did cloud seeding have an effect on rainfall in this experiment? If so, how much?
 
+Let's look at the data first:
+
+
+```{r}
+# Samples
+Unseeded <- c(1202.6, 830.1, 372.4, 345.5, 321.2, 244.3, 163.0, 147.8, 95.0, 87.0, 81.2, 68.5, 47.3,
+              41.1, 36.6, 29.0, 28.6, 26.3, 26.0, 24.4, 21.4, 17.3, 11.5, 4.9, 4.9, 1.0)
+shapiro.test(Unseeded)
+
+Seeded   <- c(2745.6, 1697.1, 1656.4, 978.0, 703.4, 489.1, 430.0, 334.1, 302.8, 274.7, 274.7, 255.0,
+              242.5, 200.7, 198.6, 129.6, 119.0, 118.3, 115.3, 92.4, 40.6, 32.7, 31.4, 17.5, 7.7, 4.1)
+shapiro.test(Seeded)
+
+# Make data frame
+Rainfall_data <- data.frame(Rainfall = c(Unseeded, Seeded),
+                            Seeded= c(rep("No",length(Unseeded)),rep("Yes",length(Seeded))))
+
+# Compare boxplots
+ggplot(Rainfall_data, aes(x=as.character(Seeded), y=Rainfall)) +
+geom_boxplot(fill="steelblue") +
+labs(title="Rainfall Distribution", x="Seeded", y="Rainfall [acre-feet]")
+
+```
+
+What do you observe? Are the samples from normal distributions?
+
 ***
 
 # Independence
 
-The *Wald–Wolfowitz runs test* (or simply *runs test*) is a non-parametric statistical test that checks a **randomness** hypothesis for a two-valued (binary) data sequence. More precisely, it can be used to test the hypothesis that the elements of the sequence are mutually **independent**. 
+The *Wald–Wolfowitz runs test* (or simply *runs test*) is a non-parametric statistical test that checks a **randomness** hypothesis for a two-valued (binary) data sequence. More precisely, it can be used to test the hypothesis that the elements of the sequence are mutually **independent**. A *run* of a sequence is a maximal non-empty segment of the sequence consisting of adjacent equal elements.
 
 For a sample, it is converted to a binary data sequence by taking the data in the given order and marking with `+` the data greater than the median, and with `–` the data less than the median. This is why the method is also called *runs above-and-below the median test*.
 
@@ -82,7 +109,7 @@ runs.test(Sample2)
 
 # Normality
 
-Even though we have been emphasizing that normality is the key assumption of t-tools ([one-sample](https://zhu-group.github.io/ese335/S07.html#One_sample_t-test), [independent two-sample](https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test), and [paired samples](https://zhu-group.github.io/ese335/S09.html#The_paired_sample_t-test)). It turns out t-tools are **very robust** to samples from non-normal populations, as long as the sample sizes are reasonably large (> `50`, this is arbitrary, but generally should be larger than `30`). To test this, run the following R scripts:
+Even though we have been emphasizing that normality is the key assumption of t-tools ([one-sample](https://zhu-group.github.io/ese335/S07.html#One_sample_t-test), [independent two-sample](https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test), and [paired samples](https://zhu-group.github.io/ese335/S09.html#The_paired_sample_t-test)). It turns out t-tools are **very robust** to samples from non-normal populations, as long as the sample sizes are reasonably large (larger than `50`, this is arbitrary, but generally should be larger than `30`). To test this, run the following R scripts:
 
 ```{r}
 # Total simulations
@@ -119,7 +146,7 @@ for(i in 1:Total_simulations){
 length(which(p_value<0.05))/Total_simulations
 ```
 
-For small samples, t-tools are also robust if the skewness in the populations differs not too much.
+For small samples, t-tools are also robust if the skewness in the populations differs not much.
 
 ```{r}
 # Population 1, form a log normal distribution
@@ -194,9 +221,9 @@ length(which(p_value<0.05))/Total_simulations
 
 ## Welch t-ratio
 
-The [independent two-sample t-test](https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test) requires the two populations to have the same variance, and sample SD s~1~ and s~2~ are independent estimates. However, such an assumption is not necessarily the case in reality. One may employ the individual sample SD as separate estimates of their respective population standard deviations, rather than polling to obtain a single estimate of a population SD. The standard error of the difference in two population means is then:
+The [independent two-sample t-test](https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test) requires the two populations to have the same variance, and sample SDs are independent estimates. However, such an assumption is not necessarily the case in reality. One may employ the individual sample SD (s~1~ and s~2~) as separate estimates of their respective population standard deviations, rather than polling to obtain a single estimate of a population SD. The standard error of the difference in two population means is then:
 
-$$ SE(\overline{X_1} - \overline{X_2}) =  \sqrt { \frac{s_1^2} {n_1} + \frac{s_2^2} {n_2} }   $$
+$$ SE_W(\overline{X_1} - \overline{X_2}) =  \sqrt { \frac{s_1^2} {n_1} + \frac{s_2^2} {n_2} }   $$
 This ends up the *Welch t-ratio*:
 
 $$t=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } { \sqrt { \frac{s_1^2} {n_1} + \frac{s_2^2} {n_2} } } $$
@@ -214,7 +241,7 @@ Let's use the observations again, but now we have no information about the popul
 
 + H1: Mean PM2.5 level in Shenzhen is not the same as that in Guangzhou ($\mu_1 \ne \mu_2$)
 
-In this case, $\overline X_1 - \overline X_2$ is `-2.32`, $SE(\overline{X_1} - \overline{X_2})$ is `0.93`, assuming H0 is true ($\mu_1 - \mu_2 = 0$), we have $t$=`-2.48`.
+In this case, $\overline X_1 - \overline X_2$ is `-2.32`, $SE_W(\overline{X_1} - \overline{X_2})$ is `0.93`, assuming H0 is true ($\mu_1 - \mu_2 = 0$), we have $t$=`-2.48`.
 
 Then the p-value can be calculated manually:
 
@@ -239,19 +266,19 @@ df2       <- n2 - 1
 sd2       <- sd(GZ_PM2.5)
 
 # SE of the difference
-SE        <- sqrt( sd1^2/n1 + sd2^2/n2 )
+SE_W      <- sqrt( sd1^2/n1 + sd2^2/n2 )
 
 # d.f.W
-df        <- SE^4/( (sd1/sqrt(n1))^4/(n1-1) + (sd2/sqrt(n2))^4/(n2-1) )
+df_W      <- SE_W^4/( (sd1/sqrt(n1))^4/(n1-1) + (sd2/sqrt(n2))^4/(n2-1) )
 
 # Get t-ratio
-t         <- (mean(SZ_PM2.5) - mean(GZ_PM2.5))/SE
+t         <- (mean(SZ_PM2.5) - mean(GZ_PM2.5))/SE_W
 
 # Find the two-side p-value
 # The pt function gives the Cumulative Distribution Function (CDF) 
 # of the Student's t distribution in R, which is the probability that 
 # the variable takes a value lower or equal to a threshold (here |t|).
-P_value  <- (1-pt(abs(t), df=df))*2
+P_value  <- (1-pt(abs(t), df=df_W))*2
 
 print(P_value)
 ```
@@ -281,19 +308,19 @@ GZ_PM2.5  <- c(27.1, 24.2, 27.9, 33.3, 26.4, 28.7, 25.6, 23.2, 24.0, 27.1, 26.2,
 t.test(SZ_PM2.5, GZ_PM2.5, alternative="two.sided", var.equal=F)
 ```
 
-Here we set `var.equal = F` when call the `t.test()` function. By doing so, we assume an "unequal SD" method. By default, R uses this "unequal SD" method.
+Here we set `var.equal = F` when call the `t.test()` function. By doing so, we assume an "unequal SD" method. R uses this "unequal SD" method by default.
 
 ***
 
 # Outliers
 
-An outlier is a value or an observation that is distant from other observations, or, a data point that differs significantly from other data points. Since the t-tools are based on average, they are not resistant to outliers. One or two outliers may affect a confidence interval or change a p-value enough to alter a conclusion completely.
+An outlier is a value or an observation that is distant from other observations, or, a data point that differs significantly from other data points. Since the t-tools are based on average, they are **not resistant** to outliers. One or two outliers may affect a confidence interval or change a p-value enough to alter a conclusion completely.
 
-We previously checked outliers by looking at histogram, boxplot, and `1.5*IQR` of the data. In this sub-section, we present 4 more formal techniques to detect outliers.
+We previously checked outliers by looking at histogram, boxplot, and `1.5*IQR` of the data. In this sub-section, we will look at `4` more formal techniques/tests to detect outliers.
 
 ## Grubbs' test
 
-*Grubbs' test* allows detecting whether the highest or lowest value in a dataset is an outlier. The test detects one outlier at a time (highest or lowest value). Note that Grubbs' test is not appropriate for a sample size of `6` or less.
+*Grubbs' test* allows detecting whether the highest or lowest value in a dataset is an outlier. The test **detects one outlier at a time** (highest or lowest value). Note that Grubbs' test is not appropriate for a sample size of `6` or less.
 
 If we want to test the highest value, the null and alternative hypotheses are as follows:
 
@@ -313,15 +340,19 @@ To perform Grubbs' test in R, use the `grubbs.test()` function from the `outlier
 # Sample
 Sample1 <- c(0.2, 0.8, -2.0, -7.0, -0.8, 0.8, 0.9, -1.1, -1.3, -0.3, 1.6, 8.3)
 
+# Boxplot
+boxplot(Sample1)
+
 # Test for the highest value with Grubbs' test
 grubbs.test(Sample1)
 
 # Test for the lowest value with Grubbs' test
 grubbs.test(Sample1,opposite = T)
 ```
+
 ## Dixon's test
 
-Similar to the Grubbs' test, *Dixon's test* is used to test whether a single low or high value is an outlier. Dixon's test is more conservative than the Grubbs' test, and is most useful for a small sample size (usually less than `25`).
+Similar to Grubbs' test, *Dixon's test* is used to test whether a single low or high value is an outlier. Dixon's test is **more conservative** than Grubbs' test, and is most useful for a small sample size (usually less than `25`).
 
 To perform Dixon's test in R, use the `dixon.test()` function from the `outliers` package. 
 
@@ -336,13 +367,16 @@ dixon.test(Sample1,opposite = T)
 
 *Rosner's test* is used to detect **several outliers** at once (unlike Grubbs' and Dixon's test, which must be performed iteratively to screen for multiple outliers), and is designed to avoid the problem of masking, where an outlier that is close in value to another outlier can go undetected. Rosner's test is most appropriate when the sample size is large (large than `20`).
 
-To perform Rosner's test we use the `rosnerTest()` function from the `EnvStats` package. This function requires at least `2` arguments: the data and the number of suspected outliers `k` (with `k = 3` as the default number of suspected outliers).
+To perform Rosner's test, we use the `rosnerTest()` function from the `EnvStats` package. This function requires at least `2` arguments: the data and the number of suspected outliers `k` (with `k = 3` as the default number of suspected outliers).
 
 ```{r}
 # New Sample
 Sample2 <- c(-0.4, 0.6, -0.6, 0.2, -7.0, -0.8, 0.6, -0.3, -1.3, 1.4, 
              -0.8, -1.2, 1.4, -0.5, -0.5, -1.2, -0.8, -2.5, 0.1, 
              -1.7, 0.6, 0.3, -2.3, 0.6, -0.1, 0.3, 8.3)
+
+# Boxplot
+boxplot(Sample2)
 
 # Test for the highest value with Rosner's test
 # number of suspected outliers is 2 (k=2)
@@ -352,9 +386,12 @@ rosnerTest(Sample2, k=2)
 
 *Walsh's test* is a non-parametric test to detect multiple outliers in a data set. This test requires a large sample size (n > `220` for a significance level of `0.05`), it can be used whenever the data are normally distributed or not. 
 
+There is no R package to do Walsh's test. The following R function (`walsh.test()`) is written by the instructor. The fucntion requires `4` keywords - `data` is the list of values from which outlier(s) are indeitified, `k` is the number of suspected outliers, `alpha` is the significance level set by the user, and `opposite` is `F` by default meaning the function will check the highest `k` values. Set `opposite` to `T` to check the lowest `k` values. The function check the `k` suspected outliers at once. Please see this [page](http://www.statistics4u.info/fundstat_eng/ee_walsh_outliertest.html) for more about Walsh's test.
+
 ```{r}
 
 # Walsh's Outlier Test
+# By Lei Zhu, 03/29/2021
 # Details see:
 # http://www.statistics4u.com/fundstat_eng/ee_walsh_outliertest.html
 
@@ -392,14 +429,15 @@ walsh.test <- function(data, k, alpha, opposite=F){
   }
 }
 
-# Perform Walsh's test
+# Make up a sample
 sample <- c(runif(250,0,1), -90, -91, -100, 90, 91, 100)
 
+# Perform Walsh's test
 # Test for the 3 highest values
 walsh.test(sample, k=3, alpha = 0.05)
 
 # Test for the 3 lowest values
-walsh.test(sample, k=3, alpha = 0.05,opposite=T)
+walsh.test(sample, k=3, alpha = 0.05, opposite=T)
 ```
 
 ## Summary of tests to detect outliers
@@ -411,12 +449,12 @@ Test           |Normal population |Sample size    |Detect several outliers | R f
 |Grubbs' test  |Yes               |$n \ge 6$      | No                     | `grubbs.test()`|`outliers`|
 |Dixon's test  |Yes               |$n \le 25$     | No                     | `dixon.test()` |`outliers`|
 |Rosner's test |Yes               |$n \ge 20$     | Yes                    | `rosnerTest()` |`EnvStats`|
-|Walsh's test  |No                |$n \ge 220 ^*$ | Yes                    | `walsh.test()` | [See above](https://zhu-group.github.io/ese335/S10.html#Outliers)     |
+|Walsh's test  |No                |$n \ge 220 ^*$ | Yes                    | `walsh.test()` |          |
 $^*$For a significant level of $\alpha$, $Trunc(\sqrt{2n})>1+\frac {1} {\alpha}$, where $Trunc()$ returns the ceiling.
 
 ## Dealing with outliers
 
-Once outliers are identified, one needs to adopt the careful examination strategy. See Display 3.6 (page `69`) in [RS] for more. 
+Once outlier(s) is identified, one needs to adopt the **careful examination strategy**. See Display 3.6 (page `69`) in [RS] for more. 
 
 ***
 
@@ -442,9 +480,9 @@ From field B, the officer randomly collected `13` samples with  Cd concentration
 
 + 2.1 Check the independence of samples
 
-+ 2.2 Plot two boxplots side by side, are there any potential outliers?
++ 2.2 Plot two boxplots side by side, are there any suspected outlier(s)?
 
-+ 2.3 Use different methods to test the potential outliers
++ 2.3 Use different methods to test the suspected outlier(s)
 
 + 2.4 Check the normality of the two samples, is the t-test suitable here?
 
