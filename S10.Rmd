@@ -182,7 +182,7 @@ length(which(p_value<0.05))/Total_simulations
 
 **The bottom line is:** 
 
-When the skewness in the populations differs too much **and** the sample sizes are small, the t-tools are not robust, thus may result in misleading outputs.
+When the skewness in the populations differs too much (especially when the sample sizes are small), the t-tools are not robust, thus may result in misleading outputs.
 
 ```{r}
 # Total simulations
@@ -446,7 +446,7 @@ walsh.test(sample, k=3, alpha = 0.05, opposite=T)
 
 Below is a brief summary of proceeding `4` tests:
 
-Test           |Normal population |Sample size    |Detect several outliers | R function     |R Package |
+Test           | Normal population (approximately) |Sample size    |Detect several outliers | R function     |R Package |
 |:------------:|:----------------:|:-------------:|:----------------------:|:--------------:|:--------:|
 |Grubbs' test  |Yes               |$n \ge 6$      | No                     | `grubbs.test()`|`outliers`|
 |Dixon's test  |Yes               |$n \le 25$     | No                     | `dixon.test()` |`outliers`|
