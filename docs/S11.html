@@ -512,7 +512,7 @@ div.tocify {
 <div id="one-way-anova-basics" class="section level1">
 <h1>One-way ANOVA basics</h1>
 <p><em>Analysis of variance</em> (ANOVA) is one of the most frequently used techniques in the environmental sciences. ANOVA is used to contrast a continuous dependent variable (e.g., soil Cd concentrations) across <em>levels</em> of one or more categorical independent variables (also called <em>factors</em>). In the section example, there is only one categorical independent variable that has <code>4</code> levels (control, plant #1, plant #2, and plant #3). For ANOVA dealing with only one factor, it is called one-way ANOVA or one-factor ANOVA.</p>
-<p>One-way ANOVA is similar to the independent samples t-test. The later one is used for comparison of population means across <strong>two levels</strong>, while one-way ANOVA is used for the comparison of <strong>more than two</strong> population means. The logic of ANOVA is essentially the same as the t-test - it compares variability between groups to variability within groups to determine whether the observed differences are due to chance or not.</p>
+<p>One-way ANOVA is similar to the independent samples t-test. The later one is used for comparison of population means across <strong>two levels</strong>, while one-way ANOVA is used for the comparison of population means across <strong>more than two levels</strong> (note that, the levels are determined by only one factor). The logic of ANOVA is essentially the same as the t-test - it compares variability between groups to variability within groups to determine whether the observed differences are due to chance or not.</p>
 <div id="variation-between-and-within-groups" class="section level2">
 <h2>Variation between and within groups</h2>
 <p>Suppose there are <span class="math inline">\(M\)</span> levels of observations in the sample <span class="math inline">\(X\)</span>, so we have <span class="math inline">\(X=\{ X_1, X_2, \dots, X_M \}\)</span>. For each level <span class="math inline">\(m\)</span> (<span class="math inline">\(m=1,2,\dots,M\)</span>), the sample size of corresponding sub-sample <span class="math inline">\(X_m\)</span> is <span class="math inline">\(n_m\)</span>. Let’s use <span class="math inline">\(N\)</span> to denote the overall sample size of <span class="math inline">\(X\)</span>, so <span class="math inline">\(N=n_1+n_2+\dots+n_M\)</span>.</p>
@@ -523,7 +523,10 @@ div.tocify {
 <p>Finally, the sum of squares within groups (SS<sub>W</sub>) is a measure for the <strong>variability within groups</strong>. SS<sub>W</sub> is associated with the variability that cannot be explained by the group variable.</p>
 <p><span class="math display">\[SS_W = \sum_{m=1}^{M} \sum_{k=1}^{n_m}(x_k-\overline X_m)^2\]</span> where <span class="math inline">\(x_k\)</span> corresponds to the <em>k</em><sup>th</sup> observation of the sub-sample <span class="math inline">\(X_m\)</span>, and <span class="math inline">\(k=1,2,\dots,n_m\)</span>.</p>
 <p>One can easily prove that:</p>
-<p><span class="math display">\[SS_T = SS_B + SS_W\]</span> ## Measures of mean variability</p>
+<p><span class="math display">\[SS_T = SS_B + SS_W\]</span></p>
+</div>
+<div id="measures-of-mean-variability" class="section level2">
+<h2>Measures of mean variability</h2>
 <p>To get an average variability, we scale the above measures of variability by the degrees of freedom. The degrees of freedom are defined for each partition of variability (SS<sub>T</sub>, SS<sub>B</sub>, and SS<sub>W</sub>).</p>
 <p>For the total variability (SS<sub>T</sub>):</p>
 <p><span class="math inline">\(df_T=N-1\)</span></p>
@@ -590,7 +593,7 @@ div.tocify {
 <p>Further, we will calculate the p-value for any given F-value. If the p-value is small, the data provide convincing evidence that at least one pair of group means is different from each other. If the p-value is large, the data do not provide convincing evidence that at least one pair of group means is different from each other, and thus, the observed differences in sample means are attributable to sampling variability (or chance).</p>
 <p>For the section example, let’s write down H0 and H1:</p>
 <ul>
-<li><p>H0: There is no difference in mean Cd concentration of the <code>4</code> populations (<span class="math inline">\(\mu_1 = mu_2 = mu_3 = mu_4\)</span>)</p></li>
+<li><p>H0: There is no difference in mean Cd concentration of the <code>4</code> populations (<span class="math inline">\(\mu_1 = \mu_2 = \mu_3 = \mu_4\)</span>)</p></li>
 <li><p>H1: At least mean Cd concentration in one population differs from the others</p></li>
 </ul>
 <p>In this case, the <em>F</em>-statistic is <code>4.66</code>, assuming H0 is true (<span class="math inline">\(\mu_D = 0\)</span>). Then the p-value can be calculated manually:</p>
@@ -664,7 +667,7 @@ div.tocify {
 <span id="cb6-4"><a href="#cb6-4"></a>F_ratio  &lt;-<span class="st"> </span>MSB<span class="op">/</span>MSW</span>
 <span id="cb6-5"><a href="#cb6-5"></a></span>
 <span id="cb6-6"><a href="#cb6-6"></a><span class="co"># Find the p-value</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># The pf function gives the Cumulative Distribution Function (CDF) </span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># The pf() function gives the Cumulative Distribution Function (CDF) </span></span>
 <span id="cb6-8"><a href="#cb6-8"></a><span class="co"># of the F distribution in R, which is the probability that </span></span>
 <span id="cb6-9"><a href="#cb6-9"></a><span class="co"># the variable takes a value lower or equal to a threshold (here F_ratio).</span></span>
 <span id="cb6-10"><a href="#cb6-10"></a><span class="co"># Here we that 1-pf to get the probability that the </span></span>
@@ -685,8 +688,8 @@ div.tocify {
 ## 
 ## data:  Cd and group
 ## F = 4.6617, num df = 3, denom df = 36, p-value = 0.007476</code></pre>
-<p>Here we put <code>var.equal = T</code> when call the <code>oneway.test</code> function. By doing so, we assume equal SD in the populations, similar to the “equal SD” method used in the independent two-sample t-test. By default, R uses unequal SD in populations (<code>var.equal = F</code>), which becomes the Welch test and which returns a different <em>F</em> statistic and d.f. We will look at this in the future.</p>
-<p>Another way to perform the one-way ANOVA with R is calling the <code>aov()</code> and <code>summary()</code> function. By doing so, R returns the full ANOVA table (df<sub>B</sub>, df<sub>W</sub>, SS<sub>B</sub>, SS<sub>W</sub>, MSB, MSW, <em>F</em>, and p-value) and you can also save the ANOVA for post analysis.</p>
+<p>Here we put <code>var.equal = T</code> when call the <code>oneway.test()</code> function. By doing so, we assume equal SD in the populations, similar to the “equal SD” method used in the <a href="https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test">independent two-sample t-test</a>. By default, R uses unequal SD in populations (<code>var.equal = F</code>), which becomes the Welch test and which returns a different <em>F</em> statistic and d.f. We will look at this in the future.</p>
+<p>Another way to perform the one-way ANOVA with R is calling the <code>aov()</code> and <code>summary()</code> functions. By doing so, R returns the full ANOVA table (df<sub>B</sub>, df<sub>W</sub>, SS<sub>B</sub>, SS<sub>W</sub>, MSB, MSW, <em>F</em>, and p-value) and you can also save the ANOVA for post analysis.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>res_aov &lt;-<span class="st"> </span><span class="kw">aov</span>(Cd <span class="op">~</span><span class="st"> </span>group,<span class="dt">data=</span>Cd_data)</span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="kw">summary</span>(res_aov)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value  Pr(&gt;F)   
@@ -699,13 +702,13 @@ div.tocify {
 <h1>In-class exercises</h1>
 <div id="exercise-1" class="section level2">
 <h2>Exercise #1</h2>
-<p>An environmentalist wanted to determine if the mean acidity of rain differs among <code>3</code> sites. He randomly selected <code>6</code> rain dates at each site obtained the following data:</p>
+<p>An environmentalist wanted to determine if the mean acidity of rain differs among <code>3</code> cities. The environmentalist randomly selected <code>6</code> rain dates at each site obtained the following data:</p>
 <ul>
-<li><p>Site #1: <code>5.11, 5.01, 4.90, 5.14, 4.80, 5.24</code></p></li>
-<li><p>Site #2: <code>4.87, 4.18, 4.40, 4.67, 4.89, 4.09</code></p></li>
-<li><p>Site #3: <code>5.46, 6.29, 5.57, 5.15, 5.45, 5.30</code></p></li>
+<li><p>City #1: <code>5.11, 5.01, 4.90, 5.14, 4.80, 5.24</code></p></li>
+<li><p>City #2: <code>4.87, 4.18, 4.40, 4.67, 4.89, 4.09</code></p></li>
+<li><p>City #3: <code>5.46, 6.29, 5.57, 5.15, 5.45, 5.30</code></p></li>
 </ul>
-<p>So, does the mean acidity of rain differ among the <code>3</code> sites?</p>
+<p>So, does the mean acidity of rain differ among the <code>3</code> cities?</p>
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
@@ -725,7 +728,7 @@ div.tocify {
 <hr />
 <ol>
 <li id="fn1"><p>Chen et al., Contamination features and health risk of soil heavy metals in China, <em>Science of The Total Environment</em>, <strong>512–513</strong>, p.143-153, 2015.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Example and data are from Shu Tao, <em>Applied statistical methods</em>, p. 246-247.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Example and data are from Shu Tao, <em>Applied statistical methods</em>, p. 246-247, 1994.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 

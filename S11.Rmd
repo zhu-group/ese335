@@ -48,7 +48,7 @@ Do soil Cd concentrations diff under the four conditions? Or do different plants
 
 *Analysis of variance* (ANOVA) is one of the most frequently used techniques in the environmental sciences. ANOVA is used to contrast a continuous dependent variable (e.g., soil Cd concentrations) across *levels* of one or more categorical independent variables (also called *factors*). In the section example, there is only one categorical independent variable that has `4` levels (control, plant #1, plant #2, and plant #3). For ANOVA dealing with only one factor, it is called one-way ANOVA or one-factor ANOVA. 
 
-One-way ANOVA is similar to the independent samples t-test. The later one is used for comparison of population means across **two levels**, while one-way ANOVA is used for the comparison of **more than two** population means. The logic of ANOVA is essentially the same as the t-test - it compares variability between groups to variability within groups to determine whether the observed differences are due to chance or not.
+One-way ANOVA is similar to the independent samples t-test. The later one is used for comparison of population means across **two levels**, while one-way ANOVA is used for the comparison of population means across **more than two levels** (note that, the levels are determined by only one factor). The logic of ANOVA is essentially the same as the t-test - it compares variability between groups to variability within groups to determine whether the observed differences are due to chance or not.
 
 ## Variation between and within groups
 
@@ -71,6 +71,7 @@ where $x_k$ corresponds to the *k*^th^ observation of the sub-sample $X_m$, and 
 One can easily prove that:
 
 $$SS_T = SS_B + SS_W$$
+
 ## Measures of mean variability
 
 To get an average variability, we scale the above measures of variability by the degrees of freedom. The degrees of freedom are defined for each partition of variability (SS~T~, SS~B~, and SS~W~).
@@ -104,6 +105,7 @@ $F=\frac {MS_B} {MS_W}$
 The *F*-statistic follows the **F-distribution** (named after Ronald A. Fisher) with a two degrees of freedom $df(M-1,N-M)$:
 
 $F=\frac {MS_B} {MS_W} \sim F_{df=(M-1,N-M)}$
+
 
 ## *F*-distribution
 
@@ -156,7 +158,7 @@ Further, we will calculate the p-value for any given F-value. If the p-value is 
 
 For the section example, let's write down H0 and H1:
 
-+ H0: There is no difference in mean Cd concentration of the `4` populations ($\mu_1 = mu_2 = mu_3 = mu_4$)
++ H0: There is no difference in mean Cd concentration of the `4` populations ($\mu_1 = \mu_2 = \mu_3 = \mu_4$)
 
 + H1: At least mean Cd concentration in one population differs from the others
 
@@ -233,7 +235,7 @@ MSW      <- SSW/df_W
 F_ratio  <- MSB/MSW
 
 # Find the p-value
-# The pf function gives the Cumulative Distribution Function (CDF) 
+# The pf() function gives the Cumulative Distribution Function (CDF) 
 # of the F distribution in R, which is the probability that 
 # the variable takes a value lower or equal to a threshold (here F_ratio).
 # Here we that 1-pf to get the probability that the 
@@ -255,9 +257,9 @@ In R, the previous steps can be done in one line:
 oneway.test(Cd ~ group, data=Cd_data, var.equal = T) 
 ```
 
-Here we put `var.equal = T` when call the `oneway.test` function. By doing so, we assume equal SD in the populations, similar to the “equal SD” method used in the independent two-sample t-test. By default, R uses unequal SD in populations (`var.equal = F`), which becomes the Welch test and which returns a different *F* statistic and d.f. We will look at this in the future.
+Here we put `var.equal = T` when call the `oneway.test()` function. By doing so, we assume equal SD in the populations, similar to the “equal SD” method used in the [independent two-sample t-test](https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test). By default, R uses unequal SD in populations (`var.equal = F`), which becomes the Welch test and which returns a different *F* statistic and d.f. We will look at this in the future.
 
-Another way to perform the one-way ANOVA with R is calling the `aov()` and `summary()` function. By doing so, R returns the full ANOVA table (df~B~, df~W~, SS~B~, SS~W~, MSB, MSW, *F*, and p-value) and you can also save the ANOVA for post analysis.
+Another way to perform the one-way ANOVA with R is calling the `aov()` and `summary()` functions. By doing so, R returns the full ANOVA table (df~B~, df~W~, SS~B~, SS~W~, MSB, MSW, *F*, and p-value) and you can also save the ANOVA for post analysis.
 
 ```{r}
 res_aov <- aov(Cd ~ group,data=Cd_data)
@@ -268,21 +270,21 @@ summary(res_aov)
 
 ## Exercise #1
 
-An environmentalist wanted to determine if the mean acidity of rain differs among `3` sites. He randomly selected `6` rain dates at each site obtained the following data:
+An environmentalist wanted to determine if the mean acidity of rain differs among `3` cities. The environmentalist randomly selected `6` rain dates at each site obtained the following data:
 
-+ Site #1: `5.11, 5.01, 4.90, 5.14, 4.80, 5.24`
++ City #1: `5.11, 5.01, 4.90, 5.14, 4.80, 5.24`
 
-+ Site #2: `4.87, 4.18, 4.40, 4.67, 4.89, 4.09`
++ City #2: `4.87, 4.18, 4.40, 4.67, 4.89, 4.09`
 
-+ Site #3: `5.46, 6.29, 5.57, 5.15, 5.45, 5.30`
++ City #3: `5.46, 6.29, 5.57, 5.15, 5.45, 5.30`
 
-So, does the mean acidity of rain differ among the `3` sites?
+So, does the mean acidity of rain differ among the `3` cities?
 
 ## Exercise #2
 
 To study the impact of sunlight on a specific organic compound's decomposition rate, one researcher observes the decomposition ratio (%) of it in `24` hours under `6` sunlight conditions. The sunlight conditions are strictly controlled. The decomposition ratio is measured repeatedly and independently under each condition. [^2]
 
-[^2]: Example and data are from Shu Tao, *Applied statistical methods*, p. 246-247.
+[^2]: Example and data are from Shu Tao, *Applied statistical methods*, p. 246-247, 1994.
 
 + Condition #1: `19.4, 32.6, 27.0, 32.1, 33.0`
 
