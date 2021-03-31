@@ -254,7 +254,7 @@ Now, we have a probability of about `0.7%` getting a statistic (*F*) as extreme 
 In R, the previous steps can be done in one line:
 
 ```{r}
-oneway.test(Cd ~ group, data=Cd_data, var.equal = T) 
+oneway.test(Cd ~ group, data=Cd_data, var.equal=T) 
 ```
 
 Here we put `var.equal = T` when call the `oneway.test()` function. By doing so, we assume equal SD in the populations, similar to the “equal SD” method used in the [independent two-sample t-test](https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test). By default, R uses unequal SD in populations (`var.equal = F`), which becomes the Welch test and which returns a different *F* statistic and d.f. We will look at this in the future.
@@ -262,7 +262,7 @@ Here we put `var.equal = T` when call the `oneway.test()` function. By doing so,
 Another way to perform the one-way ANOVA with R is calling the `aov()` and `summary()` functions. By doing so, R returns the full ANOVA table (df~B~, df~W~, SS~B~, SS~W~, MSB, MSW, *F*, and p-value) and you can also save the ANOVA for post analysis.
 
 ```{r}
-res_aov <- aov(Cd ~ group,data=Cd_data)
+res_aov <- aov(Cd ~ group, data=Cd_data)
 summary(res_aov)
 ```
 

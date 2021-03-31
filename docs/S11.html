@@ -682,7 +682,7 @@ div.tocify {
 <div id="one-way-anova-with-r" class="section level1">
 <h1>One-way ANOVA with R</h1>
 <p>In R, the previous steps can be done in one line:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">oneway.test</span>(Cd <span class="op">~</span><span class="st"> </span>group, <span class="dt">data=</span>Cd_data, <span class="dt">var.equal =</span> T) </span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">oneway.test</span>(Cd <span class="op">~</span><span class="st"> </span>group, <span class="dt">data=</span>Cd_data, <span class="dt">var.equal=</span>T) </span></code></pre></div>
 <pre><code>## 
 ##  One-way analysis of means
 ## 
@@ -690,7 +690,7 @@ div.tocify {
 ## F = 4.6617, num df = 3, denom df = 36, p-value = 0.007476</code></pre>
 <p>Here we put <code>var.equal = T</code> when call the <code>oneway.test()</code> function. By doing so, we assume equal SD in the populations, similar to the “equal SD” method used in the <a href="https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test">independent two-sample t-test</a>. By default, R uses unequal SD in populations (<code>var.equal = F</code>), which becomes the Welch test and which returns a different <em>F</em> statistic and d.f. We will look at this in the future.</p>
 <p>Another way to perform the one-way ANOVA with R is calling the <code>aov()</code> and <code>summary()</code> functions. By doing so, R returns the full ANOVA table (df<sub>B</sub>, df<sub>W</sub>, SS<sub>B</sub>, SS<sub>W</sub>, MSB, MSW, <em>F</em>, and p-value) and you can also save the ANOVA for post analysis.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>res_aov &lt;-<span class="st"> </span><span class="kw">aov</span>(Cd <span class="op">~</span><span class="st"> </span>group,<span class="dt">data=</span>Cd_data)</span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>res_aov &lt;-<span class="st"> </span><span class="kw">aov</span>(Cd <span class="op">~</span><span class="st"> </span>group, <span class="dt">data=</span>Cd_data)</span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="kw">summary</span>(res_aov)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value  Pr(&gt;F)   
 ## group        3  1.261  0.4204   4.662 0.00748 **
