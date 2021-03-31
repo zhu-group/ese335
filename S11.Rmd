@@ -192,11 +192,10 @@ N        <- n1 + n2 + n3 + n4
 
 # Make data frame
 Cd_data  <- data.frame(Cd=c(Control, P1, P2, P3),
-                      group=c(rep("Control", length(Control)),
+                       group=c(rep("Control", length(Control)),
                               rep("Plant 1", length(P1)),
                               rep("Plant 2", length(P2)),
-                              rep("Plant 3", length(P3))
-                      ))
+                              rep("Plant 3", length(P3)) ))
 
 # Compare boxplots
 ggplot(Cd_data, aes(x=group, y=Cd, fill=group)) +
