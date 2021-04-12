@@ -20,6 +20,7 @@ library(ggplot2)
 library(randtests)
 library(moments)
 library(outliers)
+library(nortest)
 ```
 
 ***
@@ -222,7 +223,8 @@ ggplot(cd_data_tbl, aes(x = Plant, y = Cd, fill = Plant)) +
 runs.test(cd_data_tbl$Cd)
 
 # Check normality
-shapiro.test(cd_data_tbl$Cd)
+# Sample size > 30, use the Lilliefors test
+lillie.test(cd_data_tbl$Cd)
 
 # Check outliers
 # After examining the data, we decide to keep this value
