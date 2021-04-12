@@ -504,8 +504,9 @@ div.tocify {
 </div>
 <div id="post-hoc-test-after-one-way-anova" class="section level1">
 <h1>Post-hoc test after one-way ANOVA</h1>
-<p>We saw from the last section that one-way ANOVA is used to test whether means among populations are the same. Once a one-way ANOVA is done, and significant differences are identified, one would be more interested in finding out which specific groups’s means (compared with each other) are different. The test compares all possible pairs of means. And this is so-called the post-hoc test of one-way ANOVA. Here we introduce the <em>Tukey Test</em> (or Tukey procedure), also called Tukey’s Honest Significant Difference test, which is based on the studentized range distribution.</p>
-<p>Let’s use the Cd example from the last section for the one-way ANOVA and its Tukey test.</p>
+<p>We saw from the last section that one-way ANOVA is used to test whether means among populations are the same. Once a one-way ANOVA is done, and significant differences are identified, one would be more interested in finding out which specific groups’s means (compared with each other) are different. The test compares all possible pairs of means. And this is so-called the post-hoc test of one-way ANOVA.</p>
+<p>Here we introduce the <em>Tukey’s Test</em> (or Tukey procedure), also called Tukey’s Honest Significant Difference (Tukey’s HSD) test, which is based on the studentized range distribution.</p>
+<p>Let’s use the <a href="https://zhu-group.github.io/ese335/S11.html#Section_Example:_Removal_of_cadmium_from_soil_by_plants">Cd example from the last section</a> for the one-way ANOVA and its Tukey’s test.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Sub-samples</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>Control  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.64</span>, <span class="fl">0.91</span>, <span class="fl">0.84</span>, <span class="fl">0.41</span>, <span class="fl">1.58</span>, <span class="fl">0.48</span>, <span class="fl">0.88</span>, <span class="fl">0.74</span>, <span class="fl">1.09</span>, <span class="fl">1.28</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>P1       &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.20</span>, <span class="fl">1.17</span>, <span class="fl">0.76</span>, <span class="fl">0.92</span>, <span class="fl">0.65</span>, <span class="fl">1.14</span>, <span class="fl">1.05</span>, <span class="fl">1.28</span>, <span class="fl">0.89</span>, <span class="fl">1.06</span>)</span>
@@ -551,12 +552,13 @@ div.tocify {
 ## Plant 3-Plant 2 -0.295 -0.6566788  0.066678783 0.1435130</code></pre>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Plot the 95% (default) CI of the difference</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="kw">plot</span>(<span class="kw">TukeyHSD</span>(res_aov))</span></code></pre></div>
-<p><img src="S12_files/figure-html/unnamed-chunk-2-2.png" width="672" /> Tukey’s test shows a significant difference in mean Cd concentration in the field with Plant #1 and field with Plant #3, and no significant difference between other pairs.</p>
+<p><img src="S12_files/figure-html/unnamed-chunk-3-1.png" width="768" /></p>
+<p>Tukey’s test shows a significant difference in mean Cd concentration in the field with Plant #1 and field with Plant #3, and no significant difference between other pairs.</p>
 <hr />
 </div>
 <div id="section-example-removal-of-cadmium-from-the-soil-by-multiple-approaches" class="section level1">
 <h1>Section Example: Removal of cadmium from the soil by multiple approaches</h1>
-<p>Now suppose we would like to test whether other approaches could have an impact on soil Cd concentration. Instead of using plants (#1, #2, and #3), we also try chemical (with chemical #1 and #2) and physical (#1, #2, #3, and #4) method. We measure Cd concentration from each combination.</p>
+<p>Now suppose we would like to test whether other approaches could have an impact on soil Cd concentration. Instead of using plants (#1, #2, and #3) alone, we also try physical (with chemical #1 and #2) and chemical (#1, #2, #3, and #4) treatment method. We measure Cd concentration from each combination.</p>
 <p>The results are list in the <a href="https://zhu-group.github.io/ese335/download/cd_data.csv">Cd dataset</a>, which contains <code>96</code> rows and <code>4</code> variables:</p>
 <ul>
 <li>Physical: type of chemical used: factor level: 1 and 2</li>
@@ -586,17 +588,17 @@ div.tocify {
 <span id="cb10-2"><a href="#cb10-2"></a><span class="kw">ggplot</span>(cd_data_tbl, <span class="kw">aes</span>(<span class="dt">x =</span> Physical, <span class="dt">y =</span> Cd, <span class="dt">fill =</span> Physical)) <span class="op">+</span></span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a><span class="st">  </span><span class="kw">theme_classic</span>()</span></code></pre></div>
-<p><img src="S12_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="S12_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Boxplot - Chemical</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="kw">ggplot</span>(cd_data_tbl, <span class="kw">aes</span>(<span class="dt">x =</span> Chemical, <span class="dt">y =</span> Cd, <span class="dt">fill =</span> Chemical)) <span class="op">+</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
 <span id="cb11-4"><a href="#cb11-4"></a><span class="st">  </span><span class="kw">theme_classic</span>()</span></code></pre></div>
-<p><img src="S12_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p><img src="S12_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Boxplot - Plant</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="kw">ggplot</span>(cd_data_tbl, <span class="kw">aes</span>(<span class="dt">x =</span> Plant, <span class="dt">y =</span> Cd, <span class="dt">fill =</span> Plant)) <span class="op">+</span></span>
 <span id="cb12-3"><a href="#cb12-3"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
 <span id="cb12-4"><a href="#cb12-4"></a><span class="st">  </span><span class="kw">theme_classic</span>()</span></code></pre></div>
-<p><img src="S12_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
+<p><img src="S12_files/figure-html/unnamed-chunk-4-3.png" width="672" /></p>
 <hr />
 </div>
 <div id="two-way-anova-with-r" class="section level1">
@@ -644,8 +646,8 @@ div.tocify {
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>To test whether two variables have an interaction effect in ANOVA, simply use an asterisk (<code>*</code>) instead of a plus-sign (<code>+</code>) in the model.</p>
-<p>In the output table, the ‘Chemical:Plant’ variable has a low sum-of-squares value and a high p-value, which means there is not much variation that can be explained by the interaction between chemical and plant type.</p>
-<p>Similar to the one-way ANOVA, we can use the Tukey test lets us see which groups are different from one another.</p>
+<p>In the output table, the <code>Chemical:Plant</code> variable has a low sum-of-squares value and a high p-value, which means there is not much variation that can be explained by the interaction between chemical and plant type.</p>
+<p>Similar to the one-way ANOVA, we can use the Tukey’s test lets us see which groups are different from one another.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">TukeyHSD</span>(two_way_additive)</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
@@ -667,8 +669,8 @@ div.tocify {
 ## 3-1  0.170625 -0.1647723 0.5060223 0.4490216
 ## 3-2  0.193125 -0.1422723 0.5285223 0.3597295</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">plot</span>(<span class="kw">TukeyHSD</span>(two_way_additive))</span></code></pre></div>
-<p><img src="S12_files/figure-html/unnamed-chunk-5-1.png" width="672" /><img src="S12_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
-<p>This output shows the pairwise differences between the <code>4</code> types of chemical (<code>$Chemical</code>) and between the <code>3</code> types of plants (<code>$Plant</code>), with the average difference (<code>diff</code>), the lower and upper bounds of the 95% confidence interval (<code>lwr</code> and <code>uwr</code>) and the p-value of the difference (<code>p-adj</code>).</p>
+<p><img src="S12_files/figure-html/unnamed-chunk-6-1.png" width="672" /><img src="S12_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p>This output shows the pairwise differences between the <code>4</code> types of chemical (<code>$Chemical</code>) and between the <code>3</code> types of plants (<code>$Plant</code>), with the average difference (<code>diff</code>), the lower and upper bounds of the <code>95%</code> confidence interval (<code>lwr</code> and <code>uwr</code>) and the p-value of the difference (<code>p-adj</code>).</p>
 <p>From the post-hoc test results, we see that there are significant differences (<code>p &lt; 0.05</code>) between:</p>
 <ul>
 <li><p>Chemical type 4 and 3,</p></li>
@@ -699,12 +701,12 @@ div.tocify {
 <span id="cb20-4"><a href="#cb20-4"></a><span class="kw">ggplot</span>(cd_data_tbl, <span class="kw">aes</span>(<span class="dt">x =</span> Chemical, <span class="dt">y =</span> Cd, <span class="dt">fill =</span> Chemical)) <span class="op">+</span></span>
 <span id="cb20-5"><a href="#cb20-5"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
 <span id="cb20-6"><a href="#cb20-6"></a><span class="st">  </span><span class="kw">theme_classic</span>()</span></code></pre></div>
-<p><img src="S12_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="S12_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Boxplot - Plant</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a><span class="kw">ggplot</span>(cd_data_tbl, <span class="kw">aes</span>(<span class="dt">x =</span> Plant, <span class="dt">y =</span> Cd, <span class="dt">fill =</span> Plant)) <span class="op">+</span></span>
 <span id="cb21-3"><a href="#cb21-3"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
 <span id="cb21-4"><a href="#cb21-4"></a><span class="st">  </span><span class="kw">theme_classic</span>()</span></code></pre></div>
-<p><img src="S12_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p><img src="S12_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Check independence of the dependent variable</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a><span class="kw">runs.test</span>(cd_data_tbl<span class="op">$</span>Cd)</span></code></pre></div>
 <pre><code>## 
@@ -747,7 +749,7 @@ div.tocify {
 </div>
 <div id="anova-with-r" class="section level2">
 <h2>3 ANOVA with R</h2>
-<p>Build the ANOVA model with and without the interaction term</p>
+<p>Build the ANOVA model with and without the interaction term:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Test the interaction term</span></span>
 <span id="cb28-2"><a href="#cb28-2"></a>two_way_interaction &lt;-<span class="st"> </span><span class="kw">aov</span>(Cd <span class="op">~</span><span class="st"> </span>Chemical <span class="op">*</span><span class="st"> </span>Plant, <span class="dt">data =</span> cd_data_tbl)</span>
 <span id="cb28-3"><a href="#cb28-3"></a><span class="kw">summary</span>(two_way_interaction)</span></code></pre></div>
@@ -773,12 +775,12 @@ div.tocify {
 <p>To check whether the model fits the assumption of homoscedasticity, look at the model diagnostic plots in R using the <code>plot()</code> function:</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb32-2"><a href="#cb32-2"></a><span class="kw">plot</span>(two_way_additive)</span></code></pre></div>
-<p><img src="S12_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="S12_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
 <p>The diagnostic plots show the unexplained variance (<em>residuals</em>) across the range of the observed data.</p>
 <p>Each plot gives a specific piece of information about the model fit. Here are things to check:</p>
 <ul>
-<li><p>The red line representing the mean of the residuals should be <strong>horizontal and centered on zero</strong> (or on one, in the scale-location plot), meaning that there are no large outliers that would cause bias in the model.</p></li>
+<li><p>The red line representing the mean of the residuals should be <strong>horizontal and centered on zero</strong> (or on one, in the scale-location plot), meaning that there are no large outliers that would cause bias in the model. This means the variance of residuals don’t change too much.</p></li>
 <li><p>The normal Q-Q plot plots a regression between the theoretical residuals of a perfectly-heteroscedastic model and the actual residuals of your model, so the <strong>closer to a slope of 1</strong> this is the better.</p></li>
 </ul>
 <p>If the model fails to fit the assumption of homoscedasticity, we need to use a non-parametric test instead.</p>
@@ -807,18 +809,19 @@ div.tocify {
 ## 3-1  0.170625 -0.1647723 0.5060223 0.4490216
 ## 3-2  0.193125 -0.1422723 0.5285223 0.3597295</code></pre>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">plot</span>(<span class="kw">TukeyHSD</span>(two_way_additive))</span></code></pre></div>
-<p><img src="S12_files/figure-html/unnamed-chunk-9-1.png" width="672" /><img src="S12_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p><img src="S12_files/figure-html/unnamed-chunk-10-1.png" width="672" /><img src="S12_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
 </div>
 <div id="report-the-results" class="section level2">
 <h2>6 Report the results</h2>
 <ul>
 <li><p>A brief description of the variables you tested</p></li>
-<li><p>The f-value, degrees of freedom, and p-values for each independent variable</p></li>
+<li><p>The <em>F</em>-value, degrees of freedom, and p-values for each independent variable</p></li>
 <li><p>What the results mean.</p></li>
 </ul>
 <p>In our example, we can report the results as:</p>
-<p>We found a statistically significant difference in average Cd concentration by chemical type (<code>f(3)=5.5, p &lt; 0.001</code>). Plant type leads to no statistically significant difference in average Cd concentration.</p>
+<p>We found a statistically significant difference in average Cd concentration by chemical type (<code>F(3)=5.5, p &lt; 0.001</code>). Plant type leads to no statistically significant difference in average Cd concentration.</p>
 <p>A Tukey post-hoc test revealed that chemical type 3 resulted in a lower Cd concentration on average than chemical type 2 (<code>0.60</code> mg/kg), chemical type 3 resulted in a lower Cd concentration on average than chemical type 4 (<code>0.45</code> mg/kg), chemical type 1 resulted in a lower Cd concentration on average than chemical type 2 (<code>0.44</code> mg/kg).</p>
+<hr />
 </div>
 </div>
 <div id="in-class-exercises" class="section level1">
