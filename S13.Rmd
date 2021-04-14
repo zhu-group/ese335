@@ -93,7 +93,7 @@ In theory, if (*X*,*Y*) follows a bivariate normal:
 
 $$\frac {r \sqrt{n-2}}{\sqrt{1-r^2}} \sim t_{df=n-2}$$
 
-With this, we can test the significance of the observed Pearson correlation coefficient.
+With this, we know p-value is the chance that randomness results in a correlation as extrme or more extreme than the observed correlation. We can test the significance of the observed Pearson correlation coefficient by comapring the p-value with a certain significant level.
 
 ***
 
@@ -154,6 +154,10 @@ Here the method is set to `pearson`, H1 as `two.sided`, and a significant level 
 
 Figure out whether the Pearson correlation coefficient is significant or not. Notice that, you could get a significant but very weak correlation, often depending on the sample size.
 
+
+***
+
+
 # In-class exercises
 
 ## Exercise #1
@@ -208,6 +212,7 @@ y <- c(y1,y2)
 A researcher wants to study the correlation between Total organic carbon (TOC) and UV absorption around `240` nm. The researcher makes `12` water samples from different lakes, and measures the corresponding TOC and UV absorption as follows: 
 
 TOC: `1.59, 1.79, 1.00, 0.45, 3.84, 2.30, 1.00, 3.20, 0.80, 2.20, 3.20, 2.10`
+
 UV: `0.144, 0.152, 0.113, 0.025, 0.227, 0.149, 0.014, 0.158, 0.042, 0.154, 0.173, 0.095`
 
 Based on the observations, is there a correlation between TOC and UV absorption? Report your results.

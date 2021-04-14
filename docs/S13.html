@@ -531,9 +531,9 @@ div.tocify {
 <p><img src="S13_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Compute covariance</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">cov</span>(x,y)</span></code></pre></div>
-<pre><code>## [1] 22.51335</code></pre>
+<pre><code>## [1] 6.112242</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">cov</span>(<span class="dv">2</span><span class="op">*</span>x,<span class="dv">2</span><span class="op">*</span>y)</span></code></pre></div>
-<pre><code>## [1] 90.0534</code></pre>
+<pre><code>## [1] 24.44897</code></pre>
 <p>As you can see, covariance provides only <strong>direction</strong> of the relationship. However, it does not indicate the <strong>strength</strong> of the relationship.</p>
 <hr />
 </div>
@@ -546,7 +546,7 @@ div.tocify {
 <p>Or:</p>
 <p><span class="math display">\[r_{xy} = \frac{\sum_{i}^{n} (x_i - \overline{x})(y_i - \overline{y})} {\sqrt{\sum_{i}^{n} (x_i - \overline{x})} \sqrt{\sum_{i}^{n} (y_i - \overline{y})} }   \]</span> In theory, if (<em>X</em>,<em>Y</em>) follows a bivariate normal:</p>
 <p><span class="math display">\[\frac {r \sqrt{n-2}}{\sqrt{1-r^2}} \sim t_{df=n-2}\]</span></p>
-<p>With this, we can test the significance of the observed Pearson correlation coefficient.</p>
+<p>With this, we know p-value is the chance that randomness results in a correlation as extrme or more extreme than the observed correlation. We can test the significance of the observed Pearson correlation coefficient by comapring the p-value with a certain significant level.</p>
 <hr />
 </div>
 <div id="pearson-correlation-test-procedure" class="section level1">
@@ -571,14 +571,14 @@ div.tocify {
 ##  Runs Test
 ## 
 ## data:  x
-## statistic = 0.91894, runs = 13, n1 = 10, n2 = 10, n = 20, p-value = 0.3581
+## statistic = 0, runs = 11, n1 = 10, n2 = 10, n = 20, p-value = 1
 ## alternative hypothesis: nonrandomness</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">runs.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Runs Test
 ## 
 ## data:  y
-## statistic = -0.91894, runs = 9, n1 = 10, n2 = 10, n = 20, p-value = 0.3581
+## statistic = 0, runs = 11, n1 = 10, n2 = 10, n = 20, p-value = 1
 ## alternative hypothesis: nonrandomness</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Check normality</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="co"># Sample size &lt; 30, use the Shapiro-Wilk test</span></span>
@@ -587,28 +587,28 @@ div.tocify {
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  x
-## W = 0.9526, p-value = 0.4083</code></pre>
+## W = 0.96136, p-value = 0.5713</code></pre>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">shapiro.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  y
-## W = 0.93188, p-value = 0.1678</code></pre>
+## W = 0.93541, p-value = 0.1961</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Check outliers</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="kw">grubbs.test</span>(x)</span></code></pre></div>
 <pre><code>## 
 ##  Grubbs test for one outlier
 ## 
 ## data:  x
-## G = 2.24975, U = 0.71959, p-value = 0.1634
-## alternative hypothesis: lowest value -1.81769397813737 is an outlier</code></pre>
+## G = 2.15557, U = 0.74258, p-value = 0.224
+## alternative hypothesis: highest value 1.943048189313 is an outlier</code></pre>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">grubbs.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Grubbs test for one outlier
 ## 
 ## data:  y
-## G = 2.25956, U = 0.71714, p-value = 0.158
-## alternative hypothesis: lowest value -3.85537451293954 is an outlier</code></pre>
+## G = 1.91313, U = 0.79723, p-value = 0.4633
+## alternative hypothesis: highest value 3.90536075440929 is an outlier</code></pre>
 </div>
 <div id="write-down-h0-and-h1" class="section level2">
 <h2>2 Write down H0 and H1</h2>
@@ -627,18 +627,19 @@ div.tocify {
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  x and y
-## t = 18.369, df = 18, p-value = 4.16e-13
+## t = 20.904, df = 18, p-value = 4.486e-14
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  0.9349514 0.9900084
+##  0.9491038 0.9922303
 ## sample estimates:
 ##       cor 
-## 0.9743493</code></pre>
+## 0.9800186</code></pre>
 <p>Here the method is set to <code>pearson</code>, H1 as <code>two.sided</code>, and a significant level of <code>0.95</code> (default value used by R).</p>
 </div>
 <div id="report-the-results" class="section level2">
 <h2>4 Report the results</h2>
 <p>Figure out whether the Pearson correlation coefficient is significant or not. Notice that, you could get a significant but very weak correlation, often depending on the sample size.</p>
+<hr />
 </div>
 </div>
 <div id="in-class-exercises" class="section level1">
@@ -684,7 +685,8 @@ div.tocify {
 <div id="exercise-3" class="section level2">
 <h2>Exercise #3</h2>
 <p>A researcher wants to study the correlation between Total organic carbon (TOC) and UV absorption around <code>240</code> nm. The researcher makes <code>12</code> water samples from different lakes, and measures the corresponding TOC and UV absorption as follows:</p>
-<p>TOC: <code>1.59, 1.79, 1.00, 0.45, 3.84, 2.30, 1.00, 3.20, 0.80, 2.20, 3.20, 2.10</code> UV: <code>0.144, 0.152, 0.113, 0.025, 0.227, 0.149, 0.014, 0.158, 0.042, 0.154, 0.173, 0.095</code></p>
+<p>TOC: <code>1.59, 1.79, 1.00, 0.45, 3.84, 2.30, 1.00, 3.20, 0.80, 2.20, 3.20, 2.10</code></p>
+<p>UV: <code>0.144, 0.152, 0.113, 0.025, 0.227, 0.149, 0.014, 0.158, 0.042, 0.154, 0.173, 0.095</code></p>
 <p>Based on the observations, is there a correlation between TOC and UV absorption? Report your results.</p>
 </div>
 </div>
