@@ -709,11 +709,11 @@ div.tocify {
 ##  Spearman&#39;s rank correlation rho
 ## 
 ## data:  x and y
-## S = 30, p-value = 6.537e-06
+## S = 114, p-value = 3.189e-06
 ## alternative hypothesis: true rho is not equal to 0
 ## sample estimates:
 ##       rho 
-## 0.9774436</code></pre>
+## 0.9142857</code></pre>
 <hr />
 </div>
 <div id="kendall-correlation-test" class="section level1">
@@ -726,17 +726,17 @@ div.tocify {
 <li><p>H1: The populations correlate with each other</p></li>
 </ul>
 <p>The Kendall correlation is also done with the <code>cor.test()</code> function in R:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Perform the Spearman correlation test</span></span>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Perform the Kendall correlation test</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a><span class="kw">cor.test</span>(x, y, <span class="dt">method=</span><span class="st">&quot;kendall&quot;</span>, <span class="dt">alternative=</span><span class="st">&quot;two.sided&quot;</span>, <span class="dt">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Kendall&#39;s rank correlation tau
 ## 
 ## data:  x and y
-## T = 180, p-value = 1.396e-11
+## T = 168, p-value = 1.035e-07
 ## alternative hypothesis: true tau is not equal to 0
 ## sample estimates:
 ##       tau 
-## 0.8947368</code></pre>
+## 0.7684211</code></pre>
 <hr />
 </div>
 <div id="summary-of-non-parametric-tests" class="section level1">
@@ -781,7 +781,7 @@ div.tocify {
 <td align="center"><a href="https://zhu-group.github.io/ese335/S14.html#Wilcoxon_signed_rank_test">Wilcoxon signed rank</a>, <a href="https://zhu-group.github.io/ese335/S14.html#Sign_test">Signed test</a></td>
 </tr>
 <tr class="even">
-<td align="center">Comparing means of more than 3 independent populations</td>
+<td align="center">Comparing means of more than 2 independent populations</td>
 <td align="center"><a href="https://zhu-group.github.io/ese335/S11.html#One-way_ANOVA_with_R">One-way ANOVA</a></td>
 <td align="center"><a href="https://zhu-group.github.io/ese335/S14.html#Kruskal%E2%80%93Wallis_test">Kruskal–Wallis test</a></td>
 </tr>
