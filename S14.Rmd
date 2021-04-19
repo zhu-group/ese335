@@ -21,21 +21,22 @@ library(FSA)
 
 ***
 
-# Section example: Soil organic matter content
+# Section example: Soil organic matter 
 
-Given the following organic matter contents (unit: %) in different soil types, do organic matters differ in different soil types?
+Given the following organic matter contents (unit: %) in different soil types, do organic matters differ among soil types?
 
 Soil type|Soil organic matter content (%)                     |
 |:------:|:---------------------------------------------------|
-| #1     | `2.0, 2.8, 3.3, 3.2, 4.4, 3.6, 1.9, 3.3, 2.8, 1.1` |
-| #2     | `3.5, 2.8, 3.2, 3.5, 2.3, 2.4, 2.0, 1.6`           |
-| #3     | `3.3, 3.6, 2.6, 3.1, 3.2, 3.3, 2.9, 3.4, 3.2, 3.2` |
-| #4     | `3.2, 3.3, 3.2, 2.9, 3.3, 2.5, 2.6, 2.8`           |
-| #5     | `2.6, 2.6, 2.9, 2.0, 2.0, 2.1`                     |
-| #6     | `3.1, 2.9, 3.1, 2.5`                               |
-| #7     | `2.6, 2.2, 2.2, 2.5, 1.2, 1.2`                     |
-| #8     | `2.5, 2.4, 3.0, 1.5`                               |
+| A      | `2.0, 2.8, 3.3, 3.2, 4.4, 3.6, 1.9, 3.3, 2.8, 1.1` |
+| B      | `3.5, 2.8, 3.2, 3.5, 2.3, 2.4, 2.0, 1.6`           |
+| C      | `3.3, 3.6, 2.6, 3.1, 3.2, 3.3, 2.9, 3.4, 3.2, 3.2` |
+| D      | `3.2, 3.3, 3.2, 2.9, 3.3, 2.5, 2.6, 2.8`           |
+| E      | `2.6, 2.6, 2.9, 2.0, 2.0, 2.1`                     |
+| F      | `3.1, 2.9, 3.1, 2.5`                               |
+| G      | `2.6, 2.2, 2.2, 2.5, 1.2, 1.2`                     |
+| H      | `2.5, 2.4, 3.0, 1.5`                               |
 
+***
 
 # Overview of non-parametric tests
 
@@ -43,7 +44,7 @@ A non-parametric test, also known as a distribution-free test, assumes nothing a
 
 Situations to use non-parametric tests:
 
-+ The underlying distribution is **not normal**, thus the normality assumption is not met
++ The underlying distribution is **not normal**, thus the normality assumption is not valid
 
 + Data type is **nominal** (e.g., `pass` or `fail`) or **ordinal** (aka, ranks or start-rating)
 
@@ -63,11 +64,11 @@ Non-parametric tests have lower *power* compared to parametric tests - they ofte
 
 The Mann–Whitney U test is also called the Mann–Whitney–Wilcoxon (MWW), Wilcoxon rank-sum test, or Wilcoxon–Mann–Whitney test. It is used to compare the differences between two independent samples when the sample distributions are not normally distributed and the sample sizes are small (`n < 30`). It is considered to be the non-parametric equivalent to the two-sample independent t-test.
 
-The requirements of using Mann–Whitney U test is:
+The requirements of using Mann–Whitney U test are:
 
 + Random and independent samples
 
-+ For maximum accuracy, there should be no ties. But there is a way to handle ties
++ For maximum accuracy, there should be **no ties**. But there is a way to handle ties in the test.
 
 In the Mann–Whitney U test, we have:
 
@@ -93,11 +94,11 @@ wilcox.test(Treat, Control, paired=F, alternative="two.sided")
 
 The Wilcoxon signed rank test is a non-parametric alternative to paired t-test used to compare paired data. It’s used whendata are not normally distributed.
 
-The requirements of using the Wilcoxon signed rank test is:
+The requirements of using the Wilcoxon signed rank test are:
 
 + Random and independent samples
 
-+ Approximately symmetrical distributions
++ Approximately **symmetrical** distributions
 
 In the Wilcoxon signed rank test, we have:
 
@@ -219,10 +220,12 @@ Purpose|Parametric|Alternative non-parametric |
 |Checking independence | | [Runs test](https://zhu-group.github.io/ese335/S10.html#Independence)|
 |Checking normality |    | [Shapiro-Wilk test](https://zhu-group.github.io/ese335/S06.html#Shapiro-Wilk_test), [Lillifors test](https://zhu-group.github.io/ese335/S06.html#Lilliefors_test)|
 |Checking Outliers | [Grubbs’ test](https://zhu-group.github.io/ese335/S10.html#Grubbs%E2%80%99_test), [Dixon’s test](https://zhu-group.github.io/ese335/S10.html#Dixon%E2%80%99s_test), [Rosner’s test](https://zhu-group.github.io/ese335/S10.html#Rosner%E2%80%99s_test) | [Walsh’s test](https://zhu-group.github.io/ese335/S10.html#Walsh%E2%80%99s_test) |
-|Comparing means of two independent populations  | [t test](https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test_with_R)   | Mann-Whitney U test |
-|Comparing means of two paired populations  | [paired t test](https://zhu-group.github.io/ese335/S09.html#Paired_sample_t-test_with_R)   | Wilcoxon signed rank, Signed test |
-|Comparing means of more than 3 independent populations  | [One-way ANOVA](https://zhu-group.github.io/ese335/S11.html#One-way_ANOVA_with_R) | Kruskal–Wallis test |
-|Checking correlation  | [Pearson test](https://zhu-group.github.io/ese335/S13.html#Pearson_correlation_test_procedure)  | Spearman test, Kendall test|
+|Comparing means of two independent populations  | [t test](https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test_with_R)   | [Mann-Whitney U test](https://zhu-group.github.io/ese335/S14.html#Mann-Whitney_U_test) |
+|Comparing means of two paired populations  | [paired t test](https://zhu-group.github.io/ese335/S09.html#Paired_sample_t-test_with_R)   | [Wilcoxon signed rank](https://zhu-group.github.io/ese335/S14.html#Wilcoxon_signed_rank_test), [Signed test](https://zhu-group.github.io/ese335/S14.html#Sign_test) |
+|Comparing means of more than 3 independent populations  | [One-way ANOVA](https://zhu-group.github.io/ese335/S11.html#One-way_ANOVA_with_R) | [Kruskal–Wallis test](https://zhu-group.github.io/ese335/S14.html#Kruskal%E2%80%93Wallis_test) |
+|Checking correlation  | [Pearson test](https://zhu-group.github.io/ese335/S13.html#Pearson_correlation_test_procedure)  | [Spearman test](https://zhu-group.github.io/ese335/S14.html#Spearman_correlation_test), [Kendall test](https://zhu-group.github.io/ese335/S14.html#Kendall_correlation_test)|
+
+***
 
 # In-class exercises
 
