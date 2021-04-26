@@ -512,50 +512,50 @@ div.tocify {
 <thead>
 <tr class="header">
 <th align="center">Observation #</th>
-<th align="left">Uptaken amount</th>
-<th>Pesticide concentration in soil</th>
+<th align="left">Pesticide concentration in soil</th>
+<th>Uptaken amount</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="center"># 1</td>
-<td align="left"><code>0.18</code></td>
-<td><code>10</code></td>
+<td align="left"><code>10</code></td>
+<td><code>0.18</code></td>
 </tr>
 <tr class="even">
 <td align="center"># 2</td>
-<td align="left"><code>1.05</code></td>
-<td><code>50</code></td>
+<td align="left"><code>50</code></td>
+<td><code>1.05</code></td>
 </tr>
 <tr class="odd">
 <td align="center"># 3</td>
-<td align="left"><code>0.50</code></td>
-<td><code>20</code></td>
+<td align="left"><code>20</code></td>
+<td><code>0.50</code></td>
 </tr>
 <tr class="even">
 <td align="center"># 4</td>
-<td align="left"><code>0.61</code></td>
-<td><code>30</code></td>
+<td align="left"><code>30</code></td>
+<td><code>0.61</code></td>
 </tr>
 <tr class="odd">
 <td align="center"># 5</td>
-<td align="left"><code>1.58</code></td>
-<td><code>80</code></td>
+<td align="left"><code>80</code></td>
+<td><code>1.58</code></td>
 </tr>
 <tr class="even">
 <td align="center"># 6</td>
-<td align="left"><code>1.10</code></td>
-<td><code>60</code></td>
+<td align="left"><code>60</code></td>
+<td><code>1.10</code></td>
 </tr>
 <tr class="odd">
 <td align="center"># 7</td>
-<td align="left"><code>1.36</code></td>
-<td><code>70</code></td>
+<td align="left"><code>70</code></td>
+<td><code>1.36</code></td>
 </tr>
 <tr class="even">
 <td align="center"># 8</td>
-<td align="left"><code>0.77</code></td>
-<td><code>40</code></td>
+<td align="left"><code>40</code></td>
+<td><code>0.77</code></td>
 </tr>
 </tbody>
 </table>
@@ -563,53 +563,62 @@ div.tocify {
 </div>
 <div id="significance-test-for-linear-regression" class="section level1">
 <h1>Significance test for linear regression</h1>
-<p>In the last section, we showed how to compute <span class="math inline">\(\hat \beta1\)</span> using sample data. Now think about two cases: (1) points nearly follow a line, and (2) points are scattered all around. In which case, do you think the linear relationship is more reliable? You probably will vote for the first case cause it follows a line much better. Ok, the question now is how to decide whether there is any significant relationship between <em>x</em> and <em>y</em>. This is done by the <em>significance test for linear regression</em>, where we have:</p>
+<p>In the last section, we showed how to compute <span class="math inline">\(\hat \beta1\)</span> using sample data. Now think about two cases: (1) points nearly follow a line, and (2) points are scattered all around. In which case, do you think the linear relationship is more reliable? You probably will vote for the first case cause it follows a line much better. Ok, the question now is how to decide whether there is any significant relationship between <em>X</em> and <em>Y</em>. This is done by the <em>significance test for linear regression</em>, where we have:</p>
 <ul>
-<li><p>H0: there is no linear relationship between <em>x</em> and <em>y</em> (<span class="math inline">\(\beta_1 = 0\)</span>)</p></li>
-<li><p>H1: there is a linear relationship between <em>x</em> and <em>y</em> (<span class="math inline">\(\beta_1 \ne 0\)</span>)</p></li>
+<li><p>H0: there is no linear relationship between <em>X</em> and <em>Y</em> (<span class="math inline">\(\beta_1 = 0\)</span>)</p></li>
+<li><p>H1: there is a linear relationship between <em>X</em> and <em>Y</em> (<span class="math inline">\(\beta_1 \ne 0\)</span>)</p></li>
 </ul>
 <div id="t-test" class="section level2">
 <h2>t-test</h2>
-<p>Suppose in the unknown population with pairs of <em>x</em> and <em>y</em>, we may have different uptaken amounts for a given pesticide concentration, something like:</p>
+<p>Suppose in the unknown population with pairs of <em>X</em> and <em>Y</em>, we may have different uptaken amounts for a given pesticide concentration, something like:</p>
 <table>
 <thead>
 <tr class="header">
-<th align="left">Uptaken amount</th>
-<th>Pesticide concentration in soil</th>
+<th align="center">Observation #</th>
+<th align="left">Pesticide concentration in soil (<em>X</em>)</th>
+<th>Uptaken amount (<em>Y</em>)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>0.15, 0.16, 0.18, 0.19, 0.20, ...</code></td>
-<td><code>10</code></td>
+<td align="center"># 1</td>
+<td align="left"><code>10</code></td>
+<td><code>0.15, 0.16, 0.18, 0.19, 0.20, ...</code></td>
 </tr>
 <tr class="even">
-<td align="left"><code>0.98, 1.00, 1.01, 1.05, 1.10, ...</code></td>
-<td><code>50</code></td>
+<td align="center"># 2</td>
+<td align="left"><code>50</code></td>
+<td><code>0.98, 1.00, 1.01, 1.05, 1.10, ...</code></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>0.38, 0.34, 0.49, 0.41, 0.50, ...</code></td>
-<td><code>20</code></td>
+<td align="center"># 3</td>
+<td align="left"><code>20</code></td>
+<td><code>0.38, 0.34, 0.49, 0.41, 0.50, ...</code></td>
 </tr>
 <tr class="even">
-<td align="left"><code>0.57, 0.61, 0.65, 0.70, 0.66, ...</code></td>
-<td><code>30</code></td>
+<td align="center"># 4</td>
+<td align="left"><code>30</code></td>
+<td><code>0.57, 0.61, 0.65, 0.70, 0.66, ...</code></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>1.34, 1.67, 1.74, 1.58, 1.88, ...</code></td>
-<td><code>80</code></td>
+<td align="center"># 5</td>
+<td align="left"><code>80</code></td>
+<td><code>1.34, 1.67, 1.74, 1.58, 1.88, ...</code></td>
 </tr>
 <tr class="even">
-<td align="left"><code>1.11, 1.12, 1.33, 1.10, 1.21, ...</code></td>
-<td><code>60</code></td>
+<td align="center"># 6</td>
+<td align="left"><code>60</code></td>
+<td><code>1.11, 1.12, 1.33, 1.10, 1.21, ...</code></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>1.36, 1.37, 1.41, 1.50, 1.60, ...</code></td>
-<td><code>70</code></td>
+<td align="center"># 7</td>
+<td align="left"><code>70</code></td>
+<td><code>1.36, 1.37, 1.41, 1.50, 1.60, ...</code></td>
 </tr>
 <tr class="even">
-<td align="left"><code>0.74, 0.77, 0.78, 0.79, 0.77, ...</code></td>
-<td><code>40</code></td>
+<td align="center"># 8</td>
+<td align="left"><code>40</code></td>
+<td><code>0.74, 0.77, 0.78, 0.79, 0.77, ...</code></td>
 </tr>
 </tbody>
 </table>
@@ -708,8 +717,8 @@ div.tocify {
 <span id="cb10-5"><a href="#cb10-5"></a><span class="kw">print</span>(R2_adj)</span></code></pre></div>
 <pre><code>## [1] 0.9844386</code></pre>
 </div>
-<div id="tests-with-r" class="section level2">
-<h2>Tests with R</h2>
+<div id="understanding-the-output-from-r" class="section level2">
+<h2>Understanding the output from R</h2>
 <p>Some of previous statistics are directly given by the <code>lm()</code> and <code>anova()</code> function, check:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Fit a simple linear regression model between</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="co"># dependent variable (Uptaken_amount) and</span></span>
@@ -749,8 +758,8 @@ div.tocify {
 <hr />
 </div>
 </div>
-<div id="make-predictions" class="section level1">
-<h1>Make predictions</h1>
+<div id="making-predictions-with-the-linear-model" class="section level1">
+<h1>Making predictions with the linear model</h1>
 <div id="confidence-band-for-mean-response" class="section level2">
 <h2>Confidence band for mean response</h2>
 <p>The <em>confidence band</em> (or confidence interval for the mean response) gives a certain range of the <strong>mean response</strong> <span class="math inline">\(\mu_y|x^*\)</span> when the predictor value is <span class="math inline">\(x^*\)</span>. For example, the confidence interval of mean uptaken amount when soil pesticide concentration is <code>10</code>.</p>
@@ -835,7 +844,7 @@ div.tocify {
 <p>As a parametric method, simple linear regression has its assumptions as well:</p>
 <ul>
 <li><p><strong>1. Existence</strong>. For any fixed value of <em>x^</em>^<em>, then </em>Y* is a random variable with some probability distribution with mean <span class="math inline">\(\mu_Y|x^*\)</span>, variance <span class="math inline">\(\sigma^2\)</span>. The assumption is usually assumed to be true when performing the regression.</p></li>
-<li><p><strong>2. Independence</strong>. The <em>Y</em> values are statistically independent of each other. This is often not valid when <em>X</em> variable is time, which shows a feature called <em>auto-regression</em>. In this case, use <em>time-series analysis</em> methods. The assumption can be tested with the <a href="https://zhu-group.github.io/ese335/S10.html#Independence">runs test</a>.</p></li>
+<li><p><strong>2. Independence of <em>Y</em> </strong>. The <em>Y</em> values are statistically independent of each other. This is often not valid when <em>X</em> variable is time, which shows a feature called <em>auto-regression</em>. In this case, use <em>time-series analysis</em> methods. The assumption can be tested with the <a href="https://zhu-group.github.io/ese335/S10.html#Independence">runs test</a>.</p></li>
 <li><p><strong>3. Linearity</strong>. Here we assume the mean of <em>Y</em> is a linear function of <em>X</em> variable.</p></li>
 </ul>
 <p><span class="math display">\[\mu_{Y|X} = \beta_0 + \beta_1 X\]</span> <span class="math display">\[Y = \beta_0 + \beta_1 X + \epsilon\]</span> This one can be examined visually - looking for a linear trend. If you fail to see a linear pattern, stop and try other methods.</p>
@@ -850,7 +859,7 @@ div.tocify {
 <li><p>Statistical test: independence and possible outliers</p></li>
 <li><p>Visual checking: linearity</p></li>
 </ul>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Check independence of the dependent variable (y)</span></span>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Check independence of the dependent variable (Y)</span></span>
 <span id="cb25-2"><a href="#cb25-2"></a><span class="kw">runs.test</span>(Pesticide_data<span class="op">$</span>Uptaken_amount)</span></code></pre></div>
 <pre><code>## 
 ##  Runs Test
@@ -872,16 +881,17 @@ div.tocify {
 ## data:  Pesticide_data$Uptaken_amount
 ## G = 1.53393, U = 0.61585, p-value = 0.4048
 ## alternative hypothesis: lowest value 0.18 is an outlier</code></pre>
+<p>If assumptions are not valid, stop.</p>
 </div>
 <div id="write-down-h0-and-h1" class="section level2">
 <h2>2 Write down H0 and H1</h2>
 <ul>
-<li><p>H0: there is no linear relationship between <em>x</em> and <em>y</em> (<span class="math inline">\(\beta_1 = 0\)</span>)</p></li>
-<li><p>H1: there is a linear relationship between <em>x</em> and <em>y</em> (<span class="math inline">\(\beta_1 \ne 0\)</span>)</p></li>
+<li><p>H0: there is no linear relationship between <em>X</em> and <em>Y</em> (<span class="math inline">\(\beta_1 = 0\)</span>)</p></li>
+<li><p>H1: there is a linear relationship between <em>X</em> and <em>Y</em> (<span class="math inline">\(\beta_1 \ne 0\)</span>)</p></li>
 </ul>
 </div>
-<div id="simple-linear-regression-with-r" class="section level2">
-<h2>3 Simple linear regression with R</h2>
+<div id="simple-linear-regression-test-with-r" class="section level2">
+<h2>3 Simple linear regression test with R</h2>
 <p>Run the simple linear regression model:</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Build the model</span></span>
 <span id="cb31-2"><a href="#cb31-2"></a>reg             &lt;-<span class="st"> </span><span class="kw">lm</span>(Uptaken_amount <span class="op">~</span><span class="st"> </span>Soil_conc, <span class="dt">data=</span>Pesticide_data)</span>
@@ -904,6 +914,7 @@ div.tocify {
 ## Residual standard error: 0.05805 on 6 degrees of freedom
 ## Multiple R-squared:  0.9867, Adjusted R-squared:  0.9844 
 ## F-statistic: 443.8 on 1 and 6 DF,  p-value: 7.453e-07</code></pre>
+<p>Based on the p-value, to reject the H0 or not. If rejct, move on to the next step.</p>
 </div>
 <div id="check-residuals" class="section level2">
 <h2>4 Check residuals</h2>

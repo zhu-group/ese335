@@ -31,42 +31,42 @@ Let's use the same example from the last section, but this time we will look at 
 
 At a given temperature, uptake of a certain pesticide by soil is usually linearly related to its concentration in soil. To study this process, a researcher made the following observations under a constant temperature of 298 K.
 
-Observation #| Uptaken amount | Pesticide concentration in soil |
-|:----------:|:---------------|--------------------|
-| # 1        |   `0.18`       |       `10`         |
-| # 2        |   `1.05`       |       `50`         |
-| # 3        |   `0.50`       |       `20`         |
-| # 4        |   `0.61`       |       `30`         |
-| # 5        |   `1.58`       |       `80`         |
-| # 6        |   `1.10`       |       `60`         |
-| # 7        |   `1.36`       |       `70`         |
-| # 8        |   `0.77`       |       `40`         |
+Observation #| Pesticide concentration in soil | Uptaken amount |
+|:----------:|:--------------------------------|----------------|
+| # 1        |   `10`                          |       `0.18`   |
+| # 2        |   `50`                          |       `1.05`   |
+| # 3        |   `20`                          |       `0.50`   |
+| # 4        |   `30`                          |       `0.61`   |
+| # 5        |   `80`                          |       `1.58`   |
+| # 6        |   `60`                          |       `1.10`   |
+| # 7        |   `70`                          |       `1.36`   |
+| # 8        |   `40`                          |       `0.77`   |
 
 
 ***
 
 # Significance test for linear regression
 
-In the last section, we showed how to compute $\hat \beta1$ using sample data. Now think about two cases: (1) points nearly follow a line, and (2) points are scattered all around. In which case, do you think the linear relationship is more reliable? You probably will vote for the first case cause it follows a line much better. Ok, the question now is how to decide whether there is any significant relationship between *x* and *y*. This is done by the *significance test for linear regression*, where we have:
+In the last section, we showed how to compute $\hat \beta1$ using sample data. Now think about two cases: (1) points nearly follow a line, and (2) points are scattered all around. In which case, do you think the linear relationship is more reliable? You probably will vote for the first case cause it follows a line much better. Ok, the question now is how to decide whether there is any significant relationship between *X* and *Y*. This is done by the *significance test for linear regression*, where we have:
 
-+ H0: there is no linear relationship between *x* and *y* ($\beta_1 = 0$)
++ H0: there is no linear relationship between *X* and *Y* ($\beta_1 = 0$)
 
-+ H1: there is a linear relationship between *x* and *y* ($\beta_1 \ne 0$)
++ H1: there is a linear relationship between *X* and *Y* ($\beta_1 \ne 0$)
 
 ## t-test
 
-Suppose in the unknown population with pairs of *x* and *y*, we may have different uptaken amounts for a given pesticide concentration, something like:
+Suppose in the unknown population with pairs of *X* and *Y*, we may have different uptaken amounts for a given pesticide concentration, something like:
 
-| Uptaken amount                      | Pesticide concentration in soil |
-|:------------------------------------|---------------------------------|
-| `0.15, 0.16, 0.18, 0.19, 0.20, ...` |       `10`                      |
-| `0.98, 1.00, 1.01, 1.05, 1.10, ...` |       `50`                      |
-| `0.38, 0.34, 0.49, 0.41, 0.50, ...` |       `20`                      |
-| `0.57, 0.61, 0.65, 0.70, 0.66, ...` |       `30`                      |
-| `1.34, 1.67, 1.74, 1.58, 1.88, ...` |       `80`                      |
-| `1.11, 1.12, 1.33, 1.10, 1.21, ...` |       `60`                      |
-| `1.36, 1.37, 1.41, 1.50, 1.60, ...` |       `70`                      |
-| `0.74, 0.77, 0.78, 0.79, 0.77, ...` |       `40`                      |
+Observation #| Pesticide concentration in soil (*X*) | Uptaken amount (*Y*)                |
+|:----------:|:------------------------------------|---------------------------------------|
+| # 1        |   `10`                              | `0.15, 0.16, 0.18, 0.19, 0.20, ...`   |
+| # 2        |   `50`                              | `0.98, 1.00, 1.01, 1.05, 1.10, ...`   |
+| # 3        |   `20`                              | `0.38, 0.34, 0.49, 0.41, 0.50, ...`   |
+| # 4        |   `30`                              | `0.57, 0.61, 0.65, 0.70, 0.66, ...`   |
+| # 5        |   `80`                              | `1.34, 1.67, 1.74, 1.58, 1.88, ...`   |
+| # 6        |   `60`                              | `1.11, 1.12, 1.33, 1.10, 1.21, ...`   |
+| # 7        |   `70`                              | `1.36, 1.37, 1.41, 1.50, 1.60, ...`   |
+| # 8        |   `40`                              | `0.74, 0.77, 0.78, 0.79, 0.77, ...`   |
 
 So the observations in the example are just one of many sampling possibilities. For each sample, we could compute $\hat \beta1$, meaning $\hat \beta1$ from all possible samples follow a certain distribution. More specifically:
 
@@ -177,7 +177,7 @@ R2_adj         <- 1 - (1-R2)*(n-1)/(n-k-1)
 print(R2_adj)
 ```
 
-## Tests with R
+## Understanding the output from R
 
 Some of previous statistics are directly given by the `lm()` and `anova()` function, check:
 
@@ -196,7 +196,7 @@ anova(reg)
 
 ***
 
-# Make predictions
+# Making predictions with the linear model
 
 ## Confidence band for mean response
 
@@ -283,7 +283,7 @@ As a parametric method, simple linear regression has its assumptions as well:
 
 + **1. Existence**. For any fixed value of *x^*^*, then *Y* is a random variable with some probability distribution with mean $\mu_Y|x^*$, variance $\sigma^2$. The assumption is usually assumed to be true when performing the regression.
 
-+ **2. Independence**. The *Y* values are statistically independent of each other. This is often not valid when *X* variable is time, which shows a feature called *auto-regression*. In this case, use *time-series analysis* methods. The assumption can be tested with the [runs test](https://zhu-group.github.io/ese335/S10.html#Independence). 
++ **2. Independence of *Y* **. The *Y* values are statistically independent of each other. This is often not valid when *X* variable is time, which shows a feature called *auto-regression*. In this case, use *time-series analysis* methods. The assumption can be tested with the [runs test](https://zhu-group.github.io/ese335/S10.html#Independence). 
 
 + **3. Linearity**. Here we assume the mean of *Y* is a linear function of *X* variable. 
 
@@ -305,7 +305,7 @@ In the following, we will use the proceeding example to go through each step of 
 
 ```{r}
 
-# Check independence of the dependent variable (y)
+# Check independence of the dependent variable (Y)
 runs.test(Pesticide_data$Uptaken_amount)
 
 # Scatter plot
@@ -318,13 +318,15 @@ grubbs.test(Pesticide_data$Uptaken_amount)
 
 ```
 
+If assumptions are not valid, stop.
+
 ## 2 Write down H0 and H1
 
-+ H0: there is no linear relationship between *x* and *y* ($\beta_1 = 0$)
++ H0: there is no linear relationship between *X* and *Y* ($\beta_1 = 0$)
 
-+ H1: there is a linear relationship between *x* and *y* ($\beta_1 \ne 0$)
++ H1: there is a linear relationship between *X* and *Y* ($\beta_1 \ne 0$)
 
-## 3 Simple linear regression with R
+## 3 Simple linear regression test with R
 
 Run the simple linear regression model:
 
@@ -333,6 +335,8 @@ Run the simple linear regression model:
 reg             <- lm(Uptaken_amount ~ Soil_conc, data=Pesticide_data)
 summary(reg)
 ```
+
+Based on the p-value, to reject the H0 or not. If rejct, move on to the next step.
 
 ## 4 Check residuals
 
