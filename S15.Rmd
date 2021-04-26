@@ -29,7 +29,7 @@ Observation #| Uptaken amount | Pesticide concentration in soil |
 | # 7        |   `1.36`       |       `70`         |
 | # 8        |   `0.77`       |       `40`         |
 
-Do the observations support a linear relationship between uptaken amount and soil concentration of this pesticide?
+Do the observations support a linear relationship between the uptaken amount and soil concentration of this pesticide?
 
 ***
 
@@ -87,13 +87,13 @@ $$SSE = {\sum_{i= 1}^{n} ({y_i}- \hat {y_i})^2} $$
 
 $$SST = SSR + SSE$$
 
-You may realize this is similar to the ANOVA analysis, where we partition *SST* into *SSW* and *SSB*. Actually, this is linkage between regression and ANOVA. 
+You may realize this is similar to the ANOVA analysis, where we partition *SST* into *SSW* and *SSB*. Actually, this is the linkage between regression and ANOVA. 
 
 We can further define the *coefficient of determination* (denoted *R^2^* or *r^2^*) as the proportion of the variance in the dependent variable that can be explained by the independent variable.
 
 $$R^2 = \frac {SSR} {SST}$$
 
-Despite of having different meanings, the coefficient of determination (*R^2^*) is equal to the square of Pearson correlation coefficient (*r*) when the model is linear with a single independent variable.
+Despite having different meanings, the coefficient of determination (*R^2^*) is equal to the square of the Pearson correlation coefficient (*r*) when the model is linear with a single independent variable.
 
 ***
 
@@ -151,7 +151,7 @@ reg            <- lm( Uptaken_amount ~ Soil_conc )
 summary(reg)
 ```
 
-In the next section, we will examine the output in details. Stay tuned.
+In the next section, we will examine the output in detail. Stay tuned.
 
 ***
 
@@ -167,6 +167,6 @@ TOC: `1.59, 1.79, 1.00, 0.45, 3.84, 2.30, 1.00, 3.20, 0.80, 2.20, 3.20, 2.10`
 
 UV: `0.144, 0.152, 0.113, 0.025, 0.227, 0.149, 0.014, 0.158, 0.042, 0.154, 0.173, 0.095`
 
-+ Can you give the best-fit linear relationship between dependent variable (UV absorption) and independent variable (TOC)? Do this manually and verify your results with the `lm()` function. 
++ Can you give the best-fit linear relationship between the dependent variable (UV absorption) and independent variable (TOC)? Do this manually and verify your results with the `lm()` function. 
 
 + To what degree can the variance in UV absorption be explained by TOC and by error?
