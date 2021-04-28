@@ -753,47 +753,98 @@ div.tocify {
 <p>There are a few useful commands you can use to interact with the R session.</p>
 <p><code>ls()</code> will list all of the variables and functions stored in the global environment (your working R session):</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="kw">ls</span>()</span></code></pre></div>
-<pre><code>##   [1] &quot;Airquality&quot;        &quot;AQI&quot;               &quot;AQI1&quot;              &quot;AQI2&quot;              &quot;average&quot;           &quot;Baseline&quot;          &quot;Check_Air_Quality&quot; &quot;CO2_ppm&quot;           &quot;COD_data&quot;         
-##  [10] &quot;cpus&quot;              &quot;cpus_test&quot;         &quot;cpus_train&quot;        &quot;d&quot;                 &quot;Daily_T&quot;           &quot;Day&quot;               &quot;density1&quot;          &quot;density2&quot;          &quot;density3&quot;         
-##  [19] &quot;density4&quot;          &quot;df&quot;                &quot;df1&quot;               &quot;df2&quot;               &quot;diff&quot;              &quot;Error&quot;             &quot;fit&quot;               &quot;Forecast_List&quot;     &quot;fraction&quot;         
-##  [28] &quot;fullmodel&quot;         &quot;Groupings_A&quot;       &quot;GZ_n&quot;              &quot;GZ_PM2.5&quot;          &quot;GZ_sigma&quot;          &quot;Hour&quot;              &quot;Hourly_T&quot;          &quot;i&quot;                 &quot;info&quot;             
-##  [37] &quot;IQ.data&quot;           &quot;k&quot;                 &quot;Keeling_Data&quot;      &quot;Keeling_Data_tbl&quot;  &quot;Lab1&quot;              &quot;Lab2&quot;              &quot;lambda&quot;            &quot;mean_A&quot;            &quot;mean_B&quot;           
-##  [46] &quot;Mean_bias&quot;         &quot;model&quot;             &quot;model_step_b&quot;      &quot;model_step_f&quot;      &quot;model_step_s&quot;      &quot;Month_CO2&quot;         &quot;mu&quot;                &quot;MyName&quot;            &quot;n&quot;                
-##  [55] &quot;n1&quot;                &quot;n2&quot;                &quot;nullmodel&quot;         &quot;Obs_A&quot;             &quot;Obs_all&quot;           &quot;Obs_B&quot;             &quot;Output_List&quot;       &quot;Output_Matrix&quot;     &quot;Output_Matrix2&quot;   
-##  [64] &quot;Ozone_data&quot;        &quot;P_value&quot;           &quot;PM2.5_data&quot;        &quot;popvar&quot;            &quot;pred&quot;              &quot;reg&quot;               &quot;Samle_size&quot;        &quot;sample&quot;            &quot;Sample&quot;           
-##  [73] &quot;sample_index&quot;      &quot;Sample_mean&quot;       &quot;sample1&quot;           &quot;Sample1&quot;           &quot;sample2&quot;           &quot;Sample2&quot;           &quot;sample3&quot;           &quot;sample4&quot;           &quot;sample5&quot;          
-##  [82] &quot;sample6&quot;           &quot;SD&quot;                &quot;sd1&quot;               &quot;sd2&quot;               &quot;SE&quot;                &quot;Simulations&quot;       &quot;subset_result&quot;     &quot;SZ_n&quot;              &quot;SZ_PM2.5&quot;         
-##  [91] &quot;SZ_sigma&quot;          &quot;t&quot;                 &quot;Temp_Value&quot;        &quot;x&quot;                 &quot;y&quot;                 &quot;y_new&quot;             &quot;Year&quot;              &quot;z&quot;                 &quot;Z&quot;                
-## [100] &quot;z.score&quot;           &quot;z.test&quot;</code></pre>
+<pre><code>##   [1] &quot;Airquality&quot;          &quot;AQI&quot;                 &quot;AQI1&quot;                &quot;AQI2&quot;                &quot;average&quot;             &quot;Baseline&quot;           
+##   [7] &quot;Beta0_hat&quot;           &quot;Beta1_hat&quot;           &quot;cd_data&quot;             &quot;Cd_data&quot;             &quot;cd_data_tbl&quot;         &quot;Check_Air_Quality&quot;  
+##  [13] &quot;CO2_ppm&quot;             &quot;COD_data&quot;            &quot;Control&quot;             &quot;cpus&quot;                &quot;cpus_test&quot;           &quot;cpus_train&quot;         
+##  [19] &quot;d&quot;                   &quot;Daily_T&quot;             &quot;Day&quot;                 &quot;density&quot;             &quot;density1&quot;            &quot;density2&quot;           
+##  [25] &quot;density3&quot;            &quot;density4&quot;            &quot;df&quot;                  &quot;df_B&quot;                &quot;df_error&quot;            &quot;df_regression&quot;      
+##  [31] &quot;df_W&quot;                &quot;df1&quot;                 &quot;df2&quot;                 &quot;df3&quot;                 &quot;df4&quot;                 &quot;diff&quot;               
+##  [37] &quot;Diff&quot;                &quot;Error&quot;               &quot;F_ratio&quot;             &quot;fit&quot;                 &quot;Forecast_List&quot;       &quot;fraction&quot;           
+##  [43] &quot;full_model&quot;          &quot;fullmodel&quot;           &quot;Groupings_A&quot;         &quot;GZ_n&quot;                &quot;GZ_PM2.5&quot;            &quot;GZ_sigma&quot;           
+##  [49] &quot;Hour&quot;                &quot;Hourly_T&quot;            &quot;i&quot;                   &quot;info&quot;                &quot;IQ.data&quot;             &quot;k&quot;                  
+##  [55] &quot;Keeling_Data&quot;        &quot;Keeling_Data_tbl&quot;    &quot;Lab1&quot;                &quot;Lab2&quot;                &quot;lambda&quot;              &quot;M&quot;                  
+##  [61] &quot;mean_A&quot;              &quot;mean_B&quot;              &quot;Mean_bias&quot;           &quot;model&quot;               &quot;model_step_b&quot;        &quot;model_step_f&quot;       
+##  [67] &quot;model_step_s&quot;        &quot;Month_CO2&quot;           &quot;MSB&quot;                 &quot;MSE&quot;                 &quot;MSR&quot;                 &quot;MSW&quot;                
+##  [73] &quot;mu&quot;                  &quot;MyName&quot;              &quot;n&quot;                   &quot;N&quot;                   &quot;n1&quot;                  &quot;N1&quot;                 
+##  [79] &quot;n2&quot;                  &quot;N2&quot;                  &quot;n3&quot;                  &quot;n4&quot;                  &quot;nullmodel&quot;           &quot;Obs_A&quot;              
+##  [85] &quot;Obs_all&quot;             &quot;Obs_B&quot;               &quot;output&quot;              &quot;Output_List&quot;         &quot;Output_Matrix&quot;       &quot;Output_Matrix2&quot;     
+##  [91] &quot;Ozone_data&quot;          &quot;p_2.5th&quot;             &quot;p_97.5th&quot;            &quot;p_value&quot;             &quot;P_value&quot;             &quot;P1&quot;                 
+##  [97] &quot;P2&quot;                  &quot;P3&quot;                  &quot;Pesticide_data&quot;      &quot;Pesticide_data2&quot;     &quot;PM2.5_2019&quot;          &quot;PM2.5_2020&quot;         
+## [103] &quot;PM2.5_data&quot;          &quot;pop1&quot;                &quot;pop2&quot;                &quot;popvar&quot;              &quot;pred&quot;                &quot;Pred_band&quot;          
+## [109] &quot;Prediction&quot;          &quot;r&quot;                   &quot;R2&quot;                  &quot;R2_adj&quot;              &quot;Rainfall_data&quot;       &quot;reg&quot;                
+## [115] &quot;res_aov&quot;             &quot;s1&quot;                  &quot;s2&quot;                  &quot;Samle_size&quot;          &quot;sample&quot;              &quot;Sample&quot;             
+## [121] &quot;sample_index&quot;        &quot;Sample_mean&quot;         &quot;sample1&quot;             &quot;Sample1&quot;             &quot;sample2&quot;             &quot;Sample2&quot;            
+## [127] &quot;sample3&quot;             &quot;sample4&quot;             &quot;sample5&quot;             &quot;sample6&quot;             &quot;sd&quot;                  &quot;SD&quot;                 
+## [133] &quot;sd1&quot;                 &quot;sd2&quot;                 &quot;SE&quot;                  &quot;SE_beta1_hat&quot;        &quot;SE_W&quot;                &quot;Seeded&quot;             
+## [139] &quot;Simulations&quot;         &quot;Soil_conc&quot;           &quot;SSB&quot;                 &quot;SSE&quot;                 &quot;SSR&quot;                 &quot;SST&quot;                
+## [145] &quot;SSW&quot;                 &quot;subset_result&quot;       &quot;SZ_n&quot;                &quot;SZ_PM2.5&quot;            &quot;SZ_sigma&quot;            &quot;t&quot;                  
+## [151] &quot;t_beta1&quot;             &quot;Temp_Value&quot;          &quot;Total_simulations&quot;   &quot;Treat&quot;               &quot;two_way_additive&quot;    &quot;two_way_interaction&quot;
+## [157] &quot;Unseeded&quot;            &quot;Uptaken_amount&quot;      &quot;walsh.test&quot;          &quot;x&quot;                   &quot;x1&quot;                  &quot;x2&quot;                 
+## [163] &quot;y&quot;                   &quot;y_new&quot;               &quot;y1&quot;                  &quot;y2&quot;                  &quot;Year&quot;                &quot;z&quot;                  
+## [169] &quot;Z&quot;                   &quot;z.score&quot;             &quot;z.test&quot;</code></pre>
 <p>Note here that we didn’t give any arguments to <code>ls()</code>, but we still needed to give the parentheses <code>()</code> to tell R to call the function.</p>
 <p>You can use <code>rm()</code> to delete objects you no longer need:</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="kw">rm</span>(x)</span>
 <span id="cb62-2"><a href="#cb62-2"></a><span class="kw">ls</span>()</span></code></pre></div>
-<pre><code>##   [1] &quot;Airquality&quot;        &quot;AQI&quot;               &quot;AQI1&quot;              &quot;AQI2&quot;              &quot;average&quot;           &quot;Baseline&quot;          &quot;Check_Air_Quality&quot; &quot;CO2_ppm&quot;           &quot;COD_data&quot;         
-##  [10] &quot;cpus&quot;              &quot;cpus_test&quot;         &quot;cpus_train&quot;        &quot;d&quot;                 &quot;Daily_T&quot;           &quot;Day&quot;               &quot;density1&quot;          &quot;density2&quot;          &quot;density3&quot;         
-##  [19] &quot;density4&quot;          &quot;df&quot;                &quot;df1&quot;               &quot;df2&quot;               &quot;diff&quot;              &quot;Error&quot;             &quot;fit&quot;               &quot;Forecast_List&quot;     &quot;fraction&quot;         
-##  [28] &quot;fullmodel&quot;         &quot;Groupings_A&quot;       &quot;GZ_n&quot;              &quot;GZ_PM2.5&quot;          &quot;GZ_sigma&quot;          &quot;Hour&quot;              &quot;Hourly_T&quot;          &quot;i&quot;                 &quot;info&quot;             
-##  [37] &quot;IQ.data&quot;           &quot;k&quot;                 &quot;Keeling_Data&quot;      &quot;Keeling_Data_tbl&quot;  &quot;Lab1&quot;              &quot;Lab2&quot;              &quot;lambda&quot;            &quot;mean_A&quot;            &quot;mean_B&quot;           
-##  [46] &quot;Mean_bias&quot;         &quot;model&quot;             &quot;model_step_b&quot;      &quot;model_step_f&quot;      &quot;model_step_s&quot;      &quot;Month_CO2&quot;         &quot;mu&quot;                &quot;MyName&quot;            &quot;n&quot;                
-##  [55] &quot;n1&quot;                &quot;n2&quot;                &quot;nullmodel&quot;         &quot;Obs_A&quot;             &quot;Obs_all&quot;           &quot;Obs_B&quot;             &quot;Output_List&quot;       &quot;Output_Matrix&quot;     &quot;Output_Matrix2&quot;   
-##  [64] &quot;Ozone_data&quot;        &quot;P_value&quot;           &quot;PM2.5_data&quot;        &quot;popvar&quot;            &quot;pred&quot;              &quot;reg&quot;               &quot;Samle_size&quot;        &quot;sample&quot;            &quot;Sample&quot;           
-##  [73] &quot;sample_index&quot;      &quot;Sample_mean&quot;       &quot;sample1&quot;           &quot;Sample1&quot;           &quot;sample2&quot;           &quot;Sample2&quot;           &quot;sample3&quot;           &quot;sample4&quot;           &quot;sample5&quot;          
-##  [82] &quot;sample6&quot;           &quot;SD&quot;                &quot;sd1&quot;               &quot;sd2&quot;               &quot;SE&quot;                &quot;Simulations&quot;       &quot;subset_result&quot;     &quot;SZ_n&quot;              &quot;SZ_PM2.5&quot;         
-##  [91] &quot;SZ_sigma&quot;          &quot;t&quot;                 &quot;Temp_Value&quot;        &quot;y&quot;                 &quot;y_new&quot;             &quot;Year&quot;              &quot;z&quot;                 &quot;Z&quot;                 &quot;z.score&quot;          
-## [100] &quot;z.test&quot;</code></pre>
+<pre><code>##   [1] &quot;Airquality&quot;          &quot;AQI&quot;                 &quot;AQI1&quot;                &quot;AQI2&quot;                &quot;average&quot;             &quot;Baseline&quot;           
+##   [7] &quot;Beta0_hat&quot;           &quot;Beta1_hat&quot;           &quot;cd_data&quot;             &quot;Cd_data&quot;             &quot;cd_data_tbl&quot;         &quot;Check_Air_Quality&quot;  
+##  [13] &quot;CO2_ppm&quot;             &quot;COD_data&quot;            &quot;Control&quot;             &quot;cpus&quot;                &quot;cpus_test&quot;           &quot;cpus_train&quot;         
+##  [19] &quot;d&quot;                   &quot;Daily_T&quot;             &quot;Day&quot;                 &quot;density&quot;             &quot;density1&quot;            &quot;density2&quot;           
+##  [25] &quot;density3&quot;            &quot;density4&quot;            &quot;df&quot;                  &quot;df_B&quot;                &quot;df_error&quot;            &quot;df_regression&quot;      
+##  [31] &quot;df_W&quot;                &quot;df1&quot;                 &quot;df2&quot;                 &quot;df3&quot;                 &quot;df4&quot;                 &quot;diff&quot;               
+##  [37] &quot;Diff&quot;                &quot;Error&quot;               &quot;F_ratio&quot;             &quot;fit&quot;                 &quot;Forecast_List&quot;       &quot;fraction&quot;           
+##  [43] &quot;full_model&quot;          &quot;fullmodel&quot;           &quot;Groupings_A&quot;         &quot;GZ_n&quot;                &quot;GZ_PM2.5&quot;            &quot;GZ_sigma&quot;           
+##  [49] &quot;Hour&quot;                &quot;Hourly_T&quot;            &quot;i&quot;                   &quot;info&quot;                &quot;IQ.data&quot;             &quot;k&quot;                  
+##  [55] &quot;Keeling_Data&quot;        &quot;Keeling_Data_tbl&quot;    &quot;Lab1&quot;                &quot;Lab2&quot;                &quot;lambda&quot;              &quot;M&quot;                  
+##  [61] &quot;mean_A&quot;              &quot;mean_B&quot;              &quot;Mean_bias&quot;           &quot;model&quot;               &quot;model_step_b&quot;        &quot;model_step_f&quot;       
+##  [67] &quot;model_step_s&quot;        &quot;Month_CO2&quot;           &quot;MSB&quot;                 &quot;MSE&quot;                 &quot;MSR&quot;                 &quot;MSW&quot;                
+##  [73] &quot;mu&quot;                  &quot;MyName&quot;              &quot;n&quot;                   &quot;N&quot;                   &quot;n1&quot;                  &quot;N1&quot;                 
+##  [79] &quot;n2&quot;                  &quot;N2&quot;                  &quot;n3&quot;                  &quot;n4&quot;                  &quot;nullmodel&quot;           &quot;Obs_A&quot;              
+##  [85] &quot;Obs_all&quot;             &quot;Obs_B&quot;               &quot;output&quot;              &quot;Output_List&quot;         &quot;Output_Matrix&quot;       &quot;Output_Matrix2&quot;     
+##  [91] &quot;Ozone_data&quot;          &quot;p_2.5th&quot;             &quot;p_97.5th&quot;            &quot;p_value&quot;             &quot;P_value&quot;             &quot;P1&quot;                 
+##  [97] &quot;P2&quot;                  &quot;P3&quot;                  &quot;Pesticide_data&quot;      &quot;Pesticide_data2&quot;     &quot;PM2.5_2019&quot;          &quot;PM2.5_2020&quot;         
+## [103] &quot;PM2.5_data&quot;          &quot;pop1&quot;                &quot;pop2&quot;                &quot;popvar&quot;              &quot;pred&quot;                &quot;Pred_band&quot;          
+## [109] &quot;Prediction&quot;          &quot;r&quot;                   &quot;R2&quot;                  &quot;R2_adj&quot;              &quot;Rainfall_data&quot;       &quot;reg&quot;                
+## [115] &quot;res_aov&quot;             &quot;s1&quot;                  &quot;s2&quot;                  &quot;Samle_size&quot;          &quot;sample&quot;              &quot;Sample&quot;             
+## [121] &quot;sample_index&quot;        &quot;Sample_mean&quot;         &quot;sample1&quot;             &quot;Sample1&quot;             &quot;sample2&quot;             &quot;Sample2&quot;            
+## [127] &quot;sample3&quot;             &quot;sample4&quot;             &quot;sample5&quot;             &quot;sample6&quot;             &quot;sd&quot;                  &quot;SD&quot;                 
+## [133] &quot;sd1&quot;                 &quot;sd2&quot;                 &quot;SE&quot;                  &quot;SE_beta1_hat&quot;        &quot;SE_W&quot;                &quot;Seeded&quot;             
+## [139] &quot;Simulations&quot;         &quot;Soil_conc&quot;           &quot;SSB&quot;                 &quot;SSE&quot;                 &quot;SSR&quot;                 &quot;SST&quot;                
+## [145] &quot;SSW&quot;                 &quot;subset_result&quot;       &quot;SZ_n&quot;                &quot;SZ_PM2.5&quot;            &quot;SZ_sigma&quot;            &quot;t&quot;                  
+## [151] &quot;t_beta1&quot;             &quot;Temp_Value&quot;          &quot;Total_simulations&quot;   &quot;Treat&quot;               &quot;two_way_additive&quot;    &quot;two_way_interaction&quot;
+## [157] &quot;Unseeded&quot;            &quot;Uptaken_amount&quot;      &quot;walsh.test&quot;          &quot;x1&quot;                  &quot;x2&quot;                  &quot;y&quot;                  
+## [163] &quot;y_new&quot;               &quot;y1&quot;                  &quot;y2&quot;                  &quot;Year&quot;                &quot;z&quot;                   &quot;Z&quot;                  
+## [169] &quot;z.score&quot;             &quot;z.test&quot;</code></pre>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="kw">rm</span>(MyName, y)</span>
 <span id="cb64-2"><a href="#cb64-2"></a><span class="kw">ls</span>()</span></code></pre></div>
-<pre><code>##  [1] &quot;Airquality&quot;        &quot;AQI&quot;               &quot;AQI1&quot;              &quot;AQI2&quot;              &quot;average&quot;           &quot;Baseline&quot;          &quot;Check_Air_Quality&quot; &quot;CO2_ppm&quot;           &quot;COD_data&quot;         
-## [10] &quot;cpus&quot;              &quot;cpus_test&quot;         &quot;cpus_train&quot;        &quot;d&quot;                 &quot;Daily_T&quot;           &quot;Day&quot;               &quot;density1&quot;          &quot;density2&quot;          &quot;density3&quot;         
-## [19] &quot;density4&quot;          &quot;df&quot;                &quot;df1&quot;               &quot;df2&quot;               &quot;diff&quot;              &quot;Error&quot;             &quot;fit&quot;               &quot;Forecast_List&quot;     &quot;fraction&quot;         
-## [28] &quot;fullmodel&quot;         &quot;Groupings_A&quot;       &quot;GZ_n&quot;              &quot;GZ_PM2.5&quot;          &quot;GZ_sigma&quot;          &quot;Hour&quot;              &quot;Hourly_T&quot;          &quot;i&quot;                 &quot;info&quot;             
-## [37] &quot;IQ.data&quot;           &quot;k&quot;                 &quot;Keeling_Data&quot;      &quot;Keeling_Data_tbl&quot;  &quot;Lab1&quot;              &quot;Lab2&quot;              &quot;lambda&quot;            &quot;mean_A&quot;            &quot;mean_B&quot;           
-## [46] &quot;Mean_bias&quot;         &quot;model&quot;             &quot;model_step_b&quot;      &quot;model_step_f&quot;      &quot;model_step_s&quot;      &quot;Month_CO2&quot;         &quot;mu&quot;                &quot;n&quot;                 &quot;n1&quot;               
-## [55] &quot;n2&quot;                &quot;nullmodel&quot;         &quot;Obs_A&quot;             &quot;Obs_all&quot;           &quot;Obs_B&quot;             &quot;Output_List&quot;       &quot;Output_Matrix&quot;     &quot;Output_Matrix2&quot;    &quot;Ozone_data&quot;       
-## [64] &quot;P_value&quot;           &quot;PM2.5_data&quot;        &quot;popvar&quot;            &quot;pred&quot;              &quot;reg&quot;               &quot;Samle_size&quot;        &quot;sample&quot;            &quot;Sample&quot;            &quot;sample_index&quot;     
-## [73] &quot;Sample_mean&quot;       &quot;sample1&quot;           &quot;Sample1&quot;           &quot;sample2&quot;           &quot;Sample2&quot;           &quot;sample3&quot;           &quot;sample4&quot;           &quot;sample5&quot;           &quot;sample6&quot;          
-## [82] &quot;SD&quot;                &quot;sd1&quot;               &quot;sd2&quot;               &quot;SE&quot;                &quot;Simulations&quot;       &quot;subset_result&quot;     &quot;SZ_n&quot;              &quot;SZ_PM2.5&quot;          &quot;SZ_sigma&quot;         
-## [91] &quot;t&quot;                 &quot;Temp_Value&quot;        &quot;y_new&quot;             &quot;Year&quot;              &quot;z&quot;                 &quot;Z&quot;                 &quot;z.score&quot;           &quot;z.test&quot;</code></pre>
+<pre><code>##   [1] &quot;Airquality&quot;          &quot;AQI&quot;                 &quot;AQI1&quot;                &quot;AQI2&quot;                &quot;average&quot;             &quot;Baseline&quot;           
+##   [7] &quot;Beta0_hat&quot;           &quot;Beta1_hat&quot;           &quot;cd_data&quot;             &quot;Cd_data&quot;             &quot;cd_data_tbl&quot;         &quot;Check_Air_Quality&quot;  
+##  [13] &quot;CO2_ppm&quot;             &quot;COD_data&quot;            &quot;Control&quot;             &quot;cpus&quot;                &quot;cpus_test&quot;           &quot;cpus_train&quot;         
+##  [19] &quot;d&quot;                   &quot;Daily_T&quot;             &quot;Day&quot;                 &quot;density&quot;             &quot;density1&quot;            &quot;density2&quot;           
+##  [25] &quot;density3&quot;            &quot;density4&quot;            &quot;df&quot;                  &quot;df_B&quot;                &quot;df_error&quot;            &quot;df_regression&quot;      
+##  [31] &quot;df_W&quot;                &quot;df1&quot;                 &quot;df2&quot;                 &quot;df3&quot;                 &quot;df4&quot;                 &quot;diff&quot;               
+##  [37] &quot;Diff&quot;                &quot;Error&quot;               &quot;F_ratio&quot;             &quot;fit&quot;                 &quot;Forecast_List&quot;       &quot;fraction&quot;           
+##  [43] &quot;full_model&quot;          &quot;fullmodel&quot;           &quot;Groupings_A&quot;         &quot;GZ_n&quot;                &quot;GZ_PM2.5&quot;            &quot;GZ_sigma&quot;           
+##  [49] &quot;Hour&quot;                &quot;Hourly_T&quot;            &quot;i&quot;                   &quot;info&quot;                &quot;IQ.data&quot;             &quot;k&quot;                  
+##  [55] &quot;Keeling_Data&quot;        &quot;Keeling_Data_tbl&quot;    &quot;Lab1&quot;                &quot;Lab2&quot;                &quot;lambda&quot;              &quot;M&quot;                  
+##  [61] &quot;mean_A&quot;              &quot;mean_B&quot;              &quot;Mean_bias&quot;           &quot;model&quot;               &quot;model_step_b&quot;        &quot;model_step_f&quot;       
+##  [67] &quot;model_step_s&quot;        &quot;Month_CO2&quot;           &quot;MSB&quot;                 &quot;MSE&quot;                 &quot;MSR&quot;                 &quot;MSW&quot;                
+##  [73] &quot;mu&quot;                  &quot;n&quot;                   &quot;N&quot;                   &quot;n1&quot;                  &quot;N1&quot;                  &quot;n2&quot;                 
+##  [79] &quot;N2&quot;                  &quot;n3&quot;                  &quot;n4&quot;                  &quot;nullmodel&quot;           &quot;Obs_A&quot;               &quot;Obs_all&quot;            
+##  [85] &quot;Obs_B&quot;               &quot;output&quot;              &quot;Output_List&quot;         &quot;Output_Matrix&quot;       &quot;Output_Matrix2&quot;      &quot;Ozone_data&quot;         
+##  [91] &quot;p_2.5th&quot;             &quot;p_97.5th&quot;            &quot;p_value&quot;             &quot;P_value&quot;             &quot;P1&quot;                  &quot;P2&quot;                 
+##  [97] &quot;P3&quot;                  &quot;Pesticide_data&quot;      &quot;Pesticide_data2&quot;     &quot;PM2.5_2019&quot;          &quot;PM2.5_2020&quot;          &quot;PM2.5_data&quot;         
+## [103] &quot;pop1&quot;                &quot;pop2&quot;                &quot;popvar&quot;              &quot;pred&quot;                &quot;Pred_band&quot;           &quot;Prediction&quot;         
+## [109] &quot;r&quot;                   &quot;R2&quot;                  &quot;R2_adj&quot;              &quot;Rainfall_data&quot;       &quot;reg&quot;                 &quot;res_aov&quot;            
+## [115] &quot;s1&quot;                  &quot;s2&quot;                  &quot;Samle_size&quot;          &quot;sample&quot;              &quot;Sample&quot;              &quot;sample_index&quot;       
+## [121] &quot;Sample_mean&quot;         &quot;sample1&quot;             &quot;Sample1&quot;             &quot;sample2&quot;             &quot;Sample2&quot;             &quot;sample3&quot;            
+## [127] &quot;sample4&quot;             &quot;sample5&quot;             &quot;sample6&quot;             &quot;sd&quot;                  &quot;SD&quot;                  &quot;sd1&quot;                
+## [133] &quot;sd2&quot;                 &quot;SE&quot;                  &quot;SE_beta1_hat&quot;        &quot;SE_W&quot;                &quot;Seeded&quot;              &quot;Simulations&quot;        
+## [139] &quot;Soil_conc&quot;           &quot;SSB&quot;                 &quot;SSE&quot;                 &quot;SSR&quot;                 &quot;SST&quot;                 &quot;SSW&quot;                
+## [145] &quot;subset_result&quot;       &quot;SZ_n&quot;                &quot;SZ_PM2.5&quot;            &quot;SZ_sigma&quot;            &quot;t&quot;                   &quot;t_beta1&quot;            
+## [151] &quot;Temp_Value&quot;          &quot;Total_simulations&quot;   &quot;Treat&quot;               &quot;two_way_additive&quot;    &quot;two_way_interaction&quot; &quot;Unseeded&quot;           
+## [157] &quot;Uptaken_amount&quot;      &quot;walsh.test&quot;          &quot;x1&quot;                  &quot;x2&quot;                  &quot;y_new&quot;               &quot;y1&quot;                 
+## [163] &quot;y2&quot;                  &quot;Year&quot;                &quot;z&quot;                   &quot;Z&quot;                   &quot;z.score&quot;             &quot;z.test&quot;</code></pre>
 </div>
 <div id="conditional-statements" class="section level2">
 <h2>Conditional statements</h2>
@@ -930,126 +981,126 @@ div.tocify {
 <span id="cb97-4"><a href="#cb97-4"></a>    <span class="kw">print</span>(<span class="kw">paste</span>(Daily_T,Hourly_T))</span>
 <span id="cb97-5"><a href="#cb97-5"></a>  }</span>
 <span id="cb97-6"><a href="#cb97-6"></a>}</span></code></pre></div>
-<pre><code>## [1] &quot;28 26.2503583334989&quot;
-## [1] &quot;28 28.4409477242241&quot;
-## [1] &quot;28 22.7650468805582&quot;
-## [1] &quot;28 25.8625992406523&quot;
-## [1] &quot;28 25.0916288452788&quot;
-## [1] &quot;28 32.8728067458782&quot;
-## [1] &quot;28 38.7065161925345&quot;
-## [1] &quot;28 30.1463971161876&quot;
-## [1] &quot;28 25.1547558583653&quot;
-## [1] &quot;28 30.8475560994416&quot;
-## [1] &quot;28 28.8618120291072&quot;
-## [1] &quot;28 20.5152472055031&quot;
-## [1] &quot;28 17.9692063265794&quot;
-## [1] &quot;28 17.1762536801906&quot;
-## [1] &quot;28 23.4780994636861&quot;
-## [1] &quot;28 30.3176177501122&quot;
-## [1] &quot;28 31.7720650111516&quot;
-## [1] &quot;28 27.2653511820751&quot;
-## [1] &quot;28 30.4750752440464&quot;
-## [1] &quot;28 28.6465208287152&quot;
-## [1] &quot;28 35.2268999715052&quot;
-## [1] &quot;28 22.69279599224&quot;
-## [1] &quot;28 24.5484779719632&quot;
-## [1] &quot;28 29.2762462352823&quot;
-## [1] &quot;27 41.8662684778394&quot;
-## [1] &quot;27 25.9785715090607&quot;
-## [1] &quot;27 36.1531571347874&quot;
-## [1] &quot;27 36.0642970051583&quot;
-## [1] &quot;27 23.6147813920855&quot;
-## [1] &quot;27 25.2761159146467&quot;
-## [1] &quot;27 29.005059893251&quot;
-## [1] &quot;27 21.9359716496234&quot;
-## [1] &quot;27 34.6290251070001&quot;
-## [1] &quot;27 33.0175105065751&quot;
-## [1] &quot;27 26.1116810020337&quot;
-## [1] &quot;27 32.609190514125&quot;
-## [1] &quot;27 20.4799660985696&quot;
-## [1] &quot;27 28.0841296406506&quot;
-## [1] &quot;27 28.1623399889315&quot;
-## [1] &quot;27 29.654902898442&quot;
-## [1] &quot;27 31.813189129398&quot;
-## [1] &quot;27 24.5145082402795&quot;
-## [1] &quot;27 24.6690871982785&quot;
-## [1] &quot;27 36.2183663417475&quot;
-## [1] &quot;27 33.2415752402377&quot;
-## [1] &quot;27 23.0067431998754&quot;
-## [1] &quot;27 33.8639689955216&quot;
-## [1] &quot;27 22.8702937227112&quot;
-## [1] &quot;28 28.5011391321433&quot;
-## [1] &quot;28 29.5242272104515&quot;
-## [1] &quot;28 29.0273998664823&quot;
-## [1] &quot;28 24.2517351307019&quot;
-## [1] &quot;28 35.931595102156&quot;
-## [1] &quot;28 29.6674086291635&quot;
-## [1] &quot;28 25.7412344209489&quot;
-## [1] &quot;28 26.3919861625593&quot;
-## [1] &quot;28 35.3525093239419&quot;
-## [1] &quot;28 22.9141096330581&quot;
-## [1] &quot;28 31.4593377924582&quot;
-## [1] &quot;28 31.4496270812038&quot;
-## [1] &quot;28 34.6356503823298&quot;
-## [1] &quot;28 27.2304029639828&quot;
-## [1] &quot;28 30.0877157737911&quot;
-## [1] &quot;28 25.2178484116206&quot;
-## [1] &quot;28 23.5974475331373&quot;
-## [1] &quot;28 36.0201508942439&quot;
-## [1] &quot;28 34.1476309439703&quot;
-## [1] &quot;28 28.343450084944&quot;
-## [1] &quot;28 33.8260066729684&quot;
-## [1] &quot;28 27.9694472702676&quot;
-## [1] &quot;28 24.0184532106703&quot;
-## [1] &quot;28 26.7009255155945&quot;
-## [1] &quot;26 21.2807875933534&quot;
-## [1] &quot;26 26.0025262885726&quot;
-## [1] &quot;26 24.2201556086331&quot;
-## [1] &quot;26 28.2480710450582&quot;
-## [1] &quot;26 24.0460863565388&quot;
-## [1] &quot;26 24.8338897679391&quot;
-## [1] &quot;26 20.34623986827&quot;
-## [1] &quot;26 25.6570291023731&quot;
-## [1] &quot;26 26.0059193854355&quot;
-## [1] &quot;26 24.8939697654961&quot;
-## [1] &quot;26 22.6703970433085&quot;
-## [1] &quot;26 20.7700401863584&quot;
-## [1] &quot;26 22.0266146818683&quot;
-## [1] &quot;26 33.3621671952195&quot;
-## [1] &quot;26 17.6740253448045&quot;
-## [1] &quot;26 24.8693757842183&quot;
-## [1] &quot;26 23.7513952136553&quot;
-## [1] &quot;26 22.8529283813699&quot;
-## [1] &quot;26 24.7325429047388&quot;
-## [1] &quot;26 22.86567806171&quot;
-## [1] &quot;26 27.0261494675083&quot;
-## [1] &quot;26 27.8586048054791&quot;
-## [1] &quot;26 25.0469695894788&quot;
-## [1] &quot;26 26.2021336636482&quot;
-## [1] &quot;27 30.1163944464483&quot;
-## [1] &quot;27 27.0911677017677&quot;
-## [1] &quot;27 33.1931652900423&quot;
-## [1] &quot;27 27.5681987277132&quot;
-## [1] &quot;27 20.7379495687632&quot;
-## [1] &quot;27 30.7105718572675&quot;
-## [1] &quot;27 28.8922570478789&quot;
-## [1] &quot;27 21.7612572377667&quot;
-## [1] &quot;27 34.4009851951057&quot;
-## [1] &quot;27 25.7289333025512&quot;
-## [1] &quot;27 21.3227917367048&quot;
-## [1] &quot;27 21.6757530119828&quot;
-## [1] &quot;27 15.3185165946189&quot;
-## [1] &quot;27 28.9334902762498&quot;
-## [1] &quot;27 15.5635746346745&quot;
-## [1] &quot;27 16.7617003865274&quot;
-## [1] &quot;27 32.8455876529337&quot;
-## [1] &quot;27 33.2398668461704&quot;
-## [1] &quot;27 17.8064000669143&quot;
-## [1] &quot;27 32.388344266026&quot;
-## [1] &quot;27 25.1620918812674&quot;
-## [1] &quot;27 18.368175195921&quot;
-## [1] &quot;27 28.8927389253829&quot;
-## [1] &quot;27 22.6624021176821&quot;</code></pre>
+<pre><code>## [1] &quot;28 22.6794292837718&quot;
+## [1] &quot;28 27.294247715265&quot;
+## [1] &quot;28 27.9281842157379&quot;
+## [1] &quot;28 25.1480683895953&quot;
+## [1] &quot;28 21.332329552254&quot;
+## [1] &quot;28 31.0398670753114&quot;
+## [1] &quot;28 28.3882826305246&quot;
+## [1] &quot;28 31.8625443571851&quot;
+## [1] &quot;28 32.1398020786802&quot;
+## [1] &quot;28 19.27334480016&quot;
+## [1] &quot;28 41.2662497688816&quot;
+## [1] &quot;28 23.1036243926813&quot;
+## [1] &quot;28 25.6266932688038&quot;
+## [1] &quot;28 29.7104655076418&quot;
+## [1] &quot;28 32.9687439498108&quot;
+## [1] &quot;28 24.0184344799878&quot;
+## [1] &quot;28 32.3435834123128&quot;
+## [1] &quot;28 25.9542476690517&quot;
+## [1] &quot;28 34.48556668952&quot;
+## [1] &quot;28 27.9321747172409&quot;
+## [1] &quot;28 30.6666445564755&quot;
+## [1] &quot;28 27.1680536555878&quot;
+## [1] &quot;28 31.0955036733679&quot;
+## [1] &quot;28 27.6905111690071&quot;
+## [1] &quot;27 21.9330279391252&quot;
+## [1] &quot;27 33.7487829586337&quot;
+## [1] &quot;27 29.4831233222078&quot;
+## [1] &quot;27 24.7944077852258&quot;
+## [1] &quot;27 34.4371376649258&quot;
+## [1] &quot;27 20.1468330926866&quot;
+## [1] &quot;27 32.955079853984&quot;
+## [1] &quot;27 19.956366667167&quot;
+## [1] &quot;27 28.1746317789643&quot;
+## [1] &quot;27 25.3578604608665&quot;
+## [1] &quot;27 27.9660479365195&quot;
+## [1] &quot;27 23.9197433199937&quot;
+## [1] &quot;27 28.9799872475054&quot;
+## [1] &quot;27 26.0674366194293&quot;
+## [1] &quot;27 31.2970719816827&quot;
+## [1] &quot;27 20.5567682322414&quot;
+## [1] &quot;27 33.1173374019589&quot;
+## [1] &quot;27 33.2927286997498&quot;
+## [1] &quot;27 26.1716905678031&quot;
+## [1] &quot;27 37.2865862866389&quot;
+## [1] &quot;27 31.0457170102975&quot;
+## [1] &quot;27 27.0467217215588&quot;
+## [1] &quot;27 25.7423599129081&quot;
+## [1] &quot;27 33.2931409287881&quot;
+## [1] &quot;28 31.2357909003347&quot;
+## [1] &quot;28 28.7187742019133&quot;
+## [1] &quot;28 32.5472959267275&quot;
+## [1] &quot;28 33.0684003185871&quot;
+## [1] &quot;28 26.0343368775723&quot;
+## [1] &quot;28 21.225504384623&quot;
+## [1] &quot;28 34.9186495316315&quot;
+## [1] &quot;28 24.9710233690158&quot;
+## [1] &quot;28 25.1064798200698&quot;
+## [1] &quot;28 25.4230242337439&quot;
+## [1] &quot;28 33.8128759152779&quot;
+## [1] &quot;28 27.9250943139851&quot;
+## [1] &quot;28 36.5075761437399&quot;
+## [1] &quot;28 27.5012450257689&quot;
+## [1] &quot;28 23.5443468444368&quot;
+## [1] &quot;28 29.1608728314775&quot;
+## [1] &quot;28 24.0111411143521&quot;
+## [1] &quot;28 21.5770132716085&quot;
+## [1] &quot;28 20.2658149484027&quot;
+## [1] &quot;28 31.1007894909634&quot;
+## [1] &quot;28 35.96019799408&quot;
+## [1] &quot;28 19.8656846920276&quot;
+## [1] &quot;28 30.5912296469178&quot;
+## [1] &quot;28 39.0650728565379&quot;
+## [1] &quot;26 21.8727626971197&quot;
+## [1] &quot;26 25.3721781405404&quot;
+## [1] &quot;26 23.7384817344639&quot;
+## [1] &quot;26 26.8472388741008&quot;
+## [1] &quot;26 20.0921966559648&quot;
+## [1] &quot;26 27.0987560467612&quot;
+## [1] &quot;26 25.3771680019631&quot;
+## [1] &quot;26 29.16147270743&quot;
+## [1] &quot;26 27.8590155468262&quot;
+## [1] &quot;26 18.3885501229841&quot;
+## [1] &quot;26 23.6320831550557&quot;
+## [1] &quot;26 28.2692753824451&quot;
+## [1] &quot;26 33.046258198065&quot;
+## [1] &quot;26 28.6369286895408&quot;
+## [1] &quot;26 28.6406021061178&quot;
+## [1] &quot;26 23.5666308780323&quot;
+## [1] &quot;26 22.7822378069842&quot;
+## [1] &quot;26 18.4517569560625&quot;
+## [1] &quot;26 21.6847580478333&quot;
+## [1] &quot;26 27.4813014017913&quot;
+## [1] &quot;26 20.5977238690226&quot;
+## [1] &quot;26 31.2789074980135&quot;
+## [1] &quot;26 30.0816562355109&quot;
+## [1] &quot;26 21.5308754293531&quot;
+## [1] &quot;27 29.8084552068598&quot;
+## [1] &quot;27 30.5514779807318&quot;
+## [1] &quot;27 29.7809031927282&quot;
+## [1] &quot;27 24.9123182930382&quot;
+## [1] &quot;27 24.7654859692867&quot;
+## [1] &quot;27 24.9571272187286&quot;
+## [1] &quot;27 28.2272045891003&quot;
+## [1] &quot;27 31.2374446299856&quot;
+## [1] &quot;27 25.4864225346148&quot;
+## [1] &quot;27 30.4720772825361&quot;
+## [1] &quot;27 27.0480785066833&quot;
+## [1] &quot;27 22.0386199963824&quot;
+## [1] &quot;27 28.7282650646999&quot;
+## [1] &quot;27 22.9121093521754&quot;
+## [1] &quot;27 25.0942257011138&quot;
+## [1] &quot;27 32.6043221203702&quot;
+## [1] &quot;27 17.4502761099392&quot;
+## [1] &quot;27 24.3941418937147&quot;
+## [1] &quot;27 23.0074886551862&quot;
+## [1] &quot;27 37.1414500992012&quot;
+## [1] &quot;27 29.4239851760433&quot;
+## [1] &quot;27 26.5176403237019&quot;
+## [1] &quot;27 38.0947847486045&quot;
+## [1] &quot;27 24.1740250964165&quot;</code></pre>
 <p>Here at each <code>Hour</code> we use the <code>rnorm()</code> function to generate <code>1</code> random Gaussian sample with a mean of <code>Daily_T</code> and a standard deviation of <code>5</code>.</p>
 <p>We notice in the output that when the first index (<code>Daily_T</code>) is set to <code>28</code>, the second index (<code>Hour</code>) iterates through its full set of indices. Once the indices of <code>Hour</code> have been iterated through, then <code>Daily_T</code> moves to the next one (<em>i.e.</em>, <code>27</code>). This process continues until the last index has been used for each <code>for()</code> loop.</p>
 <p>Rather than printing the results, we could write the loop output to a new <em>object</em>:</p>
@@ -1063,21 +1114,26 @@ div.tocify {
 <span id="cb99-8"><a href="#cb99-8"></a>}</span>
 <span id="cb99-9"><a href="#cb99-9"></a></span>
 <span id="cb99-10"><a href="#cb99-10"></a><span class="kw">print</span>(Output_List)</span></code></pre></div>
-<pre><code>##   [1] &quot;28 31.407741949495&quot;  &quot;28 36.6035793476503&quot; &quot;28 24.66747841502&quot;   &quot;28 29.6134796615331&quot; &quot;28 20.1459856304302&quot; &quot;28 28.4695867575835&quot; &quot;28 33.5653580835506&quot; &quot;28 30.0468003846124&quot;
-##   [9] &quot;28 29.1336976362289&quot; &quot;28 25.6378001323213&quot; &quot;28 28.0299183807273&quot; &quot;28 23.3455258372249&quot; &quot;28 29.3002943337012&quot; &quot;28 30.6954752859898&quot; &quot;28 37.1664302794393&quot; &quot;28 25.1105110435582&quot;
-##  [17] &quot;28 30.1302972241104&quot; &quot;28 27.1250083027016&quot; &quot;28 22.7826507855841&quot; &quot;28 22.1228408702232&quot; &quot;28 23.6270981170122&quot; &quot;28 22.3946689637845&quot; &quot;28 31.696046223248&quot;  &quot;28 32.8797769066349&quot;
-##  [25] &quot;27 30.5274123544772&quot; &quot;27 21.9475362390993&quot; &quot;27 21.9681922749137&quot; &quot;27 21.6543195291236&quot; &quot;27 37.2358182911827&quot; &quot;27 20.1595213830003&quot; &quot;27 21.4382771547082&quot; &quot;27 31.4851463287407&quot;
-##  [33] &quot;27 33.8694829083422&quot; &quot;27 24.8150668745035&quot; &quot;27 25.4018912154651&quot; &quot;27 29.6208436430078&quot; &quot;27 30.4823913344733&quot; &quot;27 33.60560704426&quot;   &quot;27 21.4812990905233&quot; &quot;27 32.1862500958744&quot;
-##  [41] &quot;27 22.9665984443538&quot; &quot;27 34.0713053954339&quot; &quot;27 29.6523851853462&quot; &quot;27 32.1190099358331&quot; &quot;27 26.5201474738643&quot; &quot;27 33.4001970620865&quot; &quot;27 24.2952124435408&quot; &quot;27 27.059979451048&quot; 
-##  [49] &quot;28 18.3057310980444&quot; &quot;28 32.477708462402&quot;  &quot;28 23.274884434699&quot;  &quot;28 39.3207540130914&quot; &quot;28 35.003551307837&quot;  &quot;28 30.856583411796&quot;  &quot;28 35.672850638064&quot;  &quot;28 30.970081363074&quot; 
-##  [57] &quot;28 28.7804573707231&quot; &quot;28 33.8693379487611&quot; &quot;28 27.6621474807019&quot; &quot;28 36.638220442393&quot;  &quot;28 28.9766745790698&quot; &quot;28 28.5703865357676&quot; &quot;28 25.7595965087755&quot; &quot;28 28.4311288526057&quot;
-##  [65] &quot;28 28.5380241734575&quot; &quot;28 34.0307481636595&quot; &quot;28 36.3391240699421&quot; &quot;28 35.1527502909113&quot; &quot;28 21.4955996410931&quot; &quot;28 28.1001537068451&quot; &quot;28 25.1147402838808&quot; &quot;28 20.9506904858049&quot;
-##  [73] &quot;26 27.1469963943966&quot; &quot;26 17.2343554694208&quot; &quot;26 24.772046026477&quot;  &quot;26 24.0506867173045&quot; &quot;26 26.2407582446834&quot; &quot;26 40.0249084551117&quot; &quot;26 24.0905462154342&quot; &quot;26 23.1278152640644&quot;
-##  [81] &quot;26 26.2773328064453&quot; &quot;26 27.080126382726&quot;  &quot;26 35.8524304179681&quot; &quot;26 26.9056865565916&quot; &quot;26 19.1738411888208&quot; &quot;26 23.1949305765423&quot; &quot;26 26.6065053008797&quot; &quot;26 24.015223972086&quot; 
-##  [89] &quot;26 22.4226765443356&quot; &quot;26 28.3868886589188&quot; &quot;26 17.4365911424958&quot; &quot;26 27.0259251040953&quot; &quot;26 20.3051657858182&quot; &quot;26 30.4856836632021&quot; &quot;26 16.4252236554529&quot; &quot;26 21.3532447303908&quot;
-##  [97] &quot;27 24.554155738424&quot;  &quot;27 21.2751784503161&quot; &quot;27 20.813224039102&quot;  &quot;27 22.0482273319597&quot; &quot;27 18.6222546931897&quot; &quot;27 33.8353602547401&quot; &quot;27 36.4093355690594&quot; &quot;27 32.1886102149049&quot;
-## [105] &quot;27 21.2992412664116&quot; &quot;27 28.3584083855872&quot; &quot;27 19.1701673199242&quot; &quot;27 27.8283730439769&quot; &quot;27 15.7035980317841&quot; &quot;27 34.0208962665977&quot; &quot;27 19.403093051033&quot;  &quot;27 27.9845871127794&quot;
-## [113] &quot;27 14.726979389866&quot;  &quot;27 36.1847536158921&quot; &quot;27 33.566099446806&quot;  &quot;27 19.335053070123&quot;  &quot;27 22.0413227743417&quot; &quot;27 13.2220587930827&quot; &quot;27 34.3630724204021&quot; &quot;27 28.3654100236188&quot;</code></pre>
+<pre><code>##   [1] &quot;28 29.3272611436605&quot; &quot;28 26.8510380216796&quot; &quot;28 30.3281010929388&quot; &quot;28 34.2574021301338&quot; &quot;28 21.2965777490969&quot; &quot;28 30.6175610180187&quot;
+##   [7] &quot;28 29.1142245894539&quot; &quot;28 26.5933188960966&quot; &quot;28 28.3346254794216&quot; &quot;28 32.7001402007935&quot; &quot;28 26.5024464881561&quot; &quot;28 22.9926947331681&quot;
+##  [13] &quot;28 30.1643957432752&quot; &quot;28 31.7032592127121&quot; &quot;28 20.5933869661623&quot; &quot;28 29.4589057672116&quot; &quot;28 21.8830514211031&quot; &quot;28 22.2039482260578&quot;
+##  [19] &quot;28 25.2816755225845&quot; &quot;28 27.0116879624005&quot; &quot;28 23.4775403131649&quot; &quot;28 32.0587660419524&quot; &quot;28 33.3177079940663&quot; &quot;28 30.2519627800892&quot;
+##  [25] &quot;27 37.1136094441942&quot; &quot;27 23.221254368418&quot;  &quot;27 24.5217524611103&quot; &quot;27 13.1280827580714&quot; &quot;27 25.6239932410787&quot; &quot;27 39.1120989192109&quot;
+##  [31] &quot;27 26.4776414193557&quot; &quot;27 24.4902430467366&quot; &quot;27 24.5139854954577&quot; &quot;27 33.3144597974526&quot; &quot;27 33.6193106436677&quot; &quot;27 33.2772366902893&quot;
+##  [37] &quot;27 32.1011112545017&quot; &quot;27 32.1614280125711&quot; &quot;27 16.5722301528742&quot; &quot;27 22.4494292730365&quot; &quot;27 37.3548651118725&quot; &quot;27 28.7727882091265&quot;
+##  [43] &quot;27 28.4649218431477&quot; &quot;27 26.4774849031408&quot; &quot;27 27.9559008414381&quot; &quot;27 19.2485645215656&quot; &quot;27 28.0107397203811&quot; &quot;27 31.9726640100707&quot;
+##  [49] &quot;28 29.7530529536859&quot; &quot;28 26.9424810057837&quot; &quot;28 21.0304077397756&quot; &quot;28 25.2109187842825&quot; &quot;28 34.9082288603545&quot; &quot;28 32.8382036298144&quot;
+##  [55] &quot;28 31.2148042181904&quot; &quot;28 29.1565594786522&quot; &quot;28 31.1758438516192&quot; &quot;28 25.4458625358593&quot; &quot;28 29.9679105294314&quot; &quot;28 26.9386226881716&quot;
+##  [61] &quot;28 32.0780369035015&quot; &quot;28 28.2605873600414&quot; &quot;28 33.5942683382681&quot; &quot;28 24.9577976711453&quot; &quot;28 30.9349867803696&quot; &quot;28 27.3583485635241&quot;
+##  [67] &quot;28 29.5777657460775&quot; &quot;28 25.6984497912691&quot; &quot;28 26.9335900800421&quot; &quot;28 34.4988760583417&quot; &quot;28 30.6241458381254&quot; &quot;28 30.9906716784842&quot;
+##  [73] &quot;26 34.5621939698997&quot; &quot;26 26.989381177981&quot;  &quot;26 25.779245742051&quot;  &quot;26 28.7351744524103&quot; &quot;26 35.7477672174111&quot; &quot;26 23.4518855887561&quot;
+##  [79] &quot;26 23.2945156065518&quot; &quot;26 21.0380281715153&quot; &quot;26 17.7613934901477&quot; &quot;26 33.4068484307967&quot; &quot;26 21.624112697322&quot;  &quot;26 26.4052246432406&quot;
+##  [85] &quot;26 27.722406592395&quot;  &quot;26 24.7216487577519&quot; &quot;26 29.1707875918395&quot; &quot;26 30.6456514932813&quot; &quot;26 30.6078792399336&quot; &quot;26 21.282435814384&quot; 
+##  [91] &quot;26 22.0991119223165&quot; &quot;26 15.5790527693008&quot; &quot;26 28.3786738755727&quot; &quot;26 24.6033775751805&quot; &quot;26 30.0801272012468&quot; &quot;26 23.9189730971106&quot;
+##  [97] &quot;27 32.385211250798&quot;  &quot;27 25.2363797582048&quot; &quot;27 29.6058265922191&quot; &quot;27 28.7815144651153&quot; &quot;27 29.7958951467681&quot; &quot;27 28.3556338344381&quot;
+## [103] &quot;27 32.8419806330968&quot; &quot;27 16.593705983745&quot;  &quot;27 23.1679736299732&quot; &quot;27 26.0932380035188&quot; &quot;27 29.5614232228512&quot; &quot;27 29.1206877296957&quot;
+## [109] &quot;27 21.3161567573755&quot; &quot;27 24.448326111217&quot;  &quot;27 25.5606396631952&quot; &quot;27 27.3588398847262&quot; &quot;27 21.0132872542982&quot; &quot;27 32.1132588254372&quot;
+## [115] &quot;27 31.9455603664219&quot; &quot;27 20.1928761864697&quot; &quot;27 31.228703280131&quot;  &quot;27 27.1942288456607&quot; &quot;27 25.5582034805407&quot; &quot;27 30.4466291902386&quot;</code></pre>
 <p>This approach can be useful, but “growing your results” (building the result object incrementally) is <strong>computationally inefficient</strong>, so avoid it when you are iterating through a lot of values.</p>
 <p><strong>Important</strong>: One of the biggest things that trips up novices and experienced R users alike, is building a results object (<em>vector</em>, <em>list</em>, <em>matrix</em>, <em>data frame</em>) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It’s much better to define an <strong>empty results object</strong> beforehand of appropriate dimensions, rather than initializing an empty object without dimensions. So if you know the end result will be stored in a matrix-like above, create an empty matrix with <code>5</code> row and <code>24</code> columns, then at each iteration stores the results in the appropriate location.</p>
 <div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1"></a>Output_Matrix    &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow=</span><span class="dv">5</span>, <span class="dt">ncol=</span><span class="dv">24</span>)</span>
@@ -1091,21 +1147,26 @@ div.tocify {
 <span id="cb101-9"><a href="#cb101-9"></a>}</span>
 <span id="cb101-10"><a href="#cb101-10"></a>Output_Matrix2 &lt;-<span class="st"> </span><span class="kw">as.vector</span>(Output_Matrix)</span>
 <span id="cb101-11"><a href="#cb101-11"></a>Output_Matrix2</span></code></pre></div>
-<pre><code>##   [1] &quot;28 23.291855825882&quot;  &quot;27 21.0896485867075&quot; &quot;28 27.5782929091894&quot; &quot;26 30.1557388540478&quot; &quot;27 22.7014757545028&quot; &quot;28 16.2975589906577&quot; &quot;27 25.1515568202025&quot; &quot;28 36.6700110739101&quot;
-##   [9] &quot;26 28.0876782401726&quot; &quot;27 31.9324960038788&quot; &quot;28 30.0462619567233&quot; &quot;27 19.4760111398184&quot; &quot;28 30.9234239785096&quot; &quot;26 21.9030226234985&quot; &quot;27 32.6037218340114&quot; &quot;28 24.5520888985017&quot;
-##  [17] &quot;27 26.4248167391679&quot; &quot;28 27.9894468016891&quot; &quot;26 15.8883719683007&quot; &quot;27 25.8125354989065&quot; &quot;28 32.9697639620799&quot; &quot;27 27.2001100201364&quot; &quot;28 28.2080255580261&quot; &quot;26 31.6756661545156&quot;
-##  [25] &quot;27 30.4997376274855&quot; &quot;28 24.832586908389&quot;  &quot;27 24.8890723118556&quot; &quot;28 33.5182183853909&quot; &quot;26 22.6722051059669&quot; &quot;27 34.0001903172004&quot; &quot;28 32.2717557618194&quot; &quot;27 18.2422077248631&quot;
-##  [33] &quot;28 25.5234898436436&quot; &quot;26 21.7116932637226&quot; &quot;27 33.704135804737&quot;  &quot;28 34.4319508457353&quot; &quot;27 17.4443465172573&quot; &quot;28 19.9745514834775&quot; &quot;26 25.3460509378552&quot; &quot;27 23.3644778047465&quot;
-##  [41] &quot;28 22.9506206373081&quot; &quot;27 31.597803455521&quot;  &quot;28 21.6416445605263&quot; &quot;26 31.6747170833899&quot; &quot;27 24.8225699292985&quot; &quot;28 27.2850698505634&quot; &quot;27 24.7624433096217&quot; &quot;28 27.1006205153563&quot;
-##  [49] &quot;26 28.6201544432441&quot; &quot;27 21.9025418301181&quot; &quot;28 27.4264399766855&quot; &quot;27 30.0287489112481&quot; &quot;28 17.6101803688239&quot; &quot;26 18.331902711796&quot;  &quot;27 30.1859059307049&quot; &quot;28 19.8573861462571&quot;
-##  [57] &quot;27 27.7349662322942&quot; &quot;28 29.0407521920471&quot; &quot;26 14.3491019670177&quot; &quot;27 33.1522646897297&quot; &quot;28 17.6272858111723&quot; &quot;27 23.2302047584665&quot; &quot;28 22.4346991891942&quot; &quot;26 24.5552142671007&quot;
-##  [65] &quot;27 23.3637361212451&quot; &quot;28 25.609024422979&quot;  &quot;27 26.1108750153346&quot; &quot;28 35.9206182569994&quot; &quot;26 35.3378110754934&quot; &quot;27 14.4457591610908&quot; &quot;28 31.9631737397299&quot; &quot;27 27.0976410075381&quot;
-##  [73] &quot;28 29.9920321429923&quot; &quot;26 30.9606820730584&quot; &quot;27 29.2369975798321&quot; &quot;28 22.4344932149136&quot; &quot;27 24.0595372513377&quot; &quot;28 24.6781214623198&quot; &quot;26 28.147614127443&quot;  &quot;27 25.9127827051259&quot;
-##  [81] &quot;28 26.2132287323207&quot; &quot;27 30.2194923919737&quot; &quot;28 26.2550040398609&quot; &quot;26 31.1810851267914&quot; &quot;27 27.3354806898177&quot; &quot;28 31.7102497737894&quot; &quot;27 30.3611654013669&quot; &quot;28 31.6572920432773&quot;
-##  [89] &quot;26 36.7945806169719&quot; &quot;27 27.6351102502197&quot; &quot;28 26.9520489915424&quot; &quot;27 30.2746087184723&quot; &quot;28 23.2566871995661&quot; &quot;26 23.5760243937955&quot; &quot;27 29.2026734174321&quot; &quot;28 28.4453220211275&quot;
-##  [97] &quot;27 28.7399853983669&quot; &quot;28 24.501769339787&quot;  &quot;26 27.9966789293886&quot; &quot;27 25.4355188287101&quot; &quot;28 28.7210399918392&quot; &quot;27 33.3598064699304&quot; &quot;28 26.7737811098212&quot; &quot;26 28.0782667575502&quot;
-## [105] &quot;27 26.8246304160943&quot; &quot;28 28.825640369334&quot;  &quot;27 29.0689563894272&quot; &quot;28 31.090059852588&quot;  &quot;26 21.8532659147957&quot; &quot;27 29.6636026952356&quot; &quot;28 24.6109942786802&quot; &quot;27 32.7237835490213&quot;
-## [113] &quot;28 14.066673505267&quot;  &quot;26 28.5702668217139&quot; &quot;27 25.0884584190727&quot; &quot;28 25.7273092617479&quot; &quot;27 31.1563201686353&quot; &quot;28 23.7102472155148&quot; &quot;26 27.9187615249135&quot; &quot;27 24.6118426724867&quot;</code></pre>
+<pre><code>##   [1] &quot;28 23.5082819127877&quot; &quot;27 22.8085462424416&quot; &quot;28 33.1412223077466&quot; &quot;26 32.1052533053571&quot; &quot;27 29.5372881878085&quot; &quot;28 24.9688642445291&quot;
+##   [7] &quot;27 16.1873094972435&quot; &quot;28 34.6602642848095&quot; &quot;26 30.133963879041&quot;  &quot;27 32.900037328568&quot;  &quot;28 22.2467158382976&quot; &quot;27 28.4352621989492&quot;
+##  [13] &quot;28 21.5949311277379&quot; &quot;26 34.2714694367638&quot; &quot;27 33.071357181053&quot;  &quot;28 28.6145252479162&quot; &quot;27 33.7284390679074&quot; &quot;28 32.171780556316&quot; 
+##  [19] &quot;26 28.4162612285233&quot; &quot;27 27.0579834782624&quot; &quot;28 25.5718335502292&quot; &quot;27 19.6028045443149&quot; &quot;28 27.8931784264453&quot; &quot;26 17.048593995457&quot; 
+##  [25] &quot;27 28.8367768029244&quot; &quot;28 29.381852738367&quot;  &quot;27 36.0604035715737&quot; &quot;28 32.1381236298599&quot; &quot;26 26.1611762653235&quot; &quot;27 28.5851656557907&quot;
+##  [31] &quot;28 22.7897265946926&quot; &quot;27 40.0247518237562&quot; &quot;28 31.8365715564168&quot; &quot;26 26.6661484605845&quot; &quot;27 27.4792030505084&quot; &quot;28 26.5367342351445&quot;
+##  [37] &quot;27 35.0937275798663&quot; &quot;28 23.2597287052437&quot; &quot;26 31.4822912074849&quot; &quot;27 21.0156558313357&quot; &quot;28 27.8357126437819&quot; &quot;27 25.0742207200147&quot;
+##  [43] &quot;28 29.0189868032101&quot; &quot;26 28.7127947884452&quot; &quot;27 23.7104045371545&quot; &quot;28 26.4625532301492&quot; &quot;27 29.2455201550024&quot; &quot;28 32.5966337214189&quot;
+##  [49] &quot;26 23.9049796238008&quot; &quot;27 31.7209158888842&quot; &quot;28 28.221480127121&quot;  &quot;27 29.5549912181371&quot; &quot;28 26.8968654896999&quot; &quot;26 21.9455689507749&quot;
+##  [55] &quot;27 14.8633240187117&quot; &quot;28 41.1193727633171&quot; &quot;27 27.2400611407886&quot; &quot;28 30.9981405251683&quot; &quot;26 18.7544530926069&quot; &quot;27 13.5535044745462&quot;
+##  [61] &quot;28 25.751055567281&quot;  &quot;27 19.9222113669115&quot; &quot;28 23.988865264699&quot;  &quot;26 16.919433664806&quot;  &quot;27 29.8947861886056&quot; &quot;28 28.1815398498777&quot;
+##  [67] &quot;27 33.011120664285&quot;  &quot;28 25.4652210373498&quot; &quot;26 27.8050520672821&quot; &quot;27 27.6747429434924&quot; &quot;28 29.5001236351772&quot; &quot;27 31.248051804293&quot; 
+##  [73] &quot;28 19.487197106999&quot;  &quot;26 23.6110385198678&quot; &quot;27 21.1480033994779&quot; &quot;28 30.0441461589003&quot; &quot;27 16.5080797115401&quot; &quot;28 25.3440889666654&quot;
+##  [79] &quot;26 23.5380555179903&quot; &quot;27 27.4971126787083&quot; &quot;28 34.1476431878386&quot; &quot;27 26.4352454234789&quot; &quot;28 29.3511756642274&quot; &quot;26 25.3585221005497&quot;
+##  [85] &quot;27 22.3216595389235&quot; &quot;28 21.2341624774935&quot; &quot;27 18.9105325082521&quot; &quot;28 24.676197795346&quot;  &quot;26 30.5526906184851&quot; &quot;27 24.1422735149169&quot;
+##  [91] &quot;28 39.3409431629398&quot; &quot;27 27.7935879144585&quot; &quot;28 25.0005862356054&quot; &quot;26 30.5039390089764&quot; &quot;27 25.4455657165279&quot; &quot;28 37.9678447850446&quot;
+##  [97] &quot;27 28.4823698969382&quot; &quot;28 22.482295309214&quot;  &quot;26 25.0982293003998&quot; &quot;27 28.1499344783455&quot; &quot;28 27.8215770637907&quot; &quot;27 15.1154534458485&quot;
+## [103] &quot;28 22.2378159887905&quot; &quot;26 28.8941666029318&quot; &quot;27 29.6149742145678&quot; &quot;28 35.1853359756735&quot; &quot;27 34.5473737510065&quot; &quot;28 34.3632794992103&quot;
+## [109] &quot;26 18.359641985108&quot;  &quot;27 30.131541858099&quot;  &quot;28 30.2964412890045&quot; &quot;27 22.5212812693538&quot; &quot;28 25.5778101948469&quot; &quot;26 28.5449818022464&quot;
+## [115] &quot;27 29.9266751113685&quot; &quot;28 30.4354575855971&quot; &quot;27 28.2549780687174&quot; &quot;28 38.3623178394442&quot; &quot;26 28.586044555825&quot;  &quot;27 22.9167548588438&quot;</code></pre>
 <p>Here we use <code>matrix()</code> to create an empty matrix with <code>5</code> rows and <code>24</code> columns, and use <code>as.vector()</code> to convert the <code>5x24</code> matrix into a vector with a length of <code>120</code>.</p>
 <p>Sometimes you will find yourself needing to repeat an operation as long as a certain condition is met. You can do this with a <code>while()</code> loop.</p>
 <div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1"></a>z &lt;-<span class="st"> </span><span class="dv">0</span></span>

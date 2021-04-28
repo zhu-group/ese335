@@ -534,9 +534,9 @@ div.tocify {
 <p><img src="S13_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Compute covariance</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">cov</span>(x,y)</span></code></pre></div>
-<pre><code>## [1] 12.33341</code></pre>
+<pre><code>## [1] 20.37461</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">cov</span>(<span class="dv">2</span><span class="op">*</span>x,<span class="dv">2</span><span class="op">*</span>y)</span></code></pre></div>
-<pre><code>## [1] 49.33363</code></pre>
+<pre><code>## [1] 81.49843</code></pre>
 <p>As you can see, covariance provides only <strong>direction</strong> of the relationship. However, it does not indicate the <strong>strength</strong> of the relationship.</p>
 <hr />
 </div>
@@ -590,28 +590,28 @@ div.tocify {
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  x
-## W = 0.94615, p-value = 0.3124</code></pre>
+## W = 0.95671, p-value = 0.4803</code></pre>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">shapiro.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  y
-## W = 0.93247, p-value = 0.1722</code></pre>
+## W = 0.95152, p-value = 0.3908</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Check outliers</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="kw">grubbs.test</span>(x)</span></code></pre></div>
 <pre><code>## 
 ##  Grubbs test for one outlier
 ## 
 ## data:  x
-## G = 2.77364, U = 0.57379, p-value = 0.01805
-## alternative hypothesis: highest value 2.50127064934773 is an outlier</code></pre>
+## G = 1.7095, U = 0.8381, p-value = 0.7861
+## alternative hypothesis: highest value 1.76000029710674 is an outlier</code></pre>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">grubbs.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Grubbs test for one outlier
 ## 
 ## data:  y
-## G = 2.79989, U = 0.56568, p-value = 0.01576
-## alternative hypothesis: highest value 5.14787966418262 is an outlier</code></pre>
+## G = 1.98873, U = 0.78088, p-value = 0.3739
+## alternative hypothesis: highest value 3.77095584486239 is an outlier</code></pre>
 </div>
 <div id="write-down-h0-and-h1" class="section level2">
 <h2>2 Write down H0 and H1</h2>
@@ -630,13 +630,13 @@ div.tocify {
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  x and y
-## t = 26.36, df = 18, p-value = 7.831e-16
+## t = 17.029, df = 18, p-value = 1.517e-12
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  0.9674497 0.9950703
+##  0.9250094 0.9884310
 ## sample estimates:
 ##       cor 
-## 0.9872937</code></pre>
+## 0.9703366</code></pre>
 <p>Here the method is set to <code>pearson</code>, H1 as <code>two.sided</code>, and a significant level of <code>0.95</code> (default value used by R).</p>
 </div>
 <div id="report-the-results" class="section level2">

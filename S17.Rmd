@@ -60,10 +60,13 @@ The assumptions are the same as those of simple linear regression - existence, i
 
 Since we are dealing with more than one independent variables in multiple linear regression, it is very likely that one independent variable correlates with another variable. For example, you will find temperature correlates significantly (*r*=`-0.46`) with wind speed in the section example. 
 
-```{r}
+```{r, eval=F}
 # Plot scatter plots
 ggpairs(Ozone_data,columns=1:5)
 ```
+
+<img src="figs/ozone_plot.png" alt="drawing" width="800"/> 
+
 
 *Multicollinearity* in a multiple regression model indicates that collinear independent variables are related in some fashion. In other words, multicollinearity can exist when two independent variables are highly correlated. It can also happen if an independent variable is computed from other variables in the data set or if two independent variables provide similar and repetitive results (called redundant variable). 
 
