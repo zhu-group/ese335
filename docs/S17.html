@@ -572,9 +572,8 @@ div.tocify {
 </div>
 <div id="aic" class="section level3">
 <h3>AIC</h3>
-<p>As you will notice, AIC measures a trade-off between the goodness of model fit (<em>SSE</em>) and model complexity (<em>p</em>). With more independent variables in a regression model, <em>SSE</em> typically would become smaller or at least the same, and therefore the first part of AIC becomes smaller. However, with independent variables, the model would become more complex, and therefore the second part of AIC becomes bigger.</p>
+<p>Akaike Information Criterion (AIC) measures a trade-off between the goodness of model fit (<em>SSE</em>) and model complexity (<em>p</em>). With more independent variables in a regression model, <em>SSE</em> typically would become smaller or at least the same, and therefore the first part of AIC becomes smaller. However, with independent variables, the model would become more complex, and therefore the second part of AIC becomes bigger.</p>
 <p><span class="math display">\[AIC = n \mathrm {ln}(\frac {SSE} {n}) + 2p\]</span></p>
-<p>As you will notice, AIC is trade-off between goodness of model fit (<em>SSE</em>) and model complexity (<em>p</em>). With more independent variables in a regression model, <em>SSE</em> typically would become smaller or at least the same and therefore the first part of AIC becomes smaller. However, with independent variables, the model would become more complex and therefore the second part of AIC becomes bigger.</p>
 </div>
 <div id="bic" class="section level3">
 <h3>BIC</h3>
@@ -673,6 +672,7 @@ div.tocify {
 <div id="forward-selection" class="section level3">
 <h3>Forward selection</h3>
 <p>Forward selection begins with a model which includes no predictors (the intercept-only model, so-called null model). Variables are then added to the model one by one until no remaining variables improve the model by a certain criterion. At each step, the variable showing the biggest improvement to the model is added. Once a variable is in the model, it remains there.</p>
+<p>Forward selection works well if you have a very large set of candidate predictors from which you wish to extract a few.</p>
 <p>In R, this is done with the <code>ols_step_forward_aic()</code> function:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">ols_step_forward_aic</span>(full_model, <span class="dt">details=</span>F)</span></code></pre></div>
 <pre><code>## 

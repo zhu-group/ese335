@@ -109,11 +109,9 @@ where *SSE~p~* is the sum of squared errors for the model with *p* independent v
 
 ### AIC
 
-As you will notice, AIC measures a trade-off between the goodness of model fit (*SSE*) and model complexity (*p*). With more independent variables in a regression model, *SSE* typically would become smaller or at least the same, and therefore the first part of AIC becomes smaller. However, with independent variables, the model would become more complex, and therefore the second part of AIC becomes bigger. 
+Akaike Information Criterion (AIC) measures a trade-off between the goodness of model fit (*SSE*) and model complexity (*p*). With more independent variables in a regression model, *SSE* typically would become smaller or at least the same, and therefore the first part of AIC becomes smaller. However, with independent variables, the model would become more complex, and therefore the second part of AIC becomes bigger. 
 
 $$AIC = n \mathrm {ln}(\frac {SSE} {n}) + 2p$$
-
-As you will notice, AIC is trade-off between goodness of model fit (*SSE*) and model complexity (*p*). With more independent variables in a regression model, *SSE* typically would become smaller or at least the same and therefore the first part of AIC becomes smaller. However, with independent variables, the model would become more complex and therefore the second part of AIC becomes bigger. 
 
 ### BIC
 
@@ -174,6 +172,8 @@ Here we remove the pressure variable from the full model.
 ### Forward selection
 
 Forward selection begins with a model which includes no predictors (the intercept-only model, so-called null model). Variables are then added to the model one by one until no remaining variables improve the model by a certain criterion. At each step, the variable showing the biggest improvement to the model is added. Once a variable is in the model, it remains there.
+
+Forward selection works well if you have a very large set of candidate predictors from which you wish to extract a few.
 
 In R, this is done with the `ols_step_forward_aic()` function:
 
