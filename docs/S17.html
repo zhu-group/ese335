@@ -606,38 +606,22 @@ div.tocify {
 <span id="cb11-6"><a href="#cb11-6"></a></span>
 <span id="cb11-7"><a href="#cb11-7"></a><span class="co"># Print results from all possible subsets</span></span>
 <span id="cb11-8"><a href="#cb11-8"></a>output</span></code></pre></div>
-<pre><code>##    Index N                                Predictors   R-Square Adj. R-Square
-## 3      1 1                               Temperature 0.48796010   0.483262487
-## 2      2 1                                Wind.Speed 0.37515206   0.369419506
-## 1      3 1                                 Solar.Rad 0.12134194   0.113280852
-## 4      4 1                                  Pressure 0.01386988   0.004822813
-## 8      5 2                    Wind.Speed Temperature 0.58137796   0.573625704
-## 6      6 2                     Solar.Rad Temperature 0.51031674   0.501248530
-## 10     7 2                      Temperature Pressure 0.50295658   0.493752075
-## 5      8 2                      Solar.Rad Wind.Speed 0.44949359   0.439299032
-## 9      9 2                       Wind.Speed Pressure 0.37516124   0.363590154
-## 7     10 2                        Solar.Rad Pressure 0.13531809   0.119305459
-## 11    11 3          Solar.Rad Wind.Speed Temperature 0.60589460   0.594844916
-## 14    12 3           Wind.Speed Temperature Pressure 0.58421695   0.572559484
-## 13    13 3            Solar.Rad Temperature Pressure 0.52528716   0.511977451
-## 12    14 3             Solar.Rad Wind.Speed Pressure 0.44951263   0.434078406
-## 15    15 4 Solar.Rad Wind.Speed Temperature Pressure 0.60863144   0.593862815
-##    Mallow&#39;s Cp
-## 3    31.683162
-## 2    62.236594
-## 1   130.979655
-## 4   160.087865
-## 8     8.381453
-## 6    27.627991
-## 10   29.621448
-## 5    44.101601
-## 9    64.234106
-## 7   129.194292
-## 11    3.741258
-## 14    9.612528
-## 13   25.573336
-## 12   46.096445
-## 15    5.000000</code></pre>
+<pre><code>##    Index N                                Predictors   R-Square Adj. R-Square Mallow&#39;s Cp
+## 3      1 1                               Temperature 0.48796010   0.483262487   31.683162
+## 2      2 1                                Wind.Speed 0.37515206   0.369419506   62.236594
+## 1      3 1                                 Solar.Rad 0.12134194   0.113280852  130.979655
+## 4      4 1                                  Pressure 0.01386988   0.004822813  160.087865
+## 8      5 2                    Wind.Speed Temperature 0.58137796   0.573625704    8.381453
+## 6      6 2                     Solar.Rad Temperature 0.51031674   0.501248530   27.627991
+## 10     7 2                      Temperature Pressure 0.50295658   0.493752075   29.621448
+## 5      8 2                      Solar.Rad Wind.Speed 0.44949359   0.439299032   44.101601
+## 9      9 2                       Wind.Speed Pressure 0.37516124   0.363590154   64.234106
+## 7     10 2                        Solar.Rad Pressure 0.13531809   0.119305459  129.194292
+## 11    11 3          Solar.Rad Wind.Speed Temperature 0.60589460   0.594844916    3.741258
+## 14    12 3           Wind.Speed Temperature Pressure 0.58421695   0.572559484    9.612528
+## 13    13 3            Solar.Rad Temperature Pressure 0.52528716   0.511977451   25.573336
+## 12    14 3             Solar.Rad Wind.Speed Pressure 0.44951263   0.434078406   46.096445
+## 15    15 4 Solar.Rad Wind.Speed Temperature Pressure 0.60863144   0.593862815    5.000000</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Plot results from all possible subsets</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="kw">plot</span>(output)</span></code></pre></div>
 <p><img src="S17_files/figure-html/unnamed-chunk-4-1.png" width="672" /><img src="S17_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
