@@ -503,16 +503,16 @@ div.tocify {
 </div>
 <div id="section-example-pm2.5-pollution-and-population-density" class="section level1">
 <h1>Section example: PM<sub>2.5</sub> pollution and population density</h1>
-<p>It is well known that cities with higher population density tend to suffer from more severe PM<sub>2.5</sub> pollution; that is, PM levels in those cities are more likely to violate air quality standards. This is due to elevated emissions from human activities in urban areas - and usually, more population means more emissions. Well, PM2.5 levels could be high as well in some cities due to a number of reasons, such as industrial distribution, wildfires, or secondary formation downwind.</p>
+<p>It is well known that cities with higher population density tend to suffer from more severe PM<sub>2.5</sub> pollution; that is, PM levels in those cities are more likely to violate air quality standards. This is due to elevated emissions from human activities in urban areas - and usually, more population means more emissions. Well, PM<sub>2.5</sub> levels could be high in less-populated cities as well due to a number of reasons, such as industrial distribution, wildfires, or secondary formation downwind.</p>
 <p><img src="figs/air-pollution-feature.jpg" alt="drawing" width="700"/></p>
 <p><a href="https://https://vitalrecord.tamhsc.edu/ma-johnson-awarded-interdisciplinary-research-leader-grant/pm2-5-unhealthy-air-pollution-dust-smoke-in-the-urban-city-low/">Photo source</a></p>
-<p>To test whether population density could influence PM2.5 exceeding, we gather the overall PM2.5 exceeding (<code>1</code> means exceeding) in Jan. in <code>20</code> cities.</p>
+<p>To test whether population density (people per km<sup>2</sup>) could influence PM<sub>2.5</sub> exceeding, we gather the overall PM2.5 exceeding (<code>1</code> means exceeding) in Jan. in <code>20</code> cities.</p>
 <table>
 <thead>
 <tr class="header">
 <th align="center">City</th>
 <th align="center">Population density</th>
-<th align="center">PM2.5 exceeding</th>
+<th align="center">PM<sub>2.5</sub> exceeding</th>
 </tr>
 </thead>
 <tbody>
@@ -618,8 +618,9 @@ div.tocify {
 </tr>
 </tbody>
 </table>
+<p>Here are the questions we want to solve:</p>
 <ul>
-<li><p>Can we build a model to predict the probability of PM2.5 exceeding using population density?</p></li>
+<li><p>Can we build a model to predict the probability of PM<sub>2.5</sub> exceeding using population density?</p></li>
 <li><p>If there are two cities with the population density of <code>1000</code> and <code>5000</code>, how to predict the PM2.5 exceeding for the two cities?</p></li>
 </ul>
 <hr />
@@ -631,7 +632,7 @@ div.tocify {
 <p>The <em>logistic regression</em> is a regression model in which the dependent variable has <strong>categorical values</strong> such as <code>true</code>/<code>false</code>, <code>pass</code>/<code>fail</code>, <code>win</code>/<code>lose</code>, <code>alive</code>/<code>dead</code>, or <code>healthy</code>/<code>sick</code>. It actually measures the probability of a <strong>binary response</strong> as the value of the dependent variable based on the mathematical equation relating it with the independent variables.</p>
 <p>For a binary dependent variable <em>Y</em>, we denote:</p>
 <p><span class="math display">\[p = \mathrm {P}(Y=1)\]</span> In the logistic regression, we assume a <strong>linear relationship</strong> between the independent variable <em>X</em> and the <strong>log-odds</strong> (also called <em>logit</em>) of the event that <span class="math inline">\(Y = 1\)</span>. This linear relationship can be written as follows:</p>
-<p><span class="math display">\[\mathrm {ln}(\frac {p} {1-p}) = \beta_0 + \beta_1 x\]</span> Once we know <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(beta_1\)</span>, <span class="math inline">\(p\)</span> would be determined as:</p>
+<p><span class="math display">\[\mathrm {ln}(\frac {p} {1-p}) = \beta_0 + \beta_1 x\]</span> Once we know <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(p\)</span> would be determined as:</p>
 <p><span class="math display">\[p = \frac{e^{\beta_0 + \beta_1x}} {1 + e^{\beta_0 + \beta_1x}} = \frac {1} {1+e^{-(\beta_0 + \beta_1x)}}\]</span></p>
 <p><em>p</em> follows a standard logistic function. This is the reason why such a regression is called “logistic”.</p>
 </div>

@@ -22,15 +22,15 @@ library(InformationValue)
 
 # Section example: PM~2.5~ pollution and population density
 
-It is well known that cities with higher population density tend to suffer from more severe PM~2.5~ pollution; that is, PM levels in those cities are more likely to violate air quality standards. This is due to elevated emissions from human activities in urban areas - and usually, more population means more emissions. Well, PM2.5 levels could be high as well in some cities due to a number of reasons, such as industrial distribution, wildfires, or secondary formation downwind.
+It is well known that cities with higher population density tend to suffer from more severe PM~2.5~ pollution; that is, PM levels in those cities are more likely to violate air quality standards. This is due to elevated emissions from human activities in urban areas - and usually, more population means more emissions. Well, PM~2.5~ levels could be high in less-populated cities as well due to a number of reasons, such as industrial distribution, wildfires, or secondary formation downwind.
 
 <img src="figs/air-pollution-feature.jpg" alt="drawing" width="700"/> 
 
 [Photo source](https://https://vitalrecord.tamhsc.edu/ma-johnson-awarded-interdisciplinary-research-leader-grant/pm2-5-unhealthy-air-pollution-dust-smoke-in-the-urban-city-low/)
 
-To test whether population density could influence PM2.5 exceeding, we gather the overall PM2.5 exceeding (`1` means exceeding) in Jan. in `20` cities.
+To test whether population density (people per km^2^) could influence PM~2.5~ exceeding, we gather the overall PM2.5 exceeding (`1` means exceeding) in Jan. in `20` cities.
 
-City  |Population density |PM2.5 exceeding |
+City  |Population density |PM~2.5~ exceeding |
 |:---:|:-----------------:|:--------------:|
 |1    |797                |0               |
 |2    |3652               |1               |
@@ -53,7 +53,9 @@ City  |Population density |PM2.5 exceeding |
 |19   |417                |0               |
 |20   |3232               |1               |
 
-+ Can we build a model to predict the probability of PM2.5 exceeding using population density? 
+Here are the questions we want to solve:
+
++ Can we build a model to predict the probability of PM~2.5~ exceeding using population density? 
 
 + If there are two cities with the population density of `1000` and `5000`, how to predict the PM2.5 exceeding for the two cities?
 
@@ -71,7 +73,7 @@ $$p = \mathrm {P}(Y=1)$$
 In the logistic regression, we assume a **linear relationship** between the independent variable *X* and the **log-odds** (also called *logit*) of the event that $Y = 1$. This linear relationship can be written as follows:
 
 $$\mathrm {ln}(\frac {p} {1-p}) = \beta_0 + \beta_1 x$$
-Once we know $\beta_0$ and $beta_1$, $p$ would be determined as:
+Once we know $\beta_0$ and $\beta_1$, $p$ would be determined as:
 
 $$p = \frac{e^{\beta_0 + \beta_1x}} {1 + e^{\beta_0 + \beta_1x}} = \frac {1} {1+e^{-(\beta_0 + \beta_1x)}}$$
 
