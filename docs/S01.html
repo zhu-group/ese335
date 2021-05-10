@@ -753,17 +753,15 @@ div.tocify {
 <p>There are a few useful commands you can use to interact with the R session.</p>
 <p><code>ls()</code> will list all of the variables and functions stored in the global environment (your working R session):</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="kw">ls</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;logistic&quot;        &quot;mtcars&quot;          &quot;MyName&quot;          &quot;new_cars&quot;       
-## [5] &quot;predicted_value&quot; &quot;x&quot;               &quot;y&quot;</code></pre>
+<pre><code>## [1] &quot;MyName&quot; &quot;x&quot;      &quot;y&quot;</code></pre>
 <p>Note here that we didn’t give any arguments to <code>ls()</code>, but we still needed to give the parentheses <code>()</code> to tell R to call the function.</p>
 <p>You can use <code>rm()</code> to delete objects you no longer need:</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="kw">rm</span>(x)</span>
 <span id="cb62-2"><a href="#cb62-2"></a><span class="kw">ls</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;logistic&quot;        &quot;mtcars&quot;          &quot;MyName&quot;          &quot;new_cars&quot;       
-## [5] &quot;predicted_value&quot; &quot;y&quot;</code></pre>
+<pre><code>## [1] &quot;MyName&quot; &quot;y&quot;</code></pre>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="kw">rm</span>(MyName, y)</span>
 <span id="cb64-2"><a href="#cb64-2"></a><span class="kw">ls</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;logistic&quot;        &quot;mtcars&quot;          &quot;new_cars&quot;        &quot;predicted_value&quot;</code></pre>
+<pre><code>## character(0)</code></pre>
 </div>
 <div id="conditional-statements" class="section level2">
 <h2>Conditional statements</h2>
@@ -900,126 +898,126 @@ div.tocify {
 <span id="cb97-4"><a href="#cb97-4"></a>    <span class="kw">print</span>(<span class="kw">paste</span>(Daily_T,Hourly_T))</span>
 <span id="cb97-5"><a href="#cb97-5"></a>  }</span>
 <span id="cb97-6"><a href="#cb97-6"></a>}</span></code></pre></div>
-<pre><code>## [1] &quot;28 27.7145966680671&quot;
-## [1] &quot;28 24.924400961183&quot;
-## [1] &quot;28 28.9518161368069&quot;
-## [1] &quot;28 24.5947829716481&quot;
-## [1] &quot;28 25.9862758964429&quot;
-## [1] &quot;28 25.2820352172089&quot;
-## [1] &quot;28 28.3275720207064&quot;
-## [1] &quot;28 30.0973823497991&quot;
-## [1] &quot;28 26.5538251199078&quot;
-## [1] &quot;28 25.4149232664877&quot;
-## [1] &quot;28 19.7735579834152&quot;
-## [1] &quot;28 24.693821731011&quot;
-## [1] &quot;28 25.8863584310144&quot;
-## [1] &quot;28 29.8315261645647&quot;
-## [1] &quot;28 31.6400560161137&quot;
-## [1] &quot;28 26.8889319521751&quot;
-## [1] &quot;28 35.8936134818702&quot;
-## [1] &quot;28 28.9783224519838&quot;
-## [1] &quot;28 32.1500914600642&quot;
-## [1] &quot;28 30.2125940711062&quot;
-## [1] &quot;28 16.4095448171142&quot;
-## [1] &quot;28 26.1435978274281&quot;
-## [1] &quot;28 32.4657754982115&quot;
-## [1] &quot;28 29.7872643323515&quot;
-## [1] &quot;27 29.2603751020839&quot;
-## [1] &quot;27 25.8526424744443&quot;
-## [1] &quot;27 29.5366337929469&quot;
-## [1] &quot;27 20.7963615421098&quot;
-## [1] &quot;27 37.820467622957&quot;
-## [1] &quot;27 27.9159194092161&quot;
-## [1] &quot;27 34.3816466285343&quot;
-## [1] &quot;27 21.1821779377121&quot;
-## [1] &quot;27 29.452779051051&quot;
-## [1] &quot;27 28.1272350617211&quot;
-## [1] &quot;27 26.2875542124962&quot;
-## [1] &quot;27 25.3064955546691&quot;
-## [1] &quot;27 20.477470110202&quot;
-## [1] &quot;27 22.0135190271344&quot;
-## [1] &quot;27 22.9507013832493&quot;
-## [1] &quot;27 23.2848055312317&quot;
-## [1] &quot;27 30.425227310029&quot;
-## [1] &quot;27 28.4983790443807&quot;
-## [1] &quot;27 26.643446081808&quot;
-## [1] &quot;27 24.6836232996941&quot;
-## [1] &quot;27 25.187065516136&quot;
-## [1] &quot;27 34.4964033476699&quot;
-## [1] &quot;27 29.9098234229893&quot;
-## [1] &quot;27 30.1198089127301&quot;
-## [1] &quot;28 31.4272687372748&quot;
-## [1] &quot;28 30.8609680748528&quot;
-## [1] &quot;28 35.3720394370662&quot;
-## [1] &quot;28 28.7507023362519&quot;
-## [1] &quot;28 16.8614242078331&quot;
-## [1] &quot;28 39.6463208536023&quot;
-## [1] &quot;28 29.6735114543336&quot;
-## [1] &quot;28 21.7884823191245&quot;
-## [1] &quot;28 22.3014615319613&quot;
-## [1] &quot;28 32.3506445887568&quot;
-## [1] &quot;28 23.9465689961981&quot;
-## [1] &quot;28 31.0930975774305&quot;
-## [1] &quot;28 28.3552204403959&quot;
-## [1] &quot;28 36.072833882739&quot;
-## [1] &quot;28 32.8690907977258&quot;
-## [1] &quot;28 28.6676891698088&quot;
-## [1] &quot;28 34.7202415699622&quot;
-## [1] &quot;28 29.4542000537518&quot;
-## [1] &quot;28 28.2122389670633&quot;
-## [1] &quot;28 29.01286094842&quot;
-## [1] &quot;28 24.957001074278&quot;
-## [1] &quot;28 28.9954559314551&quot;
-## [1] &quot;28 29.6039319505957&quot;
-## [1] &quot;28 23.8072542671722&quot;
-## [1] &quot;26 23.3889292750725&quot;
-## [1] &quot;26 24.2470002121958&quot;
-## [1] &quot;26 19.1791429678153&quot;
-## [1] &quot;26 24.5607794685888&quot;
-## [1] &quot;26 24.8481407236644&quot;
-## [1] &quot;26 26.2225930034467&quot;
-## [1] &quot;26 27.9456620316716&quot;
-## [1] &quot;26 26.4172107613324&quot;
-## [1] &quot;26 29.4457505820696&quot;
-## [1] &quot;26 25.5237128974192&quot;
-## [1] &quot;26 30.9363848703569&quot;
-## [1] &quot;26 22.783307296976&quot;
-## [1] &quot;26 27.4886830473421&quot;
-## [1] &quot;26 23.3306886267906&quot;
-## [1] &quot;26 20.9510894486071&quot;
-## [1] &quot;26 32.244943635954&quot;
-## [1] &quot;26 13.9930148090548&quot;
-## [1] &quot;26 29.9338587854896&quot;
-## [1] &quot;26 25.9623317447508&quot;
-## [1] &quot;26 25.0707941651421&quot;
-## [1] &quot;26 28.3913864044358&quot;
-## [1] &quot;26 20.9142929721399&quot;
-## [1] &quot;26 36.6254313516899&quot;
-## [1] &quot;26 21.852502803763&quot;
-## [1] &quot;27 27.165211028084&quot;
-## [1] &quot;27 26.3424105886148&quot;
-## [1] &quot;27 34.048310075147&quot;
-## [1] &quot;27 30.3601500047862&quot;
-## [1] &quot;27 32.9298505254711&quot;
-## [1] &quot;27 24.107544183849&quot;
-## [1] &quot;27 24.7828486105894&quot;
-## [1] &quot;27 28.3149147284321&quot;
-## [1] &quot;27 29.9436046660673&quot;
-## [1] &quot;27 27.6819985390344&quot;
-## [1] &quot;27 31.131682392151&quot;
-## [1] &quot;27 30.2905957443808&quot;
-## [1] &quot;27 36.5707193945912&quot;
-## [1] &quot;27 32.1768594298544&quot;
-## [1] &quot;27 24.343660089782&quot;
-## [1] &quot;27 29.2812190630038&quot;
-## [1] &quot;27 25.0286697265055&quot;
-## [1] &quot;27 15.3080608840249&quot;
-## [1] &quot;27 28.4052436530255&quot;
-## [1] &quot;27 31.7787699575571&quot;
-## [1] &quot;27 32.550166536216&quot;
-## [1] &quot;27 23.4330053676884&quot;
-## [1] &quot;27 21.6249536471483&quot;
-## [1] &quot;27 28.0335584646284&quot;</code></pre>
+<pre><code>## [1] &quot;28 26.8052029896999&quot;
+## [1] &quot;28 26.2866508071479&quot;
+## [1] &quot;28 27.013694595718&quot;
+## [1] &quot;28 27.0503394390884&quot;
+## [1] &quot;28 28.3314488315277&quot;
+## [1] &quot;28 27.5495888699354&quot;
+## [1] &quot;28 28.2944679772591&quot;
+## [1] &quot;28 33.4529528361824&quot;
+## [1] &quot;28 37.8025148127596&quot;
+## [1] &quot;28 27.4088021779995&quot;
+## [1] &quot;28 33.5206938748749&quot;
+## [1] &quot;28 39.5992483372639&quot;
+## [1] &quot;28 29.4987505060766&quot;
+## [1] &quot;28 23.3976890907706&quot;
+## [1] &quot;28 41.6273924637145&quot;
+## [1] &quot;28 31.8532516032147&quot;
+## [1] &quot;28 27.2014896413524&quot;
+## [1] &quot;28 37.4668470660007&quot;
+## [1] &quot;28 28.62482041755&quot;
+## [1] &quot;28 29.8724277611307&quot;
+## [1] &quot;28 22.9279146921097&quot;
+## [1] &quot;28 24.5853888442808&quot;
+## [1] &quot;28 26.1121318528753&quot;
+## [1] &quot;28 33.5398446416858&quot;
+## [1] &quot;27 29.4468601289305&quot;
+## [1] &quot;27 25.9209032566298&quot;
+## [1] &quot;27 28.9896074121528&quot;
+## [1] &quot;27 30.5631471632795&quot;
+## [1] &quot;27 21.3655549717278&quot;
+## [1] &quot;27 29.7543837511353&quot;
+## [1] &quot;27 24.3718119447668&quot;
+## [1] &quot;27 19.4920782922982&quot;
+## [1] &quot;27 27.8838559035282&quot;
+## [1] &quot;27 28.6281568774881&quot;
+## [1] &quot;27 37.8052548582754&quot;
+## [1] &quot;27 31.9369563779795&quot;
+## [1] &quot;27 29.3870257079857&quot;
+## [1] &quot;27 27.1716655321848&quot;
+## [1] &quot;27 18.5545099196854&quot;
+## [1] &quot;27 31.7289261659536&quot;
+## [1] &quot;27 18.9284307962064&quot;
+## [1] &quot;27 25.3067230220199&quot;
+## [1] &quot;27 29.7277929288768&quot;
+## [1] &quot;27 29.0519430459427&quot;
+## [1] &quot;27 29.6697530676128&quot;
+## [1] &quot;27 33.6678820553296&quot;
+## [1] &quot;27 28.2901930524146&quot;
+## [1] &quot;27 39.6612224412768&quot;
+## [1] &quot;28 26.111515238283&quot;
+## [1] &quot;28 26.8206961038691&quot;
+## [1] &quot;28 26.2926855916651&quot;
+## [1] &quot;28 28.4361726447856&quot;
+## [1] &quot;28 26.4271606265675&quot;
+## [1] &quot;28 33.1936082286764&quot;
+## [1] &quot;28 33.8559418136284&quot;
+## [1] &quot;28 23.419357384141&quot;
+## [1] &quot;28 25.0761837141438&quot;
+## [1] &quot;28 28.727510715097&quot;
+## [1] &quot;28 20.1834099365454&quot;
+## [1] &quot;28 23.4574601000837&quot;
+## [1] &quot;28 19.8814969623031&quot;
+## [1] &quot;28 19.817029480528&quot;
+## [1] &quot;28 23.4057057901131&quot;
+## [1] &quot;28 36.2983630553745&quot;
+## [1] &quot;28 21.6729383231345&quot;
+## [1] &quot;28 25.5867746942867&quot;
+## [1] &quot;28 31.6299313568044&quot;
+## [1] &quot;28 29.7168853429374&quot;
+## [1] &quot;28 26.5978216797991&quot;
+## [1] &quot;28 24.5721652135054&quot;
+## [1] &quot;28 21.6370810339827&quot;
+## [1] &quot;28 23.5428012336307&quot;
+## [1] &quot;26 26.8686118027694&quot;
+## [1] &quot;26 23.1993336252626&quot;
+## [1] &quot;26 30.9741834120854&quot;
+## [1] &quot;26 31.8696099782745&quot;
+## [1] &quot;26 31.4126910789344&quot;
+## [1] &quot;26 32.1636247716646&quot;
+## [1] &quot;26 26.8797516594001&quot;
+## [1] &quot;26 28.5570111066747&quot;
+## [1] &quot;26 22.2499572394613&quot;
+## [1] &quot;26 28.3794799634256&quot;
+## [1] &quot;26 25.6526703646243&quot;
+## [1] &quot;26 26.6014858273175&quot;
+## [1] &quot;26 27.7601187127674&quot;
+## [1] &quot;26 25.1682120458896&quot;
+## [1] &quot;26 27.4295368226822&quot;
+## [1] &quot;26 19.4364101501154&quot;
+## [1] &quot;26 27.0488048433746&quot;
+## [1] &quot;26 30.2343716453251&quot;
+## [1] &quot;26 21.1974469642683&quot;
+## [1] &quot;26 33.1024134714088&quot;
+## [1] &quot;26 21.5031831335672&quot;
+## [1] &quot;26 25.7701162825446&quot;
+## [1] &quot;26 24.5075715195453&quot;
+## [1] &quot;26 14.9709263786201&quot;
+## [1] &quot;27 27.3788571456692&quot;
+## [1] &quot;27 34.7198193721729&quot;
+## [1] &quot;27 24.2618940831817&quot;
+## [1] &quot;27 24.9179021631455&quot;
+## [1] &quot;27 29.4855912162301&quot;
+## [1] &quot;27 24.2502016915917&quot;
+## [1] &quot;27 21.0674606841074&quot;
+## [1] &quot;27 27.8620843185651&quot;
+## [1] &quot;27 31.8275646205471&quot;
+## [1] &quot;27 25.0777937029877&quot;
+## [1] &quot;27 22.5980372867037&quot;
+## [1] &quot;27 29.6022658283116&quot;
+## [1] &quot;27 25.6211215811055&quot;
+## [1] &quot;27 21.3179446815574&quot;
+## [1] &quot;27 20.8656720041359&quot;
+## [1] &quot;27 30.8159167066951&quot;
+## [1] &quot;27 22.0939065670095&quot;
+## [1] &quot;27 33.8163992281891&quot;
+## [1] &quot;27 27.7926907330909&quot;
+## [1] &quot;27 23.4114806930163&quot;
+## [1] &quot;27 37.4530465038819&quot;
+## [1] &quot;27 20.2301417133437&quot;
+## [1] &quot;27 26.1661874463636&quot;
+## [1] &quot;27 25.3137693692873&quot;</code></pre>
 <p>Here at each <code>Hour</code> we use the <code>rnorm()</code> function to generate <code>1</code> random Gaussian sample with a mean of <code>Daily_T</code> and a standard deviation of <code>5</code>.</p>
 <p>We notice in the output that when the first index (<code>Daily_T</code>) is set to <code>28</code>, the second index (<code>Hour</code>) iterates through its full set of indices. Once the indices of <code>Hour</code> have been iterated through, then <code>Daily_T</code> moves to the next one (<em>i.e.</em>, <code>27</code>). This process continues until the last index has been used for each <code>for()</code> loop.</p>
 <p>Rather than printing the results, we could write the loop output to a new <em>object</em>:</p>
@@ -1033,46 +1031,46 @@ div.tocify {
 <span id="cb99-8"><a href="#cb99-8"></a>}</span>
 <span id="cb99-9"><a href="#cb99-9"></a></span>
 <span id="cb99-10"><a href="#cb99-10"></a><span class="kw">print</span>(Output_List)</span></code></pre></div>
-<pre><code>##   [1] &quot;28 33.4310467708151&quot; &quot;28 25.1995597349067&quot; &quot;28 29.554307452933&quot; 
-##   [4] &quot;28 28.4074430401494&quot; &quot;28 36.3947717589223&quot; &quot;28 17.555604135208&quot; 
-##   [7] &quot;28 32.0461463864989&quot; &quot;28 27.6166608576383&quot; &quot;28 29.3493578536585&quot;
-##  [10] &quot;28 15.3114091179075&quot; &quot;28 28.1232182258728&quot; &quot;28 28.0504270675952&quot;
-##  [13] &quot;28 34.7725074395134&quot; &quot;28 30.1259308855377&quot; &quot;28 27.4969569729721&quot;
-##  [16] &quot;28 29.0520064319965&quot; &quot;28 29.0213697256903&quot; &quot;28 21.6299173104574&quot;
-##  [19] &quot;28 32.0525490059288&quot; &quot;28 35.3514426929888&quot; &quot;28 25.9521657950592&quot;
-##  [22] &quot;28 25.7593867257766&quot; &quot;28 21.8420946486573&quot; &quot;28 21.9235355767403&quot;
-##  [25] &quot;27 24.2694897225363&quot; &quot;27 29.5039108227792&quot; &quot;27 21.2253917445232&quot;
-##  [28] &quot;27 25.9901991469088&quot; &quot;27 26.7623121649397&quot; &quot;27 35.2879599463439&quot;
-##  [31] &quot;27 34.9125431418971&quot; &quot;27 28.6483004030342&quot; &quot;27 21.7067004791451&quot;
-##  [34] &quot;27 28.7262962533768&quot; &quot;27 29.1250195275104&quot; &quot;27 27.9147788169857&quot;
-##  [37] &quot;27 23.0200873594587&quot; &quot;27 37.0584990662855&quot; &quot;27 21.5676721992245&quot;
-##  [40] &quot;27 25.2178181478842&quot; &quot;27 33.0230664426505&quot; &quot;27 23.1550848833875&quot;
-##  [43] &quot;27 19.0480320203763&quot; &quot;27 22.0860373232998&quot; &quot;27 21.8762753123796&quot;
-##  [46] &quot;27 30.2161377098005&quot; &quot;27 33.6222426832101&quot; &quot;27 23.1298422547533&quot;
-##  [49] &quot;28 24.7230594555675&quot; &quot;28 24.3090192443691&quot; &quot;28 41.3803822400168&quot;
-##  [52] &quot;28 36.7865400181592&quot; &quot;28 26.0953221303668&quot; &quot;28 27.1654751462023&quot;
-##  [55] &quot;28 30.614575292679&quot;  &quot;28 27.9046840588462&quot; &quot;28 20.7201897107603&quot;
-##  [58] &quot;28 33.3009165877402&quot; &quot;28 31.9900726407541&quot; &quot;28 25.4332263169563&quot;
-##  [61] &quot;28 31.0430333671056&quot; &quot;28 28.6206744296916&quot; &quot;28 26.6949457997215&quot;
-##  [64] &quot;28 30.5689688759757&quot; &quot;28 35.154836894647&quot;  &quot;28 30.0273315794327&quot;
-##  [67] &quot;28 27.1479036507486&quot; &quot;28 32.1624193005688&quot; &quot;28 31.1504168200214&quot;
-##  [70] &quot;28 31.0603622793035&quot; &quot;28 35.1323931402722&quot; &quot;28 24.1439460131433&quot;
-##  [73] &quot;26 24.5845579027395&quot; &quot;26 28.8030012418423&quot; &quot;26 18.9552845468344&quot;
-##  [76] &quot;26 21.4129371048413&quot; &quot;26 41.0979338548334&quot; &quot;26 25.3790521605516&quot;
-##  [79] &quot;26 32.4292397794031&quot; &quot;26 26.6336903221204&quot; &quot;26 21.6366427857686&quot;
-##  [82] &quot;26 22.1914478575859&quot; &quot;26 22.7473118814125&quot; &quot;26 24.2479468546106&quot;
-##  [85] &quot;26 27.0136735886311&quot; &quot;26 22.3196208735338&quot; &quot;26 22.3280781697723&quot;
-##  [88] &quot;26 18.6700791637621&quot; &quot;26 22.027641781844&quot;  &quot;26 28.5566616879228&quot;
-##  [91] &quot;26 19.2432599287454&quot; &quot;26 22.1156163032168&quot; &quot;26 27.2989609616074&quot;
-##  [94] &quot;26 25.7380650457789&quot; &quot;26 25.4406919701182&quot; &quot;26 22.7568449188576&quot;
-##  [97] &quot;27 29.4962443676022&quot; &quot;27 12.4987049125879&quot; &quot;27 21.5017968577023&quot;
-## [100] &quot;27 35.9099963092057&quot; &quot;27 33.9628764746662&quot; &quot;27 28.763850547683&quot; 
-## [103] &quot;27 20.1083070949756&quot; &quot;27 20.3218447606492&quot; &quot;27 44.0217498018468&quot;
-## [106] &quot;27 14.5825858561106&quot; &quot;27 30.9572073102759&quot; &quot;27 26.7198778341635&quot;
-## [109] &quot;27 33.2342308096611&quot; &quot;27 27.079843031236&quot;  &quot;27 17.0946570887097&quot;
-## [112] &quot;27 43.0007847760386&quot; &quot;27 23.5352028829463&quot; &quot;27 28.9503247909048&quot;
-## [115] &quot;27 28.8242587159498&quot; &quot;27 27.0570647211841&quot; &quot;27 28.0232618145777&quot;
-## [118] &quot;27 29.3349861684745&quot; &quot;27 26.6654277221764&quot; &quot;27 37.7024149086607&quot;</code></pre>
+<pre><code>##   [1] &quot;28 26.2985289640309&quot; &quot;28 35.3604115071328&quot; &quot;28 35.1943372444026&quot;
+##   [4] &quot;28 30.1161021758436&quot; &quot;28 22.0454781182978&quot; &quot;28 34.4154075576045&quot;
+##   [7] &quot;28 23.2922707249787&quot; &quot;28 32.0245647012613&quot; &quot;28 21.423689511072&quot; 
+##  [10] &quot;28 34.4253801335035&quot; &quot;28 36.5619928287198&quot; &quot;28 32.9850537546921&quot;
+##  [13] &quot;28 32.44721824058&quot;   &quot;28 36.5057306212514&quot; &quot;28 25.9839481759934&quot;
+##  [16] &quot;28 27.27068888309&quot;   &quot;28 27.0711097278689&quot; &quot;28 28.0784928973271&quot;
+##  [19] &quot;28 29.319469756579&quot;  &quot;28 27.2797987175234&quot; &quot;28 24.5311673697466&quot;
+##  [22] &quot;28 29.4405944156763&quot; &quot;28 30.0895455679777&quot; &quot;28 25.980943140272&quot; 
+##  [25] &quot;27 30.1224814735355&quot; &quot;27 21.4405656312131&quot; &quot;27 27.0254761939982&quot;
+##  [28] &quot;27 27.6308709863176&quot; &quot;27 32.3003611980825&quot; &quot;27 27.5323739556157&quot;
+##  [31] &quot;27 17.9898998698348&quot; &quot;27 26.4452767459189&quot; &quot;27 30.905372021234&quot; 
+##  [34] &quot;27 22.2111117197144&quot; &quot;27 20.9677948231626&quot; &quot;27 20.4777271666232&quot;
+##  [37] &quot;27 19.4264051822493&quot; &quot;27 32.4781738320323&quot; &quot;27 23.6084812814185&quot;
+##  [40] &quot;27 22.6699028508368&quot; &quot;27 24.7653609932829&quot; &quot;27 33.3630074678913&quot;
+##  [43] &quot;27 25.9049286360341&quot; &quot;27 23.7618959995698&quot; &quot;27 26.6498413675923&quot;
+##  [46] &quot;27 26.9241040723077&quot; &quot;27 25.5404354570828&quot; &quot;27 25.0170031370885&quot;
+##  [49] &quot;28 32.1933008310111&quot; &quot;28 29.5849961751033&quot; &quot;28 37.2290340731773&quot;
+##  [52] &quot;28 36.9264451058473&quot; &quot;28 27.0927139579049&quot; &quot;28 30.7647113557427&quot;
+##  [55] &quot;28 26.8065218012311&quot; &quot;28 24.1353352583451&quot; &quot;28 24.7971580982438&quot;
+##  [58] &quot;28 28.4520782746253&quot; &quot;28 19.2607691572119&quot; &quot;28 25.7845695977098&quot;
+##  [61] &quot;28 37.94398196484&quot;   &quot;28 36.5372731056197&quot; &quot;28 35.8330102978451&quot;
+##  [64] &quot;28 21.9111061486814&quot; &quot;28 26.340095726113&quot;  &quot;28 31.5919969563112&quot;
+##  [67] &quot;28 26.1130134645518&quot; &quot;28 33.8658901486338&quot; &quot;28 26.4175889445811&quot;
+##  [70] &quot;28 29.2384668318656&quot; &quot;28 27.8633719137212&quot; &quot;28 30.8287847995242&quot;
+##  [73] &quot;26 27.0375305129903&quot; &quot;26 27.6112321228002&quot; &quot;26 33.7530036460131&quot;
+##  [76] &quot;26 26.314396641602&quot;  &quot;26 29.570704389197&quot;  &quot;26 27.1191265264679&quot;
+##  [79] &quot;26 34.7292342813335&quot; &quot;26 17.1595464212297&quot; &quot;26 26.806160462415&quot; 
+##  [82] &quot;26 26.5832038322928&quot; &quot;26 29.4044772481721&quot; &quot;26 34.4684676059254&quot;
+##  [85] &quot;26 30.3603773813071&quot; &quot;26 30.8495157732054&quot; &quot;26 29.0007188021231&quot;
+##  [88] &quot;26 28.5404149895641&quot; &quot;26 19.3747629090557&quot; &quot;26 28.3886262421921&quot;
+##  [91] &quot;26 43.3200728458525&quot; &quot;26 21.5390127131999&quot; &quot;26 32.5796190642372&quot;
+##  [94] &quot;26 30.8620877120877&quot; &quot;26 26.5146747611213&quot; &quot;26 25.8585179564266&quot;
+##  [97] &quot;27 28.326669501541&quot;  &quot;27 30.6333290140468&quot; &quot;27 29.2164557159621&quot;
+## [100] &quot;27 27.1072374247312&quot; &quot;27 31.7790454255093&quot; &quot;27 18.6728041876509&quot;
+## [103] &quot;27 24.145855128138&quot;  &quot;27 21.3584742317063&quot; &quot;27 25.2000377228393&quot;
+## [106] &quot;27 28.6668955988996&quot; &quot;27 24.6336774844394&quot; &quot;27 13.4540419344429&quot;
+## [109] &quot;27 19.391087946659&quot;  &quot;27 23.5222263821104&quot; &quot;27 30.3438697461249&quot;
+## [112] &quot;27 29.1497901931477&quot; &quot;27 21.520313538155&quot;  &quot;27 23.2884530603354&quot;
+## [115] &quot;27 28.1682255460458&quot; &quot;27 36.8647064015046&quot; &quot;27 29.9035556671637&quot;
+## [118] &quot;27 24.2397754390976&quot; &quot;27 25.7234376876152&quot; &quot;27 32.7348434697997&quot;</code></pre>
 <p>This approach can be useful, but “growing your results” (building the result object incrementally) is <strong>computationally inefficient</strong>, so avoid it when you are iterating through a lot of values.</p>
 <p><strong>Important</strong>: One of the biggest things that trips up novices and experienced R users alike, is building a results object (<em>vector</em>, <em>list</em>, <em>matrix</em>, <em>data frame</em>) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It’s much better to define an <strong>empty results object</strong> beforehand of appropriate dimensions, rather than initializing an empty object without dimensions. So if you know the end result will be stored in a matrix-like above, create an empty matrix with <code>5</code> row and <code>24</code> columns, then at each iteration stores the results in the appropriate location.</p>
 <div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1"></a>Output_Matrix    &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow=</span><span class="dv">5</span>, <span class="dt">ncol=</span><span class="dv">24</span>)</span>
@@ -1086,46 +1084,46 @@ div.tocify {
 <span id="cb101-9"><a href="#cb101-9"></a>}</span>
 <span id="cb101-10"><a href="#cb101-10"></a>Output_Matrix2 &lt;-<span class="st"> </span><span class="kw">as.vector</span>(Output_Matrix)</span>
 <span id="cb101-11"><a href="#cb101-11"></a>Output_Matrix2</span></code></pre></div>
-<pre><code>##   [1] &quot;28 21.8024644906056&quot; &quot;27 34.3991564960861&quot; &quot;28 26.0132469057077&quot;
-##   [4] &quot;26 22.5330326245054&quot; &quot;27 24.6805551091262&quot; &quot;28 21.2516960868893&quot;
-##   [7] &quot;27 27.3703767599133&quot; &quot;28 27.4359741384696&quot; &quot;26 32.4028649611712&quot;
-##  [10] &quot;27 22.0607908402792&quot; &quot;28 28.1422241252134&quot; &quot;27 28.124104154386&quot; 
-##  [13] &quot;28 36.0550068807821&quot; &quot;26 24.5346591361103&quot; &quot;27 30.9497072689769&quot;
-##  [16] &quot;28 33.4156260960321&quot; &quot;27 28.0426012301355&quot; &quot;28 36.3035396804309&quot;
-##  [19] &quot;26 29.0745956682426&quot; &quot;27 37.9537360739378&quot; &quot;28 27.2425919067817&quot;
-##  [22] &quot;27 25.659103927981&quot;  &quot;28 30.6178834057804&quot; &quot;26 30.5380732267954&quot;
-##  [25] &quot;27 31.726094122268&quot;  &quot;28 21.4107634297998&quot; &quot;27 27.9762878413969&quot;
-##  [28] &quot;28 26.4383402511989&quot; &quot;26 28.1787110041341&quot; &quot;27 30.9830089911657&quot;
-##  [31] &quot;28 27.8781632040276&quot; &quot;27 28.8563651459783&quot; &quot;28 29.3385146903372&quot;
-##  [34] &quot;26 27.1665397303629&quot; &quot;27 16.0153645991042&quot; &quot;28 36.0768725442078&quot;
-##  [37] &quot;27 26.7079286044539&quot; &quot;28 19.7833517230649&quot; &quot;26 14.4846983381535&quot;
-##  [40] &quot;27 30.2105188975705&quot; &quot;28 31.1766813288813&quot; &quot;27 31.8138351288332&quot;
-##  [43] &quot;28 32.2927415028151&quot; &quot;26 25.1110988084749&quot; &quot;27 24.6991214575977&quot;
-##  [46] &quot;28 29.9855323799495&quot; &quot;27 28.3873373644851&quot; &quot;28 33.1230364294744&quot;
-##  [49] &quot;26 35.2210285737309&quot; &quot;27 32.5016187626297&quot; &quot;28 26.292247492307&quot; 
-##  [52] &quot;27 19.8367500070284&quot; &quot;28 30.3720838017213&quot; &quot;26 30.3167315135985&quot;
-##  [55] &quot;27 30.3247145980225&quot; &quot;28 32.9930076803136&quot; &quot;27 20.8722544286315&quot;
-##  [58] &quot;28 27.8397357060522&quot; &quot;26 26.5323335454485&quot; &quot;27 22.7548756150919&quot;
-##  [61] &quot;28 26.5020210201152&quot; &quot;27 38.7728645634748&quot; &quot;28 24.5894989182674&quot;
-##  [64] &quot;26 30.1852386494557&quot; &quot;27 14.5322045989408&quot; &quot;28 25.5963355716386&quot;
-##  [67] &quot;27 23.9421726781923&quot; &quot;28 30.0388217730307&quot; &quot;26 23.9894012272769&quot;
-##  [70] &quot;27 16.642763027185&quot;  &quot;28 26.5422666509922&quot; &quot;27 28.8133747357955&quot;
-##  [73] &quot;28 27.2271404175105&quot; &quot;26 23.2306706585467&quot; &quot;27 18.0534415227023&quot;
-##  [76] &quot;28 26.995157516364&quot;  &quot;27 26.7814764344997&quot; &quot;28 33.115605932861&quot; 
-##  [79] &quot;26 33.8955267842843&quot; &quot;27 33.8588241296014&quot; &quot;28 33.5519006759236&quot;
-##  [82] &quot;27 24.3998195187&quot;    &quot;28 32.8413672462685&quot; &quot;26 31.1561225477384&quot;
-##  [85] &quot;27 22.4016912935356&quot; &quot;28 31.3603431386259&quot; &quot;27 24.9965513709842&quot;
-##  [88] &quot;28 20.2146645540444&quot; &quot;26 33.173453879996&quot;  &quot;27 27.8937090044206&quot;
-##  [91] &quot;28 28.2898507320269&quot; &quot;27 35.4641484525844&quot; &quot;28 21.4547000736234&quot;
-##  [94] &quot;26 31.9970446850826&quot; &quot;27 25.8942347446408&quot; &quot;28 25.8868848389608&quot;
-##  [97] &quot;27 28.0287690306314&quot; &quot;28 29.7480818004607&quot; &quot;26 24.2399389719029&quot;
-## [100] &quot;27 28.6471702317376&quot; &quot;28 24.9902365614368&quot; &quot;27 31.0895699128366&quot;
-## [103] &quot;28 27.8087047332429&quot; &quot;26 27.8695843288122&quot; &quot;27 30.3509459323335&quot;
-## [106] &quot;28 22.0120507686313&quot; &quot;27 28.3458433030572&quot; &quot;28 25.6117206706707&quot;
-## [109] &quot;26 27.9003568880229&quot; &quot;27 22.6583347029116&quot; &quot;28 32.1393172447506&quot;
-## [112] &quot;27 15.9349100396538&quot; &quot;28 32.8269467617642&quot; &quot;26 23.7055182218022&quot;
-## [115] &quot;27 30.1447155960453&quot; &quot;28 27.8056523750172&quot; &quot;27 25.1503036217343&quot;
-## [118] &quot;28 38.5674129954691&quot; &quot;26 18.4428318501175&quot; &quot;27 32.1427016026502&quot;</code></pre>
+<pre><code>##   [1] &quot;28 31.859282957702&quot;  &quot;27 25.1917758984686&quot; &quot;28 32.1478510572657&quot;
+##   [4] &quot;26 27.8202573967846&quot; &quot;27 33.8320876549701&quot; &quot;28 26.31509524971&quot;  
+##   [7] &quot;27 31.4508897862766&quot; &quot;28 17.4871350264729&quot; &quot;26 24.4685918356287&quot;
+##  [10] &quot;27 29.0513348424407&quot; &quot;28 23.5739906230801&quot; &quot;27 17.6855558659285&quot;
+##  [13] &quot;28 21.4826117027597&quot; &quot;26 34.543742390131&quot;  &quot;27 21.2528283475596&quot;
+##  [16] &quot;28 27.624865545615&quot;  &quot;27 24.4387064842088&quot; &quot;28 17.4692165017462&quot;
+##  [19] &quot;26 26.001237665961&quot;  &quot;27 25.3430062802195&quot; &quot;28 38.1167349309207&quot;
+##  [22] &quot;27 26.7360628338714&quot; &quot;28 14.4937195234559&quot; &quot;26 24.1827293547568&quot;
+##  [25] &quot;27 23.3612702129624&quot; &quot;28 31.6673058281713&quot; &quot;27 26.3329151143488&quot;
+##  [28] &quot;28 22.2833909201341&quot; &quot;26 36.483917638544&quot;  &quot;27 23.5378970341833&quot;
+##  [31] &quot;28 29.128796822903&quot;  &quot;27 13.9831920008039&quot; &quot;28 28.4284985550724&quot;
+##  [34] &quot;26 25.6029350895754&quot; &quot;27 20.354153297833&quot;  &quot;28 26.4700017694907&quot;
+##  [37] &quot;27 23.8605595322882&quot; &quot;28 27.4404777373529&quot; &quot;26 27.831840583643&quot; 
+##  [40] &quot;27 21.8885922044874&quot; &quot;28 25.3407721112036&quot; &quot;27 25.2926351641533&quot;
+##  [43] &quot;28 20.6179672658524&quot; &quot;26 33.5572639779902&quot; &quot;27 25.4752898117388&quot;
+##  [46] &quot;28 25.5175010626711&quot; &quot;27 23.9206699092563&quot; &quot;28 26.5234191707425&quot;
+##  [49] &quot;26 24.0086605195306&quot; &quot;27 26.0281973035361&quot; &quot;28 29.3160129555418&quot;
+##  [52] &quot;27 25.8967533225794&quot; &quot;28 28.5200207744194&quot; &quot;26 23.9666450114287&quot;
+##  [55] &quot;27 29.0398987987289&quot; &quot;28 19.8210722877774&quot; &quot;27 26.103085020538&quot; 
+##  [58] &quot;28 31.8265881835151&quot; &quot;26 24.4595794637258&quot; &quot;27 33.2602703095673&quot;
+##  [61] &quot;28 23.4436549363355&quot; &quot;27 27.7207115127029&quot; &quot;28 29.3074264190885&quot;
+##  [64] &quot;26 28.5044321564984&quot; &quot;27 22.7708918766036&quot; &quot;28 25.7580633666891&quot;
+##  [67] &quot;27 22.8312267260082&quot; &quot;28 28.1559171986745&quot; &quot;26 19.7170554562821&quot;
+##  [70] &quot;27 19.3120223464424&quot; &quot;28 24.1773553573101&quot; &quot;27 31.0748624030832&quot;
+##  [73] &quot;28 33.3239931990176&quot; &quot;26 31.4038248652956&quot; &quot;27 26.1184204004543&quot;
+##  [76] &quot;28 26.3568141947437&quot; &quot;27 23.3724277714636&quot; &quot;28 25.2597798551743&quot;
+##  [79] &quot;26 19.8869471497855&quot; &quot;27 31.9210510461121&quot; &quot;28 33.1839573024439&quot;
+##  [82] &quot;27 40.730170434087&quot;  &quot;28 30.6985916418726&quot; &quot;26 28.0508508131166&quot;
+##  [85] &quot;27 30.9852913246776&quot; &quot;28 30.1131752950495&quot; &quot;27 25.9643593037187&quot;
+##  [88] &quot;28 22.9004426700399&quot; &quot;26 23.3478395608692&quot; &quot;27 31.5451762206024&quot;
+##  [91] &quot;28 24.467467466921&quot;  &quot;27 28.2542242001792&quot; &quot;28 24.5607947184169&quot;
+##  [94] &quot;26 28.7398449974627&quot; &quot;27 15.288538882254&quot;  &quot;28 28.7486551349697&quot;
+##  [97] &quot;27 16.4091705135029&quot; &quot;28 22.0251511632473&quot; &quot;26 22.818935602727&quot; 
+## [100] &quot;27 28.1399155178899&quot; &quot;28 28.0712398003591&quot; &quot;27 28.0911586976376&quot;
+## [103] &quot;28 22.1288363352644&quot; &quot;26 23.9498758684976&quot; &quot;27 27.677229719524&quot; 
+## [106] &quot;28 23.7936856722504&quot; &quot;27 28.465482643796&quot;  &quot;28 29.3675300998698&quot;
+## [109] &quot;26 25.3079191567386&quot; &quot;27 30.9462414286429&quot; &quot;28 19.8453709620332&quot;
+## [112] &quot;27 36.1048710331255&quot; &quot;28 30.5636890007524&quot; &quot;26 21.6263583734673&quot;
+## [115] &quot;27 24.1035617125692&quot; &quot;28 28.3067244426769&quot; &quot;27 32.2733889377167&quot;
+## [118] &quot;28 34.5880232108829&quot; &quot;26 27.4806590705001&quot; &quot;27 24.4419083164393&quot;</code></pre>
 <p>Here we use <code>matrix()</code> to create an empty matrix with <code>5</code> rows and <code>24</code> columns, and use <code>as.vector()</code> to convert the <code>5x24</code> matrix into a vector with a length of <code>120</code>.</p>
 <p>Sometimes you will find yourself needing to repeat an operation as long as a certain condition is met. You can do this with a <code>while()</code> loop.</p>
 <div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1"></a>z &lt;-<span class="st"> </span><span class="dv">0</span></span>
