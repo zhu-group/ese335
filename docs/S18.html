@@ -676,20 +676,17 @@ div.tocify {
 <span id="cb6-10"><a href="#cb6-10"></a>          <span class="dv">1</span>,     <span class="dv">0</span>,    <span class="dv">0</span>,   <span class="dv">0</span>,     <span class="dv">1</span>,</span>
 <span id="cb6-11"><a href="#cb6-11"></a>          <span class="dv">0</span>,     <span class="dv">0</span>,    <span class="dv">1</span>,   <span class="dv">0</span>,     <span class="dv">1</span>)</span>
 <span id="cb6-12"><a href="#cb6-12"></a></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co"># Convert integer to factor</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a>PM  &lt;-<span class="st"> </span><span class="kw">as.factor</span>(PM)</span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co"># Make a data frame</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>PM_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Pop, PM)</span>
 <span id="cb6-15"><a href="#cb6-15"></a></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="co"># Make a data frame</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a>PM_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Pop, PM)</span>
-<span id="cb6-18"><a href="#cb6-18"></a></span>
-<span id="cb6-19"><a href="#cb6-19"></a><span class="co"># Plot data, scatter plots</span></span>
-<span id="cb6-20"><a href="#cb6-20"></a><span class="kw">plot</span>(Pop, PM)</span></code></pre></div>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co"># Plot data, scatter plots</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="kw">plot</span>(Pop, PM)</span></code></pre></div>
 <p><img src="S18_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Check data structure</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="kw">str</span>(PM_data)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    20 obs. of  2 variables:
 ##  $ Pop: num  797 3652 384 876 1156 ...
-##  $ PM : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 2 1 1 1 2 1 2 2 2 ...</code></pre>
+##  $ PM : num  0 1 0 0 0 1 0 1 1 1 ...</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Fit the regression model</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>logistic &lt;-<span class="st"> </span><span class="kw">glm</span>( PM <span class="op">~</span><span class="st"> </span>Pop, <span class="dt">data =</span> PM_data, <span class="dt">family =</span> binomial)</span>
 <span id="cb9-3"><a href="#cb9-3"></a></span>
