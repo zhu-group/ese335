@@ -13,6 +13,7 @@ output:
 # Prerequisites
 
 Load the libraries with R:
+
 ```{r}
 library(InformationValue)
 library(pscl)
@@ -116,23 +117,13 @@ Pop <- c(797,  3652,   384,   876,  1156,
          1074,  1444,  2620,   417,  3232)
 
 # PM exceeding
-PM  <- c( 0,     1,    0,   0,     0, 
-          1,     0,    1,   1,     1,
-          1,     0,    0,   0,     1,
-          0,     0,    1,   0,     1)
+PM  <- c( 0,     1,    0,   0,   0, 
+          1,     0,    1,   1,   1,
+          1,     0,    0,   0,   1,
+          0,     0,    1,   0,   1)
 
 # Make a data frame
 PM_data <- data.frame(Pop, PM)
-str(PM_data)
-PM_data[PM_data$PM==0,]$PM <- "G"
-PM_data[PM_data$PM==1,]$PM <- "E"
-PM_data$PM <- as.factor(PM_data$PM )
-str(PM_data)
-
-# Plot data, scatter plots
-plot(Pop, PM)
-
-# Check data structure
 str(PM_data)
 
 # Fit the regression model
@@ -158,25 +149,25 @@ pR2(logistic)["McFadden"]
 
 The default cutoff prediction probability score is `0.5` - any individual with a probability of default greater than `0.5` will be predicted to the same outcome (`0` or `1`). But sometimes, tuning the probability cutoff can improve the accuracy. We can use the `optimalCutoff()` function from the `InformationValue` package to find the optimal cutoff to improve the prediction.
 
-```{r}
-#find optimal cutoff probability to use to maximize accuracy
+```{r, eval=F}
+# Find optimal cutoff probability to use to maximize accuracy
 predicted_value <- predict(logistic, PM_data, type="response")
 optimalCutoff(PM_data$PM, predicted_value)[1]
 ```
+We end up with a cutoff of `0.2475699`.
 
 ## Making predictions
 
 Suppose we want to predict PM2.5 exceeding in two new cities (population density is `1000` and `5000`, respectively) with the fitted model, this can be done as follows:
 
-```{r}
+```{r, eval=F}
 # Define new cities where we want to make predictions
 new_cities <- data.frame(Pop = c(1000, 5000))
 
 #predict probability of defaulting
 predict(logistic, new_cities, type="response")
 ```
-
-We end up with a cutoff of `0.25`, so based on this, we say PM2.5 in city `1` will not exceed, while that in city `2` will exceed.
+We end up with prediction of `0.1755572` and  `0.8708232`, so based on this, we say PM~2.5~ in city `1` will not exceed (< `0.2475699`), while that in city `2` will exceed (> `0.2475699`).
 
 ***
 

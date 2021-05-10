@@ -663,10 +663,10 @@ div.tocify {
 <span id="cb2-5"><a href="#cb2-5"></a>         <span class="dv">1074</span>,  <span class="dv">1444</span>,  <span class="dv">2620</span>,   <span class="dv">417</span>,  <span class="dv">3232</span>)</span>
 <span id="cb2-6"><a href="#cb2-6"></a></span>
 <span id="cb2-7"><a href="#cb2-7"></a><span class="co"># PM exceeding</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>PM  &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="dv">0</span>,     <span class="dv">1</span>,    <span class="dv">0</span>,   <span class="dv">0</span>,     <span class="dv">0</span>, </span>
-<span id="cb2-9"><a href="#cb2-9"></a>          <span class="dv">1</span>,     <span class="dv">0</span>,    <span class="dv">1</span>,   <span class="dv">1</span>,     <span class="dv">1</span>,</span>
-<span id="cb2-10"><a href="#cb2-10"></a>          <span class="dv">1</span>,     <span class="dv">0</span>,    <span class="dv">0</span>,   <span class="dv">0</span>,     <span class="dv">1</span>,</span>
-<span id="cb2-11"><a href="#cb2-11"></a>          <span class="dv">0</span>,     <span class="dv">0</span>,    <span class="dv">1</span>,   <span class="dv">0</span>,     <span class="dv">1</span>)</span>
+<span id="cb2-8"><a href="#cb2-8"></a>PM  &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="dv">0</span>,     <span class="dv">1</span>,    <span class="dv">0</span>,   <span class="dv">0</span>,   <span class="dv">0</span>, </span>
+<span id="cb2-9"><a href="#cb2-9"></a>          <span class="dv">1</span>,     <span class="dv">0</span>,    <span class="dv">1</span>,   <span class="dv">1</span>,   <span class="dv">1</span>,</span>
+<span id="cb2-10"><a href="#cb2-10"></a>          <span class="dv">1</span>,     <span class="dv">0</span>,    <span class="dv">0</span>,   <span class="dv">0</span>,   <span class="dv">1</span>,</span>
+<span id="cb2-11"><a href="#cb2-11"></a>          <span class="dv">0</span>,     <span class="dv">0</span>,    <span class="dv">1</span>,   <span class="dv">0</span>,   <span class="dv">1</span>)</span>
 <span id="cb2-12"><a href="#cb2-12"></a></span>
 <span id="cb2-13"><a href="#cb2-13"></a><span class="co"># Make a data frame</span></span>
 <span id="cb2-14"><a href="#cb2-14"></a>PM_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Pop, PM)</span>
@@ -674,38 +674,23 @@ div.tocify {
 <pre><code>## &#39;data.frame&#39;:    20 obs. of  2 variables:
 ##  $ Pop: num  797 3652 384 876 1156 ...
 ##  $ PM : num  0 1 0 0 0 1 0 1 1 1 ...</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>PM_data[PM_data<span class="op">$</span>PM<span class="op">==</span><span class="dv">0</span>,]<span class="op">$</span>PM &lt;-<span class="st"> &quot;G&quot;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>PM_data[PM_data<span class="op">$</span>PM<span class="op">==</span><span class="dv">1</span>,]<span class="op">$</span>PM &lt;-<span class="st"> &quot;E&quot;</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>PM_data<span class="op">$</span>PM &lt;-<span class="st"> </span><span class="kw">as.factor</span>(PM_data<span class="op">$</span>PM )</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">str</span>(PM_data)</span></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    20 obs. of  2 variables:
-##  $ Pop: num  797 3652 384 876 1156 ...
-##  $ PM : Factor w/ 2 levels &quot;E&quot;,&quot;G&quot;: 2 1 2 2 2 1 2 1 1 1 ...</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Plot data, scatter plots</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">plot</span>(Pop, PM)</span></code></pre></div>
-<p><img src="S18_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Check data structure</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">str</span>(PM_data)</span></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    20 obs. of  2 variables:
-##  $ Pop: num  797 3652 384 876 1156 ...
-##  $ PM : Factor w/ 2 levels &quot;E&quot;,&quot;G&quot;: 2 1 2 2 2 1 2 1 1 1 ...</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Fit the regression model</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>logistic &lt;-<span class="st"> </span><span class="kw">glm</span>( PM <span class="op">~</span><span class="st"> </span>Pop, <span class="dt">data =</span> PM_data, <span class="dt">family =</span> binomial)</span>
-<span id="cb9-3"><a href="#cb9-3"></a></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># Print model detail</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="kw">summary</span>(logistic)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Fit the regression model</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>logistic &lt;-<span class="st"> </span><span class="kw">glm</span>( PM <span class="op">~</span><span class="st"> </span>Pop, <span class="dt">data =</span> PM_data, <span class="dt">family =</span> binomial)</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># Print model detail</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">summary</span>(logistic)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = PM ~ Pop, family = binomial, data = PM_data)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -1.8886  -0.7393   0.4769   0.6448   1.9554  
+## -1.9554  -0.6448  -0.4769   0.7393   1.8886  
 ## 
 ## Coefficients:
 ##               Estimate Std. Error z value Pr(&gt;|z|)  
-## (Intercept)  2.4104926  1.0761669   2.240   0.0251 *
-## Pop         -0.0008637  0.0003765  -2.294   0.0218 *
+## (Intercept) -2.4104926  1.0761669  -2.240   0.0251 *
+## Pop          0.0008637  0.0003765   2.294   0.0218 *
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -722,7 +707,7 @@ div.tocify {
 <div id="mcfaddens-r2" class="section level2">
 <h2>McFadden’s R<sup>2</sup></h2>
 <p>We use R<sup>2</sup> in the linear regression as a measure of how well a model fits the data. Here in logistic regression, we use a pseudo R<sup>2</sup>, called McFadden’s R<sup>2</sup>, to indicate how the model fits the data. To get McFadden’s R<sup>2</sup>, use the <code>pR2()</code> function from the <code>pscl</code> package.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">pR2</span>(logistic)[<span class="st">&quot;McFadden&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">pR2</span>(logistic)[<span class="st">&quot;McFadden&quot;</span>]</span></code></pre></div>
 <pre><code>## fitting null model for pseudo-r2</code></pre>
 <pre><code>##  McFadden 
 ## 0.3308617</code></pre>
@@ -730,22 +715,20 @@ div.tocify {
 <div id="setting-probability-cutoff" class="section level2">
 <h2>Setting probability cutoff</h2>
 <p>The default cutoff prediction probability score is <code>0.5</code> - any individual with a probability of default greater than <code>0.5</code> will be predicted to the same outcome (<code>0</code> or <code>1</code>). But sometimes, tuning the probability cutoff can improve the accuracy. We can use the <code>optimalCutoff()</code> function from the <code>InformationValue</code> package to find the optimal cutoff to improve the prediction.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">#find optimal cutoff probability to use to maximize accuracy</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>predicted_value &lt;-<span class="st"> </span><span class="kw">predict</span>(logistic, PM_data, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">optimalCutoff</span>(PM_data<span class="op">$</span>PM, predicted_value)[<span class="dv">1</span>]</span></code></pre></div>
-<pre><code>## [1] -4.365177</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Find optimal cutoff probability to use to maximize accuracy</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>predicted_value &lt;-<span class="st"> </span><span class="kw">predict</span>(logistic, PM_data, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">optimalCutoff</span>(PM_data<span class="op">$</span>PM, predicted_value)[<span class="dv">1</span>]</span></code></pre></div>
+<p>We end up with a cutoff of <code>0.2475699</code>.</p>
 </div>
 <div id="making-predictions" class="section level2">
 <h2>Making predictions</h2>
 <p>Suppose we want to predict PM2.5 exceeding in two new cities (population density is <code>1000</code> and <code>5000</code>, respectively) with the fitted model, this can be done as follows:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Define new cities where we want to make predictions</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>new_cities &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Pop =</span> <span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">5000</span>))</span>
-<span id="cb16-3"><a href="#cb16-3"></a></span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="co">#predict probability of defaulting</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="kw">predict</span>(logistic, new_cities, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span></code></pre></div>
-<pre><code>##         1         2 
-##  1.546743 -1.908257</code></pre>
-<p>We end up with a cutoff of <code>0.25</code>, so based on this, we say PM2.5 in city <code>1</code> will not exceed, while that in city <code>2</code> will exceed.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Define new cities where we want to make predictions</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>new_cities &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Pop =</span> <span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">5000</span>))</span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#predict probability of defaulting</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="kw">predict</span>(logistic, new_cities, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<p>We end up with prediction of <code>0.1755572</code> and <code>0.8708232</code>, so based on this, we say PM<sub>2.5</sub> in city <code>1</code> will not exceed (&lt; <code>0.2475699</code>), while that in city <code>2</code> will exceed (&gt; <code>0.2475699</code>).</p>
 <hr />
 </div>
 </div>
@@ -755,8 +738,8 @@ div.tocify {
 <h2>Exercise #1</h2>
 <p>In this exercise, we use the in-built data set <code>mtcars</code> to describe different models of a car with their various engine specifications. In <code>mtcars</code> data set, the transmission mode (automatic or manual) is described by the column <code>am</code>, which is a binary value (<code>0</code> is automatic or <code>1</code> is manual).</p>
 <p><strong>1.1</strong> Load the data via:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Load data</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">data</span>(mtcars)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Load data</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">data</span>(mtcars)</span></code></pre></div>
 <p><strong>1.2</strong> Fit a logistic regression model between the columns <code>am</code> and <code>3</code> other columns - gross horsepower <code>hp</code>, weight <code>wt</code> (in <code>1000</code> lbs), and number of cylinders <code>cyl</code>.</p>
 <p><strong>1.3</strong> Which independent variable has a significant slope? Update your logistic regression model by excluding the independent variable(s) with insignificant slope. Use such an updated model for the following questions.</p>
 <p><strong>1.4</strong> Compute McFadden’s R<sup>2</sup></p>
