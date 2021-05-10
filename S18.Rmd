@@ -14,7 +14,6 @@ output:
 
 Load the libraries with R:
 ```{r}
-library(pscl)
 library(InformationValue)
 ```
 
@@ -146,7 +145,7 @@ $$\mathrm {ln}(\frac {p} {1-p}) = -2.41 + 0.000864 Pop $$
 We use R^2^ in the linear regression as a measure of how well a model fits the data. Here in logistic regression, we use a pseudo R^2^, called McFadden’s R^2^, to indicate how the model fits the data. To get McFadden’s R^2^, use the `pR2()` function from the `pscl` package.
 
 ```{r}
-pR2(logistic)["McFadden"]
+pscl::pR2(logistic)["McFadden"]
 ```
 
 ## Making predictions
