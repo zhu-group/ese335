@@ -123,6 +123,11 @@ PM  <- c( 0,     1,    0,   0,     0,
 
 # Make a data frame
 PM_data <- data.frame(Pop, PM)
+str(PM_data)
+PM_data[PM_data$PM==0,]$PM <- "G"
+PM_data[PM_data$PM==1,]$PM <- "E"
+PM_data$PM <- as.factor(PM_data$PM )
+str(PM_data)
 
 # Plot data, scatter plots
 plot(Pop, PM)
