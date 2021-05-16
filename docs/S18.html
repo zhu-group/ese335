@@ -714,7 +714,7 @@ div.tocify {
 <p>The default cutoff prediction probability score is <code>0.5</code> - any individual with a probability of default greater than <code>0.5</code> will be predicted to the same outcome (<code>0</code> or <code>1</code>). But sometimes, tuning the probability cutoff can improve the accuracy. We can use the <code>optimalCutoff()</code> function from the <code>InformationValue</code> package to find the optimal cutoff to improve the prediction.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Find optimal cutoff probability to use to maximize accuracy</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>predicted_value &lt;-<span class="st"> </span><span class="kw">predict</span>(logistic, PM_data, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb7-3"><a href="#cb7-3"></a>InformationValue<span class="op">::</span><span class="kw">optimalCutoff</span>(PM_data<span class="op">$</span>PM, predicted_value)[<span class="dv">1</span>]</span></code></pre></div>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">optimalCutoff</span>(PM_data<span class="op">$</span>PM, predicted_value)[<span class="dv">1</span>]</span></code></pre></div>
 <p>We end up with a cutoff of <code>0.2475699</code>.</p>
 </div>
 <div id="making-predictions" class="section level2">

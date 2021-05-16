@@ -152,7 +152,7 @@ The default cutoff prediction probability score is `0.5` - any individual with a
 ```{r, eval=F}
 # Find optimal cutoff probability to use to maximize accuracy
 predicted_value <- predict(logistic, PM_data, type="response")
-InformationValue::optimalCutoff(PM_data$PM, predicted_value)[1]
+optimalCutoff(PM_data$PM, predicted_value)[1]
 ```
 We end up with a cutoff of `0.2475699`.
 
