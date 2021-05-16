@@ -498,8 +498,19 @@ div.tocify {
 <h1>Prerequisites</h1>
 <p>Load the libraries with R:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(GGally)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(olsrr)</span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(GGally)</span></code></pre></div>
+<pre><code>## Warning: package &#39;GGally&#39; was built under R version 4.0.5</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;GGally&#39;:
+##   method from   
+##   +.gg   ggplot2</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">library</span>(olsrr)</span></code></pre></div>
+<pre><code>## Warning: package &#39;olsrr&#39; was built under R version 4.0.5</code></pre>
+<pre><code>## Use suppressPackageStartupMessages() to eliminate package startup messages.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;olsrr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:datasets&#39;:
+## 
+##     rivers</code></pre>
 <hr />
 </div>
 <div id="section-example-surface-ozone-and-meteorological-factors" class="section level1">
@@ -509,11 +520,11 @@ div.tocify {
 <p>Ozone (O<sub>3</sub>) occurs both in the Earth’s upper atmosphere and at ground level. <strong>Ozone can be good or bad</strong>, depending on where it is found. Called stratospheric ozone, good ozone occurs naturally in the upper atmosphere, where it forms a protective layer that shields us from the sun’s harmful ultraviolet rays. Ozone at ground level, however, is a harmful air pollutant, because of its effects on people and the environment, and it is the main ingredient in smog. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>Ozone is produced when nitrogen oxides and volatile organic compounds react. Meteorological conditions also govern ozone levels. Here we use observations to examine the relationship between ozone and several meteorological factors, including solar radiation, wind speed, temperature, and surface pressure. The data set is <a href="https://zhu-group.github.io/ese335/download/ozone_data.csv">available here</a>.</p>
 <p>Load the observations via:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Read ozone and meteorological data</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>Ozone_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;ozone_data.csv&quot;</span>, <span class="dt">header=</span>T)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Check the data</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">str</span>(Ozone_data)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Read ozone and meteorological data</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>Ozone_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;ozone_data.csv&quot;</span>, <span class="dt">header=</span>T)</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># Check the data</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="kw">str</span>(Ozone_data)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    111 obs. of  7 variables:
 ##  $ Solar.Rad  : int  190 118 149 313 299 99 19 256 290 274 ...
 ##  $ Wind.Speed : num  7.4 8 12.6 11.5 8.6 13.8 20.1 9.7 9.2 10.9 ...
@@ -535,8 +546,8 @@ div.tocify {
 <div id="multicollinearity" class="section level2">
 <h2>Multicollinearity</h2>
 <p>Since we are dealing with more than one independent variables in multiple linear regression, it is very likely that one independent variable correlates with another variable. For example, you will find temperature correlates significantly (<em>r</em>=<code>-0.46</code>) with wind speed in the section example.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Plot scatter plots</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">ggpairs</span>(Ozone_data,<span class="dt">columns=</span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Plot scatter plots</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">ggpairs</span>(Ozone_data,<span class="dt">columns=</span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span></code></pre></div>
 <p><img src="figs/ozone_plot.png" alt="drawing" width="800"/></p>
 <p><em>Multicollinearity</em> in a multiple regression model indicates that collinear independent variables are related in some fashion. In other words, multicollinearity can exist when two independent variables are highly correlated. It can also happen if an independent variable is computed from other variables in the data set or if two independent variables provide similar and repetitive results (called redundant variable).</p>
 </div>
@@ -588,14 +599,14 @@ div.tocify {
 <div id="all-possible-subsets-approach" class="section level2">
 <h2>All possible subsets approach</h2>
 <p>The basic idea of the all possible subsets approach is to run <strong>every possible</strong> combination of independent variables to find the best subset to meet some pre-defined objective criteria. In R, you can use the <code>ols_step_all_possible</code> function from <code>olsrr</code> package to test all possible subsets of the set of potential independent variables.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Fit the full model, where all independent variables are included </span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>full_model  &lt;-<span class="st"> </span><span class="kw">lm</span>(Ozone <span class="op">~</span><span class="st"> </span>Solar.Rad <span class="op">+</span><span class="st"> </span>Wind.Speed <span class="op">+</span><span class="st"> </span>Temperature <span class="op">+</span><span class="st"> </span>Pressure, <span class="dt">data =</span> Ozone_data)</span>
-<span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co"># Test all possible subsets</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>output      &lt;-<span class="st"> </span><span class="kw">ols_step_all_possible</span>(full_model)</span>
-<span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># Print results from all possible subsets</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>output</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Fit the full model, where all independent variables are included </span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>full_model  &lt;-<span class="st"> </span><span class="kw">lm</span>(Ozone <span class="op">~</span><span class="st"> </span>Solar.Rad <span class="op">+</span><span class="st"> </span>Wind.Speed <span class="op">+</span><span class="st"> </span>Temperature <span class="op">+</span><span class="st"> </span>Pressure, <span class="dt">data =</span> Ozone_data)</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># Test all possible subsets</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>output      &lt;-<span class="st"> </span><span class="kw">ols_step_all_possible</span>(full_model)</span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co"># Print results from all possible subsets</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>output</span></code></pre></div>
 <pre><code>##    Index N                                Predictors   R-Square Adj. R-Square Mallow&#39;s Cp
 ## 3      1 1                               Temperature 0.48796010   0.483262487   31.683162
 ## 2      2 1                                Wind.Speed 0.37515206   0.369419506   62.236594
@@ -612,15 +623,15 @@ div.tocify {
 ## 13    13 3            Solar.Rad Temperature Pressure 0.52528716   0.511977451   25.573336
 ## 12    14 3             Solar.Rad Wind.Speed Pressure 0.44951263   0.434078406   46.096445
 ## 15    15 4 Solar.Rad Wind.Speed Temperature Pressure 0.60863144   0.593862815    5.000000</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Plot results from all possible subsets</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">plot</span>(output)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Plot results from all possible subsets</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">plot</span>(output)</span></code></pre></div>
 <p><img src="S17_files/figure-html/unnamed-chunk-4-1.png" width="672" /><img src="S17_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
 </div>
 <div id="all-best-subsets-approach" class="section level2">
 <h2>All best subsets approach</h2>
 <p>This approach selects the best-fitted model as a certain number of variables are included. We can then select the overall best model by comparing the statistics among those models.</p>
 <p>In R, you can print the best fitted models with the <code>ols_step_best_subset()</code> function:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">ols_step_best_subset</span>(full_model)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">ols_step_best_subset</span>(full_model)</span></code></pre></div>
 <pre><code>##                 Best Subsets Regression                 
 ## --------------------------------------------------------
 ## Model Index    Predictors
@@ -657,7 +668,7 @@ div.tocify {
 <p>Backward elimination begins with a model which includes all candidate variables (so-called full model). Variables are then deleted from the model one by one until all the variables remaining in the model are significant and exceed certain criteria. At each step, the variable showing the smallest improvement to the model is deleted. Once a variable is deleted, it cannot come back to the model.</p>
 <p>Backward elimination works well if you have a modest-sized set of potential variables from which you wish to eliminate a few – i.e. if you’re fine-tuning some prior selection of variables–you should generally go backward.</p>
 <p>In R, this is done with the <code>ols_step_backward_aic()</code> function:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">ols_step_backward_aic</span>(full_model, <span class="dt">details=</span>F)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">ols_step_backward_aic</span>(full_model, <span class="dt">details=</span>F)</span></code></pre></div>
 <pre><code>## 
 ## 
 ##                       Backward Elimination Summary                       
@@ -674,7 +685,7 @@ div.tocify {
 <p>Forward selection begins with a model which includes no predictors (the intercept-only model, so-called null model). Variables are then added to the model one by one until no remaining variables improve the model by a certain criterion. At each step, the variable showing the biggest improvement to the model is added. Once a variable is in the model, it remains there.</p>
 <p>Forward selection works well if you have a very large set of candidate predictors from which you wish to extract a few.</p>
 <p>In R, this is done with the <code>ols_step_forward_aic()</code> function:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">ols_step_forward_aic</span>(full_model, <span class="dt">details=</span>F)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">ols_step_forward_aic</span>(full_model, <span class="dt">details=</span>F)</span></code></pre></div>
 <pre><code>## 
 ##                             Selection Summary                             
 ## -------------------------------------------------------------------------
@@ -690,7 +701,7 @@ div.tocify {
 <h3>Stepwise regression</h3>
 <p>Stepwise regression is a combination of both backward elimination and forward selection methods. The stepwise method is a modification of the forward selection approach and differs in that variables already in the model do not necessarily stay. As in forward selection, stepwise regression adds one variable to the model at a time. After a variable is added, however, stepwise regression checks all the variables already included again to see whether there is a need to delete any variable that does not provide an improvement to the model based on a certain criterion.</p>
 <p>In R, this is done with the <code>ols_step_both_aic()</code> function:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">ols_step_both_aic</span>(full_model, <span class="dt">details=</span>F)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">ols_step_both_aic</span>(full_model, <span class="dt">details=</span>F)</span></code></pre></div>
 <pre><code>## 
 ## 
 ##                                    Stepwise Summary                                    
@@ -709,9 +720,9 @@ div.tocify {
 <div id="making-predictions-with-the-model" class="section level1">
 <h1>Making predictions with the model</h1>
 <p>Once the best model is selected, we can use it to predict mean and individual response. Here the R functions are the same as we saw in the simple linear regression.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Best model</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>reg &lt;-<span class="st"> </span><span class="kw">lm</span>(Ozone <span class="op">~</span><span class="st"> </span>Solar.Rad <span class="op">+</span><span class="st"> </span>Wind.Speed <span class="op">+</span><span class="st"> </span>Temperature , <span class="dt">data =</span> Ozone_data)</span>
-<span id="cb16-3"><a href="#cb16-3"></a><span class="kw">summary</span>(reg)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Best model</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>reg &lt;-<span class="st"> </span><span class="kw">lm</span>(Ozone <span class="op">~</span><span class="st"> </span>Solar.Rad <span class="op">+</span><span class="st"> </span>Wind.Speed <span class="op">+</span><span class="st"> </span>Temperature , <span class="dt">data =</span> Ozone_data)</span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="kw">summary</span>(reg)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Ozone ~ Solar.Rad + Wind.Speed + Temperature, data = Ozone_data)
@@ -732,10 +743,10 @@ div.tocify {
 ## Residual standard error: 21.18 on 107 degrees of freedom
 ## Multiple R-squared:  0.6059, Adjusted R-squared:  0.5948 
 ## F-statistic: 54.83 on 3 and 107 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Make confidence band</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">predict</span>(reg, <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Make prediction band</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">predict</span>(reg, <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Make confidence band</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">predict</span>(reg, <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Make prediction band</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="kw">predict</span>(reg, <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <hr />
 <div id="procedure-of-the-multiple-linear-regression" class="section level2">
 <h2>Procedure of the multiple linear regression</h2>
@@ -760,10 +771,10 @@ div.tocify {
 </div>
 <div id="check-residuals" class="section level2">
 <h2>4 Check residuals</h2>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">plot</span>(reg)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="kw">plot</span>(reg)</span></code></pre></div>
 <p><img src="S17_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
 <p>Here in the residuals vs. fitted plot, we see a roughly horizontal line is expected (linearity checked). In the Scale-location plot, we also see a roughly horizontal line (homoscedasticity checked). Finally, the residuals are following a normal distribution by examining the normal Q-Q plot (normality checked).</p>
 </div>
 <div id="report-the-results" class="section level2">
@@ -784,13 +795,13 @@ div.tocify {
 <p>One round of cross-validation involves <strong>partitioning a sample of data into complementary subsets</strong>, performing the analysis on one subset (called the training set), and validating the analysis on the other subset (called the validation set). To reduce variability, in most methods, multiple rounds of cross-validation are performed using different partitions, and the validation results are combined (e.g., averaged) over the rounds to give an estimate of the model’s predictive performance.</p>
 <p>We will use the CPU performance data from the MASS package.</p>
 <p><strong>1</strong> Load the data <code>cpus</code> in the <code>MASS</code> package by:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">library</span>(MASS)</span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="kw">data</span>(cpus)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="kw">data</span>(cpus)</span></code></pre></div>
 <p><strong>2</strong> Use <code>85%</code> of the data points to form a training set, and the rest data points as the validation set</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>fraction        &lt;-<span class="st"> </span><span class="fl">0.85</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>sample_index    &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(cpus),<span class="kw">nrow</span>(cpus)<span class="op">*</span>fraction)</span>
-<span id="cb23-3"><a href="#cb23-3"></a>cpus_training   &lt;-<span class="st"> </span>cpus[sample_index,]</span>
-<span id="cb23-4"><a href="#cb23-4"></a>cpus_validation &lt;-<span class="st"> </span>cpus[<span class="op">-</span>sample_index,]</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>fraction        &lt;-<span class="st"> </span><span class="fl">0.85</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>sample_index    &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(cpus),<span class="kw">nrow</span>(cpus)<span class="op">*</span>fraction)</span>
+<span id="cb30-3"><a href="#cb30-3"></a>cpus_training   &lt;-<span class="st"> </span>cpus[sample_index,]</span>
+<span id="cb30-4"><a href="#cb30-4"></a>cpus_validation &lt;-<span class="st"> </span>cpus[<span class="op">-</span>sample_index,]</span></code></pre></div>
 <p><strong>3</strong> Use the <code>ggpairs()</code> function to check the linear relationship between dependent variable <code>perf</code> and each independent variable (<code>syct</code>, <code>mmin</code>, <code>mmax</code>, <code>cach</code>, <code>chmin</code>, <code>chmax</code>) in <code>cpus_training</code>.</p>
 <p><strong>4</strong> Fit a regression model between dependent variable <code>perf</code> and all independent variables (<code>syct</code>, <code>mmin</code>, <code>mmax</code>, <code>cach</code>, <code>chmin</code>, <code>chmax</code>). What is the adjusted R<sup>2</sup>? Which independent variable(s) has an insignificant slope?</p>
 <p><strong>5</strong> Use the all possible subsets approach to find the best model. Please justify your selection.</p>

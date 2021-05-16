@@ -8,6 +8,20 @@ output:
       smooth_scroll: false
 ---
 
+***
+
+# Prerequisites
+
+Load the libraries with R:
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(gapminder)
+```
+
+***
+
 *This section is modified from the excellent [Data visualisation](https://r4ds.had.co.nz/data-visualisation.html#introduction-1) and [How to make any plot in ggplot2?](http://r-statistics.co/ggplot2-Tutorial-With-R.html), both are freely available online.*
 
 `ggplot2` is the most elegant and aesthetically pleasing graphics framework available in R. It implements the **grammar of graphics**, a coherent system for describing and building graphs. It can significantly improve your plots' quality and make you much more efficient in creating them. With that being said, the learning curve is steep because the way you make plots with `ggplot2` is very different from base graphics making in R and in other languages. The distinctive feature of the `ggplot2` framework is the way you make plots through **adding layers**. Here we will learn the steps of making a plot with `ggplot2`. [^1]
@@ -16,7 +30,7 @@ output:
 
 ***
 
-# Steps of plotting with ggplot2
+# Steps of plotting with `ggplot2`
 
 ## Step 1. Passing the data set
 
@@ -27,11 +41,6 @@ In previous sections, you learn how to use the pipe operator (`%>%`) to pass a d
 Let's use the `gapminder` data set again. Now suppose we want to look at how GCP per capita (`gdpPercap`) changes from 1957 to 2007 for countries with names starting with the letter "C" in Asia or Europe. (I make up this subjective example, but hopefully, you can see the power of the `dplyr` package!) We can then pass the subset of `gapminder` data to `ggplot` to make a scatter plot between `gdpPercap` and `year`. 
 
 ```{r}
-
-# Load libraries
-library(dplyr)
-library(ggplot2)
-library(gapminder)
 
 # Make a simple scatter plot
 gapminder %>%
