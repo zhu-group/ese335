@@ -507,8 +507,8 @@ div.tocify {
 </div>
 <div id="steps-of-plotting-with-ggplot2" class="section level1">
 <h1>Steps of plotting with <code>ggplot2</code></h1>
-<div id="step-1.-passing-the-data-set" class="section level2">
-<h2>Step 1. Passing the data set</h2>
+<div id="passing-the-data-set" class="section level2">
+<h2>1. Passing the data set</h2>
 <p>First of all, you need to tell R what data set to use in plotting. This is done by passing a <em>data.frame</em> object to the <code>ggplot()</code> function. Here the data frame object should contain <strong>all</strong> features needed to make the plot you want. Unlike base graphics in R and other languages, <code>ggplot()</code> does not take vectors as arguments.</p>
 <p>In previous sections, you learn how to use the pipe operator (<code>%&gt;%</code>) to pass a data set (<code>tibble</code> object) produced through <a href="https://zhu-group.github.io/ese5023/Section_05.html">data wrangling</a> to the <code>ggplot()</code> function. This is exactly what you need to do in this step.</p>
 <p>Let’s use the <code>gapminder</code> data set again. Now suppose we want to look at how GCP per capita (<code>gdpPercap</code>) changes from 1957 to 2007 for countries with names starting with the letter “C” in Asia or Europe. (I make up this subjective example, but hopefully, you can see the power of the <code>dplyr</code> package!) We can then pass the subset of <code>gapminder</code> data to <code>ggplot</code> to make a scatter plot between <code>gdpPercap</code> and <code>year</code>.</p>
@@ -520,8 +520,8 @@ div.tocify {
 <span id="cb2-6"><a href="#cb2-6"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
 <p><img src="S19_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
-<div id="step-2.-mapping-the-aesthetics" class="section level2">
-<h2>Step 2. Mapping the aesthetics</h2>
+<div id="mapping-the-aesthetics" class="section level2">
+<h2>2. Mapping the aesthetics</h2>
 <p>The plot above, however, can not distinguish countries as all points are plotted in the same manner. In fact, we would like to add <code>country</code> as the <strong>third</strong> variable to the two dimensional scatter plot. By doing so, we are mapping the scatter plot to an <strong><em>aesthetic</em></strong>. An aesthetic is a visual property of the objects in your plot. Aesthetics include things like the <code>size</code>, <code>shape</code>, <code>color</code>, or even transparency (<code>alpha</code>) of the points. You can display a point (like the one below) in different ways by changing the values of its aesthetic properties.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>gapminder <span class="op">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>( continent<span class="op">==</span><span class="st">&quot;Asia&quot;</span> <span class="op">|</span><span class="st"> </span>continent<span class="op">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="op">%&gt;%</span><span class="st">   </span></span>
@@ -569,8 +569,8 @@ div.tocify {
 <p><img src="S19_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Once you map an aesthetic, <code>ggplot2</code> takes care of the rest. It selects a reasonable scale to use with the aesthetic, and it constructs a legend that explains the mapping between levels and values.</p>
 </div>
-<div id="step-3.-adding-more-geometric-objects" class="section level2">
-<h2>Step 3. Adding more geometric objects</h2>
+<div id="adding-more-geometric-objects" class="section level2">
+<h2>3. Adding more geometric objects</h2>
 <p>In the previous steps, we make a scatter plot between <code>gdpPercap</code> and <code>year</code>. The plot uses a visual object to represent the data. In ggplot2 syntax, we say the plot uses a geometrical object or <strong>geom</strong>.</p>
 <p>People often describe plots by the type of geom that the plot uses. For example, bar charts use bar geoms, line charts use line geoms, boxplots use boxplot geoms, and so on. <code>ggplot2</code> provides over 40 geoms, and extension packages provide even more (see <a href="https://exts.ggplot2.tidyverse.org/gallery/">here</a> for a sampling). The best way to get a comprehensive overview is <a href="https://rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf">ggplot2 cheatsheet</a>. To learn more about any single geom, use <code>?</code>, for example <code>?geom_smooth</code>.</p>
 <p>In <code>ggplot2</code>, you can use “+” to add another geom to the plot. In the plot below, we add a smoothed line to the scatter plots from the individual country.</p>
@@ -583,8 +583,8 @@ div.tocify {
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="S19_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
-<div id="step-4.-changing-the-labels" class="section level2">
-<h2>Step 4. Changing the labels</h2>
+<div id="changing-the-labels" class="section level2">
+<h2>4. Changing the labels</h2>
 <p>Now that you have drawn the main parts of the plot. You might want to add the plot’s main title and perhaps change the X and Y axis titles. This can be accomplished using the <code>labs</code> layer, meant for specifying the labels. However, manipulating the size, the color of the labels is the job of the ‘Theme’.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>gapminder <span class="op">%&gt;%</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>( continent<span class="op">==</span><span class="st">&quot;Asia&quot;</span> <span class="op">|</span><span class="st"> </span>continent<span class="op">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="op">%&gt;%</span><span class="st">   </span></span>
@@ -596,8 +596,8 @@ div.tocify {
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="S19_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
-<div id="step-5.-adjusting-the-theme" class="section level2">
-<h2>Step 5. Adjusting the theme</h2>
+<div id="adjusting-the-theme" class="section level2">
+<h2>5. Adjusting the theme</h2>
 <p>Very often, we want to customize our plot to make it looks better. For example we may need to increase the size of the labels and/or change the legend title. Adjusting the size of labels can be done using the <code>theme()</code> function by setting the<code>plot.title</code>, <code>axis.text.x</code>, and <code>axis.text.y</code> option. They need to be specified inside the <code>element_text()</code>. If you want to remove any of them, set it to <code>element_blank()</code>, and it will vanish entirely.</p>
 <p>Adjusting the legend title is a bit tricky. If your legend is that of a <code>color</code> attribute and it varies based on a factor, you need to set the <code>name</code> using the <code>scale_color_discrete()</code> function, where the color part belongs to the color attribute and the <strong>discrete</strong> because the legend is based on a factor variable.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>gapminder <span class="op">%&gt;%</span></span>
@@ -617,8 +617,8 @@ div.tocify {
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="S19_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
-<div id="step-6.-using-the-facets" class="section level2">
-<h2>Step 6. Using the facets</h2>
+<div id="using-the-facets" class="section level2">
+<h2>6. Using the facets</h2>
 <p>For categorical variables, it is particularly useful to split your plot into <strong>facets</strong>, subplots that each display one subset of the data. To facet your plot by a single variable, use <code>facet_wrap()</code>. The first argument of <code>facet_wrap()</code> should be a formula, which you create with <code>~</code> followed by a variable name. The variable that you pass to <code>facet_wrap()</code> should be discrete.</p>
 <p>Let’s split our plot into two facets based on <code>continent</code>:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>gapminder <span class="op">%&gt;%</span></span>
@@ -657,8 +657,8 @@ div.tocify {
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="S19_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
-<div id="step-7.-saving-the-plot" class="section level2">
-<h2>Step 7. Saving the plot</h2>
+<div id="saving-the-plot" class="section level2">
+<h2>7. Saving the plot</h2>
 <p>Finally, you can save the above plot uisng the <code>ggsave()</code> function. The default is to save the last plot that you displayed, using the size of the current graphics device. It’s smart enough to guess the type of graphics device from the extension. Let’s save the above figure to a local path <code>D://class</code> with a name <code>myplot.png</code>:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>gapminder <span class="op">%&gt;%</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>( continent<span class="op">==</span><span class="st">&quot;Asia&quot;</span> <span class="op">|</span><span class="st"> </span>continent<span class="op">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="op">%&gt;%</span><span class="st">   </span></span>

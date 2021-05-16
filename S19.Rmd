@@ -32,7 +32,7 @@ library(gapminder)
 
 # Steps of plotting with `ggplot2`
 
-## Step 1. Passing the data set
+## 1. Passing the data set
 
 First of all, you need to tell R what data set to use in plotting. This is done by passing a *data.frame* object to the `ggplot()` function. Here the data frame object should contain **all** features needed to make the plot you want. Unlike base graphics in R and other languages, `ggplot()` does not take vectors as arguments.
 
@@ -51,7 +51,7 @@ gapminder %>%
 
 ```
 
-## Step 2. Mapping the aesthetics
+## 2. Mapping the aesthetics
 
 The plot above, however, can not distinguish countries as all points are plotted in the same manner. In fact, we would like to add `country` as the **third** variable to the two dimensional scatter plot. By doing so, we are mapping the scatter plot to an ***aesthetic***. An aesthetic is a visual property of the objects in your plot. Aesthetics include things like the `size`,  `shape`, `color`, or even transparency (`alpha`) of the points. You can display a point (like the one below) in different ways by changing the values of its aesthetic properties. 
 
@@ -118,7 +118,7 @@ gapminder %>%
 
 Once you map an aesthetic, `ggplot2` takes care of the rest. It selects a reasonable scale to use with the aesthetic, and it constructs a legend that explains the mapping between levels and values.
 
-## Step 3. Adding more geometric objects
+## 3. Adding more geometric objects
 
 In the previous steps, we make a scatter plot between `gdpPercap` and `year`. The plot uses a visual object to represent the data. In ggplot2 syntax, we say the plot uses a geometrical object or **geom**. 
 
@@ -135,7 +135,7 @@ gapminder %>%
   geom_smooth()
 ```
 
-## Step 4. Changing the labels
+## 4. Changing the labels
 
 Now that you have drawn the main parts of the plot. You might want to add the plot’s main title and perhaps change the X and Y axis titles. This can be accomplished using the `labs` layer, meant for specifying the labels. However, manipulating the size, the color of the labels is the job of the ‘Theme’.
 
@@ -149,7 +149,7 @@ gapminder %>%
   labs(title="GDP per captia from 1957 to 2007", x="Year", y="GDP per captia")
 ```
 
-## Step 5. Adjusting the theme
+## 5. Adjusting the theme
 
 Very often, we want to customize our plot to make it looks better. For example we may need to increase the size of the labels and/or change the legend title. Adjusting the size of labels can be done using the `theme()` function by setting the`plot.title`, `axis.text.x`, and `axis.text.y` option. They need to be specified inside the `element_text()`. If you want to remove any of them, set it to `element_blank()`, and it will vanish entirely. 
 
@@ -172,7 +172,7 @@ gapminder %>%
   scale_color_discrete(name="Country Name")
 ```
 
-## Step 6. Using the facets
+## 6. Using the facets
 
 For categorical variables, it is particularly useful to split your plot into **facets**, subplots that each display one subset of the data. To facet your plot by a single variable, use `facet_wrap()`. The first argument of `facet_wrap()` should be a formula, which you create with `~` followed by a variable name. The variable that you pass to `facet_wrap()` should be discrete.
 
@@ -216,7 +216,7 @@ gapminder %>%
   facet_wrap( ~ continent, nrow=2)
 ```
 
-## Step 7. Saving the plot
+## 7. Saving the plot
 
 Finally, you can save the above plot uisng the `ggsave()` function. The default is to save the last plot that you displayed, using the size of the current graphics device. It's smart enough to guess the type of graphics device from the extension. Let's save the above figure to a local path `D://class` with a name `myplot.png`:
 
