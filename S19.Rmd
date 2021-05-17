@@ -36,9 +36,9 @@ library(gapminder)
 
 First of all, you need to tell R what data set to use in plotting. This is done by passing a *data.frame* object to the `ggplot()` function. Here the data frame object should contain **all** features needed to make the plot you want. Unlike base graphics in R and other languages, `ggplot()` does not take vectors as arguments.
 
-In previous sections, you learn how to use the pipe operator (`%>%`) to pass a data set (`tibble` object) produced through [data wrangling](https://zhu-group.github.io/ese5023/Section_05.html) to the `ggplot()` function. This is exactly what you need to do in this step. 
+In previous sections, you learn how to use the pipe operator (`%>%`) to pass a data set (`tibble` object) produced through [data wrangling](https://zhu-group.github.io/ese335/S05.html) to the `ggplot()` function. This is exactly what you need to do in this step. 
 
-Let's use the `gapminder` data set again. Now suppose we want to look at how GCP per capita (`gdpPercap`) changes from 1957 to 2007 for countries with names starting with the letter "C" in Asia or Europe. (I make up this subjective example, but hopefully, you can see the power of the `dplyr` package!) We can then pass the subset of `gapminder` data to `ggplot` to make a scatter plot between `gdpPercap` and `year`. 
+Let's use the `gapminder` data set. Now suppose we want to look at how GDP per capita (`gdpPercap`) changes from 1957 to 2007 for countries with names starting with the letter "C" in Asia or Europe. (I make up this subjective example, but hopefully, you can feel the power of the `dplyr` package!) We can then pass the subset of `gapminder` data to `ggplot` to make a scatter plot between `gdpPercap` and `year`. 
 
 ```{r}
 
@@ -56,6 +56,8 @@ gapminder %>%
 The plot above, however, can not distinguish countries as all points are plotted in the same manner. In fact, we would like to add `country` as the **third** variable to the two dimensional scatter plot. By doing so, we are mapping the scatter plot to an ***aesthetic***. An aesthetic is a visual property of the objects in your plot. Aesthetics include things like the `size`,  `shape`, `color`, or even transparency (`alpha`) of the points. You can display a point (like the one below) in different ways by changing the values of its aesthetic properties. 
 
 ```{r}
+
+# Add an aesthetic - color
 gapminder %>%
   dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
   dplyr::filter( substr(country,1,1)=="C" ) %>% 
@@ -69,6 +71,8 @@ To map an aesthetic to a variable, associate the name of the aesthetic to the na
 In the above example, we mapped `country` to the `color` aesthetic, but we could have mapped `country` to the `size` aesthetic in the same way. In this case, the exact size of each point would reveal its class affiliation. 
 
 ```{r}
+
+# Add an aesthetic - size
 gapminder %>%
   dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
   dplyr::filter( substr(country,1,1)=="C" ) %>% 
@@ -82,12 +86,15 @@ We get a warning here, because mapping an unordered variable (`country`) to an o
 Similarly, we could map `country` to the `shape` or `alpha` aesthetic:
 
 ```{r}
+
+# Add an aesthetic - shape
 gapminder %>%
   dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
   dplyr::filter( substr(country,1,1)=="C" ) %>% 
   ggplot( aes(x=year, y=gdpPercap, shape=country) ) + 
   geom_point()
 
+# Add an aesthetic - transparency
 gapminder %>%
   dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
   dplyr::filter( substr(country,1,1)=="C" ) %>% 
@@ -99,6 +106,8 @@ gapminder %>%
 You can even combine more than one aesthetic:
 
 ```{r}
+
+# Add two aesthetics - color + shape
 gapminder %>%
   dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
   dplyr::filter( substr(country,1,1)=="C" ) %>% 
@@ -108,6 +117,8 @@ gapminder %>%
 ```
 
 ```{r}
+
+# Add two aesthetics - shape + size
 gapminder %>%
   dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
   dplyr::filter( substr(country,1,1)=="C" ) %>% 
@@ -122,11 +133,13 @@ Once you map an aesthetic, `ggplot2` takes care of the rest. It selects a reason
 
 In the previous steps, we make a scatter plot between `gdpPercap` and `year`. The plot uses a visual object to represent the data. In ggplot2 syntax, we say the plot uses a geometrical object or **geom**. 
 
-People often describe plots by the type of geom that the plot uses. For example, bar charts use bar geoms, line charts use line geoms, boxplots use boxplot geoms, and so on. `ggplot2` provides over 40 geoms, and extension packages provide even more (see [here](https://exts.ggplot2.tidyverse.org/gallery/) for a sampling). The best way to get a comprehensive overview is [ggplot2 cheatsheet](https://rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf). To learn more about any single geom, use `?`, for example `?geom_smooth`.
+People often describe plots by the type of geom that the plot uses. For example, bar charts use bar geoms, line charts use line geoms, boxplots use boxplot geoms, and so on. `ggplot2` provides over 40 geoms, and extension packages provide even more (see [here](https://exts.ggplot2.tidyverse.org/gallery/) for a sampling). The best way to get a comprehensive overview is [ggplot2 cheatsheet](https://nyu-cdsc.github.io/learningr/assets/data-visualization-2.1.pdf). To learn more about any single geom, use `?`, for example `?geom_smooth`.
 
 In `ggplot2`, you can use "+" to add another geom to the plot. In the plot below, we add a smoothed line to the scatter plots from the individual country.
 
 ```{r}
+
+# Use two geoms - point + smooth line
 gapminder %>%
   dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
   dplyr::filter( substr(country,1,1)=="C" ) %>% 
@@ -140,6 +153,8 @@ gapminder %>%
 Now that you have drawn the main parts of the plot. You might want to add the plot’s main title and perhaps change the X and Y axis titles. This can be accomplished using the `labs` layer, meant for specifying the labels. However, manipulating the size, the color of the labels is the job of the ‘Theme’.
 
 ```{r}
+
+# Change labels
 gapminder %>%
   dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
   dplyr::filter( substr(country,1,1)=="C" ) %>% 
@@ -156,6 +171,8 @@ Very often, we want to customize our plot to make it looks better. For example w
 Adjusting the legend title is a bit tricky. If your legend is that of a `color` attribute and it varies based on a factor, you need to set the `name` using the `scale_color_discrete()` function, where the color part belongs to the color attribute and the **discrete** because the legend is based on a factor variable.
 
 ```{r}
+
+# Change the theme
 gapminder %>%
   dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
   dplyr::filter( substr(country,1,1)=="C" ) %>% 
@@ -179,6 +196,8 @@ For categorical variables, it is particularly useful to split your plot into **f
 Let's split our plot into two facets based on `continent`:
 
 ```{r}
+
+# Using the facets
 gapminder %>%
   dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
   dplyr::filter( substr(country,1,1)=="C" ) %>% 
@@ -199,6 +218,8 @@ gapminder %>%
 One way to change the layout the facets is specifying `ncol` and `nrow` options in the `facet_wrap()` function:
 
 ```{r}
+
+# Using the facets - 2 rows (2x1)
 gapminder %>%
   dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
   dplyr::filter( substr(country,1,1)=="C" ) %>% 
@@ -218,9 +239,11 @@ gapminder %>%
 
 ## 7. Saving the plot
 
-Finally, you can save the above plot uisng the `ggsave()` function. The default is to save the last plot that you displayed, using the size of the current graphics device. It's smart enough to guess the type of graphics device from the extension. Let's save the above figure to a local path `D://class` with a name `myplot.png`:
+Finally, you can save the above plot uisng the `ggsave()` function. The default is to save the last plot that you displayed, using the size of the current graphics device. It's smart enough to guess the type of graphics device from the extension. Let's save the above figure to a local path `D://ese335` with a name `myplot.png`:
 
 ```{r, eval=F}
+
+# Save a ggplot figure
 gapminder %>%
   dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
   dplyr::filter( substr(country,1,1)=="C" ) %>% 
@@ -243,6 +266,7 @@ gapminder %>%
 You can also change the plot size (`width` and `height`) and resolution (`dpi`) by setting corresponding options. Use `?ggsave()` for more.
 
 ```{r,eval=F}
+
 # Save a ggplot object
 plot1 <- gapminder %>%
   dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
@@ -267,13 +291,15 @@ ggsave("myplot2.png", plot=plot1, width=20,
 
 ***
 
-# ggplot2's grammar of graphics and beyond
+# `ggplot2`'s grammar of graphics and beyond
 
 We have covered some basics but critical steps of making plots with `ggplot2`. There are many more features that we don't have time to go through in just one section. You can explore the full functionality of `ggplot2()` by studying the [further reading](https://zhu-group.github.io/ese5023/Section_08.html#Further_reading) listed at the end. 
 
 To summarize, ggplot2's grammar of graphics goes like:
 
 ```{r, eval=F}
+
+# ggplot functions
 ggplot(data = <DATA>) + 
   <GEOM_FUNCTION>(
      mapping = aes(<MAPPINGS>),
@@ -282,7 +308,8 @@ ggplot(data = <DATA>) +
   ) +
   <COORDINATE_FUNCTION> +
   <FACET_FUNCTION>
-  
+
+# Save a ggplot figure  
 ggsave()  
 ```
 
@@ -323,7 +350,7 @@ Can you reproduce the following figure (`myfirstplot.png`, width 25 cm, height 2
 
 * [ggplot2: elegant graphics for data analysis](https://ggplot2-book.org/)
 
-* [Data Visualization with ggplot2 Cheat Sheet](https://rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf)
+* [Data Visualization with ggplot2 Cheat Sheet](https://nyu-cdsc.github.io/learningr/assets/data-visualization-2.1.pdf)
 
 * [Data visualisation](https://r4ds.had.co.nz/data-visualisation.html#introduction-1)
 
