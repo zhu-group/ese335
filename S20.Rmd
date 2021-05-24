@@ -21,19 +21,20 @@ library(ggsn)
 library(leafletCN)
 library(raster)
 library(ggmap)
-
 ```
 
 ***
 
 # Shape file
 
-*ESRI shapefile* (or shape file) is widely used in environmental science and geoscience. A shapefile consists of various files of the same name, but with different extensions. They should all be in one directory. Here we use the shape file of China map as an example, [download it](https://zhu-group.github.io/ese335/download/China_map.zip). Decompress it. Open the folder, you will see there are three files of different formats (`.dbf`, `.shp`, `.shx`). In R, we can read in the shape via:
+*ESRI shapefile* (or shape file) is widely used in environmental science and geoscience. A shapefile consists of various files of the same name, but with different extensions. They should all be in one directory. Here we use the shape file of China map as an example, [download it](https://zhu-group.github.io/ese335/download/China_map.zip). Decompress it. Open the folder, you will see there are three files of different formats (`.dbf`, `.shp`, `.shx`). In R, we can read the shape file via:
 
 ```{r}
 
+# Location of the .shp file 
+Local_path <- "D://China_map/"
+
 # Read china map, a shape file
-Local_path <- "D://China_map/" # local the .shp file is stored  
 China_map <- rgdal::readOGR(paste0(Local_path, "bou2_4p.shp"))
 ```
 
@@ -43,10 +44,10 @@ class(China_map)
 names(China_map)
 ```
 
-From here we can see that there are `925` polygons, and R just follow the polygons defined by this object then line them each one up. If you want to see the data hidden in `SpatialPolygonsDataFrame`, we can use the operator `@`:
+From here, we can see that there are `925` polygons, and R just follows the polygons defined by this object then line them each one up. If you want to see the data hidden in `SpatialPolygonsDataFrame`, we can use the operator `@`:
 
 ```{r}
-# Check the attributes 
+# Check the attributes, use the operator @
 map_data <- China_map@data
 head(map_data)
 tail(map_data)
@@ -55,18 +56,21 @@ tail(map_data)
 Use `ggplot()` to plot the shape file:
 
 ```{r}
-# Check the attributes 
+
+# Quick plot use ggplot
 ggplot(China_map, aes(x = long, y = lat, group = group)) +
   geom_path(color = "grey40") +
   geom_polygon(fill = 'lightblue')
 ```
 
-This is certainly not very good looking. Let's first assign each province with an id:
+This is certainly not very good-looking. Let's first assign each province with an id:
 
 ```{r}
 
 # Assign each province with an ID
 China_map2     <- data.frame(China_map, id=seq(0:924)-1) 
+
+# Join two data sets by NAME
 China_map_new  <- join(fortify(China_map), China_map2, type = "full")
 ```
 
@@ -75,8 +79,10 @@ Here we use the `fortify()` function to include the lat and lon information. Now
 ```{r}
 # Plot the new shape file
 ggplot(China_map_new, aes(x = long, y = lat, group = id, fill = NAME)) +
+  # Plot the border
   geom_path(color = 'grey40') +
   geom_polygon() +
+  # Using different colors
   scale_fill_manual(values = rainbow(33), guide = F) +
   coord_map()
 ```
@@ -86,8 +92,7 @@ We can also edit the original shape file by adding new information. For example,
 ```{r}
 
 # Name in Chinese
-# This is the same as the NAME in original shape file
-
+# This is the same as the NAME in the original shape file
 NAME    <- c("北京市"  , "天津市"   , "河北省"      , "山西省"   , "内蒙古自治区"    , 
              "辽宁省"  , "吉林省"   , "黑龙江省"    , "上海市"   , "江苏省"          , 
              "浙江省"  , "安徽省"   , "福建省"      , "江西省"   , "山东省"          , 
@@ -134,12 +139,16 @@ ggplot(China_map_pop, aes(x = long, y = lat, group = group, fill=Pop)) +
   labs(fill = "Population")+
   geom_polygon()+
   geom_path(color = "grey40")+
+  # Try a different color theme
   scale_fill_gradientn(colours=rev(heat.colors(20)),na.value="grey90",
                        guide = guide_colourbar(barwidth = 0.8, barheight = 10)) + 
+  # Projects a portion of the earth
   coord_map() + 
+  # Change theme
   theme_classic() + 
+  # Change labels
   labs(fill = "Population", x = "Longitude", y = "Latitude") + 
-  # Map scale
+  # Add map scale
   ggsn::scalebar(data = China_map_pop, dist = 500, dist_unit = "km",
                  border.size = 0.4, st.size = 2,
                  box.fill = c('black','white'),
@@ -163,6 +172,7 @@ ggplot(GD_HK,aes(x = long, y = lat, group = id)) +
   geom_point(x = 113.98201, y = 22.59670, fill = NA) +
   # Add label
   annotate("text", x = 113.98201, y = 22.59670+0.25, label = "SUSTech") +
+  # Projects a portion of the earth
   coord_map()
 ```
 
@@ -174,8 +184,10 @@ There are many ways of plotting an interactive map. Here we show you how to do t
 
 ```{r}
 
-# Change to a data frame
+# Change to a data frame, as required by the next step
 China_map_pop2 <- as.data.frame(China_map_pop)
+
+# Make a interactive map
 geojsonMap(dat = China_map_pop2, mapName = "China",
            # Use name and population as the key information
            namevar = ~ NAME, valuevar = ~ Pop, 
@@ -183,6 +195,7 @@ geojsonMap(dat = China_map_pop2, mapName = "China",
            popup =  paste0(China_map_pop2$NAME, ": ", China_map_pop2$Pop),
            # Colors
            palette = "Reds", 
+           # Add legend
            legendTitle = "Population")
 ```
 
@@ -194,13 +207,13 @@ geojsonMap(dat = China_map_pop2, mapName = "China",
 
 * CRS (coordinate reference system)
 
-* coordinates of its origin
+* Coordinates of its origin
 
-* a distance or cell size in each direction
+* A distance or cell size in each direction
 
-* a dimension or numbers of cells in each direction
+* A dimension or numbers of cells in each direction
 
-* an array of cell values
+* An array of cell values
 
 Given this structure, coordinates for any cell can be computed and don’t need to be stored.
 
@@ -211,8 +224,10 @@ We can use `raster()` to read in raster files. Download this [tiff file](https:/
 In R, we can load it as:
 
 ```{r}
-# Read tiff file
+
+# Read the tiff file
 Wind_Nov <- raster("D://wc2.1_10m_wind_11.tif")
+
 # Look at the raster attributes
 Wind_Nov
 ```
@@ -221,13 +236,15 @@ We can plot it using `plot()` or `image()` function:
 
 ```{r}
 
-# plot()
+# Quick plot using plot()
 plot(Wind_Nov, main="Wind speed in Nov.")
 
-# Use image()
 # Set color
 col <- terrain.colors(30)
+
+# Quick using image()
 image(Wind_Nov,  main="Wind speed in Nov.", col=col)
+
 # Add contour lines
 contour(Wind_Nov, add=T, col="red")
 ```
@@ -238,14 +255,20 @@ Or with `ggplot()`, we can make a better map:
 
 # Convert the raster to a date.frame
 Wind_Nov_df <- as.data.frame(Wind_Nov, xy = TRUE) 
+
+# Check the data structure
 str(Wind_Nov_df)
 
+# Making plot
 ggplot() +
-  geom_raster(data = Wind_Nov_df , 
+  geom_raster(data = Wind_Nov_df,  
               aes(x = x, y = y, fill = wc2.1_10m_wind_11)) + 
+  # Change labels
   labs(x="Latitude", y="Longitude") +
+  # Change theme
   theme_bw() +
   coord_equal() +
+  # Change legend
   scale_fill_gradient( "Wind speed (m/s)", limits=c(0,20),
                        low = "white",
                        high = "red",
@@ -254,6 +277,7 @@ ggplot() +
                        na.value = "grey50",
                        guide = "colourbar",
                        aesthetics = "fill") +
+  # Adjust the theme
   theme(axis.title.x = element_text(size=16),
         axis.title.y = element_text(size=16, angle=90),
         axis.text.x = element_text(size=14),
@@ -263,6 +287,7 @@ ggplot() +
         legend.position = "right",
         legend.key = element_blank()
   ) +
+  # Add a title
   ggtitle("Wind Speed in Nov.") 
 ```
 
@@ -280,14 +305,14 @@ Wind_Nov_crop <- crop(Wind_Nov, Crop_box)
 plot(Wind_Nov_crop, main="Wind speed in Nov.")
 
 ```
-***
 
+***
 
 # Adding features to a base map
 
 ## Add points
 
-Suppose we want to plot site locations on a city scale, and we want to add a base map which shows road, terrain, and built-up areas. This can be done with the `ggmap()` package:
+Suppose we want to plot site locations on a city scale, and we want to add a base map that shows road, terrain, and built-up areas. This can be done with the `ggmap()` package:
 
 ```{r}
 
@@ -303,7 +328,7 @@ Site_data <- data.frame(name=Site_name, lon=Site_lon, lat=Site_lat, type=Site_ty
 # Get the lat and lon range
 Mapbox    <- make_bbox(lon = Site_data$lon, lat = Site_data$lat, f = .1)
 
-# Pull the base map, you may need a VPN
+# Pull the base map, ***you may need a VPN to download the base map ***
 # The keyword zoom defines the map resolution
 Base_map  <- get_map(location=Mapbox, zoom=10, maptype="terrain-background")
 
@@ -331,7 +356,7 @@ ggmap(Base_map) +
 
 ## Add a path
 
-Download the [path of Typhoon Mangkhut](https://zhu-group.github.io/ese335/download/Mangkhut.txt), and read via:
+Download the [track of Typhoon Mangkhut](https://zhu-group.github.io/ese335/download/Mangkhut.txt), and read via:
 
 ```{r}
 
@@ -366,10 +391,11 @@ Map1              <- ggmap(Base_map)
 
 # Plot the path
 Map1 + 
-  # Path
+  # Plot the track 
   geom_path(data = Mangkhut_data_new, 
             aes(color=speed), size=1.5, 
             lineend = "round") + 
+  # Set the color
   scale_colour_gradient("Max Wind Speed (m/s)", low = "white", high = "red", 
                         breaks = seq(10, 60, by = 10)) +
   # Change labels
@@ -388,7 +414,7 @@ Plot wind speed in Nov. near your hometown (a `10` degree by `10` degree domain)
 
 ## Exercise #2
 
-Plot a map of your home city (zoom=15), and add a few points on to the map.
+Plot a map of your home city (zoom=15), and add a few points to the map.
 
 ***
 
