@@ -15,7 +15,7 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -184,33 +184,33 @@ summary {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 52px;
+  padding-top: 66px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 57px;
-  margin-top: -57px;
+  padding-top: 71px;
+  margin-top: -71px;
 }
 .section h2 {
-  padding-top: 57px;
-  margin-top: -57px;
+  padding-top: 71px;
+  margin-top: -71px;
 }
 .section h3 {
-  padding-top: 57px;
-  margin-top: -57px;
+  padding-top: 71px;
+  margin-top: -71px;
 }
 .section h4 {
-  padding-top: 57px;
-  margin-top: -57px;
+  padding-top: 71px;
+  margin-top: -71px;
 }
 .section h5 {
-  padding-top: 57px;
-  margin-top: -57px;
+  padding-top: 71px;
+  margin-top: -71px;
 }
 .section h6 {
-  padding-top: 57px;
-  margin-top: -57px;
+  padding-top: 71px;
+  margin-top: -71px;
 }
 .dropdown-submenu {
   position: relative;
@@ -463,16 +463,7 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="download/Assignment_01.pdf">Assignment 01</a>
-    </li>
-    <li>
-      <a href="download/Assignment_02.pdf">Assignment 02</a>
-    </li>
-    <li>
-      <a href="download/Assignment_03.pdf">Assignment 03</a>
-    </li>
-    <li>
-      <a href="download/Assignment_04.pdf">Assignment 04</a>
+      <a href="Assignment_01.html">Assignment 01</a>
     </li>
   </ul>
 </li>
@@ -499,24 +490,24 @@ div.tocify {
 <p><strong>1. Have you taken any statistics course before?</strong></p>
 <p><strong>2. Do you use the following languages for data analysis?</strong></p>
 <ul>
-<li>MATLAB<br />
+<li><code>MATLAB</code><br />
 </li>
-<li>Python<br />
+<li><code>Python</code><br />
 </li>
-<li>R</li>
-<li>IDL</li>
+<li><code>R</code></li>
+<li><code>IDL</code></li>
 <li>Other</li>
 <li>No, I don’t</li>
 </ul>
 <p><strong>3. What do you use for data visualization?</strong></p>
 <ul>
-<li>MATLAB<br />
+<li><code>MATLAB</code><br />
 </li>
-<li>Python<br />
+<li><code>Python</code><br />
 </li>
-<li>R</li>
-<li>IDL</li>
-<li>Origin</li>
+<li><code>R</code></li>
+<li><code>IDL</code></li>
+<li><code>Origin</code></li>
 <li>Other (but not Excel or similar spreadsheet software)</li>
 <li>I use Excel, sometimes Power-point</li>
 </ul>
@@ -581,17 +572,21 @@ div.tocify {
 <ul>
 <li>Binary responses, binomial responses, Poisson responses, building logistic regression model</li>
 </ul></li>
+<li>Time series analysis
+<ul>
+<li>MA and AR model, SARIMA model fitting and prediction</li>
+</ul></li>
 </ul>
 <hr />
 </div>
 <div id="take-the-course-or-not" class="section level1">
 <h1>Take the course or not?</h1>
-<p>This course is designed for ESE undergraduates having no or weak data analysis background, with emphasis on R.</p>
+<p>This course is designed for ESE undergraduates having no or weak data analysis background, with emphasis on <code>R</code>.</p>
 <p>Good reasons for <strong>not</strong> taking the course:</p>
 <ul>
 <li>After browsing the <a href="https://zhu-group.github.io/ese335/Syllabus.html">syllabus</a> and <a href="https://zhu-group.github.io/ese335/Schedule.html">schedule</a>, there is nothing new for me</li>
 <li>I am able to analyze, and visualize data sets through programming efforts already</li>
-<li>I want to learn other programming languages (C, C++, Java, MATLAB, Python, IDL, etc.)</li>
+<li>I want to learn other programming languages (<code>C</code>, <code>C++</code>, <code>Java</code>, <code>MATLAB</code>, <code>Python</code>, <code>IDL</code>, etc.)</li>
 <li>I want to take an “easy” class to meet the graduation requirement</li>
 </ul>
 <p>Bad reasons for <strong>not</strong> taking the course:</p>
@@ -603,34 +598,35 @@ div.tocify {
 <hr />
 </div>
 <div id="the-r-language" class="section level1">
-<h1>The R language</h1>
-<p>R is the leading tool for statistics, data analysis, and machine learning. It is more than a statistical package; it’s a <strong>programming language</strong>, so you can create your own objects, functions, and packages. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<p>Academics and statisticians have developed R over two decades. R now has one of the richest ecosystems to perform data analysis. There are around <strong>16000 packages</strong> available in CRAN (<a href="https://cran.r-project.org/">Comprehensive R Archive Network</a>). It is possible to find a library for <strong>whatever the analysis</strong> you want to perform. The rich variety of libraries makes R the first choice for statistical and data analysis. R also makes communicating the findings with a presentation, document, or website very easy. <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
-<p>The following figure <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> summaries important reasons for learning R:</p>
+<h1>The <code>R</code> language</h1>
+<p><code>R</code> is the leading tool for statistics, data analysis, and machine learning. It is more than a statistical package; it’s a <strong>programming language</strong>, so you can create your own objects, functions, and packages.</p>
+<p>Academics and statisticians have developed <code>R</code> over two decades. <code>R</code> now has one of the richest ecosystems to perform data analysis. There are around <strong>16000 packages</strong> available in CRAN (<a href="https://cran.r-project.org/">Comprehensive R Archive Network</a>). It is possible to find a library for <strong>whatever the analysis</strong> you want to perform. The rich variety of libraries makes <code>R</code> the first choice for statistical and data analysis. <code>R</code> also makes communicating the findings with a presentation, document, or website very easy.</p>
+<p>The following figure summaries important reasons for learning <code>R</code>:</p>
 <p><img src="figs/learn_R.png" alt="drawing" width="600"/></p>
+<p><a href="https://www.gapintelligence.com/system/pictures/568/content_why-learn-r1.jpg">Figure source</a></p>
 <hr />
 </div>
 <div id="first-look-at-rstudio" class="section level1">
 <h1>First look at RStudio</h1>
 <p>Follow <a href="https://zhu-group.github.io/ese335/Resource.html#RStudio_Desktop">instructions</a> to install RStudio.</p>
-<p>The RStudio IDE (Integrated Development Environment) is the most popular integrated development environment for R. It allows you to write, run, and debug your R code. <img src="figs/RStudio.jpg" alt="drawing" width="800"/></p>
-<p>Check this <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/master/rstudio-ide.pdf">cheat sheet</a> (need VPN) for more features and shortcuts of the RStudio IDE.</p>
+<p>The RStudio IDE (Integrated Development Environment) is the most popular integrated development environment for <code>R</code>. It allows you to write, run, and debug your <code>R</code> code. <img src="figs/RStudio.jpg" alt="drawing" width="800"/></p>
+<p>Check this <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/master/rstudio-ide.pdf">cheat sheet</a> (may need VPN) for more features and shortcuts of the RStudio IDE.</p>
 <hr />
 <p><em>The notes below are modified from the excellent <a href="http://swcarpentry.github.io/r-novice-gapminder/">online R tutorial</a> freely available on the Software Carpentry website.</em></p>
 <hr />
 </div>
 <div id="quick-r-tutorial" class="section level1">
-<h1>Quick R tutorial</h1>
+<h1>Quick <code>R</code> tutorial</h1>
 <div id="using-r-as-a-calculator" class="section level2">
-<h2>Using R as a calculator</h2>
-<p>The simplest thing you could do with R is to do arithmetic. Let try this in the <strong>Console</strong> window:</p>
+<h2>Using <code>R</code> as a calculator</h2>
+<p>The simplest thing you could do with <code>R</code> is to do arithmetic. Let try this in the <strong>Console</strong> window:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<p>R will print out the answer with a preceding <code>## [1]</code> (my PC) or <code>[1]</code> (your laptop). Don’t worry about this for now, we’ll explain that later. For now, think of it as indicating output.</p>
+<p><code>R</code> will print out the answer with a preceding <code>## [1]</code> (my PC) or <code>[1]</code> (your laptop). Don’t worry about this for now, we’ll explain that later. For now, think of it as indicating output.</p>
 <p>You will find the spaces have no impact on the result.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="dv">1</span><span class="op">+</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<p>When using R as a calculator, the order of operations is the same as you would have learned back in school. From highest to lowest precedence:</p>
+<p>When using <code>R</code> as a calculator, the order of operations is the same as you would have learned back in school. From highest to lowest precedence:</p>
 <ul>
 <li>Parentheses: <code>(</code>, <code>)</code></li>
 <li>Exponents: <code>^</code> or <code>**</code></li>
@@ -646,7 +642,7 @@ div.tocify {
 <pre><code>## [1] 9</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span>) <span class="op">^</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 27</code></pre>
-<p>Always think about clarifying your intentions, as others may later read your code. Here we call such intentions as “comments”. Anything that follows after the hash symbol <code>#</code> is ignored by R when it executes code.</p>
+<p>Always think about clarifying your intentions, as others may later read your code. Here we call such intentions as “comments”. Anything that follows after the hash symbol <code>#</code> is ignored by <code>R</code> when it executes code.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Get the square root of 100</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="dv">100</span> <span class="op">^</span><span class="st"> </span><span class="fl">0.5</span></span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
@@ -661,7 +657,7 @@ div.tocify {
 </div>
 <div id="mathematical-functions" class="section level2">
 <h2>Mathematical functions</h2>
-<p>R has many built-in mathematical functions. To call a function, we can type its name, followed by open and closing parentheses <code>()</code>. Anything we type inside the parentheses is called the function’s <em>arguments</em>:</p>
+<p><code>R</code> has many built-in mathematical functions. To call a function, we can type its name, followed by open and closing parentheses <code>()</code>. Anything we type inside the parentheses is called the function’s <em>arguments</em>:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Trigonometry functions</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="kw">sin</span>(<span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.841471</code></pre>
@@ -676,13 +672,13 @@ div.tocify {
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># e^(1/2)</span></span>
 <span id="cb27-2"><a href="#cb27-2"></a><span class="kw">exp</span>(<span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## [1] 1.648721</code></pre>
-<p>Don’t worry about trying to remember every function in R. You can look them up online, or if you can remember the start of the function’s name, use the <code>Tab</code> completion in RStudio.</p>
-<p>This is one advantage that RStudio has over R on its own; it has <em>auto-completion abilities</em> that allow you to more easily look up functions, their arguments, and the values that they take. In fact, the auto-completion abilities do not limit to functions, but also to variables.</p>
+<p>Don’t worry about trying to remember every function in <code>R</code>. You can look them up online, or if you can remember the start of the function’s name, use the <code>Tab</code> completion in RStudio.</p>
+<p>This is one advantage that RStudio has over <code>R</code> on its own; it has <em>auto-completion abilities</em> that allow you to more easily look up functions, their arguments, and the values that they take. In fact, the auto-completion abilities do not limit to functions, but also to variables.</p>
 <p>Typing a <code>?</code> before the name of a command will open the help page for that command. When using RStudio, this will open the <strong>Help</strong> window. The help page will include a detailed description of the command and how it works. Scrolling to the bottom of the help page will usually show a collection of code examples that illustrate command usage. We will go back to how to get help later in this section.</p>
 </div>
 <div id="comparing-things" class="section level2">
 <h2>Comparing things</h2>
-<p>We can also do comparisons in R:</p>
+<p>We can also do comparisons in <code>R</code>:</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Equality (note two equals signs, read as &quot;is equal to&quot;)</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
@@ -733,12 +729,12 @@ div.tocify {
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="co"># Notice how RStudio updates its description of x on the top right tab</span></span>
 <span id="cb53-2"><a href="#cb53-2"></a>x &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span> </span>
 <span id="cb53-3"><a href="#cb53-3"></a>y &lt;-<span class="st"> </span>x <span class="op">*</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
-<p>The right-hand side of the assignment can be any valid R expression. The right-hand side is <strong>fully evaluated</strong> before the assignment occurs.</p>
+<p>The right-hand side of the assignment can be any valid <code>R</code> expression. The right-hand side is <strong>fully evaluated</strong> before the assignment occurs.</p>
 <p>Variable names can contain letters, numbers, underscores, periods, <strong>but no spaces</strong>. They must start with a letter or a period followed by a letter (they cannot start with a number nor an underscore). Variables beginning with a period are hidden variables. Different people use different conventions for long variable names. Whatever you use is up to you, but be consistent.</p>
 </div>
 <div id="vectorization" class="section level2">
 <h2>Vectorization</h2>
-<p>One thing to be aware of is that R is <em>vectorized</em>, meaning that variables and functions can have vectors as values. In contrast to physics and mathematics, a vector in R describes a set of values <strong>in a certain order</strong> of the same data type. For example:</p>
+<p>One thing to be aware of is that <code>R</code> is <em>vectorized</em>, meaning that variables and functions can have vectors as values. In contrast to physics and mathematics, a vector in <code>R</code> describes a set of values <strong>in a certain order</strong> of the same data type. For example:</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</span></code></pre></div>
@@ -750,11 +746,11 @@ div.tocify {
 </div>
 <div id="managing-your-environment" class="section level2">
 <h2>Managing your environment</h2>
-<p>There are a few useful commands you can use to interact with the R session.</p>
-<p><code>ls()</code> will list all of the variables and functions stored in the global environment (your working R session):</p>
+<p>There are a few useful commands you can use to interact with the <code>R</code> session.</p>
+<p><code>ls()</code> will list all of the variables and functions stored in the global environment (your working <code>R</code> session):</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="kw">ls</span>()</span></code></pre></div>
 <pre><code>## [1] &quot;MyName&quot; &quot;x&quot;      &quot;y&quot;</code></pre>
-<p>Note here that we didn’t give any arguments to <code>ls()</code>, but we still needed to give the parentheses <code>()</code> to tell R to call the function.</p>
+<p>Note here that we didn’t give any arguments to <code>ls()</code>, but we still needed to give the parentheses <code>()</code> to tell <code>R</code> to call the function.</p>
 <p>You can use <code>rm()</code> to delete objects you no longer need:</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="kw">rm</span>(x)</span>
 <span id="cb62-2"><a href="#cb62-2"></a><span class="kw">ls</span>()</span></code></pre></div>
@@ -766,7 +762,7 @@ div.tocify {
 <div id="conditional-statements" class="section level2">
 <h2>Conditional statements</h2>
 <p>Often when we’re coding, we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met. Alternatively, we can also set an action to occur a particular number of times.</p>
-<p>There are several ways you can control flow in R. For conditional statements, the most commonly used approaches are the <code>if</code> and <code>else</code> constructs.</p>
+<p>There are several ways you can control flow in <code>R</code>. For conditional statements, the most commonly used approaches are the <code>if</code> and <code>else</code> constructs.</p>
 <p>Given today’s AQI (Air Quality Index) value, suppose we want to write a piece of code to check whether the Air Quality is excellent (AQI &lt;= <code>50</code>) or not.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a>AQI &lt;-<span class="st"> </span><span class="dv">69</span></span></code></pre></div>
 <p>Open a new R script (<code>File -&gt; New File -&gt; R Script</code>), and you should see a new panel in your RStudio. Type the following lines in the script, and save it. Select the lines you want to run, there are two ways to do so:</p>
@@ -800,7 +796,7 @@ div.tocify {
 <span id="cb70-7"><a href="#cb70-7"></a>}</span></code></pre></div>
 <pre><code>## [1] &quot;Air Quality is GOOD&quot;</code></pre>
 <p>Change <code>AQI</code> to <code>40</code>, <code>80</code>, and <code>120</code>, check the ouput.</p>
-<p><strong>Important</strong>: when R evaluates the condition inside <code>if()</code> statements, it is looking for a logical element, <em>i.e.</em>, <code>TRUE</code> or <code>FALSE</code>. This can cause some headaches for beginners. For example:</p>
+<p><strong>Important</strong>: when <code>R</code> evaluates the condition inside <code>if()</code> statements, it is looking for a logical element, <em>i.e.</em>, <code>TRUE</code> or <code>FALSE</code>. This can cause some headaches for beginners. For example:</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>x  &lt;-<span class="st">  </span><span class="dv">4</span> <span class="op">==</span><span class="st"> </span><span class="dv">3</span></span>
 <span id="cb72-2"><a href="#cb72-2"></a><span class="cf">if</span> (x) {</span>
 <span id="cb72-3"><a href="#cb72-3"></a>  <span class="st">&quot;4 equals 3&quot;</span></span>
@@ -826,8 +822,8 @@ div.tocify {
 <div id="defining-a-function" class="section level2">
 <h2>Defining a Function</h2>
 <p>You probably have realized it’s really tedious to change the AQI variables. It would be really helpful to define a <em>function</em> that handles different inputs automatically.</p>
-<p>A function is a set of statements organized together to perform a specific task. R has a large number of in-built functions and the user can create their own functions. In R, a function is an object so the R interpreter is able to pass control to the function, along with arguments that may be necessary for the function to accomplish the actions. The function in turn performs its task and returns control to the interpreter as well as any result which may be stored in other objects.</p>
-<p>An R function is created by using the keyword <strong>function</strong>. The basic syntax of an R function definition is as follows:</p>
+<p>A function is a set of statements organized together to perform a specific task. <code>R</code> has a large number of in-built functions and the user can create their own functions. In <code>R</code>, a function is an object so the <code>R</code> interpreter is able to pass control to the function, along with arguments that may be necessary for the function to accomplish the actions. The function in turn performs its task and returns control to the interpreter as well as any result which may be stored in other objects.</p>
+<p>An <code>R</code> function is created by using the keyword <strong>function</strong>. The basic syntax of an <code>R</code> function definition is as follows:</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a>function_name &lt;-<span class="st"> </span><span class="cf">function</span>(argument_<span class="dv">1</span>, argument_<span class="dv">2</span>, ...) {</span>
 <span id="cb78-2"><a href="#cb78-2"></a>   Function body </span>
 <span id="cb78-3"><a href="#cb78-3"></a>}</span></code></pre></div>
@@ -875,7 +871,7 @@ div.tocify {
 <div id="repeating-operations" class="section level2">
 <h2>Repeating operations</h2>
 <p>If you want to iterate over a set of values, when the order of iteration is important, and perform the same operation on each, a <code>for()</code> loop will do the job. This is the <strong>most flexible</strong> of looping operations, but therefore also the <strong>hardest</strong> to use correctly.</p>
-<p>In general, the advice of many R users would be to learn about <code>for()</code> loops but to avoid using <code>for()</code> loops unless the order of iteration is important: <em>i.e.</em>, the calculation at each iteration depends on the results of previous iterations.</p>
+<p>In general, the advice of many <code>R</code> users would be to learn about <code>for()</code> loops but to avoid using <code>for()</code> loops unless the order of iteration is important: <em>i.e.</em>, the calculation at each iteration depends on the results of previous iterations.</p>
 <p>Let’s define a list <code>Forecast_List</code>, which contains daily mean temperature forecasts in 5 days in Shenzhen:</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a>Forecast_List &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">28</span>, <span class="dv">27</span>, <span class="dv">28</span>, <span class="dv">26</span>, <span class="dv">27</span>)</span></code></pre></div>
 <p>Here <code>c()</code> means “combine”:</p>
@@ -898,126 +894,126 @@ div.tocify {
 <span id="cb97-4"><a href="#cb97-4"></a>    <span class="kw">print</span>(<span class="kw">paste</span>(Daily_T,Hourly_T))</span>
 <span id="cb97-5"><a href="#cb97-5"></a>  }</span>
 <span id="cb97-6"><a href="#cb97-6"></a>}</span></code></pre></div>
-<pre><code>## [1] &quot;28 36.3021848190263&quot;
-## [1] &quot;28 27.3364425598012&quot;
-## [1] &quot;28 29.8999157769837&quot;
-## [1] &quot;28 20.9425825645618&quot;
-## [1] &quot;28 36.1193508030212&quot;
-## [1] &quot;28 21.2470069838204&quot;
-## [1] &quot;28 30.7448285209514&quot;
-## [1] &quot;28 30.5724019163137&quot;
-## [1] &quot;28 35.213736007097&quot;
-## [1] &quot;28 29.7625475859313&quot;
-## [1] &quot;28 22.1026386262034&quot;
-## [1] &quot;28 22.1257858465898&quot;
-## [1] &quot;28 26.1942971257939&quot;
-## [1] &quot;28 28.8707501391157&quot;
-## [1] &quot;28 29.6622404001604&quot;
-## [1] &quot;28 27.0125416997509&quot;
-## [1] &quot;28 27.010436614173&quot;
-## [1] &quot;28 31.5071073684393&quot;
-## [1] &quot;28 21.2181795214569&quot;
-## [1] &quot;28 22.6489572090249&quot;
-## [1] &quot;28 28.084171696378&quot;
-## [1] &quot;28 23.6793463026854&quot;
-## [1] &quot;28 23.8270141870942&quot;
-## [1] &quot;28 24.5441988944181&quot;
-## [1] &quot;27 26.5353065557404&quot;
-## [1] &quot;27 23.6946554832005&quot;
-## [1] &quot;27 22.9876002040298&quot;
-## [1] &quot;27 31.5221696003249&quot;
-## [1] &quot;27 19.174485207099&quot;
-## [1] &quot;27 21.172183810489&quot;
-## [1] &quot;27 26.3493823368633&quot;
-## [1] &quot;27 26.623466154261&quot;
-## [1] &quot;27 27.2587602955193&quot;
-## [1] &quot;27 18.678386361769&quot;
-## [1] &quot;27 28.9999184858&quot;
-## [1] &quot;27 28.7364414117065&quot;
-## [1] &quot;27 36.3762320644766&quot;
-## [1] &quot;27 16.1909535816305&quot;
-## [1] &quot;27 31.9718112971487&quot;
-## [1] &quot;27 27.9790988888714&quot;
-## [1] &quot;27 25.4257619668704&quot;
-## [1] &quot;27 26.6738079131559&quot;
-## [1] &quot;27 27.6336379912779&quot;
-## [1] &quot;27 26.2708208059744&quot;
-## [1] &quot;27 26.6458500459978&quot;
-## [1] &quot;27 26.4418707096027&quot;
-## [1] &quot;27 32.9220251947552&quot;
-## [1] &quot;27 19.4401201765832&quot;
-## [1] &quot;28 25.2379527097754&quot;
-## [1] &quot;28 32.0695593094594&quot;
-## [1] &quot;28 22.6493353986968&quot;
-## [1] &quot;28 30.5949295700655&quot;
-## [1] &quot;28 31.7338417635506&quot;
-## [1] &quot;28 35.3490844815274&quot;
-## [1] &quot;28 37.6875588812392&quot;
-## [1] &quot;28 42.0291707413971&quot;
-## [1] &quot;28 27.766335907764&quot;
-## [1] &quot;28 26.6778844062781&quot;
-## [1] &quot;28 29.3673949501445&quot;
-## [1] &quot;28 28.2423033356994&quot;
-## [1] &quot;28 32.665825632526&quot;
-## [1] &quot;28 25.4133415867742&quot;
-## [1] &quot;28 34.3007308498731&quot;
-## [1] &quot;28 28.5522360873518&quot;
-## [1] &quot;28 33.2474688454556&quot;
-## [1] &quot;28 26.3359436257643&quot;
-## [1] &quot;28 30.928984753915&quot;
-## [1] &quot;28 30.7876598241741&quot;
-## [1] &quot;28 31.6125209100931&quot;
-## [1] &quot;28 19.1996750086106&quot;
-## [1] &quot;28 24.256824063542&quot;
-## [1] &quot;28 31.3570586899421&quot;
-## [1] &quot;26 25.903710552364&quot;
-## [1] &quot;26 22.2712620094234&quot;
-## [1] &quot;26 26.0113618358084&quot;
-## [1] &quot;26 26.2305848087369&quot;
-## [1] &quot;26 33.5509177954738&quot;
-## [1] &quot;26 26.6674795246584&quot;
-## [1] &quot;26 19.9958272689167&quot;
-## [1] &quot;26 21.3379470330793&quot;
-## [1] &quot;26 24.0186315446823&quot;
-## [1] &quot;26 33.5200140832265&quot;
-## [1] &quot;26 33.2241962474296&quot;
-## [1] &quot;26 15.3348037341914&quot;
-## [1] &quot;26 25.7721918216964&quot;
-## [1] &quot;26 32.3938123705249&quot;
-## [1] &quot;26 28.8438983276032&quot;
-## [1] &quot;26 23.8772983715281&quot;
-## [1] &quot;26 27.8471436628392&quot;
-## [1] &quot;26 28.4008633496177&quot;
-## [1] &quot;26 29.002064130213&quot;
-## [1] &quot;26 27.6108946011701&quot;
-## [1] &quot;26 26.8852246310906&quot;
-## [1] &quot;26 26.9527636078919&quot;
-## [1] &quot;26 32.4381055567448&quot;
-## [1] &quot;26 18.5282901628604&quot;
-## [1] &quot;27 30.0793526000918&quot;
-## [1] &quot;27 31.6528630497&quot;
-## [1] &quot;27 26.3919469527205&quot;
-## [1] &quot;27 30.2072243816483&quot;
-## [1] &quot;27 24.6479828597153&quot;
-## [1] &quot;27 32.3162681004894&quot;
-## [1] &quot;27 32.6129800382476&quot;
-## [1] &quot;27 26.9746995189495&quot;
-## [1] &quot;27 25.1235705736676&quot;
-## [1] &quot;27 23.8310921687532&quot;
-## [1] &quot;27 24.8750634566136&quot;
-## [1] &quot;27 24.8604870286791&quot;
-## [1] &quot;27 22.0999378595478&quot;
-## [1] &quot;27 24.9806991115739&quot;
-## [1] &quot;27 18.7498390475223&quot;
-## [1] &quot;27 11.8550829220849&quot;
-## [1] &quot;27 25.9998724815211&quot;
-## [1] &quot;27 22.0862541995913&quot;
-## [1] &quot;27 29.3100490608627&quot;
-## [1] &quot;27 18.2723968449173&quot;
-## [1] &quot;27 36.0445535297748&quot;
-## [1] &quot;27 29.7718753865375&quot;
-## [1] &quot;27 29.5817723522045&quot;
-## [1] &quot;27 37.2502475472382&quot;</code></pre>
+<pre><code>## [1] &quot;28 24.6668706562043&quot;
+## [1] &quot;28 27.1005683905814&quot;
+## [1] &quot;28 21.3506717346236&quot;
+## [1] &quot;28 34.9457199068254&quot;
+## [1] &quot;28 25.5119448647692&quot;
+## [1] &quot;28 27.5166971988956&quot;
+## [1] &quot;28 29.1567184309591&quot;
+## [1] &quot;28 38.3788441189988&quot;
+## [1] &quot;28 30.9743478164592&quot;
+## [1] &quot;28 32.1853880163238&quot;
+## [1] &quot;28 17.5378767852596&quot;
+## [1] &quot;28 35.6187775200335&quot;
+## [1] &quot;28 25.9283683578256&quot;
+## [1] &quot;28 21.6013421562046&quot;
+## [1] &quot;28 31.9174592417391&quot;
+## [1] &quot;28 30.6253764048356&quot;
+## [1] &quot;28 33.4172305445124&quot;
+## [1] &quot;28 28.4768088886399&quot;
+## [1] &quot;28 28.9200083875098&quot;
+## [1] &quot;28 23.6967951776562&quot;
+## [1] &quot;28 30.1889767109845&quot;
+## [1] &quot;28 27.0683275923598&quot;
+## [1] &quot;28 25.3357185604547&quot;
+## [1] &quot;28 25.0156186387949&quot;
+## [1] &quot;27 31.4412880257079&quot;
+## [1] &quot;27 31.0089657875657&quot;
+## [1] &quot;27 24.3967772712937&quot;
+## [1] &quot;27 22.0690125194844&quot;
+## [1] &quot;27 33.3071737870571&quot;
+## [1] &quot;27 35.6802636522897&quot;
+## [1] &quot;27 35.2466679782864&quot;
+## [1] &quot;27 35.5191178199866&quot;
+## [1] &quot;27 26.5347968832656&quot;
+## [1] &quot;27 22.6305663838101&quot;
+## [1] &quot;27 23.9349763112486&quot;
+## [1] &quot;27 29.7153200417526&quot;
+## [1] &quot;27 17.1199543211065&quot;
+## [1] &quot;27 22.8436570361516&quot;
+## [1] &quot;27 24.7079547503495&quot;
+## [1] &quot;27 18.9007681267031&quot;
+## [1] &quot;27 21.5284018012049&quot;
+## [1] &quot;27 28.7098993495721&quot;
+## [1] &quot;27 21.2039254723981&quot;
+## [1] &quot;27 31.9367938985775&quot;
+## [1] &quot;27 28.1265713028108&quot;
+## [1] &quot;27 21.0830725780481&quot;
+## [1] &quot;27 29.6891959546678&quot;
+## [1] &quot;27 31.7071731489641&quot;
+## [1] &quot;28 29.312713269533&quot;
+## [1] &quot;28 28.1668737941441&quot;
+## [1] &quot;28 29.0791018147786&quot;
+## [1] &quot;28 23.4876763338484&quot;
+## [1] &quot;28 30.422481652543&quot;
+## [1] &quot;28 20.3890930547506&quot;
+## [1] &quot;28 27.282849279409&quot;
+## [1] &quot;28 36.6582488212885&quot;
+## [1] &quot;28 30.9610478267153&quot;
+## [1] &quot;28 29.0171270326978&quot;
+## [1] &quot;28 34.7581367513131&quot;
+## [1] &quot;28 28.3207657536664&quot;
+## [1] &quot;28 31.2959039019935&quot;
+## [1] &quot;28 32.3295173125605&quot;
+## [1] &quot;28 26.9466657556273&quot;
+## [1] &quot;28 29.8460244198172&quot;
+## [1] &quot;28 23.2200442169097&quot;
+## [1] &quot;28 22.422081317318&quot;
+## [1] &quot;28 28.0762262849762&quot;
+## [1] &quot;28 26.667343764512&quot;
+## [1] &quot;28 38.619779333902&quot;
+## [1] &quot;28 28.721462226484&quot;
+## [1] &quot;28 29.8175665072462&quot;
+## [1] &quot;28 27.4852402213914&quot;
+## [1] &quot;26 30.7863597521155&quot;
+## [1] &quot;26 22.5333329017826&quot;
+## [1] &quot;26 24.2475008033334&quot;
+## [1] &quot;26 23.6923415558539&quot;
+## [1] &quot;26 22.432313940742&quot;
+## [1] &quot;26 27.5768571977544&quot;
+## [1] &quot;26 27.7953688956232&quot;
+## [1] &quot;26 24.5736388385244&quot;
+## [1] &quot;26 24.8459406090445&quot;
+## [1] &quot;26 36.3405344816655&quot;
+## [1] &quot;26 16.888768827175&quot;
+## [1] &quot;26 24.6499524216677&quot;
+## [1] &quot;26 23.0106955520788&quot;
+## [1] &quot;26 30.2576980794212&quot;
+## [1] &quot;26 27.3454979472743&quot;
+## [1] &quot;26 20.7454627056131&quot;
+## [1] &quot;26 27.6319985973273&quot;
+## [1] &quot;26 25.473559822644&quot;
+## [1] &quot;26 29.413404186812&quot;
+## [1] &quot;26 24.7915909234029&quot;
+## [1] &quot;26 24.2551303482386&quot;
+## [1] &quot;26 30.5086708055149&quot;
+## [1] &quot;26 22.6978111403629&quot;
+## [1] &quot;26 28.6202412970725&quot;
+## [1] &quot;27 21.8593662490301&quot;
+## [1] &quot;27 25.1411892687558&quot;
+## [1] &quot;27 20.4737201803301&quot;
+## [1] &quot;27 24.82798023593&quot;
+## [1] &quot;27 33.7556411568783&quot;
+## [1] &quot;27 27.348423093073&quot;
+## [1] &quot;27 19.2134563433715&quot;
+## [1] &quot;27 29.5933179432208&quot;
+## [1] &quot;27 24.4961571366686&quot;
+## [1] &quot;27 20.8134135095952&quot;
+## [1] &quot;27 24.3828851622268&quot;
+## [1] &quot;27 28.3929091709637&quot;
+## [1] &quot;27 32.6529832895358&quot;
+## [1] &quot;27 32.5896219053043&quot;
+## [1] &quot;27 31.1805832406309&quot;
+## [1] &quot;27 21.0393504292687&quot;
+## [1] &quot;27 34.6769859346977&quot;
+## [1] &quot;27 30.1040973683074&quot;
+## [1] &quot;27 28.4031926511322&quot;
+## [1] &quot;27 27.085897616048&quot;
+## [1] &quot;27 31.0466664523111&quot;
+## [1] &quot;27 24.7208538130459&quot;
+## [1] &quot;27 29.8323801309001&quot;
+## [1] &quot;27 30.6519147864676&quot;</code></pre>
 <p>Here at each <code>Hour</code> we use the <code>rnorm()</code> function to generate <code>1</code> random Gaussian sample with a mean of <code>Daily_T</code> and a standard deviation of <code>5</code>.</p>
 <p>We notice in the output that when the first index (<code>Daily_T</code>) is set to <code>28</code>, the second index (<code>Hour</code>) iterates through its full set of indices. Once the indices of <code>Hour</code> have been iterated through, then <code>Daily_T</code> moves to the next one (<em>i.e.</em>, <code>27</code>). This process continues until the last index has been used for each <code>for()</code> loop.</p>
 <p>Rather than printing the results, we could write the loop output to a new <em>object</em>:</p>
@@ -1031,28 +1027,20 @@ div.tocify {
 <span id="cb99-8"><a href="#cb99-8"></a>}</span>
 <span id="cb99-9"><a href="#cb99-9"></a></span>
 <span id="cb99-10"><a href="#cb99-10"></a><span class="kw">print</span>(Output_List)</span></code></pre></div>
-<pre><code>##   [1] &quot;28 22.5174400239383&quot; &quot;28 22.3118693231331&quot; &quot;28 31.1733232416198&quot; &quot;28 20.8073741587026&quot; &quot;28 22.131559593111&quot;  &quot;28 22.8612749598593&quot;
-##   [7] &quot;28 33.2189917461791&quot; &quot;28 24.9914926854142&quot; &quot;28 39.1736410949427&quot; &quot;28 25.7662171189244&quot; &quot;28 26.0251455142721&quot; &quot;28 29.081746917937&quot; 
-##  [13] &quot;28 33.2244621850403&quot; &quot;28 32.4056830473088&quot; &quot;28 23.1977771972523&quot; &quot;28 31.3270350932144&quot; &quot;28 38.8958572548415&quot; &quot;28 35.6788520635554&quot;
-##  [19] &quot;28 32.0044057730112&quot; &quot;28 27.8692181246915&quot; &quot;28 26.0282202556877&quot; &quot;28 30.1046108213993&quot; &quot;28 27.5406977811539&quot; &quot;28 19.6950641050737&quot;
-##  [25] &quot;27 26.9271503795124&quot; &quot;27 22.8965670810955&quot; &quot;27 27.080344242426&quot;  &quot;27 25.8294077193704&quot; &quot;27 26.0752075467433&quot; &quot;27 26.9010353316112&quot;
-##  [31] &quot;27 35.1321590268883&quot; &quot;27 28.954987618343&quot;  &quot;27 25.2768814727861&quot; &quot;27 33.5238708898735&quot; &quot;27 22.022750643452&quot;  &quot;27 31.6627015895195&quot;
-##  [37] &quot;27 21.8370155223681&quot; &quot;27 28.6134421777976&quot; &quot;27 37.5532672779213&quot; &quot;27 27.4785442065897&quot; &quot;27 15.2892394210152&quot; &quot;27 25.12489756784&quot;  
-##  [43] &quot;27 37.3643437454967&quot; &quot;27 15.8253228545279&quot; &quot;27 30.7996234887763&quot; &quot;27 34.32260981362&quot;   &quot;27 20.7917866464361&quot; &quot;27 23.2952016809381&quot;
-##  [49] &quot;28 25.8902976771973&quot; &quot;28 30.2705140491536&quot; &quot;28 26.4425734702964&quot; &quot;28 30.5676064529871&quot; &quot;28 31.737750926063&quot;  &quot;28 28.5366075018645&quot;
-##  [55] &quot;28 36.0997572518275&quot; &quot;28 22.8401609687809&quot; &quot;28 35.6531386189314&quot; &quot;28 29.9167567449551&quot; &quot;28 29.5801417751133&quot; &quot;28 24.7138574011167&quot;
-##  [61] &quot;28 29.2530657542517&quot; &quot;28 23.5321154667341&quot; &quot;28 26.4087438005605&quot; &quot;28 25.1859518791331&quot; &quot;28 31.2092783011482&quot; &quot;28 25.1859664679081&quot;
-##  [67] &quot;28 34.9137039979347&quot; &quot;28 20.5371639404288&quot; &quot;28 24.1443602189201&quot; &quot;28 21.2671281576306&quot; &quot;28 27.9772224722355&quot; &quot;28 31.3305620971865&quot;
-##  [73] &quot;26 26.4696448927474&quot; &quot;26 30.7994149981118&quot; &quot;26 22.3042324247544&quot; &quot;26 28.6332537058461&quot; &quot;26 22.4432365535552&quot; &quot;26 29.2268131976713&quot;
-##  [79] &quot;26 26.6374055489618&quot; &quot;26 21.8241615652628&quot; &quot;26 32.7595876752811&quot; &quot;26 23.1315621928774&quot; &quot;26 24.4544249202693&quot; &quot;26 30.8049692521774&quot;
-##  [85] &quot;26 16.342214878642&quot;  &quot;26 18.5362925560983&quot; &quot;26 22.4828332973182&quot; &quot;26 30.4587756392675&quot; &quot;26 28.3627845382586&quot; &quot;26 23.9720463561618&quot;
-##  [91] &quot;26 31.6977021525353&quot; &quot;26 17.4571182285885&quot; &quot;26 30.8036030558954&quot; &quot;26 26.2527043552489&quot; &quot;26 29.14409734654&quot;   &quot;26 28.0338561736791&quot;
-##  [97] &quot;27 29.3548551765456&quot; &quot;27 15.8026018290011&quot; &quot;27 26.4471788411169&quot; &quot;27 24.1852588139943&quot; &quot;27 37.5486305182479&quot; &quot;27 21.8724207814227&quot;
-## [103] &quot;27 32.9010035369142&quot; &quot;27 29.5190385414745&quot; &quot;27 22.8336405015638&quot; &quot;27 25.3274303630419&quot; &quot;27 31.5319154475066&quot; &quot;27 30.148194338551&quot; 
-## [109] &quot;27 28.2279632004824&quot; &quot;27 30.6216273063016&quot; &quot;27 24.8130150651082&quot; &quot;27 27.4262424736222&quot; &quot;27 35.413553305079&quot;  &quot;27 16.624554789504&quot; 
-## [115] &quot;27 32.0839316845746&quot; &quot;27 29.8585980610776&quot; &quot;27 28.3285740636228&quot; &quot;27 30.1142989942329&quot; &quot;27 29.1129526092238&quot; &quot;27 25.345972233186&quot;</code></pre>
+<pre><code>##   [1] &quot;28 24.862567759076&quot;  &quot;28 32.2672617604715&quot; &quot;28 25.7143574518679&quot; &quot;28 31.5150692273972&quot; &quot;28 34.2842617311482&quot; &quot;28 33.6000001227535&quot; &quot;28 29.0992485883702&quot; &quot;28 25.1467802462739&quot; &quot;28 35.0845860502142&quot; &quot;28 26.7311493708457&quot;
+##  [11] &quot;28 29.4471437181032&quot; &quot;28 22.2270589111441&quot; &quot;28 19.295225370564&quot;  &quot;28 28.7201793521837&quot; &quot;28 32.9765735764862&quot; &quot;28 37.8276628968522&quot; &quot;28 27.3394377400717&quot; &quot;28 28.5771041482508&quot; &quot;28 22.7191104252066&quot; &quot;28 20.6854160945418&quot;
+##  [21] &quot;28 30.6638094358557&quot; &quot;28 36.9667328808812&quot; &quot;28 32.7270614110706&quot; &quot;28 33.9953620405437&quot; &quot;27 26.5599793671474&quot; &quot;27 27.22676927996&quot;   &quot;27 29.7643415272484&quot; &quot;27 21.1837614172492&quot; &quot;27 25.143158980632&quot;  &quot;27 26.0369673113447&quot;
+##  [31] &quot;27 24.5874188559285&quot; &quot;27 24.3127020791446&quot; &quot;27 26.1053516828611&quot; &quot;27 32.7121007425539&quot; &quot;27 32.8334598207363&quot; &quot;27 27.9748253259982&quot; &quot;27 34.1324019677439&quot; &quot;27 27.496894079903&quot;  &quot;27 27.4419065973874&quot; &quot;27 29.8710776997866&quot;
+##  [41] &quot;27 21.6950241336601&quot; &quot;27 25.9984937176164&quot; &quot;27 20.6573092553429&quot; &quot;27 25.0179720063991&quot; &quot;27 25.7749116367889&quot; &quot;27 34.5607864360156&quot; &quot;27 19.9160771525171&quot; &quot;27 23.354434812687&quot;  &quot;28 23.0675372792783&quot; &quot;28 30.2403237032944&quot;
+##  [51] &quot;28 27.056260690489&quot;  &quot;28 23.4490478364724&quot; &quot;28 27.9572065736753&quot; &quot;28 31.4324355389347&quot; &quot;28 29.1613594015226&quot; &quot;28 24.4102878130076&quot; &quot;28 30.3523363377812&quot; &quot;28 24.5506578634078&quot; &quot;28 21.1056375404204&quot; &quot;28 28.5199736089485&quot;
+##  [61] &quot;28 19.8897377416317&quot; &quot;28 23.9402802704796&quot; &quot;28 29.3374047373131&quot; &quot;28 24.2962243172979&quot; &quot;28 28.5931178971354&quot; &quot;28 26.1178083492376&quot; &quot;28 23.4395869077815&quot; &quot;28 22.833575669874&quot;  &quot;28 23.0715723492632&quot; &quot;28 14.8086823031038&quot;
+##  [71] &quot;28 23.2022279047611&quot; &quot;28 29.6411785787197&quot; &quot;26 41.0898791206696&quot; &quot;26 28.5756544742045&quot; &quot;26 23.5679230600789&quot; &quot;26 24.6645553782171&quot; &quot;26 27.5194955447224&quot; &quot;26 26.4771029896912&quot; &quot;26 21.6762781389784&quot; &quot;26 18.7391559430345&quot;
+##  [81] &quot;26 27.7627254851405&quot; &quot;26 24.5720069023958&quot; &quot;26 28.941797174645&quot;  &quot;26 27.7479616905077&quot; &quot;26 21.0833338239298&quot; &quot;26 24.1925496910184&quot; &quot;26 26.2573030818564&quot; &quot;26 17.9057225317525&quot; &quot;26 16.716188388949&quot;  &quot;26 26.4402382453062&quot;
+##  [91] &quot;26 16.7403207987945&quot; &quot;26 23.9177068548883&quot; &quot;26 26.5188396362497&quot; &quot;26 28.8794000409032&quot; &quot;26 25.680721889499&quot;  &quot;26 28.2553413470094&quot; &quot;27 23.4679237866334&quot; &quot;27 30.5823350632966&quot; &quot;27 26.2080403859845&quot; &quot;27 23.8153752679993&quot;
+## [101] &quot;27 37.523918575406&quot;  &quot;27 29.9754516873025&quot; &quot;27 20.3234924514414&quot; &quot;27 22.6623507965868&quot; &quot;27 28.4810644487054&quot; &quot;27 27.7246837369956&quot; &quot;27 28.1285065127963&quot; &quot;27 26.3039808121838&quot; &quot;27 21.5350751943454&quot; &quot;27 26.0846455547135&quot;
+## [111] &quot;27 27.3095521879372&quot; &quot;27 30.6233358571219&quot; &quot;27 22.930897141465&quot;  &quot;27 27.2116960229662&quot; &quot;27 18.9083189535665&quot; &quot;27 27.2110582307052&quot; &quot;27 23.4737304029519&quot; &quot;27 21.1187663317528&quot; &quot;27 24.8601330225435&quot; &quot;27 28.0614397894156&quot;</code></pre>
 <p>This approach can be useful, but “growing your results” (building the result object incrementally) is <strong>computationally inefficient</strong>, so avoid it when you are iterating through a lot of values.</p>
-<p><strong>Important</strong>: One of the biggest things that trips up novices and experienced R users alike, is building a results object (<em>vector</em>, <em>list</em>, <em>matrix</em>, <em>data frame</em>) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It’s much better to define an <strong>empty results object</strong> beforehand of appropriate dimensions, rather than initializing an empty object without dimensions. So if you know the end result will be stored in a matrix-like above, create an empty matrix with <code>5</code> row and <code>24</code> columns, then at each iteration stores the results in the appropriate location.</p>
+<p><strong>Important</strong>: One of the biggest things that trips up novices and experienced <code>R</code> users alike, is building a results object (<em>vector</em>, <em>list</em>, <em>matrix</em>, <em>data frame</em>) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It’s much better to define an <strong>empty results object</strong> beforehand of appropriate dimensions, rather than initializing an empty object without dimensions. So if you know the end result will be stored in a matrix-like above, create an empty matrix with <code>5</code> row and <code>24</code> columns, then at each iteration stores the results in the appropriate location.</p>
 <div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1"></a>Output_Matrix    &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow=</span><span class="dv">5</span>, <span class="dt">ncol=</span><span class="dv">24</span>)</span>
 <span id="cb101-2"><a href="#cb101-2"></a><span class="cf">for</span> (Day <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {</span>
 <span id="cb101-3"><a href="#cb101-3"></a>  Daily_T        &lt;-<span class="st"> </span>Forecast_List[Day]</span>
@@ -1064,26 +1052,18 @@ div.tocify {
 <span id="cb101-9"><a href="#cb101-9"></a>}</span>
 <span id="cb101-10"><a href="#cb101-10"></a>Output_Matrix2 &lt;-<span class="st"> </span><span class="kw">as.vector</span>(Output_Matrix)</span>
 <span id="cb101-11"><a href="#cb101-11"></a>Output_Matrix2</span></code></pre></div>
-<pre><code>##   [1] &quot;28 16.7462093226698&quot; &quot;27 27.7877499726905&quot; &quot;28 30.1877091036099&quot; &quot;26 26.9631114602047&quot; &quot;27 21.3051193785235&quot; &quot;28 33.0687398813821&quot;
-##   [7] &quot;27 32.7026229837286&quot; &quot;28 30.8013814840464&quot; &quot;26 34.110258728879&quot;  &quot;27 29.5895530906008&quot; &quot;28 28.1880500291334&quot; &quot;27 30.7711699113163&quot;
-##  [13] &quot;28 30.4882401832156&quot; &quot;26 25.4810396728254&quot; &quot;27 29.1578795422323&quot; &quot;28 20.5241313643412&quot; &quot;27 22.4882421896354&quot; &quot;28 29.7856184441498&quot;
-##  [19] &quot;26 25.325596969069&quot;  &quot;27 28.9813389824149&quot; &quot;28 25.0309332735579&quot; &quot;27 19.0780060211933&quot; &quot;28 31.2842862785477&quot; &quot;26 21.2781950080227&quot;
-##  [25] &quot;27 26.8494418707686&quot; &quot;28 25.250329176861&quot;  &quot;27 27.0528274276349&quot; &quot;28 29.9893084877998&quot; &quot;26 21.01777191148&quot;   &quot;27 25.2853105331229&quot;
-##  [31] &quot;28 32.8888354564881&quot; &quot;27 24.4213408956267&quot; &quot;28 20.9267369495819&quot; &quot;26 29.6342542854171&quot; &quot;27 29.2939405496971&quot; &quot;28 36.8715055914376&quot;
-##  [37] &quot;27 26.1608418066514&quot; &quot;28 30.7683899746527&quot; &quot;26 16.6484849663108&quot; &quot;27 28.6250244163359&quot; &quot;28 27.1410602839028&quot; &quot;27 18.7870462688817&quot;
-##  [43] &quot;28 34.9680457175462&quot; &quot;26 26.5391033470422&quot; &quot;27 28.4486434107674&quot; &quot;28 18.2949232613337&quot; &quot;27 20.2372098069932&quot; &quot;28 37.3543626979475&quot;
-##  [49] &quot;26 27.7466315783981&quot; &quot;27 18.1651668515605&quot; &quot;28 27.0528767262088&quot; &quot;27 23.3756278197546&quot; &quot;28 16.0764523037139&quot; &quot;26 29.3722379744914&quot;
-##  [55] &quot;27 30.7815159648866&quot; &quot;28 31.225834860206&quot;  &quot;27 39.0531270476514&quot; &quot;28 22.1932727166463&quot; &quot;26 26.3473658435403&quot; &quot;27 21.640081240826&quot; 
-##  [61] &quot;28 36.1292894167323&quot; &quot;27 32.8498850100116&quot; &quot;28 23.7191862427151&quot; &quot;26 25.9178663410946&quot; &quot;27 21.6897916569323&quot; &quot;28 24.4103344558764&quot;
-##  [67] &quot;27 26.4723718717433&quot; &quot;28 31.5780313410164&quot; &quot;26 23.0820597656584&quot; &quot;27 31.9103872576222&quot; &quot;28 28.4320013866317&quot; &quot;27 33.0146741705417&quot;
-##  [73] &quot;28 25.2320137753976&quot; &quot;26 20.005754342619&quot;  &quot;27 26.0569129725323&quot; &quot;28 34.0310101887257&quot; &quot;27 33.7699379074737&quot; &quot;28 25.5860891455454&quot;
-##  [79] &quot;26 24.7038421182103&quot; &quot;27 21.1715973117482&quot; &quot;28 31.7091098837765&quot; &quot;27 29.1097863570488&quot; &quot;28 36.9607933057286&quot; &quot;26 35.1285743262828&quot;
-##  [85] &quot;27 27.1859703846882&quot; &quot;28 23.6558778617581&quot; &quot;27 27.3049493845579&quot; &quot;28 16.5790476321374&quot; &quot;26 28.9710179942475&quot; &quot;27 23.337668916924&quot; 
-##  [91] &quot;28 33.0420323214266&quot; &quot;27 34.8372060711197&quot; &quot;28 31.2923551999244&quot; &quot;26 31.362854342274&quot;  &quot;27 41.183736935376&quot;  &quot;28 22.2189840832543&quot;
-##  [97] &quot;27 28.2783666384186&quot; &quot;28 33.3762717430818&quot; &quot;26 18.7241255483334&quot; &quot;27 22.7930698555304&quot; &quot;28 27.6847847673889&quot; &quot;27 24.9183037629901&quot;
-## [103] &quot;28 26.7712871981658&quot; &quot;26 32.4160883530279&quot; &quot;27 24.3649687148157&quot; &quot;28 27.5251408583632&quot; &quot;27 24.6609934887308&quot; &quot;28 31.7549985144869&quot;
-## [109] &quot;26 23.4572981539468&quot; &quot;27 24.2861943575393&quot; &quot;28 37.0452643153517&quot; &quot;27 27.2688289893984&quot; &quot;28 27.2170449933836&quot; &quot;26 20.589102903328&quot; 
-## [115] &quot;27 34.065831104512&quot;  &quot;28 33.9991203211467&quot; &quot;27 22.1820467574858&quot; &quot;28 25.253635251197&quot;  &quot;26 22.1545515123478&quot; &quot;27 29.4748235837478&quot;</code></pre>
+<pre><code>##   [1] &quot;28 16.0673929620475&quot; &quot;27 26.888775179454&quot;  &quot;28 21.6753107263034&quot; &quot;26 19.7376025157343&quot; &quot;27 19.2464696412961&quot; &quot;28 33.2200674830694&quot; &quot;27 23.5292645939498&quot; &quot;28 25.8072508866983&quot; &quot;26 24.0141752415533&quot; &quot;27 28.0481275129806&quot;
+##  [11] &quot;28 32.1407032478343&quot; &quot;27 31.1853296162139&quot; &quot;28 29.8138606069109&quot; &quot;26 35.9314044700916&quot; &quot;27 24.5646908193851&quot; &quot;28 26.7885051511071&quot; &quot;27 30.0755567821056&quot; &quot;28 19.7106109742359&quot; &quot;26 30.5478526913124&quot; &quot;27 30.4231745516411&quot;
+##  [21] &quot;28 36.4969519942876&quot; &quot;27 17.8533175583225&quot; &quot;28 25.9479780862596&quot; &quot;26 29.6230386659304&quot; &quot;27 28.8226058992091&quot; &quot;28 30.416621786637&quot;  &quot;27 21.7265583431026&quot; &quot;28 33.5829975017751&quot; &quot;26 21.9771087130571&quot; &quot;27 19.4693692939079&quot;
+##  [31] &quot;28 22.9103079073815&quot; &quot;27 29.6436627472717&quot; &quot;28 38.5443716958742&quot; &quot;26 19.7555278154842&quot; &quot;27 26.6642113121607&quot; &quot;28 19.8242788054767&quot; &quot;27 36.9787691840759&quot; &quot;28 29.7380794932709&quot; &quot;26 26.9665302213175&quot; &quot;27 24.7421618233481&quot;
+##  [41] &quot;28 29.6085329080077&quot; &quot;27 23.8182468398356&quot; &quot;28 34.5498841591409&quot; &quot;26 28.898547793911&quot;  &quot;27 28.1718926039174&quot; &quot;28 33.1805440047584&quot; &quot;27 25.2453743334028&quot; &quot;28 33.419741691669&quot;  &quot;26 24.9524029930448&quot; &quot;27 15.4176306378369&quot;
+##  [51] &quot;28 30.487391307344&quot;  &quot;27 27.6413509936623&quot; &quot;28 26.1854239409345&quot; &quot;26 29.069743703167&quot;  &quot;27 27.3858899326125&quot; &quot;28 27.859534300796&quot;  &quot;27 30.9010825268967&quot; &quot;28 30.1056508069412&quot; &quot;26 15.5486740734529&quot; &quot;27 25.2221843037292&quot;
+##  [61] &quot;28 33.0669078276647&quot; &quot;27 19.1752524831512&quot; &quot;28 24.5673824514963&quot; &quot;26 35.2516174569008&quot; &quot;27 31.0819691814975&quot; &quot;28 26.9575388949147&quot; &quot;27 28.4192190839876&quot; &quot;28 31.7240731034306&quot; &quot;26 27.6104518029181&quot; &quot;27 20.4573902092209&quot;
+##  [71] &quot;28 29.6139213094066&quot; &quot;27 18.5905265862153&quot; &quot;28 34.3420246055035&quot; &quot;26 36.7928475705676&quot; &quot;27 20.5802764370758&quot; &quot;28 29.8016359510161&quot; &quot;27 19.1825610794944&quot; &quot;28 27.5375897713342&quot; &quot;26 22.7676164311001&quot; &quot;27 25.6236980054396&quot;
+##  [81] &quot;28 21.2762107489437&quot; &quot;27 29.6692927496723&quot; &quot;28 29.2928251606574&quot; &quot;26 29.5758394693639&quot; &quot;27 21.4248015269069&quot; &quot;28 24.7662712149164&quot; &quot;27 27.3523737572321&quot; &quot;28 38.9655033597425&quot; &quot;26 18.9426035697761&quot; &quot;27 26.0549206505915&quot;
+##  [91] &quot;28 37.0031741510427&quot; &quot;27 32.1748063389132&quot; &quot;28 27.6510341969107&quot; &quot;26 16.3342155618955&quot; &quot;27 25.7879132379904&quot; &quot;28 28.2826086376626&quot; &quot;27 30.3245520449304&quot; &quot;28 30.8092432969664&quot; &quot;26 24.1561119521184&quot; &quot;27 28.4044911640777&quot;
+## [101] &quot;28 32.1453023546713&quot; &quot;27 33.5644350291793&quot; &quot;28 20.5451750148125&quot; &quot;26 33.147411198318&quot;  &quot;27 25.7014002998115&quot; &quot;28 20.4767590728241&quot; &quot;27 32.9422572755121&quot; &quot;28 24.4553720280583&quot; &quot;26 26.1484626411161&quot; &quot;27 20.5707162766334&quot;
+## [111] &quot;28 15.6313744164492&quot; &quot;27 21.5788009014992&quot; &quot;28 29.1762510661698&quot; &quot;26 15.5323297711622&quot; &quot;27 20.7821702212851&quot; &quot;28 23.0196854986751&quot; &quot;27 29.229962120168&quot;  &quot;28 28.6443811191295&quot; &quot;26 29.1454425130047&quot; &quot;27 30.4220450044663&quot;</code></pre>
 <p>Here we use <code>matrix()</code> to create an empty matrix with <code>5</code> rows and <code>24</code> columns, and use <code>as.vector()</code> to convert the <code>5x24</code> matrix into a vector with a length of <code>120</code>.</p>
 <p>Sometimes you will find yourself needing to repeat an operation as long as a certain condition is met. You can do this with a <code>while()</code> loop.</p>
 <div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1"></a>z &lt;-<span class="st"> </span><span class="dv">0</span></span>
@@ -1102,8 +1082,8 @@ div.tocify {
 <p><code>while()</code> loops will <strong>not</strong> always be appropriate. You have to be <strong>particularly careful</strong> that you don’t end up stuck in an infinite loop because your condition is always met, and hence the while statement never terminates.</p>
 </div>
 <div id="r-packages" class="section level2">
-<h2>R Packages</h2>
-<p>It is possible to add functions to R by writing a <em>package</em> or by obtaining a package written by someone else. As of this writing, there are over 16,000 packages available on CRAN (the comprehensive R archive network). RStudio has functionality for managing packages. You can:</p>
+<h2><code>R</code> Packages</h2>
+<p>It is possible to add functions to <code>R</code> by writing a <em>package</em> or by obtaining a package written by someone else. As of this writing, there are over 16,000 packages available on CRAN (the comprehensive R archive network). RStudio has functionality for managing packages. You can:</p>
 <ul>
 <li>See what packages are installed by typing <code>installed.packages()</code></li>
 <li>Install packages by typing <code>install.packages("packagename")</code>, where <code>packagename</code> is the package name, in quotes.</li>
@@ -1118,7 +1098,7 @@ div.tocify {
 </div>
 <div id="working-directory" class="section level2">
 <h2>Working directory</h2>
-<p>If you want to read files from a specific location or write files to a specific location, you need to set <em>working directory</em> in R. This can be accomplished by specifying path with <code>setwd()</code> function. First, let’s check the working directory using <code>getwd()</code>.</p>
+<p>If you want to read files from a specific location or write files to a specific location, you need to set <em>working directory</em> in <code>R</code>. This can be accomplished by specifying path with <code>setwd()</code> function. First, let’s check the working directory using <code>getwd()</code>.</p>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1"></a><span class="co"># Get current working directory in R</span></span>
 <span id="cb105-2"><a href="#cb105-2"></a><span class="kw">getwd</span>()</span></code></pre></div>
 <p>You can change the working directory using <code>setwd()</code>:</p>
@@ -1129,7 +1109,7 @@ div.tocify {
 <div id="seeking-help" class="section level2">
 <h2>Seeking Help</h2>
 <p><strong>Reading Help files</strong></p>
-<p>R, and every package, provide help files for functions. The general syntax to search for help on any function, “function_name”, from a specific function that is in a package loaded into your namespace (your interactive R session):</p>
+<p><code>R</code>, and every package, provides help files for functions. The general syntax to search for help on any function, “function_name”, from a specific function that is in a package loaded into your namespace (your interactive <code>R</code> session):</p>
 <p><code>?function_name</code> or <code>help(function_name)</code></p>
 <p>This will load up a help page in RStudio.</p>
 <p><strong>Special Operators</strong></p>
@@ -1174,25 +1154,14 @@ div.tocify {
 <div id="further-reading" class="section level1">
 <h1>Further reading</h1>
 <ul>
-<li><a href="https://cran.r-project.org/doc/contrib/Short-refcard.pdf">R Reference Card</a></li>
+<li><a href="https://cran.r-project.org/doc/contrib/Short-refcard.pdf"><code>R</code> Reference Card</a></li>
 <li><a href="https://rstudio.com/wp-content/uploads/2019/01/Cheatsheets_2019.pdf">rstudio::conf 2019 / CHEATSHEETS</a></li>
 <li><a href="https://dss.princeton.edu/training/RStudio101.pdf">Introduction to RStudio</a></li>
-<li><a href="http://swcarpentry.github.io/r-novice-gapminder/">R for Reproducible Scientific Analysis</a></li>
-<li><a href="http://swcarpentry.github.io/r-novice-inflammation/">Programming with R</a></li>
-<li><a href="http://www.r-tutor.com/r-introduction">R Introduction</a></li>
-<li><a href="https://www.statmethods.net/r-tutorial/index.html">R Tutorial For Beginners - Quick-R</a></li>
+<li><a href="http://swcarpentry.github.io/r-novice-gapminder/"><code>R</code> for Reproducible Scientific Analysis</a></li>
+<li><a href="http://swcarpentry.github.io/r-novice-inflammation/">Programming with <code>R</code></a></li>
+<li><a href="http://www.r-tutor.com/r-introduction"><code>R</code> Introduction</a></li>
+<li><a href="https://www.statmethods.net/r-tutorial/index.html"><code>R</code> Tutorial For Beginners - Quick-R</a></li>
 </ul>
-</div>
-<div id="references" class="section level1">
-<h1>References</h1>
-</div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p><a href="https://www.r-bloggers.com/why-use-r/">Why Use R?</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p><a href="https://www.guru99.com/r-vs-python.html">R Vs Python: What’s the Difference?</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p><a href="https://www.gapintelligence.com/system/pictures/568/content_why-learn-r1.jpg">Source</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
 
 
