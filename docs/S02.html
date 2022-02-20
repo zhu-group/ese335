@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Section 02 A closer look at environmental datasets</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Environmental Data Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Syllabus.html">
+    <span class="fa fa-bell-o"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="Schedule.html">
+    <span class="fa fa-calendar"></span>
+     
+    Schedule
+  </a>
+</li>
+<li>
+  <a href="Resource.html">
+    <span class="fa fa-wrench"></span>
+     
+    Resource
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-laptop"></span>
+     
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Assignment_01.html">Assignment 01</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Section 02 A closer look at environmental datasets</h1>
+
+</div>
+
+
+<hr />
+<div id="section-example-keeling-curve" class="section level1">
+<h1>Section Example: Keeling Curve</h1>
+<p><img src="figs/mlo_record.png" alt="drawing" width="800"/></p>
+<p><a href="https://scrippsco2.ucsd.edu/history_legacy/keeling_curve_lessons.html">Figure source</a></p>
+<p><a href="https://scrippsco2.ucsd.edu/history_legacy/charles_david_keeling_biography.html">Charles David Keeling</a> directed a program to measure the concentrations of CO<sub>2</sub> in the atmosphere that continued without interruption from the late 1950s through the present. This program, operated out of <a href="https://scripps.ucsd.edu">Scripps Institution of Oceanography</a>, is responsible for the Mauna Loa record, which is almost certainly the <strong><em>best-known icon</em></strong> illustrating the impact of humanity on the planet as a whole. Learn more about <a href="https://scrippsco2.ucsd.edu/history_legacy/keeling_curve_lessons.html">Keeling Curve Lessons</a>.</p>
+<p>We will start with <a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html">monthly CO<sub>2</sub> data</a> measured from Mauna Loa.</p>
+<hr />
+</div>
+<div id="loading-a-.csv-file" class="section level1">
+<h1>Loading a <code>.csv</code> file</h1>
+<p>To begin with,</p>
+<ul>
+<li><p>Download the <code>co2_mm_mlo.csv</code> file from <a href="https://zhu-group.github.io/ese335/download/co2_mm_mlo.csv">here</a></p></li>
+<li><p>Save the file to your <code>working directory</code>.</p></li>
+<li><p>Take a look at the file, where the column <code>co2</code> means monthly average CO<sub>2</sub> in the unit of <code>ppm</code> (part per million, 10<sup>-6</sup>), <code>quality</code> column is the quality flag of the observation, <code>0</code> means the data point does not meet the quality control so that should be discarded, <code>1</code> means the data point is usable.</p></li>
+</ul>
+<p>Now let’s <em>load</em> this file via the following:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Keeling_Data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;co2_mm_mlo.csv&quot;</span>, <span class="at">header =</span> T)</span></code></pre></div>
+<p>The file is loaded into the dataset <code>Keeling_Data</code>. Here we use the <em>option</em> <code>header = T</code> so that the first line of <code>co2_mm_mlo.csv</code> is also loaded as names of the variables. You can try to turn this off by setting <code>header = F</code>, and check what happens.</p>
+<p>Check the names of columns:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Keeling_Data)</span></code></pre></div>
+<pre><code>## [1] &quot;year&quot;         &quot;month&quot;        &quot;decimal_date&quot; &quot;co2&quot;          &quot;quality&quot;</code></pre>
+<p>If column names are not specified, <em>e.g.</em>, using <code>headers = FALSE</code> in a <code>read.csv()</code> function, R assigns default names <code>V1</code>, <code>V2</code>, …, <code>Vn</code>.</p>
+<p>Check the head (first 6 lines) of the dataset using <code>head()</code> function</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Keeling_Data)</span></code></pre></div>
+<pre><code>##   year  month decimal_date    co2 quality
+## 1 1958  March     1958.203 315.70       1
+## 2 1958  April     1958.288 317.45       1
+## 3 1958    May     1958.370 317.51       1
+## 4 1958   June     1958.455 -99.99       0
+## 5 1958   July     1958.537 315.86       1
+## 6 1958 August     1958.622 314.93       1</code></pre>
+<p>Or the end of (last 6 lines) with <code>tail()</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(Keeling_Data)</span></code></pre></div>
+<pre><code>##     year     month decimal_date    co2 quality
+## 762 2021    August     2021.625 414.47       1
+## 763 2021 September     2021.708 413.30       1
+## 764 2021   October     2021.792 413.93       1
+## 765 2021  November     2021.875 415.01       1
+## 766 2021  December     2021.958 416.71       1
+## 767 2022   January     2022.042 418.19       1</code></pre>
+<p>The <code>read.table()</code> function is used for reading in <strong>tabular data</strong> stored in a text file where the columns of data are separated by punctuation characters such as <code>.csv</code> files (csv = comma-separated values). Tabular files are the most common <em>file type</em> you would encounter in your future study, as it’s easy to use and share.</p>
+<p><code>Tabs</code> and <code>commas</code> are the most common punctuation characters used to separate or delimit data points in <code>.csv</code> files. For convenience R provides 2 other versions of <code>read.table()</code>. These are: <code>read.csv()</code> for files where the data are separated with <code>commas</code> and <code>read.delim()</code> for files where the data are separated with <code>tabs</code>. Of these three functions, <code>read.csv()</code> is the most commonly used. If needed it is possible to override the default delimiting punctuation marks for both <code>read.csv()</code> and <code>read.delim()</code>.</p>
+<p>We can begin exploring our data set right away, pulling out columns by specifying them using the <code>$</code> operator:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Keeling_Data<span class="sc">$</span>co2</span></code></pre></div>
+<pre><code>##   [1] 315.70 317.45 317.51 -99.99 315.86 314.93 313.20 -99.99 313.33 314.67
+##  [11] 315.58 316.48 316.65 317.72 318.29 318.15 316.54 314.80 313.84 313.33
+##  [21] 314.81 315.58 316.43 316.98 317.58 319.03 320.04 319.59 318.18 315.90
+##  [31] 314.17 313.83 315.00 316.19 316.89 317.70 318.54 319.48 320.58 319.77
+##  [41] 318.57 316.79 314.99 315.31 316.10 317.01 317.94 318.55 319.68 320.57
+##  [51] 321.02 320.62 319.61 317.40 316.25 315.42 316.69 317.70 318.74 319.07
+##  [61] 319.86 321.38 322.25 321.48 319.74 317.77 316.21 315.99 317.07 318.35
+##  [71] 319.57 -99.99 -99.99 -99.99 322.26 321.89 320.44 318.69 316.70 316.87
+##  [81] 317.68 318.71 319.44 320.44 320.89 322.14 322.17 321.87 321.21 318.87
+##  [91] 317.81 317.30 318.87 319.42 320.62 321.60 322.39 323.70 324.08 323.75
+## [101] 322.38 320.36 318.64 318.10 319.78 321.03 322.33 322.50 323.04 324.42
+## [111] 325.00 324.09 322.54 320.92 319.25 319.39 320.73 321.96 322.57 323.15
+## [121] 323.89 325.02 325.57 325.36 324.14 322.11 320.33 320.25 321.32 322.89
+## [131] 324.00 324.42 325.63 326.66 327.38 326.71 325.88 323.66 322.38 321.78
+## [141] 322.86 324.12 325.06 325.98 326.93 328.13 328.08 327.67 326.34 324.69
+## [151] 323.10 323.06 324.01 325.13 326.17 326.68 327.17 327.79 328.93 328.57
+## [161] 327.36 325.43 323.36 323.56 324.80 326.01 326.77 327.63 327.75 329.72
+## [171] 330.07 329.09 328.04 326.32 324.84 325.20 326.50 327.55 328.55 329.56
+## [181] 330.30 331.50 332.48 332.07 330.87 329.31 327.51 327.18 328.16 328.64
+## [191] 329.35 330.71 331.48 332.65 333.19 332.20 331.07 329.15 327.33 327.28
+## [201] 328.31 329.58 330.73 331.46 331.94 333.11 333.95 333.42 331.97 329.95
+## [211] 328.50 328.36 329.38 -99.99 331.56 332.74 333.36 334.74 334.72 333.98
+## [221] 333.08 330.68 328.96 328.72 330.16 331.62 332.68 333.17 334.96 336.14
+## [231] 336.93 336.17 334.88 332.56 331.29 331.28 332.46 333.60 334.94 335.26
+## [241] 336.66 337.69 338.02 338.01 336.50 334.42 332.36 332.45 333.76 334.91
+## [251] 336.14 336.69 338.27 338.82 339.24 339.26 337.54 335.72 333.97 334.24
+## [261] 335.32 336.82 337.90 338.34 340.07 340.93 341.45 341.36 339.45 337.67
+## [271] 336.25 336.14 337.30 338.29 339.29 340.55 341.63 342.60 343.04 342.54
+## [281] 340.82 338.48 336.95 337.05 338.57 339.91 340.93 341.76 342.78 343.96
+## [291] 344.77 343.88 342.42 340.24 338.38 338.41 339.44 340.78 341.57 342.79
+## [301] 343.37 345.40 346.14 345.76 344.32 342.50 340.46 340.53 341.79 343.20
+## [311] 344.21 344.92 345.68 -99.99 347.77 347.16 345.79 343.74 341.59 341.86
+## [321] 343.31 345.00 345.48 346.41 347.91 348.66 349.28 348.65 346.90 345.26
+## [331] 343.47 343.35 344.73 346.12 346.78 347.48 348.25 349.86 350.52 349.98
+## [341] 348.25 346.17 345.48 344.82 346.22 347.49 348.73 348.92 349.81 351.40
+## [351] 352.15 351.59 350.21 348.20 346.66 346.72 348.08 349.28 350.51 351.70
+## [361] 352.50 353.67 354.35 353.88 352.80 350.49 348.97 349.37 350.43 351.62
+## [371] 353.07 353.43 354.08 355.72 355.95 355.44 354.05 351.84 350.09 350.33
+## [381] 351.55 352.91 353.86 355.10 355.75 356.38 357.38 356.39 354.89 353.07
+## [391] 351.38 351.69 353.14 354.41 354.93 355.82 357.33 358.77 359.23 358.23
+## [401] 356.30 353.97 352.34 352.43 353.89 355.21 356.34 357.21 357.97 359.22
+## [411] 359.71 359.43 357.15 354.98 353.01 353.41 354.42 355.68 357.10 357.42
+## [421] 358.59 359.39 360.30 359.64 357.46 355.76 354.14 354.23 355.53 357.03
+## [431] 358.36 359.04 360.11 361.36 361.78 360.94 359.51 357.59 355.86 356.21
+## [441] 357.65 359.10 360.04 361.00 361.98 363.44 363.83 363.33 361.78 359.33
+## [451] 358.32 358.14 359.61 360.82 362.20 363.36 364.28 364.69 365.25 365.06
+## [461] 363.69 361.55 359.69 359.72 361.04 362.39 363.24 364.21 364.65 366.49
+## [471] 366.77 365.73 364.46 362.40 360.44 360.98 362.65 364.51 365.39 366.10
+## [481] 367.36 368.79 369.56 369.13 367.98 366.10 364.16 364.54 365.67 367.30
+## [491] 368.35 369.28 369.84 371.15 371.12 370.46 369.61 367.06 364.95 365.52
+## [501] 366.88 368.26 369.45 369.71 370.75 371.98 371.74 371.87 370.02 368.27
+## [511] 367.15 367.18 368.53 369.83 370.76 371.69 372.63 373.55 374.03 373.40
+## [521] 371.68 369.78 368.34 368.61 369.94 371.42 372.70 373.37 374.30 375.19
+## [531] 375.93 375.69 374.16 372.03 370.92 370.73 372.43 373.98 375.07 375.82
+## [541] 376.64 377.92 378.78 378.46 376.88 374.57 373.34 373.31 374.84 376.17
+## [551] 377.17 378.05 379.06 380.54 380.80 379.87 377.65 376.17 374.43 374.63
+## [561] 376.33 377.68 378.63 379.91 380.95 382.48 382.64 382.40 380.93 378.93
+## [571] 376.89 377.19 378.54 380.31 381.58 382.40 382.86 384.80 385.22 384.24
+## [581] 382.65 380.60 379.04 379.33 380.35 382.02 383.10 384.12 384.81 386.73
+## [591] 386.78 386.33 384.73 382.24 381.20 381.37 382.70 384.19 385.78 386.06
+## [601] 386.28 387.33 388.78 387.99 386.61 384.32 383.41 383.21 384.41 385.79
+## [611] 387.17 387.70 389.04 389.76 390.36 389.70 388.25 386.29 384.95 384.64
+## [621] 386.23 387.63 388.91 390.41 391.37 392.67 393.21 392.38 390.41 388.54
+## [631] 387.03 387.43 388.87 389.99 391.50 392.05 392.80 393.44 394.41 393.95
+## [641] 392.72 390.33 389.28 389.19 390.48 392.06 393.31 394.04 394.59 396.38
+## [651] 396.93 395.91 394.56 392.59 391.32 391.27 393.20 394.57 395.78 397.03
+## [661] 397.66 398.64 400.02 398.81 397.51 395.39 393.72 393.90 395.36 397.03
+## [671] 398.04 398.27 399.91 401.51 401.96 401.43 399.38 397.32 395.64 396.29
+## [681] 397.55 399.15 400.18 400.55 401.74 403.35 404.15 402.97 401.46 399.11
+## [691] 397.82 398.49 400.27 402.06 402.73 404.25 405.06 407.60 407.90 406.99
+## [701] 404.59 402.45 401.23 401.79 403.72 404.64 406.36 406.66 407.53 409.22
+## [711] 409.89 409.08 407.33 405.32 403.57 403.82 405.31 407.00 408.15 408.52
+## [721] 409.59 410.45 411.44 410.99 408.90 407.16 405.71 406.19 408.21 409.27
+## [731] 411.03 411.96 412.18 413.54 414.86 414.16 411.97 410.18 408.76 408.75
+## [741] 410.48 411.98 413.61 414.34 414.74 416.45 417.31 416.60 414.62 412.78
+## [751] 411.52 411.51 413.12 414.26 415.52 416.75 417.64 419.05 419.13 418.94
+## [761] 416.96 414.47 413.30 413.93 415.01 416.71 418.19</code></pre>
+<p>Let’s do some simple statistical checks with <code>Keeling_Data$co2</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Min</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Keeling_Data<span class="sc">$</span>co2)</span></code></pre></div>
+<pre><code>## [1] -99.99</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Max</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(Keeling_Data<span class="sc">$</span>co2)</span></code></pre></div>
+<pre><code>## [1] 419.13</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Range</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(Keeling_Data<span class="sc">$</span>co2)</span></code></pre></div>
+<pre><code>## [1] -99.99 419.13</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Keeling_Data<span class="sc">$</span>co2)</span></code></pre></div>
+<pre><code>## [1] 352.9977</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Median</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(Keeling_Data<span class="sc">$</span>co2)</span></code></pre></div>
+<pre><code>## [1] 353.86</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show quantiles</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Keeling_Data<span class="sc">$</span>co2)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  -99.99  329.33  353.86  353.00  381.07  419.13</code></pre>
+<p>You will find there are some <code>-99.99</code> values, which are <em>missing values</em>. We will get back to this later.</p>
+<p>You can use <code>[]</code> to extract elements of a vector by specifying their corresponding <em>index</em>.</p>
+<p><font size="2" color="red"> <strong>Important: </strong></font> Index in R starts from <code>1</code>, not <code>0</code>. For example:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Keeling_Data<span class="sc">$</span>co2[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<pre><code>##  [1] 315.70 317.45 317.51 -99.99 315.86 314.93 313.20 -99.99 313.33 314.67</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Keeling_Data<span class="sc">$</span>year[<span class="dv">200</span><span class="sc">:</span><span class="dv">210</span>]</span></code></pre></div>
+<pre><code>##  [1] 1974 1974 1974 1975 1975 1975 1975 1975 1975 1975 1975</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>Keeling_Data<span class="sc">$</span>co2[<span class="dv">0</span>]</span></code></pre></div>
+<pre><code>## numeric(0)</code></pre>
+<p>We can mimic the Keeling Curve using <code>plot()</code> function</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Keeling_Data<span class="sc">$</span>decimal_date, Keeling_Data<span class="sc">$</span>co2)</span></code></pre></div>
+<p><img src="S02_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>It’s ugly as there are a few data points with a value of <code>-99.99</code> (quality=<code>0</code>). In fact, we should never use data points with a value of <code>-99.99</code> (quality=<code>0</code>). One good way to do so is to set those values to <code>NA</code> (stands for Not Available) or <em>Missing Values</em>.</p>
+<p><font size="2" color="red"> <strong>Important: </strong></font> <code>NA</code> is NOT the same as <code>zero</code>.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>Year     <span class="ot">&lt;-</span> Keeling_Data<span class="sc">$</span>decimal_date</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>CO2_ppm  <span class="ot">&lt;-</span> Keeling_Data<span class="sc">$</span>co2 </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>CO2_ppm[<span class="fu">which</span>(CO2_ppm <span class="sc">==</span> <span class="sc">-</span><span class="fl">99.99</span>)]  <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Year, CO2_ppm, <span class="at">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<p><img src="S02_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Here we use <code>which()</code> function to return the indexes of elements equal to <code>-99.99</code>. Use <code>type="l"</code> to plot a line, <code>type="p"</code> for points, and <code>type="o"</code> for points + line.</p>
+<p><font size="2" color="red"> <strong>Important: </strong></font> Always use the <code>na.rm=T</code> option to handle vectors containing <code>NA</code> values.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(CO2_ppm)</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(CO2_ppm, <span class="at">na.rm=</span>T)</span></code></pre></div>
+<pre><code>## [1] 357.1699</code></pre>
+<hr />
+</div>
+<div id="missing-values" class="section level1">
+<h1>Missing Values</h1>
+<div id="different-kinds-of-missing-values" class="section level2">
+<h2>Different kinds of missing values</h2>
+<p>Despite the best laid plans, environmental data often contain missing data. This generally is caused by the following reasons.</p>
+<ul>
+<li><p>Data points are indeed missing. For example, the instrument may be out of service, or some data records are lost.</p></li>
+<li><p>Observed values are below the instrument <em>detection limit</em> (DL) or <em>limit of detection</em> (LOD). This is often seen for experimental data sets.</p></li>
+<li><p>Observations are labeled as bad observations. This is usually seen in Remote Sensing data sets.</p></li>
+</ul>
+</div>
+<div id="handling-missing-values" class="section level2">
+<h2>Handling missing values</h2>
+<p>As you can see, missing data can arise for all sorts of reasons, the problem is how to deal with it? There are lots of options for dealing with missing data, ranging from simple to complex.</p>
+<ul>
+<li><p>Perhaps the easiest solution is to <strong>ignore or delete observations</strong> with any missing data (like what just did). This is a luxury we often cannot afford since we may have a small sample size to begin with.</p></li>
+<li><p>Another option is to <strong>replace the missing values with values</strong> based on expert prior knowledge. For example, people usually replace values below DL with <code>0</code>, DL, or half DL. This of course is risky business and should not be done unless under very special circumstances.</p></li>
+<li><p>A final solution is to estimate the missing values using methods of imputation. The simplest of these, and therefore the most commonly used, is to <strong>replace the missing value with the mean or median of the variable</strong>. The purpose behind this imputation method is to replace the missing value with a value that will no <strong>exert any influence on the analysis</strong>. There are much more complex methods of imputation, including for example using a statistical model to predict the missing values based on the other variables in the data set. This procedure comes at the cost of using the same data to predict the missing values as we intend to use in our final statistical model. One solution of course is to use a separate set of variables for the imputation than we intend to use in the final model.</p></li>
+</ul>
+<p>Regardless of the method employed, we have to be suspicious of any data set in which a large number of missing values have been replaced. See more from <a href="http://www.umass.edu/landeco/teaching/ecodata/schedule/exploratory.pdf">Analysis of Environmental DataConceptual Foundations:Data Exploration, Screening &amp; Adjustments</a>.</p>
+<hr />
+</div>
+</div>
+<div id="data-types-in-r" class="section level1">
+<h1>Data Types in R</h1>
+<p>Let’s try:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Keeling_Data<span class="sc">$</span>co2[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>] <span class="sc">*</span> <span class="fl">1e3</span></span></code></pre></div>
+<pre><code>##  [1] 315700 317450 317510 -99990 315860 314930 313200 -99990 313330 314670</code></pre>
+<p>By doing so, we convert CO<sub>2</sub> in a unit of ppb (part per billion, 10<sup>-9</sup>). Then how about:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Keeling_Data<span class="sc">$</span>month[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>] <span class="sc">+</span> Keeling_Data<span class="sc">$</span>co2[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<p>The above line won’t work as <code>Keeling_Data$month</code> and <code>Keeling_Data$co2</code> has different <em>data types</em>.</p>
+<p>In R, there are 5 main types: <code>double</code>, <code>integer</code>, <code>complex</code>, <code>logical</code>, and <code>character</code>. We can ask what type of data something is using the <code>typeof()</code> function:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(Keeling_Data<span class="sc">$</span>co2)</span></code></pre></div>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(Keeling_Data<span class="sc">$</span>month)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(Keeling_Data<span class="sc">$</span>quality)</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">&lt;=</span> <span class="dv">2</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+<p>By default, R uses float numbers. Use a <code>L</code> suffix to force the number to be an integer:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(1L)</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<p>We don’t use <code>complex</code> very often; it can be defined as <code>a + bi</code>, where <code>a</code> and <code>b</code> are numbers:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">1</span><span class="sc">+</span>1i)</span></code></pre></div>
+<pre><code>## [1] &quot;complex&quot;</code></pre>
+<p>No matter how complicated our analyses become, all data in R is interpreted as one of these basic data types.</p>
+<p>For more about data types and structure, read this <a href="https://zhu-group.github.io/ese5023/Section_03.html#Data_structure">note</a></p>
+</div>
+<div id="environmental-data-have-unique-features" class="section level1">
+<h1>Environmental data have unique features</h1>
+<div id="temporal-time-series" class="section level2">
+<h2>Temporal (time series)</h2>
+<p>As you can see from the monthly CO<sub>2</sub> data, the <em>time series</em> is clearly defined. A time series is a sequence of numerical data points in successive order. Environmental data are usually sampled/stored in various time scales. Can you think about a few examples?</p>
+</div>
+<div id="spatial" class="section level2">
+<h2>Spatial</h2>
+<p>Almost all environmental data we have today can be classified as spatial data. Spatial data tells us what is happening where. The data contains geospatial references, such as point coordinates or larger areas, but it actually includes many additional attributes. In this respect, spatial data provides the glue and the context of environmental information, essential for understanding and assessing what is happening.</p>
+<p><img src="figs/spatial_data.jpg" alt="drawing" width="600"/></p>
+<p><a href="https://whmconsulting.com/wp-content/uploads/2017/01/cartografia2.jpg">Figure Source</a></p>
+</div>
+<div id="multivariate" class="section level2">
+<h2>Multivariate</h2>
+<p>As you may imagine, it makes sense to measure more than one variable in one experiment. For example, The <a href="https://daac.ornl.gov/ATOM/campaign/documentation.html">Atmospheric Tomography Mission (ATom)</a> is a flight campaign that studies the impact of human-produced air pollution on greenhouse gases and on chemically reactive gases in the atmosphere.</p>
+<p>So why do we want to do so? What new information we might gain using such multivariate data sets?</p>
+</div>
+<div id="uncertain" class="section level2">
+<h2>Uncertain</h2>
+<p>Uncertainty refers to a lack of data or an incomplete understanding. Every measurement comes with a certiany uncertainty, which can be quantified by some efforts.</p>
+<hr />
+</div>
+</div>
+<div id="in-class-exercises" class="section level1">
+<h1>In-class exercises</h1>
+<div id="exercise-1" class="section level2">
+<h2>Exercise #1</h2>
+<p>Using <code>Keeling_Data</code>, try the following ways to call variables or elements:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>Keeling_Data[<span class="dv">2</span>]</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>Keeling_Data<span class="sc">$</span>month</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>Keeling_Data[<span class="st">&quot;month&quot;</span>]</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>Keeling_Data[<span class="dv">2</span>, <span class="dv">2</span>]</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>Keeling_Data[, <span class="dv">2</span>]</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>Keeling_Data[<span class="dv">2</span>, ]</span></code></pre></div>
+<ul>
+<li>Can you explain what is returned by each one and why?</li>
+</ul>
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise #2</h2>
+<p>Use <code>Keeling_Data</code> again, compute the annual mean of CO<sub>2</sub> since <code>1959</code>, plot your results.</p>
+<hr />
+</div>
+</div>
+<div id="further-reading" class="section level1">
+<h1>Further reading</h1>
+<ul>
+<li><a href="https://cran.r-project.org/doc/contrib/Short-refcard.pdf">R Reference Card</a></li>
+<li><a href="http://swcarpentry.github.io/r-novice-gapminder/">R for Reproducible Scientific Analysis</a></li>
+<li><a href="http://swcarpentry.github.io/r-novice-inflammation/">Programming with R</a></li>
+<li><a href="http://www.r-tutor.com/r-introduction">R Introduction</a></li>
+<li><a href="https://www.statmethods.net/r-tutorial/index.html">R Tutorial For Beginners - Quick-R</a></li>
+</ul>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
