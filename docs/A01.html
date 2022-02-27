@@ -11,7 +11,7 @@
 
 
 
-<title>ESE335</title>
+<title>Assignment 01</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,10 +19,11 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -236,6 +237,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -243,6 +313,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -306,18 +386,52 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">ESE335</h1>
+<h1 class="title toc-ignore">Assignment 01</h1>
 
 </div>
 
 
-<div id="environmental-data-analysis" class="section level3">
-<h3>Environmental Data Analysis</h3>
-<p><img src="figs/ese335.png" /></p>
+<p><strong>Out: 02/28 10:20 </strong><br />
+<strong>Due: 03/14 10:20 </strong></p>
+<hr />
+<div id="instructions" class="section level1">
+<h1>Instructions</h1>
+<p><strong>Collaboration:</strong></p>
+<p>Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements:</p>
+<ul>
+<li><p>Cite your collaborators <strong>fully and completely</strong> (<em>e.g.</em>, “XXX explained to me what is asked in problem set 3”). Or cite online resources (<em>e.g.</em>, “I got inspired by reading XXX”) that helped you.</p></li>
+<li><p>Write your scripts and report <strong>independently</strong> - the scripts and report must come from you only.</p></li>
+</ul>
+<p><strong>Submitting your assignment:</strong></p>
+<p>Submit your R scripts and report to TA (<a href="mailto:12132243@mail.sustech.edu.cn" class="email">12132243@mail.sustech.edu.cn</a>)</p>
+<p><strong>Late Submission:</strong></p>
+<p>Late submissions will not receive any credit.</p>
+<hr />
+</div>
+<div id="solving-problems" class="section level1">
+<h1>1. Solving problems</h1>
+<p><strong>1.1 [10 points]</strong> [RS], P23, Exercise #8.</p>
+<p><strong>1.2 [10 points]</strong> [RS], P24, Exercise #17.</p>
+<p><strong>1.3 [10 points]</strong> [RS], P24, Exercise #18.</p>
+<hr />
+</div>
+<div id="flowchart" class="section level1">
+<h1>2. Flowchart</h1>
+<p><strong>[10 points]</strong> Write a function <code>Print_values</code> with arguments <code>a</code>, <code>b</code>, and <code>c</code> to reflect the following flowchart. Here the purple parallelogram operator is to print values in the given order. Report your output with some random <code>a</code>, <code>b</code>, and <code>c</code> values.</p>
+<p><img src="figs/flowchart_a1.png" alt="drawing" width="500"/></p>
+<hr />
+</div>
+<div id="matrix-multiplication" class="section level1">
+<h1>3. Matrix multiplication</h1>
+<p><strong>3.1 [5 points]</strong> Generate two matrices <code>M1</code> (<code>5</code> rows and <code>10</code> columns ) and <code>M2</code> (<code>10</code> rows and <code>5</code> columns ); both are filled with random integers from <code>0</code> and <code>50</code>.</p>
+<p>[<strong>Hint:</strong> use the <code>sample</code> function to draw random integers]</p>
+<p><strong>3.2 [10 points]</strong> Write a function <code>Matrix_multip</code> to do matrix multiplication, <em>i.e.</em>, <code>M1 * M2</code>. Here you are <strong>only</strong> allowed to use <code>for</code> loop, <code>*</code> operator, and <code>+</code> operator.</p>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -350,6 +464,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

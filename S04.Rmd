@@ -1,0 +1,160 @@
+---
+title: "Section 04 Review of statistic basics (II)"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+***
+
+***Pre-class reading:*** [RS] p1-22 
+
+***
+
+# Prerequisites
+
+Install the following package:
+
++ `gtools`
+
+Load the libraries with R:
+```{r}
+library(gtools)
+```
+
+***
+
+# Section Example: a new technology to remove pollutant X
+
+<img src="figs/sampling.jpg" alt="drawing" width="600"/>
+
+[Figure Source](https://www.alamy.com/zouping-china-march-15-2021-agricultural-technicians-take-samples-of-wheat-soil-at-the-jiaoqiao-town-base-of-the-cultivated-land-soil-environmental-quality-improvement-experiment-and-demonstration-project-in-zouping-city-shandong-province-china-march-15-2021-photo-by-dong-naide-costfotosipa-usa-image415007617.html)
+
+Suppose we want to test whether a new technology is useful in removing pollutant X. To do so, we prepare `6` cases, randomly select `3` cases and apply the technology, leaving the rest without treatment. Then we measure X levels from the two groups (assuming no unit).
+
++ Group A (new technology applied): `1.0`, `2.0`, `3.0`
+
++ Group B (no treatment): `2.0`, `3.0`, `4.0`
+
+So the mean of group A is `2.0`, mean of group B is `3.0`, with an observed difference of `-1.0`. One may argue the difference is caused by the new technology; while it is also possible that the difference could be driven by randomization when no treatment being applied. 
+
+So the question is: can the observations back up the usefulness of the new technology?
+
+***
+
+# A randomization test example
+
+Recall the processes of [hypothesis testing](https://zhu-group.github.io/ese335/S03.html#Hypothesis_tests) in Section 03.
+
+Given the research question in the previous example, we write hypotheses as:
+
++ H~0~: The new technology can NOT remove X
+
++ H~1~: The new technology does have effects in removing X
+
+Let's assume H~0~ is true, what is the chance of randomization leads to the observed or more extreme difference? In other words, what is the chance of grouping leads to the **observed or more extreme difference** given H~0~ is true? This can be written as:
+
+$$P(diff <= -1.0 | H_{0} )$$
+Since the sample size is small, we can write all possible groupings (combinations) for A with R.
+
+```{r}
+# Need `gtools` package
+library(gtools)
+
+# Obs from group A
+Obs_A   <- c(1.0, 2.0, 3.0)
+
+# Obs from group B
+Obs_B   <- c(2.0, 3.0, 4.0)
+
+# Compute the difference, d
+Obs_diff <- mean(Obs_A) - mean(Obs_B)
+print(Obs_diff)
+
+# Given H0 is true, we assume that A and B are from the same population
+# So the total possible groupings for A is C(6,3) 
+Obs_all     <- c(Obs_A, Obs_B)
+Groupings_A <- combinations(length(Obs_all),length(Obs_A),Obs_all,F)
+
+# Show all possible groupings of A
+print(Groupings_A)
+```
+
+Next, we can compute all possible differences:
+
+```{r}
+# Make an empty list
+diff <- c()
+
+# Loop all possible grouping methods for A
+for(i in 1:dim(Groupings_A)[1]){
+  # Mean of group A
+  mean_A <- mean(Groupings_A[i,])
+  
+  # Mean of group B
+  mean_B <- (sum(Obs_all)-sum(Groupings_A[i,]))/length(Obs_B)
+  
+  # Difference
+  diff <- c(diff, mean_A - mean_B)
+}
+
+# Show all possible differences
+print(diff)
+
+# Plot all possible differences
+hist(diff)
+
+# Add a vertical line
+abline(v=Obs_diff, col="red", lwd=5, lty=2)
+```
+
+OK, given H~0~ is true, what is the chance that grouping leads to the observed or more extreme difference? From the above plot, we count that there are `5` cases out of `20` cases that the difference is as extreme or more extreme than `-1.0`. 
+
+```{r}
+# Compute p-value
+length(which(diff<=Obs_diff))/length(diff)
+```
+
+The p-value, in this case, is `0.25`, which is not a small value (compared with `0.05`). So we can not rule out that H~0~, meaning the observations fail to back up the usefulness of the new technology.
+
+Now change the observations to:
+
++ Group A (new technology applied): `1.0`, `2.0`, `3.0`
+
++ Group B (no treatment): `20.0`, `30.0`, `40.0`
+
+Re-compute the p-value, see what would change. Can you explain why?
+
+***
+
+# Probability Density Function (PDF)
+
+In probability theory, a probability density function (PDF) $f(x)$, or density of a **continuous random variable**, is a function that describes the relative likelihood (probability or chance) for this random variable $X$ to take on a given value $x$.
+
+Probability density function is defined by following formula:
+$$ P(a \le X \le b) = \int_a^b f(x) ~ dx $$
+
+***
+
+## Exercise #1
+
+Suppose we want to test another new technology, to check whether it is useful in **increasing** student's scores. To do so, we recruit `9` students, randomly select `5` of them to apply this technology, leaving the rest students without treatment. Then we measure scores from the two groups:
+
++ Group A (new technology applied): `2.0`, `3.0`, `4.0`, `5.0`, `6.0`
+
++ Group B (no treatment): `1.0`, `2.0`, `3.0`, `4.0`
+
+Do the observations back up the usefulness of such new technology? Please use a significant level of `0.10`.
+
+## Exercise #2
+
+Suppose we want to test another new technology, to check whether it **has impact** on (could increase or reduce) student's scores. To do so, we recruit `9` students, randomly select `5` of them to apply this technology, leaving the rest students without treatment. Then we measure scores from the two groups:
+
++ Group A (new technology applied): `2.0`, `3.0`, `4.0`, `5.0`, `6.0`
+
++ Group B (no treatment): `1.0`, `2.0`, `3.0`, `4.0`
+
+What is the p-value now? Why is it different from the p-value from the previous exercise #1?
