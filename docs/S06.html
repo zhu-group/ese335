@@ -499,18 +499,27 @@ div.tocify {
 <p>Suppose we want to determine the concentration of CO (carbon monoxide) near freeways with various conditions of traffic flow. The basic technique involves capturing air samples in special bags, and then determine the CO concentrations in a bag using an instrument called spectrophotometer. The spectrophotometers are quite delicate and have to be calibrated every day. This is done by measuring CO concentration in a <em>span gas</em>, where the concentration is precisely controlled at <code>70</code> ppm. If the spectrophotometer reads close to <code>70</code> ppm on the span gas, it’s ready for use; otherwise, it has to be adjusted.</p>
 <p>One day, we make five readings on span gas, and get:</p>
 <p><code>78, 83, 68, 72, 88</code></p>
-<p>So <code>4</code> out of <code>5</code> of these numbers are higher than <code>70</code>, and some of them by quite a bit. Can this be explained on the basis of chance variation? Or does it show bias?</p>
+<p>So the error then is:</p>
+<p><code>8, 13, -2, 2, 18</code></p>
+<p>OK, <code>4</code> out of <code>5</code> of these numbers are higher than <code>0</code>, and some of them by quite a bit. Can this be explained on the basis of chance variation? Or does it show bias?</p>
+<hr />
+</div>
+<div id="instrument-error" class="section level1">
+<h1>Instrument error</h1>
+<p>Instrument error refers to the error of a measuring instrument, or the difference between the actual value and the value indicated by the instrument. There can be errors of various types, and the overall error is the sum of the individual errors. Here we focus on <strong>systematic errors</strong> and <strong>random errors</strong>.</p>
+<p>The size of the systematic error is sometimes referred to as the <strong>accuracy</strong>. For example the instrument may always indicate a value 5% higher than the actual value. A systematic error may arise because the instrument has been incorrectly <strong>calibrated</strong>, or perhaps because a defect has arisen in the instrument since it was calibrated. Instruments should be calibrated against a standard instrument that is known to be accurate, and ideally the calibration should be repeated at intervals.</p>
+<p>The range in amount of possible random errors is sometimes referred to as the <strong>precision</strong>. Random errors may arise because of the design of the instrument. In particular they may be subdivided between errors in the amount shown on the display, and how accurately the display can actually be read.</p>
 <hr />
 </div>
 <div id="the-z-ratio" class="section level1">
 <h1>The Z-Ratio</h1>
-<p>We also know that the spectrophotometer can measure CO concentration up to <code>100</code> ppm with an instrument error of <code>10</code> ppm (<code>1</code> <span class="math inline">\(\sigma\)</span>). Instrument error generally follows a normal distribution. In this case, let’s now assume that the error follows a normal distribution <span class="math inline">\(N(\mu , 10)\)</span>, where <span class="math inline">\(\mu\)</span> is unknown. With this set-up, we can write:</p>
+<p>We also know that the spectrophotometer can measure CO concentration with an instrument random error of <code>10</code> ppm (<code>1</code> <span class="math inline">\(\sigma\)</span>). Instrument error generally follows a normal distribution. In this case, let’s now assume that the error follows a normal distribution <span class="math inline">\(N(\mu , 10)\)</span>, where <span class="math inline">\(\mu\)</span> is unknown. With this set-up, we can write:</p>
 <ul>
-<li><p>H0: The instrument has no bias (<span class="math inline">\(\mu = 0\)</span>)</p></li>
-<li><p>H1: The instrument has a positive bias (<span class="math inline">\(\mu &gt; 0\)</span>)</p></li>
+<li><p>H0: The spectrophotometer has no bias (<span class="math inline">\(\mu = 0\)</span>)</p></li>
+<li><p>H1: The spectrophotometer has a positive bias (<span class="math inline">\(\mu &gt; 0\)</span>)</p></li>
 </ul>
 <p>To test the hypothesis (H0), let’s calculate the p-value assuming H0 is true. Here we will use <em>Z-Ratio</em>, which is defined as:</p>
-<p><span class="math display">\[Z=\frac {Estimate - Parameter} {SD(Estimate)}  \]</span> In this case, <span class="math inline">\(Estimate\)</span> is the sample average (<span class="math inline">\(\overline{X}\)</span>), and <span class="math inline">\(Parameter\)</span> is the population mean (<span class="math inline">\(\mu\)</span>). Since the sample is from a normal population with a known (<span class="math inline">\(\sigma\)</span>), the SD of the sample average (<span class="math inline">\(\overline{X}\)</span>) is then <span class="math inline">\(\ {\sigma} / {\sqrt{n}}\)</span>.</p>
+<p><span class="math display">\[Z=\frac {Estimate - Parameter} {SD(Estimate)}  \]</span> In this case, <span class="math inline">\(Estimate\)</span> is the sample average (<span class="math inline">\(\overline{X}\)</span>), and <span class="math inline">\(Parameter\)</span> is the population mean (<span class="math inline">\(\mu\)</span>). Since the sample is from a normal population with a known (<span class="math inline">\(\sigma\)</span>), the SD of the sample average (<span class="math inline">\(\overline{X}\)</span>) is then <span class="math inline">\(\ {\sigma} / {\sqrt{n}}\)</span>, here <span class="math inline">\(n\)</span> is the sample size.</p>
 <p>For our job, it is then specified as:</p>
 <p><span class="math display">\[Z=\frac {\overline{X} - \mu} {\sigma / \sqrt{n}}   \]</span></p>
 <p>Basically, Z-Ratio describes how far do the observations deviate from the assumed mean.</p>
@@ -529,7 +538,7 @@ div.tocify {
 <span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Error</span></span>
 <span id="cb2-8"><a href="#cb2-8"></a>Error    &lt;-<span class="st"> </span>Sample <span class="op">-</span><span class="st"> </span>Baseline</span>
 <span id="cb2-9"><a href="#cb2-9"></a></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># Instrument error SD</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># Spectrophotometer error SD</span></span>
 <span id="cb2-11"><a href="#cb2-11"></a>SD       &lt;-<span class="st"> </span><span class="dv">10</span></span>
 <span id="cb2-12"><a href="#cb2-12"></a></span>
 <span id="cb2-13"><a href="#cb2-13"></a><span class="co"># Get Z-ratio</span></span>
@@ -545,8 +554,8 @@ div.tocify {
 <span id="cb2-23"><a href="#cb2-23"></a></span>
 <span id="cb2-24"><a href="#cb2-24"></a><span class="kw">print</span>(P_value)</span></code></pre></div>
 <pre><code>## [1] 0.04056795</code></pre>
-<p>OK, we have a probability of about <code>4.06%</code> getting a statistic (<span class="math inline">\(Z\)</span>) as extreme or more extreme than the observed statistic (<code>1.74</code>), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, the instrument has bias based on the observations.</p>
-<p>Now change the instrument error to <code>20</code> and repeat the above steps. Can you explain what happens?</p>
+<p>OK, we have a probability of about <code>4.06%</code> getting a statistic (<span class="math inline">\(Z\)</span>) as extreme or more extreme than the observed statistic (<code>1.74</code>), assuming H0 is true. This is a small probability, and is NOT likely due to chance. We can reject H0 based on the observations. Thus, the spectrophotometer has postive bias based on the observations.</p>
+<p>Now change the spectrophotometer error to <code>20</code> and repeat the above steps. Can you explain what happens?</p>
 <hr />
 </div>
 <div id="the-t-ratio" class="section level1">
@@ -641,7 +650,7 @@ div.tocify {
 <span id="cb6-27"><a href="#cb6-27"></a></span>
 <span id="cb6-28"><a href="#cb6-28"></a><span class="kw">print</span>(P_value)</span></code></pre></div>
 <pre><code>## [1] 0.04844399</code></pre>
-<p>Now, we have a probability of about <code>4.84%</code> getting a statistic (<span class="math inline">\(t\)</span>) as extreme or more extreme than the observed statistic (<code>2.16</code>), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, the instrument is positively biased based on the observations.</p>
+<p>Now, we have a probability of about <code>4.84%</code> getting a statistic (<span class="math inline">\(t\)</span>) as extreme or more extreme than the observed statistic (<code>2.16</code>), assuming H0 is true. This is a small probability, and is NOT likely due to chance. We can reject H0 based on the observations. Thus, the instrument is positively biased based on the observations.</p>
 <hr />
 </div>
 <div id="one-sample-t-test-with-r" class="section level1">
