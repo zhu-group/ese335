@@ -525,66 +525,74 @@ div.tocify {
 <p><span class="math display">\[Z=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {\sqrt { \frac{\sigma_1^2} {n_1} +  \frac{\sigma_2^2} {n_2} } }   \]</span> and <span class="math inline">\(Z \sim N(0,1)\)</span>.</p>
 <p>Assuming H0 is true, we get <span class="math inline">\(Z\)</span> is <code>-2.16</code>. Then with R, we can compute the two-side p-value for this statistic.</p>
 <p>Before computing <span class="math inline">\(Z\)</span>, let’s check the data first.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Shenzhen </span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Shenzhen sample</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>SZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">25.6</span>, <span class="fl">23.7</span>, <span class="fl">21.9</span>, <span class="fl">26.0</span>, <span class="fl">24.5</span>, <span class="fl">22.4</span>, <span class="fl">26.7</span>, <span class="fl">24.6</span>, <span class="fl">22.7</span>, <span class="fl">23.8</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>SZ_n      &lt;-<span class="st"> </span><span class="kw">length</span>(SZ_PM2<span class="fl">.5</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a>SZ_sigma  &lt;-<span class="st"> </span><span class="fl">2.0</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># Guangzhou</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>GZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">27.1</span>, <span class="fl">24.2</span>, <span class="fl">27.9</span>, <span class="fl">33.3</span>, <span class="fl">26.4</span>, <span class="fl">28.7</span>, <span class="fl">25.6</span>, <span class="fl">23.2</span>, <span class="fl">24.0</span>, <span class="fl">27.1</span>, <span class="fl">26.2</span>, <span class="fl">24.4</span>)</span>
-<span id="cb2-8"><a href="#cb2-8"></a>GZ_n      &lt;-<span class="st"> </span><span class="kw">length</span>(GZ_PM2<span class="fl">.5</span>)</span>
-<span id="cb2-9"><a href="#cb2-9"></a>GZ_sigma  &lt;-<span class="st"> </span><span class="fl">3.0</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co"># Make data frame</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>PM2<span class="fl">.5</span>_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">PM2.5 =</span> <span class="kw">c</span>(SZ_PM2<span class="fl">.5</span>, GZ_PM2<span class="fl">.5</span>),</span>
-<span id="cb2-13"><a href="#cb2-13"></a>                         <span class="dt">City =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;Shenzhen&quot;</span>,SZ_n),<span class="kw">rep</span>(<span class="st">&quot;Guangzhou&quot;</span>,GZ_n)))</span>
-<span id="cb2-14"><a href="#cb2-14"></a></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co"># Compare boxplots</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>PM2<span class="fl">.5</span>_data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">as.character</span>(City), <span class="dt">y=</span>PM2<span class="fl">.5</span>)) <span class="op">+</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill=</span><span class="st">&quot;steelblue&quot;</span>) <span class="op">+</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;PM2.5 Distribution by City&quot;</span>, <span class="dt">x=</span><span class="st">&quot;City&quot;</span>, <span class="dt">y=</span><span class="st">&quot;ug/m3&quot;</span>)</span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Shenzhen population sigma</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>SZ_sigma  &lt;-<span class="st"> </span><span class="fl">2.0</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Guangzhou sample</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>GZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">27.1</span>, <span class="fl">24.2</span>, <span class="fl">27.9</span>, <span class="fl">33.3</span>, <span class="fl">26.4</span>, <span class="fl">28.7</span>, <span class="fl">25.6</span>, <span class="fl">23.2</span>, <span class="fl">24.0</span>, <span class="fl">27.1</span>, <span class="fl">26.2</span>, <span class="fl">24.4</span>)</span>
+<span id="cb2-9"><a href="#cb2-9"></a>GZ_n      &lt;-<span class="st"> </span><span class="kw">length</span>(GZ_PM2<span class="fl">.5</span>)</span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># Guangzhou population sigma</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>GZ_sigma  &lt;-<span class="st"> </span><span class="fl">3.0</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co"># Make data frame, create a data table</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>PM2<span class="fl">.5</span>_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">PM2.5 =</span> <span class="kw">c</span>(SZ_PM2<span class="fl">.5</span>, GZ_PM2<span class="fl">.5</span>),</span>
+<span id="cb2-15"><a href="#cb2-15"></a>                         <span class="dt">City =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;Shenzhen&quot;</span>,SZ_n),<span class="kw">rep</span>(<span class="st">&quot;Guangzhou&quot;</span>,GZ_n)))</span>
+<span id="cb2-16"><a href="#cb2-16"></a></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="co"># Compare boxplots</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="co"># %&gt;% means pipe</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>PM2<span class="fl">.5</span>_data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">as.character</span>(City), <span class="dt">y=</span>PM2<span class="fl">.5</span>)) <span class="op">+</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill=</span><span class="st">&quot;steelblue&quot;</span>) <span class="op">+</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;PM2.5 Distribution by City&quot;</span>, <span class="dt">x=</span><span class="st">&quot;City&quot;</span>, <span class="dt">y=</span><span class="st">&quot;ug/m3&quot;</span>)</span></code></pre></div>
 <p><img src="S07_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Check normality qqplot</span></span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Check normality - density plot</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>PM2<span class="fl">.5</span>_data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">sample =</span> PM2<span class="fl">.5</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="st">  </span><span class="kw">geom_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_qq</span>() <span class="op">+</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>City)</span></code></pre></div>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>PM2<span class="fl">.5</span>, <span class="dt">color=</span>City)) <span class="op">+</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="st">  </span><span class="kw">geom_density</span>()</span></code></pre></div>
 <p><img src="S07_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Check normality Shapiro-Wilk test</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">shapiro.test</span>(SZ_PM2<span class="fl">.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Check normality - qqplot</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>PM2<span class="fl">.5</span>_data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">sample =</span> PM2<span class="fl">.5</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="st">  </span><span class="kw">geom_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_qq</span>() <span class="op">+</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>City)</span></code></pre></div>
+<p><img src="S07_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Check normality Shapiro-Wilk test</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">shapiro.test</span>(SZ_PM2<span class="fl">.5</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  SZ_PM2.5
 ## W = 0.9644, p-value = 0.8346</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">shapiro.test</span>(GZ_PM2<span class="fl">.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">shapiro.test</span>(GZ_PM2<span class="fl">.5</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  GZ_PM2.5
 ## W = 0.89343, p-value = 0.1305</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Sample difference</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">mean</span>(SZ_PM2<span class="fl">.5</span>) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(GZ_PM2<span class="fl">.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Sample difference</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">mean</span>(SZ_PM2<span class="fl">.5</span>) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(GZ_PM2<span class="fl">.5</span>)</span></code></pre></div>
 <pre><code>## [1] -2.318333</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Get Z-ratio</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>Z        &lt;-<span class="st"> </span>(<span class="kw">mean</span>(SZ_PM2<span class="fl">.5</span>) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(GZ_PM2<span class="fl">.5</span>)) <span class="op">/</span><span class="st"> </span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="st">            </span><span class="kw">sqrt</span>( SZ_sigma<span class="op">^</span><span class="dv">2</span><span class="op">/</span>SZ_n <span class="op">+</span><span class="st"> </span>GZ_sigma<span class="op">^</span><span class="dv">2</span><span class="op">/</span>GZ_n )</span>
-<span id="cb10-4"><a href="#cb10-4"></a></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="co"># Find the two-side p-value</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="co"># The pnorm function gives the Cumulative Distribution Function (CDF) </span></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="co"># of the Normal distribution in R, which is the probability that </span></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="co"># the variable takes a value lower or equal to a threshold (here |Z|).</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a>P_value   &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">-</span><span class="kw">pnorm</span>(<span class="kw">abs</span>(Z), <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>))<span class="op">*</span><span class="dv">2</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="kw">print</span>(P_value)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Get Z-ratio</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>Z        &lt;-<span class="st"> </span>(<span class="kw">mean</span>(SZ_PM2<span class="fl">.5</span>) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(GZ_PM2<span class="fl">.5</span>)) <span class="op">/</span><span class="st"> </span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="st">            </span><span class="kw">sqrt</span>( SZ_sigma<span class="op">^</span><span class="dv">2</span><span class="op">/</span>SZ_n <span class="op">+</span><span class="st"> </span>GZ_sigma<span class="op">^</span><span class="dv">2</span><span class="op">/</span>GZ_n )</span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co"># Find the two-side p-value</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co"># The pnorm function gives the Cumulative Distribution Function (CDF) </span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co"># of the Normal distribution in R, which is the probability that </span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co"># the variable takes a value lower or equal to a threshold (here |Z|).</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>P_value   &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">-</span><span class="kw">pnorm</span>(<span class="kw">abs</span>(Z), <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>))<span class="op">*</span><span class="dv">2</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="kw">print</span>(P_value)</span></code></pre></div>
 <pre><code>## [1] 0.0306292</code></pre>
-<p>OK, we have a probability of about <code>3.06%</code> getting a statistic (<span class="math inline">\(Z\)</span>) as extreme or more extreme than the observed statistic (<code>-2.16</code>), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, the mean PM2.5 level in Shenzhen is not the same as that in Guangzhou.</p>
+<p>OK, we have a probability of about <code>3.06%</code> getting a statistic (<span class="math inline">\(Z\)</span>) as extreme or more extreme than the observed statistic (<code>-2.16</code>), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, the mean PM2.5 level in Shenzhen is NOT the same as that in Guangzhou.</p>
 <hr />
 </div>
 <div id="independent-two-sample-t-test" class="section level1">
 <h1>Independent two-sample t-test</h1>
-<p>As we saw from the last Section, SDs of populations (<span class="math inline">\(\sigma_1\)</span> and <span class="math inline">\(\sigma_2\)</span>) are generally unknown. And we need to use sample SE as an estimate of the population SD, and the the proceeding Z test becomes the t test:</p>
+<p>As we saw from the last Section, SDs of populations (<span class="math inline">\(\sigma_1\)</span> and <span class="math inline">\(\sigma_2\)</span>) are generally unknown. In this case, we need to use sample SE as an estimate of the population SD, and the the proceeding Z test becomes the t test:</p>
 <p><span class="math display">\[ t =\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {SE(\overline{X_1} - \overline{X_2}) } \]</span> For a independent two-sample t-test (Note: we use the “equal SD” method in here, see page 40 in [R.S.] for more):</p>
 <p><span class="math display">\[ SE(\overline{X_1} - \overline{X_2}) = s_p \sqrt { \frac{1} {n_1} +  \frac{1} {n_2} }   \]</span> <span class="math inline">\(s_p\)</span> is <em>pooled SD</em>, or pooled estimate of standard deviation.</p>
 <p><span class="math display">\[ s_p = \sqrt { \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2} {n_1 + n_2 -2} }\]</span> where <span class="math inline">\(s_1\)</span> and <span class="math inline">\(s_2\)</span> is the standard deviation of the two samples. And the number of degrees of freedom associated with <span class="math inline">\(s_p\)</span> is the sum of degrees of freedom from the individual estimates.</p>
@@ -597,37 +605,38 @@ div.tocify {
 </ul>
 <p>In this case, <span class="math inline">\(\overline X_1 - \overline X_2\)</span> is again <code>-2.32</code>, <span class="math inline">\(SE(\overline{X_1} - \overline{X_2})\)</span> is <code>0.98</code>, assuming H0 is true (<span class="math inline">\(\mu_1 - \mu_2 = 0\)</span>), we have <span class="math inline">\(t\)</span>=<code>-2.37</code>.</p>
 <p>Then the p-value can be calculated manually:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Shenzhen </span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>SZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">25.6</span>, <span class="fl">23.7</span>, <span class="fl">21.9</span>, <span class="fl">26.0</span>, <span class="fl">24.5</span>, <span class="fl">22.4</span>, <span class="fl">26.7</span>, <span class="fl">24.6</span>, <span class="fl">22.7</span>, <span class="fl">23.8</span>)</span>
-<span id="cb12-3"><a href="#cb12-3"></a></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># Guangzhou</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>GZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">27.1</span>, <span class="fl">24.2</span>, <span class="fl">27.9</span>, <span class="fl">33.3</span>, <span class="fl">26.4</span>, <span class="fl">28.7</span>, <span class="fl">25.6</span>, <span class="fl">23.2</span>, <span class="fl">24.0</span>, <span class="fl">27.1</span>, <span class="fl">26.2</span>, <span class="fl">24.4</span>)</span>
-<span id="cb12-6"><a href="#cb12-6"></a></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="co"># Sample difference</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="kw">mean</span>(SZ_PM2<span class="fl">.5</span>) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(GZ_PM2<span class="fl">.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Shenzhen sample</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>SZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">25.6</span>, <span class="fl">23.7</span>, <span class="fl">21.9</span>, <span class="fl">26.0</span>, <span class="fl">24.5</span>, <span class="fl">22.4</span>, <span class="fl">26.7</span>, <span class="fl">24.6</span>, <span class="fl">22.7</span>, <span class="fl">23.8</span>)</span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co"># Guangzhou sample</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>GZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">27.1</span>, <span class="fl">24.2</span>, <span class="fl">27.9</span>, <span class="fl">33.3</span>, <span class="fl">26.4</span>, <span class="fl">28.7</span>, <span class="fl">25.6</span>, <span class="fl">23.2</span>, <span class="fl">24.0</span>, <span class="fl">27.1</span>, <span class="fl">26.2</span>, <span class="fl">24.4</span>)</span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co"># Sample difference</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="kw">mean</span>(SZ_PM2<span class="fl">.5</span>) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(GZ_PM2<span class="fl">.5</span>)</span></code></pre></div>
 <pre><code>## [1] -2.318333</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Get sample size, degrees of freedom, and sd</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>n1        &lt;-<span class="st"> </span><span class="kw">length</span>(SZ_PM2<span class="fl">.5</span>)</span>
-<span id="cb14-3"><a href="#cb14-3"></a>df1       &lt;-<span class="st"> </span>n1 <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a>sd1       &lt;-<span class="st"> </span><span class="kw">sd</span>(SZ_PM2<span class="fl">.5</span>)</span>
-<span id="cb14-5"><a href="#cb14-5"></a></span>
-<span id="cb14-6"><a href="#cb14-6"></a>n2        &lt;-<span class="st"> </span><span class="kw">length</span>(GZ_PM2<span class="fl">.5</span>)</span>
-<span id="cb14-7"><a href="#cb14-7"></a>df2       &lt;-<span class="st"> </span>n2 <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a>sd2       &lt;-<span class="st"> </span><span class="kw">sd</span>(GZ_PM2<span class="fl">.5</span>)</span>
-<span id="cb14-9"><a href="#cb14-9"></a></span>
-<span id="cb14-10"><a href="#cb14-10"></a><span class="co"># SE of the difference</span></span>
-<span id="cb14-11"><a href="#cb14-11"></a>SE        &lt;-<span class="st"> </span><span class="kw">sqrt</span>( (df1<span class="op">*</span>sd1<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>df2<span class="op">*</span>sd2<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(df1<span class="op">+</span>df2) <span class="op">*</span><span class="st"> </span>(n1<span class="op">+</span>n2)<span class="op">/</span>(n1<span class="op">*</span>n2) )</span>
-<span id="cb14-12"><a href="#cb14-12"></a></span>
-<span id="cb14-13"><a href="#cb14-13"></a><span class="co"># Get t-ratio</span></span>
-<span id="cb14-14"><a href="#cb14-14"></a>t         &lt;-<span class="st"> </span>(<span class="kw">mean</span>(SZ_PM2<span class="fl">.5</span>) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(GZ_PM2<span class="fl">.5</span>))<span class="op">/</span>SE</span>
-<span id="cb14-15"><a href="#cb14-15"></a></span>
-<span id="cb14-16"><a href="#cb14-16"></a><span class="co"># Find the two-side p-value</span></span>
-<span id="cb14-17"><a href="#cb14-17"></a><span class="co"># The pt function gives the Cumulative Distribution Function (CDF) </span></span>
-<span id="cb14-18"><a href="#cb14-18"></a><span class="co"># of the Student&#39;s t distribution in R, which is the probability that </span></span>
-<span id="cb14-19"><a href="#cb14-19"></a><span class="co"># the variable takes a value lower or equal to a threshold (here |t|).</span></span>
-<span id="cb14-20"><a href="#cb14-20"></a>P_value  &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">-</span><span class="kw">pt</span>(<span class="kw">abs</span>(t), <span class="dt">df=</span>df1<span class="op">+</span>df2))<span class="op">*</span><span class="dv">2</span></span>
-<span id="cb14-21"><a href="#cb14-21"></a></span>
-<span id="cb14-22"><a href="#cb14-22"></a><span class="kw">print</span>(P_value)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Get sample size, degrees of freedom, and sd</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>n1        &lt;-<span class="st"> </span><span class="kw">length</span>(SZ_PM2<span class="fl">.5</span>)</span>
+<span id="cb15-3"><a href="#cb15-3"></a>df1       &lt;-<span class="st"> </span>n1 <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>sd1       &lt;-<span class="st"> </span><span class="kw">sd</span>(SZ_PM2<span class="fl">.5</span>)</span>
+<span id="cb15-5"><a href="#cb15-5"></a></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="co"># Get sample size, degrees of freedom, and sd</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>n2        &lt;-<span class="st"> </span><span class="kw">length</span>(GZ_PM2<span class="fl">.5</span>)</span>
+<span id="cb15-8"><a href="#cb15-8"></a>df2       &lt;-<span class="st"> </span>n2 <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>sd2       &lt;-<span class="st"> </span><span class="kw">sd</span>(GZ_PM2<span class="fl">.5</span>)</span>
+<span id="cb15-10"><a href="#cb15-10"></a></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="co"># SE of the sample difference</span></span>
+<span id="cb15-12"><a href="#cb15-12"></a>SE        &lt;-<span class="st"> </span><span class="kw">sqrt</span>( (df1<span class="op">*</span>sd1<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>df2<span class="op">*</span>sd2<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(df1<span class="op">+</span>df2) <span class="op">*</span><span class="st"> </span>(n1<span class="op">+</span>n2)<span class="op">/</span>(n1<span class="op">*</span>n2) )</span>
+<span id="cb15-13"><a href="#cb15-13"></a></span>
+<span id="cb15-14"><a href="#cb15-14"></a><span class="co"># Get t-ratio</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a>t         &lt;-<span class="st"> </span>(<span class="kw">mean</span>(SZ_PM2<span class="fl">.5</span>) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(GZ_PM2<span class="fl">.5</span>))<span class="op">/</span>SE</span>
+<span id="cb15-16"><a href="#cb15-16"></a></span>
+<span id="cb15-17"><a href="#cb15-17"></a><span class="co"># Find the two-side p-value</span></span>
+<span id="cb15-18"><a href="#cb15-18"></a><span class="co"># The pt function gives the Cumulative Distribution Function (CDF) </span></span>
+<span id="cb15-19"><a href="#cb15-19"></a><span class="co"># of the Student&#39;s t distribution in R, which is the probability that </span></span>
+<span id="cb15-20"><a href="#cb15-20"></a><span class="co"># the variable takes a value lower or equal to a threshold (here |t|).</span></span>
+<span id="cb15-21"><a href="#cb15-21"></a>P_value  &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">-</span><span class="kw">pt</span>(<span class="kw">abs</span>(t), <span class="dt">df=</span>df1<span class="op">+</span>df2))<span class="op">*</span><span class="dv">2</span></span>
+<span id="cb15-22"><a href="#cb15-22"></a></span>
+<span id="cb15-23"><a href="#cb15-23"></a><span class="kw">print</span>(P_value)</span></code></pre></div>
 <pre><code>## [1] 0.02796399</code></pre>
 <p>Now, we have a probability of about <code>2.80%</code> getting a statistic (<span class="math inline">\(t\)</span>) as extreme or more extreme than the observed statistic (<code>-2.37</code>), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, the mean PM2.5 level in Shenzhen is not the same as that in Guangzhou.</p>
 <hr />
@@ -640,16 +649,16 @@ div.tocify {
 <li><p>H1: Mean PM2.5 level in Shenzhen is not the same as that in Guangzhou (<span class="math inline">\(\mu_1 \ne \mu_2\)</span>)</p></li>
 </ul>
 <p>In R, this is done by:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Shenzhen </span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>SZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">25.6</span>, <span class="fl">23.7</span>, <span class="fl">21.9</span>, <span class="fl">26.0</span>, <span class="fl">24.5</span>, <span class="fl">22.4</span>, <span class="fl">26.7</span>, <span class="fl">24.6</span>, <span class="fl">22.7</span>, <span class="fl">23.8</span>)</span>
-<span id="cb16-3"><a href="#cb16-3"></a></span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="co"># Guangzhou</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a>GZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">27.1</span>, <span class="fl">24.2</span>, <span class="fl">27.9</span>, <span class="fl">33.3</span>, <span class="fl">26.4</span>, <span class="fl">28.7</span>, <span class="fl">25.6</span>, <span class="fl">23.2</span>, <span class="fl">24.0</span>, <span class="fl">27.1</span>, <span class="fl">26.2</span>, <span class="fl">24.4</span>)</span>
-<span id="cb16-6"><a href="#cb16-6"></a></span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="co"># Call t.test function</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="co"># Since H1 states a different PM2.5 value in Shenzhen, </span></span>
-<span id="cb16-9"><a href="#cb16-9"></a><span class="co"># we need to compute the two-sided p-value</span></span>
-<span id="cb16-10"><a href="#cb16-10"></a><span class="kw">t.test</span>(SZ_PM2<span class="fl">.5</span>, GZ_PM2<span class="fl">.5</span>, <span class="dt">alternative=</span><span class="st">&quot;two.sided&quot;</span>, <span class="dt">var.equal=</span>T)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Shenzhen sample</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>SZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">25.6</span>, <span class="fl">23.7</span>, <span class="fl">21.9</span>, <span class="fl">26.0</span>, <span class="fl">24.5</span>, <span class="fl">22.4</span>, <span class="fl">26.7</span>, <span class="fl">24.6</span>, <span class="fl">22.7</span>, <span class="fl">23.8</span>)</span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># Guangzhou sample</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>GZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">27.1</span>, <span class="fl">24.2</span>, <span class="fl">27.9</span>, <span class="fl">33.3</span>, <span class="fl">26.4</span>, <span class="fl">28.7</span>, <span class="fl">25.6</span>, <span class="fl">23.2</span>, <span class="fl">24.0</span>, <span class="fl">27.1</span>, <span class="fl">26.2</span>, <span class="fl">24.4</span>)</span>
+<span id="cb17-6"><a href="#cb17-6"></a></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="co"># Call t.test function</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="co"># Since H1 states a different PM2.5 value in Shenzhen, </span></span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="co"># we need to compute the two-sided p-value</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="kw">t.test</span>(SZ_PM2<span class="fl">.5</span>, GZ_PM2<span class="fl">.5</span>, <span class="dt">alternative=</span><span class="st">&quot;two.sided&quot;</span>, <span class="dt">var.equal=</span>T)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -661,14 +670,14 @@ div.tocify {
 ## sample estimates:
 ## mean of x mean of y 
 ##  24.19000  26.50833</code></pre>
-<p>As you may notice, here we set <code>var.equal = T</code> when call the <code>t.test()</code> function. By doing so, we assume an “equal SD” method, please see page <code>40</code> in [R.S] for more. By default, R uses the “unequal SD” method, which returns a slightly different t statistic and d.f. We will look at this in the future.</p>
+<p>As you notice, here we set <code>alternative="two.sided"</code>, this means we are testing whether the two population means are different (one could be smaller or larger than the other), and this requires a two-sided p-value. We set <code>var.equal = T</code> when call the <code>t.test()</code> function. By doing so, we assume an “equal SD” method, please see page <code>40</code> in [R.S] for more. By default, R uses the “unequal SD” method, which returns a slightly different t statistic and d.f. We will look at this in the future.</p>
 <hr />
 </div>
 <div id="in-class-exercises" class="section level1">
 <h1>In-class exercises</h1>
 <div id="exercise-1" class="section level2">
 <h2>Exercise #1</h2>
-<p>Two labs (Lab 1 and 2) use the same method to measure the TSP concentration of one air sample. The readings are as follow:</p>
+<p>Two labs (Lab 1 and 2) use the same method to measure the total suspended particulate (TSP) concentration of one air sample. The readings are as follow:</p>
 <ul>
 <li><p>Lab 1: <code>14.7, 14.8, 15.2, 15.6</code></p></li>
 <li><p>Lab2: <code>14.6, 15.0, 15.2</code></p></li>
@@ -682,7 +691,7 @@ div.tocify {
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
-<p>A local environmental officer wants to compare two rivers to see if there are any difference in COD. From river A, the officer randomly collected <code>15</code> water bottles, and COD is measured as follows:</p>
+<p>A local environmental officer wants to compare two rivers to see if there are any difference in chemical oxygen demand (COD). From river A, the officer randomly collected <code>15</code> water bottles, and COD is measured as follows:</p>
 <p><code>915.4, 789.3, 828.2, 811.4, 832.4, 841.7, 871.6, 830.8, 884.5, 847.5, 841.4, 936.7, 977.0, 825.2, 707.9</code></p>
 <p>From river B, the officer randomly collected <code>10</code> water bottles with COD read as:</p>
 <p><code>804.0, 779.8, 749.3, 877.4, 753.8, 778.6, 807.5, 913.3, 784.8, 659.7</code></p>

@@ -74,27 +74,35 @@ Assuming H0 is true, we get $Z$ is `-2.16`. Then with R, we can compute the two-
 Before computing $Z$, let's check the data first.
 
 ```{r}
-# Shenzhen 
+# Shenzhen sample
 SZ_PM2.5  <- c(25.6, 23.7, 21.9, 26.0, 24.5, 22.4, 26.7, 24.6, 22.7, 23.8)
 SZ_n      <- length(SZ_PM2.5)
+# Shenzhen population sigma
 SZ_sigma  <- 2.0
 
-# Guangzhou
+# Guangzhou sample
 GZ_PM2.5  <- c(27.1, 24.2, 27.9, 33.3, 26.4, 28.7, 25.6, 23.2, 24.0, 27.1, 26.2, 24.4)
 GZ_n      <- length(GZ_PM2.5)
+# Guangzhou population sigma
 GZ_sigma  <- 3.0
 
-# Make data frame
+# Make data frame, create a data table
 PM2.5_data <- data.frame(PM2.5 = c(SZ_PM2.5, GZ_PM2.5),
                          City = c(rep("Shenzhen",SZ_n),rep("Guangzhou",GZ_n)))
 
 # Compare boxplots
+# %>% means pipe
 PM2.5_data %>% 
   ggplot(aes(x=as.character(City), y=PM2.5)) +
   geom_boxplot(fill="steelblue") +
   labs(title="PM2.5 Distribution by City", x="City", y="ug/m3")
 
-# Check normality qqplot
+# Check normality - density plot
+PM2.5_data %>% 
+  ggplot(aes(x=PM2.5, color=City)) +
+  geom_density()
+
+# Check normality - qqplot
 PM2.5_data %>% 
  ggplot(aes(sample = PM2.5)) + 
   geom_qq_line() + geom_qq() +
@@ -120,13 +128,13 @@ P_value   <- (1-pnorm(abs(Z), mean=0, sd=1))*2
 print(P_value)
 ```
 
-OK, we have a probability of about `3.06%` getting a statistic ($Z$) as extreme or more extreme than the observed statistic (`-2.16`), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, the mean PM2.5 level in Shenzhen is not the same as that in Guangzhou.
+OK, we have a probability of about `3.06%` getting a statistic ($Z$) as extreme or more extreme than the observed statistic (`-2.16`), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, the mean PM2.5 level in Shenzhen is NOT the same as that in Guangzhou.
 
 ***
 
 # Independent two-sample t-test
 
-As we saw from the last Section, SDs of populations ($\sigma_1$ and $\sigma_2$) are generally unknown. And we need to use sample SE as an estimate of the population SD, and the the proceeding Z test becomes the t test:
+As we saw from the last Section, SDs of populations ($\sigma_1$ and $\sigma_2$) are generally unknown. In this case, we need to use sample SE as an estimate of the population SD, and the the proceeding Z test becomes the t test:
 
 $$ t =\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {SE(\overline{X_1} - \overline{X_2}) } $$
 For a independent two-sample t-test (Note: we use the "equal SD" method in here, see page 40 in [R.S.] for more):
@@ -154,10 +162,10 @@ Then the p-value can be calculated manually:
 
 ```{r}
 
-# Shenzhen 
+# Shenzhen sample
 SZ_PM2.5  <- c(25.6, 23.7, 21.9, 26.0, 24.5, 22.4, 26.7, 24.6, 22.7, 23.8)
 
-# Guangzhou
+# Guangzhou sample
 GZ_PM2.5  <- c(27.1, 24.2, 27.9, 33.3, 26.4, 28.7, 25.6, 23.2, 24.0, 27.1, 26.2, 24.4)
 
 # Sample difference
@@ -168,11 +176,12 @@ n1        <- length(SZ_PM2.5)
 df1       <- n1 - 1
 sd1       <- sd(SZ_PM2.5)
 
+# Get sample size, degrees of freedom, and sd
 n2        <- length(GZ_PM2.5)
 df2       <- n2 - 1
 sd2       <- sd(GZ_PM2.5)
 
-# SE of the difference
+# SE of the sample difference
 SE        <- sqrt( (df1*sd1^2 + df2*sd2^2)/(df1+df2) * (n1+n2)/(n1*n2) )
 
 # Get t-ratio
@@ -203,10 +212,10 @@ In R, this is done by:
 
 ```{r}
 
-# Shenzhen 
+# Shenzhen sample
 SZ_PM2.5  <- c(25.6, 23.7, 21.9, 26.0, 24.5, 22.4, 26.7, 24.6, 22.7, 23.8)
 
-# Guangzhou
+# Guangzhou sample
 GZ_PM2.5  <- c(27.1, 24.2, 27.9, 33.3, 26.4, 28.7, 25.6, 23.2, 24.0, 27.1, 26.2, 24.4)
 
 # Call t.test function
@@ -214,7 +223,8 @@ GZ_PM2.5  <- c(27.1, 24.2, 27.9, 33.3, 26.4, 28.7, 25.6, 23.2, 24.0, 27.1, 26.2,
 # we need to compute the two-sided p-value
 t.test(SZ_PM2.5, GZ_PM2.5, alternative="two.sided", var.equal=T)
 ```
-As you may notice, here we set `var.equal = T` when call the `t.test()` function. By doing so, we assume an "equal SD" method, please see page `40` in [R.S] for more. By default, R uses the "unequal SD" method, which returns a slightly different t statistic and d.f. We will look at this in the future.
+
+As you notice, here we set `alternative="two.sided"`, this means we are testing whether the two population means are different (one could be smaller or larger than the other), and this requires a two-sided p-value. We set `var.equal = T` when call the `t.test()` function. By doing so, we assume an "equal SD" method, please see page `40` in [R.S] for more. By default, R uses the "unequal SD" method, which returns a slightly different t statistic and d.f. We will look at this in the future.
 
 ***
 
@@ -222,7 +232,7 @@ As you may notice, here we set `var.equal = T` when call the `t.test()` function
 
 ## Exercise #1
 
-Two labs (Lab 1 and 2) use the same method to measure the TSP concentration of one air sample. The readings are as follow:
+Two labs (Lab 1 and 2) use the same method to measure the total suspended particulate (TSP) concentration of one air sample. The readings are as follow:
 
 + Lab 1: `14.7, 14.8, 15.2, 15.6`
 
@@ -238,7 +248,7 @@ Based on the data, are results from the two labs consistent?
 
 ## Exercise #2
 
-A local environmental officer wants to compare two rivers to see if there are any difference in COD. From river A, the officer randomly collected `15` water bottles, and COD is measured as follows:
+A local environmental officer wants to compare two rivers to see if there are any difference in chemical oxygen demand (COD). From river A, the officer randomly collected `15` water bottles, and COD is measured as follows:
 
 `915.4, 789.3, 828.2, 811.4, 832.4, 841.7, 871.6, 830.8, 884.5, 847.5, 841.4, 936.7, 977.0, 825.2, 707.9`
 
