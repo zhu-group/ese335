@@ -114,7 +114,7 @@ runs.test(Sample2)
 
 Even though we have been emphasizing that normality is the key assumption of t-tools ([one-sample](https://zhu-group.github.io/ese335/S06.html#One_sample_t-test), [independent two-sample](https://zhu-group.github.io/ese335/S07.html#Independent_two-sample_t-test), and [paired samples](https://zhu-group.github.io/ese335/S08.html#The_paired_sample_t-test)). It turns out t-tools are **very robust** to samples from non-normal populations, as long as the sample sizes are reasonably large (larger than `50`, this is arbitrary, but generally should be larger than `30`). 
 
-To test this, run the following R scripts:
+To demonstrate this, we draw samples from log-normal distributions and conduct the t-test. Run the following R scripts:
 
 ```{r}
 # Total simulations
@@ -126,7 +126,7 @@ shapiro.test(pop1)
 skewness(pop1)
 
 # Population 2, form a log normal distribution
-pop2 <- rlnorm(4000, 2, 2)
+pop2 <- rlnorm(4000, 2, 0.6)
 shapiro.test(pop2)
 skewness(pop2)
 
