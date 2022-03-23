@@ -20,6 +20,7 @@ library(randtests)
 library(moments)
 library(outliers)
 library(EnvStats)
+library(nortest)
 ```
 
 ***
@@ -122,12 +123,12 @@ Total_simulations <- 1000
 
 # Population 1, form a log normal distribution
 pop1 <- rlnorm(4000, 1, 0.2)
-shapiro.test(pop1)
+lillie.test(pop1)
 skewness(pop1)
 
 # Population 2, form a log normal distribution
 pop2 <- rlnorm(4000, 2, 0.6)
-shapiro.test(pop2)
+lillie.test(pop2)
 skewness(pop2)
 
 # Sample size
@@ -352,7 +353,7 @@ boxplot(Sample1)
 grubbs.test(Sample1)
 
 # Test for the lowest value with Grubbs' test
-grubbs.test(Sample1,opposite = T)
+grubbs.test(Sample1, opposite = T)
 ```
 
 ## Dixon's test
@@ -366,7 +367,7 @@ To perform Dixon's test in R, use the `dixon.test()` function from the `outliers
 dixon.test(Sample1)
 
 # Test for the lowest value with Dixon's test
-dixon.test(Sample1,opposite = T)
+dixon.test(Sample1, opposite = T)
 ```
 ## Rosner's test
 
