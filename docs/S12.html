@@ -501,7 +501,7 @@ div.tocify {
 <div id="section-example-temperature-change-and-carbon-dioxide-change" class="section level1">
 <h1>Section Example: Temperature Change and Carbon Dioxide Change</h1>
 <p><img src="figs/T_CO2.jpg" alt="drawing" width="800"/><br />
-<a href="%5B%5E1%5D:%20%5BTemperature%20Change%20and%20Carbon%20Dioxide%20Change%5D(https://www.ncdc.noaa.gov/global-warming/temperature-change)">Figure Source</a></p>
+<a href="https://www.ncdc.noaa.gov/global-warming/temperature-change">Figure Source</a></p>
 <p>One of the most remarkable aspects of the paleoclimate record is the strong correspondence between temperature and the concentration of CO<sub>2</sub> in the atmosphere observed during the glacial cycles of the past several hundred thousand years. When CO<sub>2</sub> concentration goes up, temperature goes up; when CO<sub>2</sub> concentration goes down, temperature goes down. Or in other words, CO<sub>2</sub> <em>correlates</em> with temperature.</p>
 <p>The correspondence shown in the figure is actually not very strightforwad - it’s not simply because rising temperature leads to higher CO<sub>2</sub> or the other way around. Part of the <em>correlation</em> is due to the relationship between temperature and the solubility of carbon dioxide in the surface ocean, and part is due to a feedback between carbon dioxide and climate. These changes are expected if Earth is in radiative balance, and they are consistent with the role of greenhouse gases in climate change. Furthermore, other changes are involved in the glacial climate, including altered vegetation, land surface characteristics, and ice sheet extent.</p>
 <p>The idea of this example is to show you: <strong>correlation not necessarily means causality</strong>.</p>
@@ -532,9 +532,9 @@ div.tocify {
 <p><img src="S12_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Compute covariance</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">cov</span>(x,y)</span></code></pre></div>
-<pre><code>## [1] 4.066198</code></pre>
+<pre><code>## [1] 11.78701</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">cov</span>(<span class="dv">2</span><span class="op">*</span>x,<span class="dv">2</span><span class="op">*</span>y)</span></code></pre></div>
-<pre><code>## [1] 16.26479</code></pre>
+<pre><code>## [1] 47.14802</code></pre>
 <p>As you can see, covariance provides only <strong>direction</strong> of the relationship. However, it does not indicate the <strong>strength</strong> of the relationship.</p>
 <hr />
 </div>
@@ -572,14 +572,14 @@ div.tocify {
 ##  Runs Test
 ## 
 ## data:  x
-## statistic = 0, runs = 11, n1 = 10, n2 = 10, n = 20, p-value = 1
+## statistic = -0.45947, runs = 10, n1 = 10, n2 = 10, n = 20, p-value = 0.6459
 ## alternative hypothesis: nonrandomness</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">runs.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Runs Test
 ## 
 ## data:  y
-## statistic = 0, runs = 11, n1 = 10, n2 = 10, n = 20, p-value = 1
+## statistic = -0.45947, runs = 10, n1 = 10, n2 = 10, n = 20, p-value = 0.6459
 ## alternative hypothesis: nonrandomness</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Check normality</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="co"># Sample size &lt; 30, use the Shapiro-Wilk test</span></span>
@@ -588,28 +588,28 @@ div.tocify {
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  x
-## W = 0.96128, p-value = 0.5696</code></pre>
+## W = 0.89535, p-value = 0.03377</code></pre>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">shapiro.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  y
-## W = 0.96449, p-value = 0.6368</code></pre>
+## W = 0.94189, p-value = 0.2603</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Check outliers</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="kw">grubbs.test</span>(x)</span></code></pre></div>
 <pre><code>## 
 ##  Grubbs test for one outlier
 ## 
 ## data:  x
-## G = 1.70448, U = 0.83904, p-value = 0.7957
-## alternative hypothesis: highest value 1.16439423711565 is an outlier</code></pre>
+## G = 1.43902, U = 0.88527, p-value = 1
+## alternative hypothesis: highest value 1.70140991576957 is an outlier</code></pre>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">grubbs.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Grubbs test for one outlier
 ## 
 ## data:  y
-## G = 2.07141, U = 0.76229, p-value = 0.2921
-## alternative hypothesis: lowest value -4.97826436364874 is an outlier</code></pre>
+## G = 1.73135, U = 0.83393, p-value = 0.7451
+## alternative hypothesis: lowest value -4.14346836454497 is an outlier</code></pre>
 </div>
 <div id="write-down-h0-and-h1" class="section level2">
 <h2>2 Write down H0 and H1</h2>
@@ -628,13 +628,13 @@ div.tocify {
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  x and y
-## t = 18.919, df = 18, p-value = 2.509e-13
+## t = 20.212, df = 18, p-value = 8.031e-14
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  0.9384723 0.9905637
+##  0.9457287 0.9917029
 ## sample estimates:
 ##       cor 
-## 0.9757645</code></pre>
+## 0.9786711</code></pre>
 <p>Here the method is set to <code>pearson</code>, H1 as <code>two.sided</code>, and a significant level of <code>0.95</code> (default value used by R).</p>
 </div>
 <div id="report-the-results" class="section level2">
