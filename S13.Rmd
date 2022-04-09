@@ -1,0 +1,254 @@
+---
+title: "Section 13 Non-parametric tests"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+***
+
+# Prerequisites
+
+Load the libraries with R:
+```{r}
+library(BSDA)
+library(ggplot2)
+library(FSA)
+```
+
+***
+
+# Section example: Soil organic matter 
+
+Given the following organic matter contents (unit: %) in different soil types, do organic matters differ among soil types?
+
+Soil type|Soil organic matter content (%)                     |
+|:------:|:---------------------------------------------------|
+| A      | `2.0, 2.8, 3.3, 3.2, 4.4, 3.6, 1.9, 3.3, 2.8, 1.1` |
+| B      | `3.5, 2.8, 3.2, 3.5, 2.3, 2.4, 2.0, 1.6`           |
+| C      | `3.3, 3.6, 2.6, 3.1, 3.2, 3.3, 2.9, 3.4, 3.2, 3.2` |
+| D      | `3.2, 3.3, 3.2, 2.9, 3.3, 2.5, 2.6, 2.8`           |
+| E      | `2.6, 2.6, 2.9, 2.0, 2.0, 2.1`                     |
+| F      | `3.1, 2.9, 3.1, 2.5`                               |
+| G      | `2.6, 2.2, 2.2, 2.5, 1.2, 1.2`                     |
+| H      | `2.5, 2.4, 3.0, 1.5`                               |
+
+***
+
+# Overview of non-parametric tests
+
+A non-parametric test, also known as a distribution-free test, assumes nothing about the underlying distribution (for example, that the data comes from a normal distribution). That’s compared to parametric test, which makes assumptions about a population’s parameters (for example, the mean or standard deviation); When the word “non-parametric” is used in stats, it doesn’t quite mean that you know nothing about the population. It usually means that you know the population data does not have a normal distribution. 
+
+Situations to use non-parametric tests:
+
++ The underlying distribution is **not normal**, thus the normality assumption is not valid
+
++ Data type is **nominal** (e.g., `pass` or `fail`) or **ordinal** (aka, ranks or start-rating)
+
++ One or more assumptions of a parametric test have been violated
+
++ The sample size is too small to run a parametric test
+
++ Outliers can not be removed
+
++ Prefer to test for the median rather than the mean (e.g., very skewed distribution)
+
+Non-parametric tests have lower *power* compared to parametric tests - they often do not reject H0 when they should. 
+
+***
+
+# Mann-Whitney U test
+
+The Mann–Whitney U test is also called the Mann–Whitney–Wilcoxon (MWW), Wilcoxon rank-sum test, or Wilcoxon–Mann–Whitney test. It is used to compare the differences between two independent samples when the sample distributions are not normally distributed and the sample sizes are small (`n < 30`). It is considered to be the non-parametric equivalent to the two-sample independent t-test.
+
+The requirements of using Mann–Whitney U test are:
+
++ Random and independent samples
+
++ For maximum accuracy, there should be **no ties**. But there is a way to handle ties in the test.
+
+In the Mann–Whitney U test, we have:
+
++ H0: There is no difference in the two population
+
++ H1: There is a difference in the two population
+
+The Mann–Whitney U test is done with the `wilcox.test()` function in R:
+
+```{r}
+
+# Make up samples
+Treat     <- c(3, 5, 1, 4, 3, 5)
+Control   <- c(4, 8, 6, 2, 1, 9)
+
+# Perform the Mann Whitney U test
+wilcox.test(Treat, Control, paired=F, alternative="two.sided")
+```
+
+***
+
+# Wilcoxon signed rank test
+
+The Wilcoxon signed rank test is a non-parametric alternative to paired t-test used to compare paired data. It’s used whendata are not normally distributed.
+
+The requirements of using the Wilcoxon signed rank test are:
+
++ Random and independent samples
+
++ Approximately **symmetrical** distributions
+
+In the Wilcoxon signed rank test, we have:
+
++ H0: There is no difference in the two populations
+
++ H1: There is a difference in the two populations
+
+The Wilcoxon signed rank test is also done with the `wilcox.test()` function in R, but with different keywords:
+
+```{r}
+
+# Make up samples
+Treat     <- c(3, 5, 1, 4, 3, 5)
+Control   <- c(4, 8, 6, 2, 1, 9)
+
+# Perform the Wilcoxon signed rank test
+wilcox.test(Treat, Control, paired=T, alternative="two.sided")
+```
+
+***
+
+# Sign test
+
+When the distribution of differences between paired data values is neither normal nor symmetrical, use the sign test. The sign test is done with the `SIGN.test()` function from the `BSDA` package R:
+
+```{r}
+SIGN.test(Treat, Control, alternative = "two.sided", conf.level = 0.95)
+```
+
+***
+
+# Kruskal–Wallis test
+
+The Kruskal–Wallis test, also known as Kruskal–Wallis H test or one-way ANOVA on ranks, is an alternative for the one-way analysis of variance (ANOVA). The test is for checking whether samples originate from the same distribution. It is used for comparing two or more independent samples. It extends the Mann–Whitney U test, which is used for comparing only two groups.
+
+The test assumes that the observations are independent. That is, it is not appropriate for paired observations or repeated measures data.
+
+In the Kruskal–Wallis test, we have:
+
++ H0: There is no difference among populations
+
++ H1: There is a difference among populations
+
+The Kruskal–Wallis test is done with the `kruskal.test()` function in R:
+
+```{r}
+
+# Load data
+require(graphics)
+
+# Boxplots
+ggplot(airquality, aes(x=Month, y=Ozone, group=Month, fill=Month)) +
+  geom_boxplot() +
+  labs(title="Monthly ozone", 
+       x="Month", y="Ozone [ppb]") +
+  theme_classic()
+
+# Perform the Kruskal–Wallis test
+kruskal.test(Ozone ~ Month, data = airquality)
+
+```
+
+The outcome of the Kruskal–Wallis test tells you if there are differences among the groups, but doesn’t tell you which groups are different from other groups. To determine which groups are different from others, post-hoc testing can be conducted.  Probably the most common post-hoc test for the Kruskal–Wallis test is the *Dunn test*, here conducted with the `dunnTest()` function in the `FSA` package.
+
+```{r}
+dunnTest(Ozone ~ Month, data=airquality, method="bh")      
+```
+
+***
+
+# Spearman correlation test
+
+The Spearman correlation test is a rank-based test that does not require assumptions about the distribution of the data. The correlation coefficient from the test, $\rho$, ranges from `-1` to `–1`, with `+1` being a perfect positive correlation and `–1` being a perfect negative correlation.  A $\rho$ of `0` represents no correlation.
+
+In the Spearman correlation test, we have:
+
++ H0: The populations do not correlate with each other
+
++ H1: The populations correlate with each other
+
+The Spearman correlation is done with the `cor.test()` function in R:
+
+```{r}
+# Make up some random values
+x <- rnorm(20,0,1)
+y <- 2*x+rnorm(20,0,0.5)
+
+# Perform the Spearman correlation test
+cor.test(x, y, method="spearman", alternative="two.sided", conf.level=0.95)
+```
+
+***
+
+# Kendall correlation test
+
+The Kendall correlation test is also a rank-based test. The correlation coefficient from the test is $\tau$, ranging from `-1` to `+1`. 
+
+Used the Kendall correlation when the sample size is small or there are many tied ranks.
+
+In the Kendall correlation test, we have:
+
++ H0: The populations do not correlate with each other
+
++ H1: The populations correlate with each other
+
+The Kendall correlation is also done with the `cor.test()` function in R:
+
+```{r}
+# Perform the Kendall correlation test
+cor.test(x, y, method="kendall", alternative="two.sided", conf.level=0.95)
+```
+
+***
+
+# Summary of non-parametric tests
+
+Purpose|Parametric|Alternative non-parametric |
+|:----:|:--------:|:-------------:|
+|Checking independence | | [Runs test](https://zhu-group.github.io/ese335/S10.html#Independence)|
+|Checking normality |    | [Shapiro-Wilk test](https://zhu-group.github.io/ese335/S06.html#Shapiro-Wilk_test), [Lillifors test](https://zhu-group.github.io/ese335/S06.html#Lilliefors_test)|
+|Checking Outliers | [Grubbs’ test](https://zhu-group.github.io/ese335/S10.html#Grubbs%E2%80%99_test), [Dixon’s test](https://zhu-group.github.io/ese335/S10.html#Dixon%E2%80%99s_test), [Rosner’s test](https://zhu-group.github.io/ese335/S10.html#Rosner%E2%80%99s_test) | [Walsh’s test](https://zhu-group.github.io/ese335/S10.html#Walsh%E2%80%99s_test) |
+|Comparing means of two independent populations  | [t test](https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test_with_R)   | [Mann-Whitney U test](https://zhu-group.github.io/ese335/S14.html#Mann-Whitney_U_test) |
+|Comparing means of two paired populations  | [paired t test](https://zhu-group.github.io/ese335/S09.html#Paired_sample_t-test_with_R)   | [Wilcoxon signed rank](https://zhu-group.github.io/ese335/S14.html#Wilcoxon_signed_rank_test), [Signed test](https://zhu-group.github.io/ese335/S14.html#Sign_test) |
+|Comparing means of more than 2 independent populations  | [One-way ANOVA](https://zhu-group.github.io/ese335/S11.html#One-way_ANOVA_with_R) | [Kruskal–Wallis test](https://zhu-group.github.io/ese335/S14.html#Kruskal%E2%80%93Wallis_test) |
+|Checking correlation  | [Pearson test](https://zhu-group.github.io/ese335/S13.html#Pearson_correlation_test_procedure)  | [Spearman test](https://zhu-group.github.io/ese335/S14.html#Spearman_correlation_test), [Kendall test](https://zhu-group.github.io/ese335/S14.html#Kendall_correlation_test)|
+
+***
+
+# In-class exercises
+
+## Exercise #1
+
+Exposure to a consistent level of noise may increase human's blood pressure. To test this, blood pressures are measured for `12` volunteers before and after noise exposure.
+
++ Before: `134, 112, 113, 113, 111, 153, 143, 105, 142, 157, 119, 111`
+
++ After: `132, 126, 149, 124, 118, 157, 142, 124, 139, 157, 135, 125`
+
+Do the observations support the hypothesis? Report your results.
+
+## Exercise #2
+
+Using data from the section example, do organic matters differ among soil types? Report your results.
+
+## Exercise #3
+
+An experiment is conducted to study the relationship between aerosol surface density (m^-1^) and Pb content. The observations are as fellow:
+
++ Surface density: `8.7, 8.5, 9.1, 9.3, 6.3, 7.8, 9.9, 6.5, 6.6, 9.5, 9.4, 7.2, 8.6, 9.6, 11.1`
+
++ Pb content: `6.0, 5.7, 6.0, 5.7, 4.7, 5.5, 6.4, 4.2, 6.2, 5.9, 5.7, 5.7, 6.1, 6.3, 6.0`
+
+Does aerosol surface density relate to Pb content? Report your results.
