@@ -471,6 +471,9 @@ div.tocify {
     <li>
       <a href="A03.html">Assignment 03</a>
     </li>
+    <li>
+      <a href="A04.html">Assignment 04</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -532,9 +535,9 @@ div.tocify {
 <p><img src="S12_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Compute covariance</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">cov</span>(x,y)</span></code></pre></div>
-<pre><code>## [1] 15.1804</code></pre>
+<pre><code>## [1] 11.93982</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">cov</span>(<span class="dv">2</span><span class="op">*</span>x,<span class="dv">2</span><span class="op">*</span>y)</span></code></pre></div>
-<pre><code>## [1] 60.72159</code></pre>
+<pre><code>## [1] 47.75929</code></pre>
 <p>As you can see, covariance provides only <strong>direction</strong> of the relationship. However, it does not indicate the <strong>strength</strong> of the relationship.</p>
 <hr />
 </div>
@@ -572,7 +575,7 @@ div.tocify {
 ##  Runs Test
 ## 
 ## data:  x
-## statistic = 0.45947, runs = 12, n1 = 10, n2 = 10, n = 20, p-value = 0.6459
+## statistic = -0.45947, runs = 10, n1 = 10, n2 = 10, n = 20, p-value = 0.6459
 ## alternative hypothesis: nonrandomness</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">runs.test</span>(y)</span></code></pre></div>
 <pre><code>## 
@@ -588,28 +591,28 @@ div.tocify {
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  x
-## W = 0.96323, p-value = 0.6101</code></pre>
+## W = 0.96362, p-value = 0.6184</code></pre>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">shapiro.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  y
-## W = 0.96348, p-value = 0.6154</code></pre>
+## W = 0.9586, p-value = 0.5162</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Check outliers</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="kw">grubbs.test</span>(x)</span></code></pre></div>
 <pre><code>## 
 ##  Grubbs test for one outlier
 ## 
 ## data:  x
-## G = 2.15653, U = 0.74235, p-value = 0.2233
-## alternative hypothesis: lowest value -2.26200633261749 is an outlier</code></pre>
+## G = 2.04341, U = 0.76867, p-value = 0.3181
+## alternative hypothesis: highest value 1.96280028047858 is an outlier</code></pre>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">grubbs.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Grubbs test for one outlier
 ## 
 ## data:  y
-## G = 2.13721, U = 0.74694, p-value = 0.2377
-## alternative hypothesis: lowest value -4.69303719286711 is an outlier</code></pre>
+## G = 1.62678, U = 0.85339, p-value = 0.9564
+## alternative hypothesis: lowest value -3.73027376519127 is an outlier</code></pre>
 </div>
 <div id="write-down-h0-and-h1" class="section level2">
 <h2>2 Write down H0 and H1</h2>
@@ -628,13 +631,13 @@ div.tocify {
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  x and y
-## t = 14.866, df = 18, p-value = 1.498e-11
+## t = 14.268, df = 18, p-value = 2.969e-11
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  0.9035910 0.9849854
+##  0.8960899 0.9837632
 ## sample estimates:
 ##       cor 
-## 0.9616061</code></pre>
+## 0.9585205</code></pre>
 <p>Here the method is set to <code>pearson</code>, H1 as <code>two.sided</code>, and a significant level of <code>0.95</code> (default value used by R).</p>
 </div>
 <div id="report-the-results" class="section level2">
