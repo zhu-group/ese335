@@ -532,9 +532,9 @@ div.tocify {
 <p><img src="S12_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Compute covariance</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">cov</span>(x,y)</span></code></pre></div>
-<pre><code>## [1] 4.916158</code></pre>
+<pre><code>## [1] 15.0674</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">cov</span>(<span class="dv">2</span><span class="op">*</span>x,<span class="dv">2</span><span class="op">*</span>y)</span></code></pre></div>
-<pre><code>## [1] 19.66463</code></pre>
+<pre><code>## [1] 60.26961</code></pre>
 <p>As you can see, covariance provides only <strong>direction</strong> of the relationship. However, it does not indicate the <strong>strength</strong> of the relationship.</p>
 <hr />
 </div>
@@ -572,14 +572,14 @@ div.tocify {
 ##  Runs Test
 ## 
 ## data:  x
-## statistic = 0, runs = 11, n1 = 10, n2 = 10, n = 20, p-value = 1
+## statistic = 0.45947, runs = 12, n1 = 10, n2 = 10, n = 20, p-value = 0.6459
 ## alternative hypothesis: nonrandomness</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">runs.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Runs Test
 ## 
 ## data:  y
-## statistic = -0.45947, runs = 10, n1 = 10, n2 = 10, n = 20, p-value = 0.6459
+## statistic = 0.45947, runs = 12, n1 = 10, n2 = 10, n = 20, p-value = 0.6459
 ## alternative hypothesis: nonrandomness</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Check normality</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="co"># Sample size &lt; 30, use the Shapiro-Wilk test</span></span>
@@ -588,28 +588,28 @@ div.tocify {
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  x
-## W = 0.96238, p-value = 0.5925</code></pre>
+## W = 0.96712, p-value = 0.6932</code></pre>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">shapiro.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  y
-## W = 0.94664, p-value = 0.3189</code></pre>
+## W = 0.95595, p-value = 0.4664</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Check outliers</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="kw">grubbs.test</span>(x)</span></code></pre></div>
 <pre><code>## 
 ##  Grubbs test for one outlier
 ## 
 ## data:  x
-## G = 1.89987, U = 0.80003, p-value = 0.4805
-## alternative hypothesis: lowest value -1.54339038363731 is an outlier</code></pre>
+## G = 1.81781, U = 0.81693, p-value = 0.5984
+## alternative hypothesis: lowest value -1.62352439777916 is an outlier</code></pre>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">grubbs.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Grubbs test for one outlier
 ## 
 ## data:  y
-## G = 2.3367, U = 0.6975, p-value = 0.1199
-## alternative hypothesis: lowest value -4.24167595722142 is an outlier</code></pre>
+## G = 1.93102, U = 0.79342, p-value = 0.4408
+## alternative hypothesis: lowest value -3.7507224448647 is an outlier</code></pre>
 </div>
 <div id="write-down-h0-and-h1" class="section level2">
 <h2>2 Write down H0 and H1</h2>
@@ -628,13 +628,13 @@ div.tocify {
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  x and y
-## t = 10.693, df = 18, p-value = 3.155e-09
+## t = 22.827, df = 18, p-value = 9.717e-15
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  0.8272591 0.9721549
+##  0.9570074 0.9934593
 ## sample estimates:
 ##       cor 
-## 0.9295067</code></pre>
+## 0.9831629</code></pre>
 <p>Here the method is set to <code>pearson</code>, H1 as <code>two.sided</code>, and a significant level of <code>0.95</code> (default value used by R).</p>
 </div>
 <div id="report-the-results" class="section level2">
