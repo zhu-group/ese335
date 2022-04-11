@@ -72,9 +72,9 @@ The requirements of using Mann–Whitney U test are:
 
 In the Mann–Whitney U test, we have:
 
-+ H0: There is no difference in the two population
++ H0: There is no difference in the two population means
 
-+ H1: There is a difference in the two population
++ H1: There is a difference in the two population means
 
 The Mann–Whitney U test is done with the `wilcox.test()` function in R:
 
@@ -102,9 +102,9 @@ The requirements of using the Wilcoxon signed rank test are:
 
 In the Wilcoxon signed rank test, we have:
 
-+ H0: There is no difference in the two populations
++ H0: There is no difference in the two population means
 
-+ H1: There is a difference in the two populations
++ H1: There is a difference in the two population means
 
 The Wilcoxon signed rank test is also done with the `wilcox.test()` function in R, but with different keywords:
 
@@ -138,9 +138,9 @@ The test assumes that the observations are independent. That is, it is not appro
 
 In the Kruskal–Wallis test, we have:
 
-+ H0: There is no difference among populations
++ H0: There is no difference among population means
 
-+ H1: There is a difference among populations
++ H1: There is a difference among population means
 
 The Kruskal–Wallis test is done with the `kruskal.test()` function in R:
 
@@ -161,7 +161,7 @@ kruskal.test(Ozone ~ Month, data = airquality)
 
 ```
 
-The outcome of the Kruskal–Wallis test tells you if there are differences among the groups, but doesn’t tell you which groups are different from other groups. To determine which groups are different from others, post-hoc testing can be conducted.  Probably the most common post-hoc test for the Kruskal–Wallis test is the *Dunn test*, here conducted with the `dunnTest()` function in the `FSA` package.
+The outcome of the Kruskal–Wallis test tells you if there are differences among the group means, but doesn’t tell you which groups are different from other groups. To determine which groups are different from others, post-hoc testing can be conducted. The most common post-hoc test for the Kruskal–Wallis test is the *Dunn test*, here conducted with the `dunnTest()` function in the `FSA` package.
 
 ```{r}
 dunnTest(Ozone ~ Month, data=airquality, method="bh")      
@@ -196,7 +196,7 @@ cor.test(x, y, method="spearman", alternative="two.sided", conf.level=0.95)
 
 The Kendall correlation test is also a rank-based test. The correlation coefficient from the test is $\tau$, ranging from `-1` to `+1`. 
 
-Used the Kendall correlation when the sample size is small or there are many tied ranks.
+Used the Kendall correlation when **the sample size is small or there are many tied ranks**.
 
 In the Kendall correlation test, we have:
 

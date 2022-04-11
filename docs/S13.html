@@ -574,8 +574,8 @@ div.tocify {
 </ul>
 <p>In the Mann–Whitney U test, we have:</p>
 <ul>
-<li><p>H0: There is no difference in the two population</p></li>
-<li><p>H1: There is a difference in the two population</p></li>
+<li><p>H0: There is no difference in the two population means</p></li>
+<li><p>H1: There is a difference in the two population means</p></li>
 </ul>
 <p>The Mann–Whitney U test is done with the <code>wilcox.test()</code> function in R:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Make up samples</span></span>
@@ -584,7 +584,8 @@ div.tocify {
 <span id="cb2-4"><a href="#cb2-4"></a></span>
 <span id="cb2-5"><a href="#cb2-5"></a><span class="co"># Perform the Mann Whitney U test</span></span>
 <span id="cb2-6"><a href="#cb2-6"></a><span class="kw">wilcox.test</span>(Treat, Control, <span class="dt">paired=</span>F, <span class="dt">alternative=</span><span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning in wilcox.test.default(Treat, Control, paired = F, alternative = &quot;two.sided&quot;): cannot compute exact p-value with ties</code></pre>
+<pre><code>## Warning in wilcox.test.default(Treat, Control, paired = F, alternative = &quot;two.sided&quot;): cannot compute exact
+## p-value with ties</code></pre>
 <pre><code>## 
 ##  Wilcoxon rank sum test with continuity correction
 ## 
@@ -603,8 +604,8 @@ div.tocify {
 </ul>
 <p>In the Wilcoxon signed rank test, we have:</p>
 <ul>
-<li><p>H0: There is no difference in the two populations</p></li>
-<li><p>H1: There is a difference in the two populations</p></li>
+<li><p>H0: There is no difference in the two population means</p></li>
+<li><p>H1: There is a difference in the two population means</p></li>
 </ul>
 <p>The Wilcoxon signed rank test is also done with the <code>wilcox.test()</code> function in R, but with different keywords:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Make up samples</span></span>
@@ -613,7 +614,8 @@ div.tocify {
 <span id="cb5-4"><a href="#cb5-4"></a></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co"># Perform the Wilcoxon signed rank test</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="kw">wilcox.test</span>(Treat, Control, <span class="dt">paired=</span>T, <span class="dt">alternative=</span><span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning in wilcox.test.default(Treat, Control, paired = T, alternative = &quot;two.sided&quot;): cannot compute exact p-value with ties</code></pre>
+<pre><code>## Warning in wilcox.test.default(Treat, Control, paired = T, alternative = &quot;two.sided&quot;): cannot compute exact
+## p-value with ties</code></pre>
 <pre><code>## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -652,8 +654,8 @@ div.tocify {
 <p>The test assumes that the observations are independent. That is, it is not appropriate for paired observations or repeated measures data.</p>
 <p>In the Kruskal–Wallis test, we have:</p>
 <ul>
-<li><p>H0: There is no difference among populations</p></li>
-<li><p>H1: There is a difference among populations</p></li>
+<li><p>H0: There is no difference among population means</p></li>
+<li><p>H1: There is a difference among population means</p></li>
 </ul>
 <p>The Kruskal–Wallis test is done with the <code>kruskal.test()</code> function in R:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Load data</span></span>
@@ -674,7 +676,7 @@ div.tocify {
 ## 
 ## data:  Ozone by Month
 ## Kruskal-Wallis chi-squared = 29.267, df = 4, p-value = 6.901e-06</code></pre>
-<p>The outcome of the Kruskal–Wallis test tells you if there are differences among the groups, but doesn’t tell you which groups are different from other groups. To determine which groups are different from others, post-hoc testing can be conducted. Probably the most common post-hoc test for the Kruskal–Wallis test is the <em>Dunn test</em>, here conducted with the <code>dunnTest()</code> function in the <code>FSA</code> package.</p>
+<p>The outcome of the Kruskal–Wallis test tells you if there are differences among the group means, but doesn’t tell you which groups are different from other groups. To determine which groups are different from others, post-hoc testing can be conducted. The most common post-hoc test for the Kruskal–Wallis test is the <em>Dunn test</em>, here conducted with the <code>dunnTest()</code> function in the <code>FSA</code> package.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">dunnTest</span>(Ozone <span class="op">~</span><span class="st"> </span>Month, <span class="dt">data=</span>airquality, <span class="dt">method=</span><span class="st">&quot;bh&quot;</span>)      </span></code></pre></div>
 <pre><code>## Warning: Month was coerced to a factor.</code></pre>
 <pre><code>## Warning: Some rows deleted from &#39;x&#39; and &#39;g&#39; because missing data.</code></pre>
@@ -712,17 +714,17 @@ div.tocify {
 ##  Spearman&#39;s rank correlation rho
 ## 
 ## data:  x and y
-## S = 42, p-value = 6.562e-06
+## S = 54, p-value = 6.442e-06
 ## alternative hypothesis: true rho is not equal to 0
 ## sample estimates:
 ##       rho 
-## 0.9684211</code></pre>
+## 0.9593985</code></pre>
 <hr />
 </div>
 <div id="kendall-correlation-test" class="section level1">
 <h1>Kendall correlation test</h1>
 <p>The Kendall correlation test is also a rank-based test. The correlation coefficient from the test is <span class="math inline">\(\tau\)</span>, ranging from <code>-1</code> to <code>+1</code>.</p>
-<p>Used the Kendall correlation when the sample size is small or there are many tied ranks.</p>
+<p>Used the Kendall correlation when <strong>the sample size is small or there are many tied ranks</strong>.</p>
 <p>In the Kendall correlation test, we have:</p>
 <ul>
 <li><p>H0: The populations do not correlate with each other</p></li>
@@ -735,11 +737,11 @@ div.tocify {
 ##  Kendall&#39;s rank correlation tau
 ## 
 ## data:  x and y
-## T = 177, p-value = 2.187e-10
+## T = 176, p-value = 4.965e-10
 ## alternative hypothesis: true tau is not equal to 0
 ## sample estimates:
 ##       tau 
-## 0.8631579</code></pre>
+## 0.8526316</code></pre>
 <hr />
 </div>
 <div id="summary-of-non-parametric-tests" class="section level1">
