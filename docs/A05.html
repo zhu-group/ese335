@@ -11,7 +11,7 @@
 
 
 
-<title>Section 03 Review of statistic basics (I)</title>
+<title>Assignment 05</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -491,179 +491,278 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Section 03 Review of statistic basics (I)</h1>
+<h1 class="title toc-ignore">Assignment 05</h1>
 
 </div>
 
 
+<p><strong>Out: 04/25 10:20 </strong><br />
+<strong>Due: 05/16 10:20 </strong></p>
 <hr />
-<p><strong><em>Pre-class reading:</em></strong> [RS] p1-22</p>
-<hr />
-<div id="prerequisites" class="section level1">
-<h1>Prerequisites</h1>
-<p>Install the following package:</p>
+<div id="instructions" class="section level1">
+<h1>Instructions</h1>
+<p><strong>Collaboration:</strong></p>
+<p>Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements:</p>
 <ul>
-<li><code>moments</code></li>
+<li><p>Cite your collaborators <strong>fully and completely</strong> (<em>e.g.</em>, “XXX explained to me what is asked in problem set 3”). Or cite online resources (<em>e.g.</em>, “I got inspired by reading XXX”) that helped you.</p></li>
+<li><p>Write your scripts and report <strong>independently</strong> - the scripts and report must come from you only.</p></li>
 </ul>
-<p>Load the libraries with R:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(moments)</span></code></pre></div>
+<p><strong>Submitting your assignment:</strong></p>
+<p>Submit your R scripts and report to TA (<a href="mailto:12132243@mail.sustech.edu.cn" class="email">12132243@mail.sustech.edu.cn</a>)</p>
+<p><strong>Late Submission:</strong></p>
+<p>Late submissions will not receive any credit.</p>
+<hr />
+<p><strong>Hint:</strong> Please follow the general steps of hypothesis testing as introduced in the lecture.</p>
 <hr />
 </div>
-<div id="section-example-1-how-many-hours-do-ese335-student-sleep-everyday" class="section level1">
-<h1>Section Example 1: How many hours do ESE335 student Sleep everyday?</h1>
-<p>This section starts with a poll. Suppose we want to know: on average how many hours ESE335 students sleep everyday will. To do so:</p>
+<div id="sitting-duration-and-blood-pressure" class="section level1">
+<h1>1. Sitting duration and blood pressure</h1>
+<p>Your professor wants to study the relationship between sitting duration and his blood pressure. In 13 days, he measured how long he sits (in hours) and his blood pressure (mm Hg) immediately after it. The data are sorted and listed in the table.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Day</th>
+<th align="left">Sitting duration (hour)</th>
+<th align="left">Blood pressure (mm Hg)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">2.88</td>
+<td align="left">84</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">2.51</td>
+<td align="left">86</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">2.22</td>
+<td align="left">96</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">2.16</td>
+<td align="left">93</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">2.05</td>
+<td align="left">94</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">1.93</td>
+<td align="left">101</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">1.67</td>
+<td align="left">103</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">1.49</td>
+<td align="left">102</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">1.25</td>
+<td align="left">100</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">1.21</td>
+<td align="left">108</td>
+</tr>
+<tr class="odd">
+<td align="left">11</td>
+<td align="left">1.15</td>
+<td align="left">104</td>
+</tr>
+<tr class="even">
+<td align="left">12</td>
+<td align="left">1.12</td>
+<td align="left">102</td>
+</tr>
+<tr class="odd">
+<td align="left">13</td>
+<td align="left">0.73</td>
+<td align="left">111</td>
+</tr>
+</tbody>
+</table>
+<p><strong>1.1 [5 points]</strong> Is there a linear relationship between sitting duration and blood pressure for your professor?</p>
+<p><strong>1.2 [5 points]</strong> On average, how high will your professor’s blood pressure be after he sits for <code>1.80</code> hours (give the <code>95%</code> confidence interval)?</p>
+<hr />
+</div>
+<div id="aqi-near-a-highway" class="section level1">
+<h1>2. AQI near a highway</h1>
+<p>To investigate the influence factors of AQI near a highway, a researcher measured the air pressure (hPa), air temperature (degree), relative humidity (%), and traffic flow rate (cars per hour) in 15 days.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Day</th>
+<th align="left">AQI</th>
+<th align="left">Pressure</th>
+<th align="left">Temperature</th>
+<th align="center">Humidity</th>
+<th>Traffic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">367</td>
+<td align="left">999.9</td>
+<td align="left">20.2</td>
+<td align="center">44</td>
+<td>357</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">307</td>
+<td align="left">999.4</td>
+<td align="left">21.1</td>
+<td align="center">56</td>
+<td>256</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">280</td>
+<td align="left">999.1</td>
+<td align="left">19.3</td>
+<td align="center">20</td>
+<td>270</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">388</td>
+<td align="left">999.6</td>
+<td align="left">17.5</td>
+<td align="center">31</td>
+<td>541</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">268</td>
+<td align="left">998.5</td>
+<td align="left">16.9</td>
+<td align="center">60</td>
+<td>254</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">347</td>
+<td align="left">1000.8</td>
+<td align="left">22.5</td>
+<td align="center">48</td>
+<td>337</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">308</td>
+<td align="left">1002.0</td>
+<td align="left">13.6</td>
+<td align="center">76</td>
+<td>411</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">247</td>
+<td align="left">999.4</td>
+<td align="left">21.2</td>
+<td align="center">62</td>
+<td>280</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">289</td>
+<td align="left">1002.7</td>
+<td align="left">23.5</td>
+<td align="center">60</td>
+<td>281</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">200</td>
+<td align="left">1003.2</td>
+<td align="left">18.6</td>
+<td align="center">74</td>
+<td>88</td>
+</tr>
+<tr class="odd">
+<td align="left">11</td>
+<td align="left">329</td>
+<td align="left">996.6</td>
+<td align="left">25.0</td>
+<td align="center">68</td>
+<td>275</td>
+</tr>
+<tr class="even">
+<td align="left">12</td>
+<td align="left">385</td>
+<td align="left">1003.0</td>
+<td align="left">23.6</td>
+<td align="center">69</td>
+<td>358</td>
+</tr>
+<tr class="odd">
+<td align="left">13</td>
+<td align="left">337</td>
+<td align="left">1004.3</td>
+<td align="left">17.0</td>
+<td align="center">50</td>
+<td>380</td>
+</tr>
+<tr class="even">
+<td align="left">14</td>
+<td align="left">337</td>
+<td align="left">1000.4</td>
+<td align="left">27.2</td>
+<td align="center">36</td>
+<td>268</td>
+</tr>
+<tr class="odd">
+<td align="left">15</td>
+<td align="left">394</td>
+<td align="left">998.3</td>
+<td align="left">14.1</td>
+<td align="center">63</td>
+<td>523</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.1 [5 points]</strong> Build a best model between <code>AQI</code> and potential variables.</p>
+<p><strong>2.2 [10 points]</strong> Based on your best model, how high will AQI be in this site at the specific conditions as follow? Provide the <code>95%</code> confidence interval.</p>
 <ul>
-<li><p>First, each student is assigned with and ID</p></li>
-<li><p>Second, please think about your answer to the question. We will ask you later.</p></li>
-<li><p>Now, we will ask 3 answers from you with random drawing.</p></li>
+<li><p>Condition 1: Pressure <code>1003.0 hPa</code>, temperature <code>25.0 °C</code>, humidity <code>70%,</code> and traffic flow rate <code>450</code> cars per hour.</p></li>
+<li><p>Condition 2: Pressure <code>1001.0 hPa</code>, temperature <code>15.0 °C</code>, humidity <code>50%</code>, and traffic flow rate <code>300</code> cars per hour.</p></li>
 </ul>
 <hr />
 </div>
-<div id="population-vs-sample" class="section level1">
-<h1>Population vs sample</h1>
-<p>From this simple poll, hopefully you have a clear understanding about:</p>
+<div id="car-and-its-engine" class="section level1">
+<h1>3. Car and its engine</h1>
+<p>In this problem set we use the in-built data set <code>mtcars</code> to describe different models of a car with their various engine specifications.</p>
+<p>In <code>mtcars</code> data set, the transmission mode (automatic or manual) is described by the column <code>am</code>, which is a binary value (<code>0</code> is automatic or <code>1</code> is manual).</p>
+<p>Load the data via:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load data</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">data</span>(mtcars)</span></code></pre></div>
+<p><strong>3.1 [5 points]</strong> Fit a logistic regression model between the columns <code>am</code> and <code>3</code> other columns - gross horsepower <code>hp</code>, weight <code>wt</code> (in <code>1000</code> lbs), and number of cylinders <code>cyl</code>.</p>
+<p><strong>3.2 [10 points]</strong> Which independent variable has a significant slope? Update your logistic regression model by excluding the independent variable(s) with insignificant slope. Compute McFadden’s R<sup>2</sup> and the probability cutoff.</p>
+<p><strong>3.3 [10 points]</strong> Using the updated model from step <code>3.2</code>, make predictions of <code>am</code> (automatic or manual) for the following <code>2</code> cars:</p>
 <ul>
-<li><p>Population. A <em>population</em> is a set of entities from which <em>statistical inferences</em> are to be drawn.</p></li>
-<li><p>Sample. A <em>sample</em> is a set of data collected and/or selected from a population by a <strong>defined procedure</strong>. Here we draw samples through <em>simple random sampling</em>.</p></li>
+<li><p>Car 1: gross horsepower of <code>140</code>, weight of <code>3000</code> lbs</p></li>
+<li><p>Car 2: gross horsepower of <code>90</code>, weight of <code>2000</code> lbs</p></li>
 </ul>
 <hr />
 </div>
-<div id="statistical-sleuthing" class="section level1">
-<h1>Statistical sleuthing</h1>
-<p>Statistics is a common bond supporting all other sciences. It provides standards of <strong>empirical proof</strong> and a language for <strong>communicating</strong> scientific results.</p>
-<p>The first part is generally referred as <strong>Statistical sleuthing</strong>, which is the process of using statistical tools to answer questions of interest. It includes:</p>
-<ul>
-<li><p>designing experiments to unearth hidden truths</p></li>
-<li><p>describing real data using tools based on ideal mathematical models</p></li>
-<li><p>answering the questions of interest efficiently</p></li>
-<li><p>verifying that the tools are appropriate</p></li>
-<li><p>snooping around to see if there is anything more to be learned.</p></li>
-</ul>
-<hr />
-</div>
-<div id="standard-statistical-terminology" class="section level1">
-<h1>Standard Statistical Terminology</h1>
-<ul>
-<li><p>A <em>parameter</em> is an unknown numerical value describing a feature of a probability model. Parameters are indicated by Greek letters.</p></li>
-<li><p>A <em>statistic</em> is any quantity that can be calculated from the observed data. Statistics are represented by Roman letter symbols.</p></li>
-<li><p>An <em>estimate</em> is a statistic used as a guess for the value of a parameter. The notation for the estimate of a parameter is the parameter symbol with a hat on it.</p></li>
-</ul>
-<hr />
-</div>
-<div id="statistics-describing-a-sample" class="section level1">
-<h1>Statistics describing a sample</h1>
-<div id="center" class="section level2">
-<h2>Center</h2>
-<p>Call the <code>mean()</code> function to compute <em>average</em>.</p>
-</div>
-<div id="spread" class="section level2">
-<h2>Spread</h2>
-<p>The <em>standard deviation</em> is a measure of spread, interpreted as the typical distance between a single number and the set’s average.</p>
-<p>In R, standard deviation can be computed with the <code>sd()</code> function.</p>
-</div>
-<div id="skewness" class="section level2">
-<h2>Skewness</h2>
-<p><em>Skewness</em> is a statistical numerical method to measure the <em>asymmetry</em> of the distribution or data set. It tells about the position of the majority of data values in the distribution around the mean value. Distributions can exhibit right (positive) skewness or left (negative) skewness to varying degrees. A normal distribution (bell curve) exhibits zero skewness.</p>
-<p>Call the <code>skewness()</code> function in the <code>moments</code> package to compute the skewness.</p>
-</div>
-<div id="kurtosis" class="section level2">
-<h2>Kurtosis</h2>
-<p><em>Kurtosis</em> is a numerical method in statistics that measures the <em>sharpness</em> of the peak in the data distribution.</p>
-<p>Call the <code>kurtosis()</code> function in the <code>moments</code> package to compute the kurtosis.</p>
-</div>
-<div id="other-statistics" class="section level2">
-<h2>Other statistics</h2>
-<p>We have covered many of the summary functions, make sure you understand what the following functions return: <code>median()</code>, <code>range()</code>, <code>max()</code>, <code>min()</code>, <code>var()</code>, <code>IQR()</code>, <code>summary()</code>. Pay attention to data sets containing <code>NA</code> values.</p>
-</div>
-<div id="an-example" class="section level2">
-<h2>An example</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Drawing a sample (n=100) from a normal distribution</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>sample1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># OK, let&#39;s take a quick look at the data </span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">hist</span>(sample1)</span></code></pre></div>
-<p><img src="S03_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Check the average and sd</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">mean</span>(sample1)</span></code></pre></div>
-<pre><code>## [1] -0.0760289</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">sd</span>(sample1)</span></code></pre></div>
-<pre><code>## [1] 0.8613901</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Compute the skewness, here we need load the moments package</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">library</span>(moments)</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">skewness</span>(sample1)</span></code></pre></div>
-<pre><code>## [1] 0.08142415</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Compute the kurtosis</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">kurtosis</span>(sample1)</span></code></pre></div>
-<pre><code>## [1] 0.3879382</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">#--------------------------------</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="co"># Make a log-normal</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>sample2 &lt;-<span class="st"> </span><span class="kw">exp</span>(sample1<span class="op">+</span><span class="dv">10</span>)</span>
-<span id="cb11-4"><a href="#cb11-4"></a></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="co"># Check</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="kw">hist</span>(sample2)</span></code></pre></div>
-<p><img src="S03_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">mean</span>(sample2)</span></code></pre></div>
-<pre><code>## [1] 29808.91</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">sd</span>(sample2)</span></code></pre></div>
-<pre><code>## [1] 32014.95</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">skewness</span>(sample2)</span></code></pre></div>
-<pre><code>## [1] 3.171437</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">kurtosis</span>(sample2)</span></code></pre></div>
-<pre><code>## [1] 13.04487</code></pre>
-<hr />
-</div>
-</div>
-<div id="section-example-2-pirates-vs.-global-warming" class="section level1">
-<h1>Section Example 2: Pirates vs. Global Warming</h1>
-<p>It’s official! The data’s been analyzed, and the true cause of global warming has finally been revealed: a worldwide crisis in declining pirate numbers. Don’t believe me? Well, there’s a graph to prove it.</p>
-<p><img src="figs/pirates_vs_T.jpg" alt="drawing" width="600"/></p>
-<p><a href="https://www.sisense.com/blog/global-warming-caused-lack-pirates-bad-graph-lessons/">Figure Source</a></p>
-<p>You can see that as the number of pirates in the world has decreased over the past 130 years, global warming has gotten steadily worse. In fact, this makes it entirely clear that if you truly want to stop global warming, the most impactful thing to do is - become a pirate!</p>
-<p>Hope you’re laughing. Unfortunately, this kind of ridiculous and <strong>misleading causality</strong> is sold wildly every day.</p>
-<hr />
-</div>
-<div id="causal-inference-and-confunding-variables" class="section level1">
-<h1>Causal inference and confunding variables</h1>
-<p>Statistical analysis <strong>alone</strong> can be used to establish a causal relationship, only if such a relationship is drawn from <strong>randomized experiments</strong>, but not from <strong>observational studies</strong>. The difference between randomized and observational studies is that whether the group status of the subjects can or can not be controlled by the investigator.</p>
-<p>In an observational study, it is impossible to draw a causal conclusion from the statistical analysis alone, because one can not rule out the possibility that <strong>confounding variables</strong> are responsible for group differences in the measured outcome. So can you give some confounding variables in the Pirates vs. Global Warming example?</p>
-<p>Observational studies are still very useful in research because:</p>
-<ul>
-<li><p>Establishing causation is not always the goal</p></li>
-<li><p>Establishing causation can be done in other ways</p></li>
-<li><p>Observations may suggest an association</p></li>
-</ul>
-<hr />
-</div>
-<div id="hypothesis-tests" class="section level1">
-<h1>Hypothesis tests</h1>
-<p>Briefly, hypothesis tests use data from a sample to infer the value of a population parameter.</p>
-<p>The first step in conducting a hypothesis test is to write the hypothesis statements that are going to be tested. For each test, you will have a <strong>null hypothesis</strong> (H<sub>0</sub>) and an <strong>alternative hypothesis</strong> (H<sub>a</sub> or H<sub>1</sub>). In general, the null hypothesis is the one that specifies a simpler state of affairs, typically an absence of an effect.</p>
-<p>The next step is to compute the <strong>p-value</strong>, which is defined as:</p>
-<p>Given that the null hypothesis is true, a p-value is the probability that randomization alone leads to a test statistic <strong>as extreme or more extreme</strong> than the one observed.</p>
-<p>Finally, we use the p-value to evaluate <strong>statistical significance</strong>. If we fail to reject the null hypothesis and there is no evidence to support the alternative hypothesis. These results are said to be not <strong>statistically significant</strong>. If then we reject the null hypothesis and conclude that there is evidence to support the alternative hypothesis. These results are statistically significant.</p>
-<p>The general procedures are summarized:</p>
-<ul>
-<li><p>Write the hypotheses</p></li>
-<li><p>Construct a randomization distribution under the assumption that the null hypothesis is true</p></li>
-<li><p>Use the randomization distribution to find the p-value</p></li>
-<li><p>Decide if you should reject or fail to reject the null hypothesis</p></li>
-<li><p>State a real-world conclusion in relation to the original research question</p></li>
-</ul>
-<hr />
-</div>
-<div id="in-class-exercises" class="section level1">
-<h1>In-class exercises</h1>
-<div id="exercise-1" class="section level2">
-<h2>Exercise #1</h2>
-<p>Can you create a left-skewed sample? Can you repeat we did in the above example?</p>
-</div>
-<div id="exercise-2" class="section level2">
-<h2>Exercise #2</h2>
-<p>One of the most important theorems in all of statistics is called the <em>Central Limit Theorem</em> or the <em>Law of Large Numbers</em>.</p>
-<p>It states that given a sufficiently large sample size from a population with a finite level of <em>variance</em>, the mean of all samples from the same population will be approximately equal to the mean of the original population.</p>
-<p>Furthermore, as you increase the number of samples and the sample size, the distribution of all of the sample means will approximate a normal distribution even if the original variables themselves are not normally distributed.</p>
-<p>Can you demonstrate the two statements using R?</p>
-</div>
+<div id="solving-problems" class="section level1">
+<h1>4. Solving problems</h1>
+<p><strong>4.1 [15 points]</strong> [SS], p38-39, Problem 1.2.</p>
+<p><strong>4.1 [15 points]</strong> [SS], p39, Problem 1.6.</p>
 </div>
 
 
