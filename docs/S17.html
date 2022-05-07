@@ -500,8 +500,8 @@ div.tocify {
 <div id="prerequisites" class="section level1">
 <h1>Prerequisites</h1>
 <p>Load the libraries with R:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(InformationValue)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(pscl)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(pscl)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(InformationValue)</span></code></pre></div>
 <hr />
 </div>
 <div id="section-example-pm2.5-pollution-and-population-density" class="section level1">
@@ -711,23 +711,29 @@ div.tocify {
 <h2>McFadden’s R<sup>2</sup></h2>
 <p>We use R<sup>2</sup> in the linear regression as a measure of how well a model fits the data. Here in logistic regression, we use a pseudo R<sup>2</sup>, called McFadden’s R<sup>2</sup>, to indicate how the model fits the data. To get McFadden’s R<sup>2</sup>, use the <code>pR2()</code> function from the <code>pscl</code> package.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">pR2</span>(logistic)[<span class="st">&quot;McFadden&quot;</span>]</span></code></pre></div>
+<pre><code>## fitting null model for pseudo-r2</code></pre>
+<pre><code>##  McFadden 
+## 0.3308617</code></pre>
 </div>
 <div id="setting-probability-cutoff" class="section level2">
 <h2>Setting probability cutoff</h2>
 <p>The default cutoff prediction probability score is <code>0.5</code> - any individual with a probability of default greater than <code>0.5</code> will be predicted to the same outcome (<code>0</code> or <code>1</code>). But sometimes, tuning the probability cutoff can improve the accuracy. We can use the <code>optimalCutoff()</code> function from the <code>InformationValue</code> package to find the optimal cutoff to improve the prediction.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Find optimal cutoff probability to use to maximize accuracy</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>predicted_value &lt;-<span class="st"> </span><span class="kw">predict</span>(logistic, PM_data, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">optimalCutoff</span>(PM_data<span class="op">$</span>PM, predicted_value)[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Find optimal cutoff probability to use to maximize accuracy</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>predicted_value &lt;-<span class="st"> </span><span class="kw">predict</span>(logistic, PM_data, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">optimalCutoff</span>(PM_data<span class="op">$</span>PM, predicted_value)[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] -1.154874</code></pre>
 <p>We end up with a cutoff of <code>0.2475699</code>.</p>
 </div>
 <div id="making-predictions" class="section level2">
 <h2>Making predictions</h2>
 <p>Suppose we want to predict PM2.5 exceeding in two new cities (population density is <code>1000</code> and <code>5000</code>, respectively) with the fitted model, this can be done as follows:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Define new cities where we want to make predictions</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>new_cities &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Pop =</span> <span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">5000</span>))</span>
-<span id="cb8-3"><a href="#cb8-3"></a></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#predict probability of defaulting</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">predict</span>(logistic, new_cities, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Define new cities where we want to make predictions</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>new_cities &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Pop =</span> <span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">5000</span>))</span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#predict probability of defaulting</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="kw">predict</span>(logistic, new_cities, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<pre><code>##         1         2 
+## -1.546743  1.908257</code></pre>
 <p>We end up with prediction of <code>0.1755572</code> and <code>0.8708232</code>, so based on this, we say PM<sub>2.5</sub> in city <code>1</code> will not exceed (&lt; <code>0.2475699</code>), while that in city <code>2</code> will exceed (&gt; <code>0.2475699</code>).</p>
 </div>
 </div>
