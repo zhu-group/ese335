@@ -61,7 +61,7 @@ output:
 + Comparisons among several groups
   - One-way ANOVA, F-test, two-way ANOVA, linear combinations of group means, multiple comparison procedures
 + Correlation tests
-  - Pearson’s test, Spearman’s test, Kendall’s test
+  - Pearson's test, Spearman's test, Kendall's test
 + Simple linear regression 
   - Least squares regression estimation, robustness of least squares inferences, model assessment, fit assessment
 + Multiple linear regression
@@ -84,7 +84,7 @@ Good reasons for **not** taking the course:
 * After browsing the [syllabus](https://zhu-group.github.io/ese335/Syllabus.html) and [schedule](https://zhu-group.github.io/ese335/Schedule.html), there is nothing new for me
 * I am able to analyze, and visualize data sets through programming efforts already
 * I want to learn other programming languages (`C`, `C++`, `Java`, `MATLAB`, `Python`, `IDL`, etc.)
-* I want to take an “easy” class to meet the graduation requirement
+* I want to take an "easy" class to meet the graduation requirement
 
 Bad reasons for **not** taking the course:
 
@@ -96,7 +96,7 @@ Bad reasons for **not** taking the course:
 
 # The `R` language
 
-`R` is the leading tool for statistics, data analysis, and machine learning. It is more than a statistical package; it’s a **programming language**, so you can create your own objects, functions, and packages. 
+`R` is the leading tool for statistics, data analysis, and machine learning. It is more than a statistical package; it's a **programming language**, so you can create your own objects, functions, and packages. 
 
 Academics and statisticians have developed `R` over two decades. `R` now has one of the richest ecosystems to perform data analysis. There are around **16000 packages** available in CRAN ([Comprehensive R Archive Network](https://cran.r-project.org/)). It is possible to find a library for **whatever the analysis** you want to perform. The rich variety of libraries makes `R` the first choice for statistical and data analysis. `R` also makes communicating the findings with a presentation, document, or website very easy.
 
@@ -133,7 +133,7 @@ The simplest thing you could do with `R` is to do arithmetic. Let try this in th
 1 + 2
 ```
 
-`R` will print out the answer with a preceding `## [1]` (my PC) or `[1]` (your laptop). Don’t worry about this for now, we’ll explain that later. For now, think of it as indicating output.  
+`R` will print out the answer with a preceding `## [1]` (my PC) or `[1]` (your laptop). Don't worry about this for now, we will explain that later. For now, think of it as indicating output.  
 
 You will find the spaces have no impact on the result.
 
@@ -164,7 +164,7 @@ Let's try
 (1 + 2) ^ 3
 ```
 
-Always think about clarifying your intentions, as others may later read your code. Here we call such intentions as “comments”. Anything that follows after the hash symbol `#` is ignored by `R` when it executes code.
+Always think about clarifying your intentions, as others may later read your code. Here we call such intentions as *comments*. Anything that follows after the hash symbol `#` is ignored by `R` when it executes code.
 
 ```{r}
 # Get the square root of 100
@@ -184,7 +184,7 @@ You can write numbers in scientific notation too:
 
 ## Mathematical functions
 
-`R` has many built-in mathematical functions. To call a function, we can type its name, followed by open and closing parentheses `()`. Anything we type inside the parentheses is called the function’s *arguments*:
+`R` has many built-in mathematical functions. To call a function, we can type its name, followed by open and closing parentheses `()`. Anything we type inside the parentheses is called the function's *arguments*:
 
 ```{r}
 # Trigonometry functions
@@ -201,7 +201,7 @@ log10(10)
 exp(0.5)
 ```
 
-Don’t worry about trying to remember every function in `R`. You can look them up online, or if you can remember the start of the function’s name, use the `Tab` completion in RStudio.
+Don't worry about trying to remember every function in `R`. You can look them up online, or if you can remember the start of the function's name, use the `Tab` completion in RStudio.
 
 This is one advantage that RStudio has over `R` on its own; it has *auto-completion abilities* that allow you to more easily look up functions, their arguments, and the values that they take. In fact, the auto-completion abilities do not limit to functions, but also to variables.
 
@@ -312,7 +312,7 @@ ls()
 
 ## Conditional statements 
 
-Often when we’re coding, we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met. Alternatively, we can also set an action to occur a particular number of times.
+Often when we are coding, we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met. Alternatively, we can also set an action to occur a particular number of times.
 
 There are several ways you can control flow in `R`. For conditional statements, the most commonly used approaches are the `if` and `else` constructs.
 
@@ -399,7 +399,7 @@ Change `AQI1` to `40`, `80`, and `120`, check the ouput.
 
 ## Defining a Function
 
-You probably have realized it’s really tedious to change the AQI variables. It would be really helpful to define a *function* that handles different inputs automatically. 
+You probably have realized it's really tedious to change the AQI variables. It would be really helpful to define a *function* that handles different inputs automatically. 
 
 A function is a set of statements organized together to perform a specific task. `R` has a large number of in-built functions and the user can create their own functions. In `R`, a function is an object so the `R` interpreter is able to pass control to the function, along with arguments that may be necessary for the function to accomplish the actions. The function in turn performs its task and returns control to the interpreter as well as any result which may be stored in other objects.
 
@@ -508,7 +508,7 @@ print(Output_List)
 ```
 This approach can be useful, but "growing your results" (building the result object incrementally) is **computationally inefficient**, so avoid it when you are iterating through a lot of values. 
 
-**Important**: One of the biggest things that trips up novices and experienced `R` users alike, is building a results object (*vector*, *list*, *matrix*, *data frame*) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It’s much better to define an **empty results object** beforehand of appropriate dimensions, rather than initializing an empty object without dimensions. So if you know the end result will be stored in a matrix-like above, create an empty matrix with `5` row and `24` columns, then at each iteration stores the results in the appropriate location.
+**Important**: One of the biggest things that trips up novices and experienced `R` users alike, is building a results object (*vector*, *list*, *matrix*, *data frame*) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It's much better to define an **empty results object** beforehand of appropriate dimensions, rather than initializing an empty object without dimensions. So if you know the end result will be stored in a matrix-like above, create an empty matrix with `5` row and `24` columns, then at each iteration stores the results in the appropriate location.
 
 ```{r}
 Output_Matrix    <- matrix(nrow=5, ncol=24)
@@ -538,11 +538,11 @@ while(z <= 5){ # While this condition is TRUE
 
 OK, can you figure out why the number `6` is also printed?
 
-`while()` loops will **not** always be appropriate. You have to be **particularly careful** that you don’t end up stuck in an infinite loop because your condition is always met, and hence the while statement never terminates.
+`while()` loops will **not** always be appropriate. You have to be **particularly careful** that you don't end up stuck in an infinite loop because your condition is always met, and hence the while statement never terminates.
 
 ## `R` Packages
 
-It is possible to add functions to `R` by writing a *package* or by obtaining a package written by someone else. As of this writing, there are over 16,000 packages available on CRAN (the comprehensive R archive network). RStudio has functionality for managing packages. You can:
+It is possible to add functions to `R` by writing a *package* or by obtaining a package written by someone else. As of this writing, there are over `16000` packages available on CRAN (the comprehensive R archive network). RStudio has functionality for managing packages. You can:
 
 * See what packages are installed by typing `installed.packages()`
 * Install packages by typing `install.packages("packagename")`, where `packagename` is the package name, in quotes.
@@ -579,7 +579,7 @@ Or you may use RStudio through GUI - click `Session` then `Set Working Directory
 
 **Reading Help files**
 
-`R`, and every package, provides help files for functions. The general syntax to search for help on any function, “function_name”, from a specific function that is in a package loaded into your namespace (your interactive `R` session): 
+`R`, and every package, provides help files for functions. The general syntax to search for help on any function, `? function_name`, from a specific function that is in a package loaded into your namespace (your interactive `R` session): 
 
 `?function_name` or `help(function_name)`
 
@@ -592,11 +592,11 @@ To seek help on special operators, use quotes:
 
 **When you have no idea where to begin**
 
-If you don’t know what function or package you need to use [CRAN Task Views](https://cran.r-project.org/web/views/) is a specially maintained list of packages grouped into fields. This can be a good starting point.
+If you don't know what function or package you need to use [CRAN Task Views](https://cran.r-project.org/web/views/) is a specially maintained list of packages grouped into fields. This can be a good starting point.
 
-**When your code doesn’t work: seeking help from your peers**
+**When your code doesn't work: seeking help from your peers**
 
-If you’re having trouble using a function, 9 times out of 10, the answers you are seeking have ***already been answered*** on [Stack Overflow](https://stackoverflow.com/). You can search using the `[r]` tag.
+If you are having trouble using a function, 9 times out of 10, the answers you are seeking have ***already been answered*** on [Stack Overflow](https://stackoverflow.com/). You can search using the `[r]` tag.
 
 ***
 
