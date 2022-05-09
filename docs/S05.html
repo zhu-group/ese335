@@ -622,7 +622,7 @@ div.tocify {
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sample3
-## W = 0.98331, p-value = 0.9418</code></pre>
+## W = 0.89066, p-value = 0.01155</code></pre>
 <p>From the output, the p-value &gt; 0.05 shows that we fail to reject the null hypothesis, which means the distribution of our data is not significantly different from the normal distribution. In other words, the distribution of our data is normal.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Shapiro-Wilk test of sample 4</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="kw">shapiro.test</span>(sample4)</span></code></pre></div>
@@ -630,7 +630,7 @@ div.tocify {
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sample4
-## W = 0.97559, p-value = 0.7863</code></pre>
+## W = 0.88498, p-value = 0.008769</code></pre>
 </div>
 <div id="lilliefors-test" class="section level2">
 <h2>Lilliefors test</h2>
@@ -641,14 +641,14 @@ div.tocify {
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  sample1
-## D = 0.056048, p-value = 0.1305</code></pre>
+## D = 0.030786, p-value = 0.9153</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Lilliefors test of sample 2</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="kw">lillie.test</span>(sample2)</span></code></pre></div>
 <pre><code>## 
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  sample2
-## D = 0.08588, p-value = 0.001081</code></pre>
+## D = 0.096479, p-value = 0.0001089</code></pre>
 <hr />
 </div>
 </div>
@@ -695,7 +695,7 @@ div.tocify {
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  y
-## D = 0.11828, p-value = 0.3515</code></pre>
+## D = 0.15012, p-value = 0.0826</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># BOX-COX transformation, get lambda</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a>lambda &lt;-<span class="st"> </span><span class="kw">boxcoxfit</span>(y)<span class="op">$</span>lambda</span>
 <span id="cb21-3"><a href="#cb21-3"></a></span>
@@ -714,7 +714,7 @@ div.tocify {
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  y_new
-## D = 0.13665, p-value = 0.1631</code></pre>
+## D = 0.095373, p-value = 0.694</code></pre>
 </div>
 <div id="in-class-exercises" class="section level1">
 <h1>In-class exercises</h1>

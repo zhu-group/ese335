@@ -634,8 +634,11 @@ div.tocify {
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Load data</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="kw">library</span>(astsa)</span>
 <span id="cb11-3"><a href="#cb11-3"></a></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co"># Plot</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="kw">plot</span>(globtemp, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Global Temperature Deviations&quot;</span>)</span></code></pre></div>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co"># Reset panel</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co"># Plot</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="kw">plot</span>(globtemp, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Global Temperature Deviations&quot;</span>)</span></code></pre></div>
 <p><img src="S18_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>There is a clear trend, so the first step is to de-trend the data.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Fit a linear model</span></span>
