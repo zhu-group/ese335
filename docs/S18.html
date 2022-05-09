@@ -556,7 +556,7 @@ div.tocify {
 <p>Here stationary actually refers <em>weakly stationary</em> time series, which is a finite variance process such that:</p>
 <ul>
 <li><p>The mean value of time-series is constant over time</p></li>
-<li><p>The variance does not increase over time</p></li>
+<li><p>The autovariance function does not change over time</p></li>
 <li><p>Seasonality effect is minimal</p></li>
 </ul>
 <div id="ar-model" class="section level2">
@@ -600,7 +600,7 @@ div.tocify {
 <div id="acf-and-pacf" class="section level2">
 <h2>ACF and PACF</h2>
 <p>The autocorrelation function (ACF) measures the linear predictability of the series at time <code>t</code>, say <span class="math inline">\(x_t\)</span>, using only the value <span class="math inline">\(x_s\)</span>.</p>
-<p>The partial auto-correlation function (PACF) is a measure of the correlation between observations of a time series that are separated by <code>k</code> time units (<span class="math inline">\(x_t\)</span> and <span class="math inline">\(x_{t-k}\)</span>).</p>
+<p>The partial auto-correlation function (PACF) is a measure of the correlation between observations of a time series that are separated by <code>k</code> time units (<span class="math inline">\(x_t\)</span> and <span class="math inline">\(x_{t-k}\)</span>), with linear dependence removed. In other words, yhe partial autocorrelation at lag <code>k</code> is the autocorrelation between <span class="math inline">\(x_t\)</span> and <span class="math inline">\(x_{t-k}\)</span> that is not accounted for by lags <code>1</code> through <code>k−1</code>.</p>
 <p>To show ACF and the PACF of a AR model, AR(2), in R we can use the following lines:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Compute ACF and PACF of AR(2)</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>ACF =<span class="st"> </span><span class="kw">ARMAacf</span>(<span class="dt">ar=</span><span class="kw">c</span>(<span class="fl">1.5</span>,<span class="op">-</span>.<span class="dv">75</span>), <span class="dt">ma=</span><span class="dv">0</span>, <span class="dv">24</span>)[<span class="op">-</span><span class="dv">1</span>]</span>

@@ -94,7 +94,7 @@ Here stationary actually refers *weakly stationary* time series, which is a fini
 
 * The mean value of time-series is constant over time
 
-* The variance does not increase over time
+* The autovariance function does not change over time
 
 * Seasonality effect is minimal
 
@@ -152,7 +152,7 @@ main=(expression(MA(1)~~~theta==-.9)))
 
 The autocorrelation function (ACF) measures the linear predictability of the series at time `t`, say $x_t$, using only the value $x_s$.
 
-The partial auto-correlation function (PACF) is a measure of the correlation between observations of a time series that are separated by `k` time units ($x_t$ and $x_{t-k}$). 
+The partial auto-correlation function (PACF) is a measure of the correlation between observations of a time series that are separated by `k` time units ($x_t$ and $x_{t-k}$), with linear dependence removed. In other words, yhe partial autocorrelation at lag `k` is the autocorrelation between $x_t$ and $x_{t-k}$ that is not accounted for by lags `1` through `k−1`.
 
 To show ACF and the PACF of a AR model, AR(2), in R we can use the following lines: 
 
