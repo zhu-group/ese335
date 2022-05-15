@@ -513,7 +513,7 @@ div.tocify {
 <div id="integrated-models-for-nonstationary-data" class="section level1">
 <h1>Integrated models for nonstationary data</h1>
 <p>In many situations, time series can be thought of as being composed of two components, a nonstationary trend component and a zero-mean stationary component. In fact, this is the general approach we will take to build integrated models for nonstationary data, a.k.a. the ARIMA (I stands for integrated) model.</p>
-<p>A process <span class="math inline">\(x_t\)</span> is said to be ARIMA(p,d,q) if</p>
+<p>A process <span class="math inline">\(x_t\)</span> is said to be ARIMA(<code>p</code>, <code>d</code>, <code>q</code>) if</p>
 <p><span class="math display">\[\nabla^d x_t= \mathrm{(1-B)}^d x_t\]</span> is ARMA(p,q). Here differences of order <span class="math inline">\(d\)</span> are defined as</p>
 <p><span class="math display">\[\nabla^d = \mathrm{(1-B)}^d \]</span> where we may expand the operator <span class="math inline">\(\mathrm{(1-B)}^d\)</span> algebraically to evaluate for higher integer values of d. When <span class="math inline">\(d = 1\)</span>, we drop it from the notation. And the backshift operator <span class="math inline">\(\mathrm{B}\)</span> by</p>
 <p><span class="math display">\[\mathrm{B}^k x_t = x_{t-k} \]</span></p>
@@ -530,7 +530,7 @@ div.tocify {
 <li><p>making predictions</p></li>
 </ul>
 <p><strong>1. Load the daily new cases data</strong></p>
-<p>Download the <code>.csv</code> data from <a href="https://zhu-group.github.io/ese335/download/COVID_2020_data.csv">here</a>, take a quick glance at the file.</p>
+<p>Download the <code>.csv</code> data from <a href="https://zhu-group.github.io/ese335/download/COVID_2020_data.csv">here</a>, take a quick glance at the file. This file contains COVID cases from <code>Dec. 31, 2019</code> to <code>Nov. 09, 2020</code>.</p>
 <p>Then move the file (<code>COVID_2020_data.csv</code>， ~ 4MB) to your <code>working directory</code>, load the file using <code>read.csv()</code>, and convert it to a <code>tibble</code> (name it as <code>COVID_tbl</code>) using the <code>as_tibble()</code> function. If you don’t know how to handle <code>tibble</code> data, please check <a href="https://zhu-group.github.io/ese335/Sup01.html">Supplement 01 Data wrangling and quick plots</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Read in the COVID-19 data</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>COVID_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;COVID_2020_data.csv&quot;</span>, <span class="dt">header =</span> T)</span>
@@ -539,7 +539,10 @@ div.tocify {
 <span id="cb2-5"><a href="#cb2-5"></a><span class="kw">head</span>(COVID_data)</span>
 <span id="cb2-6"><a href="#cb2-6"></a></span>
 <span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Convert the data.frame to a tibble</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>COVID_tbl &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(COVID_data)</span></code></pre></div>
+<span id="cb2-8"><a href="#cb2-8"></a>COVID_tbl &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(COVID_data)</span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># Show data</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>COVID_tbl</span></code></pre></div>
 <p><strong>2. Get the daily total number of newly reported cases worldwide</strong></p>
 <p>What you just read from <code>COVID_2020_data.csv</code> is the daily number of new cases of COVID-19 by country worldwide (the <code>cases</code> column). Nect we will try to get daily <strong>total</strong> number of new cases of COVID-19 over the world.</p>
 <p>[Hint] You may find the following lines useful:</p>
@@ -547,7 +550,10 @@ div.tocify {
 <span id="cb3-2"><a href="#cb3-2"></a>COVID_tbl &lt;-<span class="st"> </span>COVID_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dateRep =</span> <span class="kw">as.Date</span>(dateRep,<span class="dt">format=</span><span class="st">&#39;%d/%m/%Y&#39;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="st">  </span><span class="kw">group_by</span>(dateRep) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">global_cases =</span> <span class="kw">sum</span>(cases))</span></code></pre></div>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">global_cases =</span> <span class="kw">sum</span>(cases))</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co"># Show data</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>COVID_tbl</span></code></pre></div>
 <p><strong>3. Plot the data</strong></p>
 <p>Plot the daily new cases, what do you observe? Do you see an exponential trend? Why is that?</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Quick plot</span></span>
@@ -557,7 +563,10 @@ div.tocify {
 <p>As you can see from the above figure, daily new case starts to increase exponentially since late March and early April. To make the time series more reliable (a.k.a, not effected by initial fluctuations), let’s only use the data after <code>April 01, 2020</code>. Do this using the <code>filter()</code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Filter the data, only use data from April 01 </span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>COVID_tbl &lt;-<span class="st"> </span>COVID_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="st">  </span><span class="kw">filter</span>(dateRep <span class="op">&gt;=</span><span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2020-04-01&quot;</span>))</span></code></pre></div>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="st">  </span><span class="kw">filter</span>(dateRep <span class="op">&gt;=</span><span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2020-04-01&quot;</span>))</span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co"># Show data</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>COVID_tbl</span></code></pre></div>
 <p><strong>5. Convert a vector to a time series</strong></p>
 <p>Convert the vector from the previous step to a time series using the <code>ts()</code> function. As we are dealing with daily data here, use <em>Julian Day</em> as the indicator of the time series. You can return the Julian Day of a certain date using the <code>yday()</code> function from the <code>lubridate</code> package.</p>
 <p>Plot the time series, what do you observe?</p>
@@ -585,7 +594,7 @@ div.tocify {
 <span id="cb6-22"><a href="#cb6-22"></a><span class="kw">plot</span>(inds, global_cases_ts, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
 <p><strong>6. Transform the time series</strong></p>
 <p>Take <code>log</code> to the <code>global_cases_ts</code> time series, and assign the results to a new object <code>global_cases_ts_log</code>. Plot <code>global_cases_ts_log</code>, also check acf and pacf of <code>global_cases_ts_log</code>.</p>
-<p>Do you see a trend in the time series <code>global_cases_ts_log</code>? And is this time series stationary?</p>
+<p>Do you see a trend in the time series <code>global_cases_ts_log</code>? <strong>And is this time series stationary?</strong></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Data transform with log</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>global_cases_ts_log &lt;-<span class="st"> </span><span class="kw">log</span>(global_cases_ts)</span>
 <span id="cb7-3"><a href="#cb7-3"></a></span>
@@ -597,7 +606,7 @@ div.tocify {
 <span id="cb7-9"><a href="#cb7-9"></a><span class="kw">pacf</span>(global_cases_ts_log)</span></code></pre></div>
 <p><strong>7. Take the difference</strong></p>
 <p>One way to make a non-stationary time series stationary is to take the <em>difference</em>. For an ARIMA(<code>p</code>,<code>d</code>,<code>q</code>) model, <code>d=1</code> if difference is taken once, and <code>d=2</code> if difference is taken twice. In R, this is done with the <code>diff()</code> function.</p>
-<p>What do you see from the time series plot? Does the time series look stationary now?</p>
+<p>What do you see from the time series plot? <strong>Does the time series look stationary now?</strong></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Take the diff, d=1</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>global_cases_ts_log_d1 &lt;-<span class="st"> </span><span class="kw">diff</span>(global_cases_ts_log)</span>
 <span id="cb8-3"><a href="#cb8-3"></a></span>
@@ -629,7 +638,7 @@ div.tocify {
 <span id="cb10-8"><a href="#cb10-8"></a>forecast_30days &lt;-<span class="st"> </span><span class="kw">forecast</span>(model, days_forecast)</span>
 <span id="cb10-9"><a href="#cb10-9"></a></span>
 <span id="cb10-10"><a href="#cb10-10"></a><span class="co"># Plot</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="kw">plot</span>(<span class="kw">forecast</span>(model, days_forecast), <span class="dt">include=</span>days_in_plot, </span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="kw">plot</span>(forecast_30days, <span class="dt">include=</span>days_in_plot, </span>
 <span id="cb10-12"><a href="#cb10-12"></a>     <span class="dt">xlab=</span><span class="st">&quot;Time&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;log(global cases)&quot;</span>, <span class="dt">type=</span><span class="st">&quot;o&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>) </span></code></pre></div>
 <p>Here the blue line is the estimated values, the blue shaded area shows the <code>80%</code> confidence interval, and the gray area shows the <code>95%</code> confidence interval.</p>
 <p>Change <code>days_forecast</code> to, see how the predictions would vary.</p>
@@ -651,7 +660,7 @@ div.tocify {
 <p>Now download the latest data from <a href="https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/data.csv">ECDC</a>, compute the global total number of new cases of COVID-19 on <code>Nov. 10, 2020</code> and <code>Nov. 30, 2020</code> .</p>
 <p>Compare this number with the predicted value from the previous step. Do you get a reasonable prediction?</p>
 <p><strong>12. [optional] Even more: Fit a SARIMA model</strong></p>
-<p>In fact, the <code>global_cases_ts_log</code> shows weekly cycles, this is not well considered in the model. You can make an even better ARIMA model by removing this pattern, or by fitting a SARIMA model, where “S” stands for seasonal. Look at <a href="https://cran.r-project.org/web/packages/sarima/sarima.pdf">Package ‘sarima’</a> for more.</p>
+<p>In fact, the <code>global_cases_ts_log</code> shows weekly cycles, this is not well considered in the model. You can make an even better ARIMA model by removing this pattern, or by fitting a SARIMA model, where “S” stands for seasonal. Look at package <a href="https://cran.r-project.org/web/packages/sarima/sarima.pdf">sarima</a> for more.</p>
 <hr />
 </div>
 
