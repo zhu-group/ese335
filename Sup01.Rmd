@@ -99,8 +99,8 @@ Here we’re going to cover commonly used functions as well as using pipes `%>%`
 Use the `select()` function to keep only the variables (columns) you select.
 
 ```{r}
-select(Keeling_Data_tbl,year,co2,quality)
-select(Keeling_Data_tbl,co2)
+dplyr::select(Keeling_Data_tbl,year,co2,quality)
+dplyr::select(Keeling_Data_tbl,co2)
 ```
 
 ## The pipe symbol `%>%`
@@ -111,7 +111,7 @@ Above we used ‘normal’ grammar, but the strengths of `dplyr` and `tidyr` lie
 
 ```{r}
 Keeling_Data_tbl %>% 
-  select(year,co2,quality)
+  dplyr::select(year,co2,quality)
 ```
 
 The above lines mean we first call the `Keeling_Data_tbl` tibble and pass it on, using the **pipe symbol** `%>%`, to the next step, which is the `select()` function. In this case, we don’t specify which **data object** we use in the `select()` function since in gets that from the previous pipe. The `select()` function then takes what it gets from the pipe, in this case the `Keeling_Data_tbl` tibble, as its **first argument**. By using pipe, we can take output of the previous step as input for the next one, so that we can avoid defining and calling unnecessary temporary variables. You will start to see the power of pipe later.
@@ -127,7 +127,7 @@ Keeling_Data_tbl %>%
 If we now want to move forward with the above tibble, but only with `quality == 1` , we can combine `select()` and `filter()` functions:
 ```{r}
 Keeling_Data_tbl %>% 
-  select(year,co2,quality) %>% 
+  dplyr::select(year,co2,quality) %>% 
   filter(quality == 1)
 ```
 
@@ -139,7 +139,7 @@ Now try to group monthly data using the `group_by()` function, notice how the ou
 
 ```{r}
 Keeling_Data_tbl %>% 
-  select(year,month,co2,quality) %>% 
+  dplyr::select(year,month,co2,quality) %>% 
   filter(quality == 1) %>% 
   group_by(month)
 ```
@@ -148,7 +148,7 @@ The `group_by()` function is much more exciting in conjunction with the  `summar
 
 ```{r}
 Keeling_Data_tbl %>% 
-  select(year,month,co2,quality) %>% 
+  dplyr::select(year,month,co2,quality) %>% 
   filter(quality == 1) %>% 
   group_by(month) %>% 
   summarize(monthly_mean = mean(co2))
@@ -158,7 +158,7 @@ Here we create a new variable (column) `monthly_mean`, and append it to the grou
 You can also use `arrange()` and `desc()` to sort the data: 
 ```{r}
 Keeling_Data_tbl %>% 
-  select(year,month,co2,quality) %>% 
+  dplyr::select(year,month,co2,quality) %>% 
   filter(quality == 1) %>% 
   group_by(month) %>% 
   summarize(monthly_mean = mean(co2)) %>% 
@@ -167,7 +167,7 @@ Keeling_Data_tbl %>%
 
 ```{r}
 Keeling_Data_tbl %>% 
-  select(year,month,co2,quality) %>% 
+  dplyr::select(year,month,co2,quality) %>% 
   filter(quality == 1) %>% 
   group_by(month) %>% 
   summarize(monthly_mean = mean(co2)) %>% 
@@ -177,7 +177,7 @@ Keeling_Data_tbl %>%
 Let's add more statistics to the monthly climatology:
 ```{r}
 Keeling_Data_tbl %>% 
-  select(year,month,co2,quality) %>% 
+  dplyr::select(year,month,co2,quality) %>% 
   filter(quality == 1) %>% 
   group_by(month) %>% 
   summarize(monthly_mean = mean(co2), monthly_sd = sd(co2),

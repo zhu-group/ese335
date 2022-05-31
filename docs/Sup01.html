@@ -584,7 +584,7 @@ div.tocify {
 <div id="using-select" class="section level2">
 <h2>Using <code>select()</code></h2>
 <p>Use the <code>select()</code> function to keep only the variables (columns) you select.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">select</span>(Keeling_Data_tbl,year,co2,quality)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>dplyr<span class="op">::</span><span class="kw">select</span>(Keeling_Data_tbl,year,co2,quality)</span></code></pre></div>
 <pre><code>## # A tibble: 767 x 3
 ##     year   co2 quality
 ##    &lt;int&gt; &lt;dbl&gt;   &lt;int&gt;
@@ -599,7 +599,7 @@ div.tocify {
 ##  9  1958  313.       1
 ## 10  1958  315.       1
 ## # ... with 757 more rows</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">select</span>(Keeling_Data_tbl,co2)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>dplyr<span class="op">::</span><span class="kw">select</span>(Keeling_Data_tbl,co2)</span></code></pre></div>
 <pre><code>## # A tibble: 767 x 1
 ##      co2
 ##    &lt;dbl&gt;
@@ -620,7 +620,7 @@ div.tocify {
 <p>Above we used ‘normal’ grammar, but the strengths of <code>dplyr</code> and <code>tidyr</code> lie in combining several functions using <strong>pipes</strong>. Since the pipes grammar is unlike anything we’ve seen in R before, let’s repeat what we’ve done above using pipes.</p>
 <p><code>x %&gt;% f(y)</code> is the same as <code>f(x, y)</code></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="st">  </span><span class="kw">select</span>(year,co2,quality)</span></code></pre></div>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(year,co2,quality)</span></code></pre></div>
 <pre><code>## # A tibble: 767 x 3
 ##     year   co2 quality
 ##    &lt;int&gt; &lt;dbl&gt;   &lt;int&gt;
@@ -659,7 +659,7 @@ div.tocify {
 ## 12  2000 December         2001.  370.       1</code></pre>
 <p>If we now want to move forward with the above tibble, but only with <code>quality == 1</code> , we can combine <code>select()</code> and <code>filter()</code> functions:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="st">  </span><span class="kw">select</span>(year,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(year,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb14-3"><a href="#cb14-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 760 x 3
 ##     year   co2 quality
@@ -681,7 +681,7 @@ div.tocify {
 <h2>Using <code>group_by()</code> and <code>summarize()</code></h2>
 <p>Now try to group monthly data using the <code>group_by()</code> function, notice how the output tibble changes:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb16-3"><a href="#cb16-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb16-4"><a href="#cb16-4"></a><span class="st">  </span><span class="kw">group_by</span>(month)</span></code></pre></div>
 <pre><code>## # A tibble: 760 x 4
@@ -701,7 +701,7 @@ div.tocify {
 ## # ... with 750 more rows</code></pre>
 <p>The <code>group_by()</code> function is much more exciting in conjunction with the <code>summarize()</code> function. This will allow us to create new variable(s) by using functions that repeat for each of the continent-specific data frames. That is to say, using the <code>group_by()</code> function, we <strong>split our original dataframe into multiple pieces</strong>, then we can run functions (<em>e.g.</em>, <code>mean()</code> or <code>sd()</code>) within <code>summarize()</code>.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb18-3"><a href="#cb18-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb18-4"><a href="#cb18-4"></a><span class="st">  </span><span class="kw">group_by</span>(month) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb18-5"><a href="#cb18-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">monthly_mean =</span> <span class="kw">mean</span>(co2))</span></code></pre></div>
@@ -723,7 +723,7 @@ div.tocify {
 <p>Here we create a new variable (column) <code>monthly_mean</code>, and append it to the groups (<code>month</code> in this case). Now, we get a so-called <em>monthly climatology</em>.</p>
 <p>You can also use <code>arrange()</code> and <code>desc()</code> to sort the data:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb20-3"><a href="#cb20-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb20-4"><a href="#cb20-4"></a><span class="st">  </span><span class="kw">group_by</span>(month) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb20-5"><a href="#cb20-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">monthly_mean =</span> <span class="kw">mean</span>(co2)) <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -744,7 +744,7 @@ div.tocify {
 ## 11 June              360.
 ## 12 April             360.</code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb22-3"><a href="#cb22-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb22-4"><a href="#cb22-4"></a><span class="st">  </span><span class="kw">group_by</span>(month) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb22-5"><a href="#cb22-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">monthly_mean =</span> <span class="kw">mean</span>(co2)) <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -766,7 +766,7 @@ div.tocify {
 ## 12 September         354.</code></pre>
 <p>Let’s add more statistics to the monthly climatology:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb24-3"><a href="#cb24-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb24-4"><a href="#cb24-4"></a><span class="st">  </span><span class="kw">group_by</span>(month) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb24-5"><a href="#cb24-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">monthly_mean =</span> <span class="kw">mean</span>(co2), <span class="dt">monthly_sd =</span> <span class="kw">sd</span>(co2),</span>
