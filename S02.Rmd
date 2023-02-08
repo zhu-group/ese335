@@ -29,7 +29,7 @@ library(ggplot2)
 
 # Section Example: weather data from BaoAn airport
 
-Environment data, expecially raw observations, are really messy. Here we  take a look at  hourly weather data measured at BaoAn International Airport during the past 10 years. The data set is from [NOAA Integrated Surface Dataset](https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc%3AC00532/html).
+Environment data, expecially raw observations, are really messy. Here we  take a look at  hourly weather data measured at BaoAn International Airport during the past 10 years. The data set is from [NOAA Integrated Surface Dataset](https://www.ncei.noaa.gov/products/land-based-station/integrated-surface-database).
 
 Download the file [2281305.zip](https://zhu-group.github.io/ese335/download/2281305.zip), where the number `2281305` is the site ID.
 
@@ -218,8 +218,6 @@ Keeling_Data_tbl %>%
   geom_line()
 ```
 
-As you will see, this is much easier than what we have done in [Section 2](https://zhu-group.github.io/ese335/S02.html#Loading_a_csv_file). This is the power of a tidy dataset and its related functions!
-
 Let's plot CO~2~ of the same month as a function of `decimal_date`, with the `color` option:
 ```{r}
 Keeling_Data_tbl %>% 
@@ -249,7 +247,7 @@ Now think about what will you do when get a new dataset before analyzing it?
 
 Normally, we would like to do two things - to take a quick look at the statics and to plot the patterns. 
 
-R has many built-in functions for a large number of summary statistics. For example,  `mean()`, `median()`, `range()`, `max()`, `min()`, `sd()`, `var()`, `IQR()`, and `summary()`. We have used some of those functions in [Section 02](https://zhu-group.github.io/ese335/S02.html). Make sure you understand how to use them and always pay attentions to `NA` values.
+R has many built-in functions for a large number of summary statistics. For example,  `mean()`, `median()`, `range()`, `max()`, `min()`, `sd()`, `var()`, `IQR()`, and `summary()`. Make sure you understand how to use them and always pay attentions to `NA` values.
 
 Our next task is to visualize the data. Often, a proper visualization can illuminate features of the data that can inform further analysis. We will learn three basic types of plots in this section.
 

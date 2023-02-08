@@ -465,18 +465,6 @@ div.tocify {
     <li>
       <a href="A01.html">Assignment 01</a>
     </li>
-    <li>
-      <a href="A02.html">Assignment 02</a>
-    </li>
-    <li>
-      <a href="A03.html">Assignment 03</a>
-    </li>
-    <li>
-      <a href="A04.html">Assignment 04</a>
-    </li>
-    <li>
-      <a href="A05.html">Assignment 05</a>
-    </li>
   </ul>
 </li>
       </ul>
@@ -513,7 +501,7 @@ div.tocify {
 </div>
 <div id="section-example-weather-data-from-baoan-airport" class="section level1">
 <h1>Section Example: weather data from BaoAn airport</h1>
-<p>Environment data, expecially raw observations, are really messy. Here we take a look at hourly weather data measured at BaoAn International Airport during the past 10 years. The data set is from <a href="https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc%3AC00532/html">NOAA Integrated Surface Dataset</a>.</p>
+<p>Environment data, expecially raw observations, are really messy. Here we take a look at hourly weather data measured at BaoAn International Airport during the past 10 years. The data set is from <a href="https://www.ncei.noaa.gov/products/land-based-station/integrated-surface-database">NOAA Integrated Surface Dataset</a>.</p>
 <p>Download the file <a href="https://zhu-group.github.io/ese335/download/2281305.zip">2281305.zip</a>, where the number <code>2281305</code> is the site ID.</p>
 <p>Extract the zip file, you should see a file named <code>2281305.csv</code>.</p>
 <p>Open the file, you see many columns and even more lines, with no clear meaning and definitions. This is very often you would encounter when work with environmental data. As Hadley Wickham puts it, “Tidy datasets are all alike, but every messy dataset is messy in its own way.”</p>
@@ -837,7 +825,6 @@ div.tocify {
 <span id="cb30-4"><a href="#cb30-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>decimal_date, <span class="dt">y=</span>co2_new)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb30-5"><a href="#cb30-5"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
 <p><img src="S02_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<p>As you will see, this is much easier than what we have done in <a href="https://zhu-group.github.io/ese335/S02.html#Loading_a_csv_file">Section 2</a>. This is the power of a tidy dataset and its related functions!</p>
 <p>Let’s plot CO<sub>2</sub> of the same month as a function of <code>decimal_date</code>, with the <code>color</code> option:</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb31-2"><a href="#cb31-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">co2_new =</span> <span class="kw">ifelse</span>(quality<span class="op">==</span><span class="dv">1</span>, co2, <span class="ot">NA</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -863,7 +850,7 @@ div.tocify {
 <h1>Quick plots</h1>
 <p>Now think about what will you do when get a new dataset before analyzing it?</p>
 <p>Normally, we would like to do two things - to take a quick look at the statics and to plot the patterns.</p>
-<p>R has many built-in functions for a large number of summary statistics. For example, <code>mean()</code>, <code>median()</code>, <code>range()</code>, <code>max()</code>, <code>min()</code>, <code>sd()</code>, <code>var()</code>, <code>IQR()</code>, and <code>summary()</code>. We have used some of those functions in <a href="https://zhu-group.github.io/ese335/S02.html">Section 02</a>. Make sure you understand how to use them and always pay attentions to <code>NA</code> values.</p>
+<p>R has many built-in functions for a large number of summary statistics. For example, <code>mean()</code>, <code>median()</code>, <code>range()</code>, <code>max()</code>, <code>min()</code>, <code>sd()</code>, <code>var()</code>, <code>IQR()</code>, and <code>summary()</code>. Make sure you understand how to use them and always pay attentions to <code>NA</code> values.</p>
 <p>Our next task is to visualize the data. Often, a proper visualization can illuminate features of the data that can inform further analysis. We will learn three basic types of plots in this section.</p>
 <div id="histograms" class="section level2">
 <h2>Histograms</h2>
