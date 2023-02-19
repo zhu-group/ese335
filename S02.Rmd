@@ -19,6 +19,7 @@ Install the following packages:
 + `ggplot2`
 
 Load the libraries with R:
+
 ```{r}
 library(tidyr)
 library(dplyr)
@@ -43,15 +44,100 @@ Open the file, you see many columns and even more lines, with no clear meaning a
 
 ***
 
+# Loading a `.csv` file
+
+<img src="figs/mlo_record.png" alt="drawing" width="800"/>
+
+[Figure source](https://scrippsco2.ucsd.edu/history_legacy/keeling_curve_lessons.html)
+
+[Charles David Keeling](https://scrippsco2.ucsd.edu/history_legacy/charles_david_keeling_biography.html) directed a program to measure the concentrations of CO~2~ in the atmosphere that continued without interruption from the late 1950s through the present. This program, operated out of [Scripps Institution of Oceanography](https://scripps.ucsd.edu), is responsible for the Mauna Loa record, which is almost certainly the **best-known icon** illustrating the impact of humanity on the planet as a whole. Learn more about [Keeling Curve Lessons](https://scrippsco2.ucsd.edu/history_legacy/keeling_curve_lessons.html).
+
+We will start with [monthly CO~2~ data](https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html) measured from Mauna Loa. 
+
+To begin with,
+
++ Download the `co2_mm_mlo.csv` file from [here](https://zhu-group.github.io/ese335/download/co2_mm_mlo.csv)
+
++ Save the file to your `working directory`. 
+
++ Take a look at the file, where the column `co2` means monthly average CO~2~ in the unit of `ppm` (part per million, 10^-6^), `quality` column is the quality flag of the observation, `0` means the data point does not meet the quality control so that should be discarded, `1` means the data point is usable.
+
+Now let's *load* this file via the following:
+
+```{r}
+Keeling_Data <- read.csv(file = "co2_mm_mlo.csv", header = T)
+```
+
+The file is loaded into the dataset `Keeling_Data`. Here we use the *option* `header = T` so that the first line of `co2_mm_mlo.csv` is also loaded as names of the variables. You can try to turn this off by setting `header = F`, and check what happens.
+
+Check the names of columns:
+
+```{r}
+colnames(Keeling_Data)
+```
+
+If column names are not specified, *e.g.*, using `headers = FALSE` in a `read.csv()` function, R assigns default names `V1`, `V2`, ..., `Vn`.
+
+Check the head (first 6 lines) of the dataset using `head()` function
+
+```{r}
+head(Keeling_Data)
+```
+
+Or the end of (last 6 lines) with `tail()`:
+
+```{r}
+tail(Keeling_Data)
+```
+
+The `read.table()` function is used for reading in **tabular data** stored in a text file where the columns of data are separated by punctuation characters such as `.csv` files (csv = comma-separated values). Tabular files are the most common *file type* you would encounter in your future study, as it's easy to use and share.
+
+`Tabs` and `commas` are the most common punctuation characters used to separate or delimit data points in `.csv` files. For convenience R provides 2 other versions of `read.table()`. These are: `read.csv()` for files where the data are separated with `commas` and `read.delim()` for files where the data are separated with `tabs`. Of these three functions, `read.csv()` is the most commonly used. If needed it is possible to override the default delimiting punctuation marks for both `read.csv()` and `read.delim()`.
+
+We can begin exploring our data set right away, pulling out columns by specifying them using the `$` operator:
+
+```{r}
+Keeling_Data$co2
+```
+
+Let's do some simple statistical checks with `Keeling_Data$co2`:
+
+```{r}
+# Min
+min(Keeling_Data$co2)
+# Max
+max(Keeling_Data$co2)
+# Range
+range(Keeling_Data$co2)
+# Mean
+mean(Keeling_Data$co2)
+# Median
+median(Keeling_Data$co2)
+# Show quantiles
+summary(Keeling_Data$co2)
+```
+
+You will find there are some `-99.99` values, which are *missing values*. We will get back to this later.
+
+You can use `[]` to extract elements of a vector by specifying their corresponding *index*.  
+
+<font size="2" color="red"> **Important: **</font> Index in R starts from `1`, not `0`. For example:
+
+```{r}
+Keeling_Data$co2[1:10]
+Keeling_Data$year[200:210]
+Keeling_Data$co2[0]
+```
+
 # Tidy data
 
-In this section, we will learn a consistent way to organize the data in R, called **tidy data**. Getting the data into this format requires some upfront work, but that work pays off in the long term. Once you have tidy data and the tools provided by the `tidyr`, `dplyr` and `ggplot2` packages, you will spend much less time munging/wrangling data from one representation to another, allowing you to spend more time on the analytic questions at hand.
+In the rest of the section, we will learn a consistent way to organize the data in R, called **tidy data**. Getting the data into this format requires some upfront work, but that work pays off in the long term. Once you have tidy data and the tools provided by the `tidyr`, `dplyr` and `ggplot2` packages, you will spend much less time munging/wrangling data from one representation to another, allowing you to spend more time on the analytic questions at hand.
 
 ## Tibble
 
 For now, we will use `tibble` instead of R’s traditional `data.frame`. Tibble is a data frame, but they tweak some older behaviors to make life a little easier. 
 
-Let's use `Keeling_Data` as an example:
+Let's use `Keeling_Data` again:
 
 ```{r}
 Keeling_Data <- read.csv(file = "co2_mm_mlo.csv", header = T)
