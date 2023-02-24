@@ -563,7 +563,7 @@ div.tocify {
 ## [20,]    2    3    4</code></pre>
 <p>Next, we can compute all possible differences:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Make an empty list</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>differnce &lt;-<span class="st"> </span><span class="kw">c</span>()</span>
+<span id="cb6-2"><a href="#cb6-2"></a>difference &lt;-<span class="st"> </span><span class="kw">c</span>()</span>
 <span id="cb6-3"><a href="#cb6-3"></a></span>
 <span id="cb6-4"><a href="#cb6-4"></a><span class="co"># Loop all possible grouping methods for A</span></span>
 <span id="cb6-5"><a href="#cb6-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">dim</span>(Groupings_A)[<span class="dv">1</span>]){</span>
@@ -575,22 +575,22 @@ div.tocify {
 <span id="cb6-11"><a href="#cb6-11"></a>  mean_B &lt;-<span class="st"> </span>(<span class="kw">sum</span>(Obs_all)<span class="op">-</span><span class="kw">sum</span>(Groupings_A[i,]))<span class="op">/</span><span class="kw">length</span>(Obs_B)</span>
 <span id="cb6-12"><a href="#cb6-12"></a>  </span>
 <span id="cb6-13"><a href="#cb6-13"></a>  <span class="co"># Store difference</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a>  differnce &lt;-<span class="st"> </span><span class="kw">c</span>(differnce, mean_A <span class="op">-</span><span class="st"> </span>mean_B)</span>
+<span id="cb6-14"><a href="#cb6-14"></a>  difference &lt;-<span class="st"> </span><span class="kw">c</span>(difference, mean_A <span class="op">-</span><span class="st"> </span>mean_B)</span>
 <span id="cb6-15"><a href="#cb6-15"></a>}</span>
 <span id="cb6-16"><a href="#cb6-16"></a></span>
 <span id="cb6-17"><a href="#cb6-17"></a><span class="co"># Show all possible differences</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a><span class="kw">print</span>(differnce)</span></code></pre></div>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="kw">print</span>(difference)</span></code></pre></div>
 <pre><code>##  [1] -1.0000000 -1.6666667 -1.0000000 -0.3333333 -1.0000000 -0.3333333  0.3333333 -1.0000000 -0.3333333  0.3333333 -0.3333333  0.3333333  1.0000000 -0.3333333  0.3333333  1.0000000  0.3333333  1.0000000
 ## [19]  1.6666667  1.0000000</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Plot all possible differences</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">hist</span>(differnce)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">hist</span>(difference)</span>
 <span id="cb8-3"><a href="#cb8-3"></a></span>
 <span id="cb8-4"><a href="#cb8-4"></a><span class="co"># Add a vertical line</span></span>
 <span id="cb8-5"><a href="#cb8-5"></a><span class="kw">abline</span>(<span class="dt">v=</span>Obs_difference, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lwd=</span><span class="dv">5</span>, <span class="dt">lty=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="S04_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>OK, given H<sub>0</sub> is true, what is the chance that grouping leads to the observed or more extreme difference? From the above plot, we count that there are <code>5</code> cases out of <code>20</code> cases that the difference is as extreme or more extreme than <code>-1.0</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Compute p-value</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">length</span>( <span class="kw">which</span>(differnce <span class="op">&lt;=</span><span class="st"> </span>Obs_difference) )<span class="op">/</span><span class="kw">length</span>(differnce)</span></code></pre></div>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">length</span>( <span class="kw">which</span>(difference <span class="op">&lt;=</span><span class="st"> </span>Obs_difference) )<span class="op">/</span><span class="kw">length</span>(difference)</span></code></pre></div>
 <pre><code>## [1] 0.25</code></pre>
 <p>The p-value, in this case, is <code>0.25</code>, which is not a small value (compared with <code>0.05</code>). So we can not rule out that H<sub>0</sub>, meaning the observations fail to back up the usefulness of the new technology.</p>
 <p>Now change the observations to:</p>

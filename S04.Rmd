@@ -88,7 +88,7 @@ Next, we can compute all possible differences:
 
 ```{r}
 # Make an empty list
-differnce <- c()
+difference <- c()
 
 # Loop all possible grouping methods for A
 for(i in 1:dim(Groupings_A)[1]){
@@ -100,14 +100,14 @@ for(i in 1:dim(Groupings_A)[1]){
   mean_B <- (sum(Obs_all)-sum(Groupings_A[i,]))/length(Obs_B)
   
   # Store difference
-  differnce <- c(differnce, mean_A - mean_B)
+  difference <- c(difference, mean_A - mean_B)
 }
 
 # Show all possible differences
-print(differnce)
+print(difference)
 
 # Plot all possible differences
-hist(differnce)
+hist(difference)
 
 # Add a vertical line
 abline(v=Obs_difference, col="red", lwd=5, lty=2)
@@ -118,7 +118,7 @@ OK, given H~0~ is true, what is the chance that grouping leads to the observed o
 ```{r}
 
 # Compute p-value
-length( which(differnce <= Obs_difference) )/length(differnce)
+length( which(difference <= Obs_difference) )/length(difference)
 ```
 
 The p-value, in this case, is `0.25`, which is not a small value (compared with `0.05`). So we can not rule out that H~0~, meaning the observations fail to back up the usefulness of the new technology.
