@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Section 05 Normal distribution</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 66px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h2 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h3 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h4 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h5 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h6 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Environmental Data Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Syllabus.html">
+    <span class="fa fa-bell-o"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="Schedule.html">
+    <span class="fa fa-calendar"></span>
+     
+    Schedule
+  </a>
+</li>
+<li>
+  <a href="Resource.html">
+    <span class="fa fa-wrench"></span>
+     
+    Resource
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-laptop"></span>
+     
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="A01.html">Assignment 01</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Section 05 Normal distribution</h1>
+
+</div>
+
+
+<hr />
+<div id="prerequisites" class="section level1">
+<h1>Prerequisites</h1>
+<p>Install the following packages:</p>
+<ul>
+<li><code>ggpubr</code></li>
+<li><code>nortest</code></li>
+<li><code>geoR</code></li>
+</ul>
+<p>Load the libraries with R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(ggpubr)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(nortest)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(geoR)</span></code></pre></div>
+<hr />
+</div>
+<div id="section-example-sleep-duration-of-sustech-students" class="section level1">
+<h1>Section Example: Sleep duration of SUSTech students</h1>
+<p>Let’s start this section with the poll we asked previously, but focus on a different concept this time.</p>
+<p>Suppose we want to know how many hours SUSTech undergraduates generally sleep every day. Let’s further assume that ESE335 students are representative of the whole population (SUSTech undergraduates).</p>
+<p>Now we count the number of students for each of the following intervals:</p>
+<ul>
+<li><p>less than 5 hours</p></li>
+<li><p>5-6 hours</p></li>
+<li><p>6-7 hours</p></li>
+<li><p>7-8 hours</p></li>
+<li><p>8-9 hours</p></li>
+<li><p>9-10 hours</p></li>
+<li><p>more than 10 hours</p></li>
+</ul>
+<p>We should be able to build a histogram, but think about what is the chance that the sleep duration is <strong>exactly 8.00 hours</strong>?</p>
+<hr />
+</div>
+<div id="normal-distribution" class="section level1">
+<h1>Normal distribution</h1>
+<div id="why-is-it-so-normal" class="section level2">
+<h2>Why is it so “normal”?</h2>
+<p>The normal distribution is the most important probability distribution in statistics because it fits many natural phenomena. For example, heights, blood pressure, measurement error, and IQ scores follow the normal distribution. The reason why normal distribution is so “normal” in nature can be traced to the <strong>Central Limit Theory</strong>, which states that various <strong>independent</strong> factors influence a particular trait. When all these independent factors contribute to a phenomenon, their normalized sum tends to result in a normal distribution.</p>
+<p>The normal distribution is also known as Gaussian distribution or bell curve, which encompasses two basic terms - mean and standard deviation. It is a symmetrical arrangement of a data set in which most values cluster in the mean and the rest taper off symmetrically towards either extreme.</p>
+</div>
+<div id="pdf-of-a-normal-distribution" class="section level2">
+<h2>PDF of a normal distribution</h2>
+<p>An Normal random variable <span class="math inline">\(X\)</span> is defined as follows: <span class="math display">\[X \sim N(\mu, \sigma^2) \]</span> where <span class="math inline">\(\mu\)</span> is the mean and <span class="math inline">\(\sigma^2\)</span> is the variance, both refer to features of the population. And the PDF of a normal distribution is written as:</p>
+<p><span class="math display">\[f(x)=\frac{1} {\sigma \sqrt{2 \pi}} e^{-(x-\mu)^2/2\sigma^2}\]</span> In R, the <code>dnorm()</code> returns the probability density of a normal distribution:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Make a vector from -5 to 5, with a step of 0.01 </span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>x        &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="fl">5.0</span>, <span class="fl">5.0</span>, <span class="dt">by=</span><span class="fl">0.01</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Compute the density for each element in x</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>density1 &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Plot Density</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="kw">plot</span>(x, density1, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
+<span id="cb2-9"><a href="#cb2-9"></a>     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="dv">2</span>, </span>
+<span id="cb2-10"><a href="#cb2-10"></a>     <span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">5.0</span>, <span class="fl">5.0</span>),</span>
+<span id="cb2-11"><a href="#cb2-11"></a>     <span class="dt">main=</span><span class="st">&quot;PDF of normal distributions&quot;</span>)</span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co"># Compute and plot the density from another normal</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>density2  &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="kw">lines</span>(x, density2, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
+<span id="cb2-16"><a href="#cb2-16"></a>     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="dv">2</span>)</span>
+<span id="cb2-17"><a href="#cb2-17"></a></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="co"># Compute and plot the density from another normal</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>density3  &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="kw">lines</span>(x, density3, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
+<span id="cb2-21"><a href="#cb2-21"></a>     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="dv">2</span>)</span>
+<span id="cb2-22"><a href="#cb2-22"></a></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="co"># Add legends</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="kw">text</span>(<span class="op">-</span><span class="dv">4</span>, <span class="fl">0.35</span>, <span class="st">&quot;N(0,1)&quot;</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,   <span class="dt">cex=</span><span class="dv">2</span>)</span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="kw">text</span>(<span class="op">-</span><span class="dv">4</span>, <span class="fl">0.30</span>, <span class="st">&quot;N(1,1)&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,  <span class="dt">cex=</span><span class="dv">2</span>)</span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="kw">text</span>(<span class="op">-</span><span class="dv">4</span>, <span class="fl">0.25</span>, <span class="st">&quot;N(0,3)&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">cex=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="S05_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<hr />
+</div>
+</div>
+<div id="normality-test" class="section level1">
+<h1>Normality Test</h1>
+<p>If the data set follows the normal distribution, it is easier to predict with high accuracy. If we would like to use <strong>parametric</strong> statistical tests (e.g., correlation, regression, t-test, ANOVA, Pearson’s correlation coefficient), the validity of these tests depends on the distribution. Parametric tests are only valid if the distribution is normal, otherwise, we violate the underlying assumption of normality. <strong>Normality</strong> and other assumptions should take seriously to have reliable and interpretable research and conclusions.</p>
+<p>If we found that the distribution of our data is not normal, we have to choose a <strong>non-parametric</strong> statistical test (e.g. Mann-Whitney test, Spearman’s correlation coefficient) or so-called distribution-free tests.</p>
+<p>There are several possibilities to check normality, including visual inspections, such as normal plots/histograms, Q-Q (quartile-quartile) plot, and statistical tests, such as Shapiro-Wilk test and Lilliefors (Kolmogorov–Smirnov) test.</p>
+<div id="density-plot" class="section level2">
+<h2>Density plot</h2>
+<p>The simplest, of course, is to visually check whether the distribution is bell-shaped or not.</p>
+<p>Let’s generate two samples, one is from <span class="math inline">\(N(0,1)\)</span>, the other one is from a uniform distribution. Then plot the density functions of the two samples.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Sample 1 is from a normal distribution</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>sample1  &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">200</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co"># Sample 2 is from a uniform distribution</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>sample2  &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">200</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co"># Plot density function of sample 1</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">ggdensity</span>(sample1, <span class="dt">main =</span> <span class="st">&quot;Density plot of sample 1&quot;</span>, </span>
+<span id="cb3-9"><a href="#cb3-9"></a>          <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">color =</span><span class="st">&quot;blue&quot;</span>, <span class="dt">lwd=</span><span class="fl">1.5</span>)</span></code></pre></div>
+<p><img src="S05_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Plot density function of sample 2</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">ggdensity</span>(sample2, <span class="dt">main =</span> <span class="st">&quot;Density plot of sample 2&quot;</span>, </span>
+<span id="cb4-3"><a href="#cb4-3"></a>          <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">color =</span><span class="st">&quot;red&quot;</span>, <span class="dt">lwd=</span><span class="fl">1.5</span>)</span></code></pre></div>
+<p><img src="S05_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p>Well, it seems sample 1 is more likely to be from a normal distribution than sample 2.</p>
+</div>
+<div id="q-q-plot" class="section level2">
+<h2>Q-Q plot</h2>
+<p>A QQ (or quantile-quantile plot) plot is a scatter plot that compares two sets of data. A common use of QQ plots is checking the normality of data. However, they can be used to compare real-world data to any theoretical data set to test the validity of the theory. They can actually be used for comparing any two data sets to check for a relationship.</p>
+<p>It works by plotting the data from each data set on a different axis. If the distribution of the data is the same, the result will be a straight line.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># QQ plot of sample1</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">ggqqplot</span>(sample1)</span></code></pre></div>
+<p><img src="S05_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># QQ plot of sample2</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">ggqqplot</span>(sample2)</span></code></pre></div>
+<p><img src="S05_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<p>Here the gray area shows the acceptable deviation from the normal line.</p>
+</div>
+<div id="shapiro-wilk-test" class="section level2">
+<h2>Shapiro-Wilk test</h2>
+<p>The above visual observations are just sanity checks. To have a more reliable result, one needs to do a statistical test of the normality. Here the sample distribution is compared with the normal distribution. The null hypothesis of these tests is the sample distribution is normal. If we fail to reject the null hypothesis, the sample is normal. If the test is significant/we reject the null hypothesis, the sample distribution is non-normal.</p>
+<p>The Shapiro-Wilk method is widely used to check normality of a <strong>small sample</strong> (size less than <code>30</code>). In R, the test is done with <code>shapiro.test()</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Sample 3 is from a normal distribution</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>sample3  &lt;-<span class="st"> </span>sample1[<span class="dv">1</span><span class="op">:</span><span class="dv">25</span>]</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co"># Sample 4 is from a uniform distribution</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>sample4  &lt;-<span class="st"> </span>sample2[<span class="dv">1</span><span class="op">:</span><span class="dv">25</span>]</span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co"># Shapiro-Wilk test of sample 3</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="kw">shapiro.test</span>(sample3)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  sample3
+## W = 0.98007, p-value = 0.8866</code></pre>
+<p>From the output, the p-value &gt; 0.05 shows that we fail to reject the null hypothesis, which means the distribution of our data is not significantly different from the normal distribution. In other words, the distribution of our data is normal.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Shapiro-Wilk test of sample 4</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">shapiro.test</span>(sample4)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  sample4
+## W = 0.8636, p-value = 0.003228</code></pre>
+</div>
+<div id="lilliefors-test" class="section level2">
+<h2>Lilliefors test</h2>
+<p>The Kolmogorov-Smirnov (K-S) test is used to test whether or not or not a sample comes from a certain distribution. The Lilliefors test is an improvement on the K-S test — correcting the K-S for small values at the tails of probability distributions — and is therefore sometimes called the K-S D test. The Lilliefors test can be conducted with the <code>lillie.test()</code> function from the <code>nortest</code> package:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Lilliefors test of sample 1</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">lillie.test</span>(sample1)</span></code></pre></div>
+<pre><code>## 
+##  Lilliefors (Kolmogorov-Smirnov) normality test
+## 
+## data:  sample1
+## D = 0.036326, p-value = 0.7494</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Lilliefors test of sample 2</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">lillie.test</span>(sample2)</span></code></pre></div>
+<pre><code>## 
+##  Lilliefors (Kolmogorov-Smirnov) normality test
+## 
+## data:  sample2
+## D = 0.059524, p-value = 0.0816</code></pre>
+<hr />
+</div>
+</div>
+<div id="log-normal-distribution" class="section level1">
+<h1>Log-Normal Distribution</h1>
+<p>The log-normal distribution is found to the basic type of distribution of many geological/environmental variables. When the logarithms of values form a normal distribution, the original (antilog) values are log-normally distributed. It is a skewed distribution with many small values and fewer large values. Therefore the mean is usually greater than the mode.</p>
+<p>In geology, many processes lead to a log-normal, so often that it has been said the log-normal is the normal of geology.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Sample 5 is from a log-normal distribution</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>sample5  &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">rnorm</span>(<span class="dv">200</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># Plot density function of sample 1</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="kw">ggdensity</span>(sample5, <span class="dt">main =</span> <span class="st">&quot;Density plot of sample 5&quot;</span>, </span>
+<span id="cb15-6"><a href="#cb15-6"></a>          <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">color =</span><span class="st">&quot;blue&quot;</span>, <span class="dt">lwd=</span><span class="fl">1.5</span>)</span></code></pre></div>
+<p><img src="S05_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<hr />
+</div>
+<div id="normal-transformation" class="section level1">
+<h1>Normal transformation</h1>
+<p>When the sample follows a log-normal distribution, it’s straightforward to make a logarithmic transformation. Such as:</p>
+<p><span class="math display">\[ x_{i}^{&#39;}= ln(x_{i})\]</span></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Sample 5 is from a log-normal distribution</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>sample5  &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">rnorm</span>(<span class="dv">200</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb16-3"><a href="#cb16-3"></a>sample6  &lt;-<span class="st"> </span><span class="kw">log</span>(sample5)</span>
+<span id="cb16-4"><a href="#cb16-4"></a></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="co"># Plot density function of sample 1</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="kw">ggdensity</span>(sample6, <span class="dt">main =</span> <span class="st">&quot;Density plot of sample 6&quot;</span>, </span>
+<span id="cb16-7"><a href="#cb16-7"></a>          <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">color =</span><span class="st">&quot;blue&quot;</span>, <span class="dt">lwd=</span><span class="fl">1.5</span>)</span></code></pre></div>
+<p><img src="S05_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>The Box-Cox transformation is commonly used to transfer a non-normal dependent variables into a normal shape. The basic idea behind this method is to find some value for <span class="math inline">\(\lambda\)</span> such that the transformed data is as close to normally distributed as possible, using the following formula:</p>
+<p><span class="math display">\[x_{i}^{&#39;}= ln(x_{i}), \lambda = 0\]</span> <span class="math display">\[x_{i}^{&#39;}= \frac{x_{i}^{\lambda}-1}{\lambda}, \lambda \ne 0\]</span></p>
+<p>In R, you can find <span class="math inline">\(\lambda\)</span> using the <code>boxcoxfit()</code> function from the <code>geoR</code> package. For example:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Generate a sample</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>y &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">runif</span>(<span class="dv">30</span>,<span class="dv">0</span>,<span class="dv">1</span>)<span class="op">+</span><span class="kw">runif</span>(<span class="dv">30</span>,<span class="dv">0</span>,<span class="dv">1</span>)<span class="op">+</span><span class="kw">runif</span>(<span class="dv">30</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># Plot the density</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="kw">ggdensity</span>(y,<span class="dt">main =</span> <span class="st">&quot;Density plot of sample&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>)</span></code></pre></div>
+<p><img src="S05_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Plot Q-Q plot</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">ggqqplot</span>(y)</span></code></pre></div>
+<p><img src="S05_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Lilliefors test </span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">lillie.test</span>(y)</span></code></pre></div>
+<pre><code>## 
+##  Lilliefors (Kolmogorov-Smirnov) normality test
+## 
+## data:  y
+## D = 0.17972, p-value = 0.01455</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># BOX-COX transformation, get lambda</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>lambda &lt;-<span class="st"> </span><span class="kw">boxcoxfit</span>(y)<span class="op">$</span>lambda</span>
+<span id="cb21-3"><a href="#cb21-3"></a></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="co"># BOX-COX transformation</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>y_new &lt;-<span class="st"> </span>(y<span class="op">^</span>lambda<span class="dv">-1</span>)<span class="op">/</span>lambda</span>
+<span id="cb21-6"><a href="#cb21-6"></a></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="co"># Plot the density</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="kw">ggdensity</span>(y_new,<span class="dt">main =</span> <span class="st">&quot;Density plot of sample&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>)</span></code></pre></div>
+<p><img src="S05_files/figure-html/unnamed-chunk-10-3.png" width="672" /></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Plot Q-Q plot</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="kw">ggqqplot</span>(y_new)</span></code></pre></div>
+<p><img src="S05_files/figure-html/unnamed-chunk-10-4.png" width="672" /></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Lilliefors test </span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="kw">lillie.test</span>(y_new)</span></code></pre></div>
+<pre><code>## 
+##  Lilliefors (Kolmogorov-Smirnov) normality test
+## 
+## data:  y_new
+## D = 0.10949, p-value = 0.475</code></pre>
+</div>
+<div id="in-class-exercises" class="section level1">
+<h1>In-class exercises</h1>
+<div id="exercise-1" class="section level2">
+<h2>Exercise #1</h2>
+<p>Is the following sample from a normal distribution?</p>
+<p><code>0.6, -1.0, -0.5, 0.9, -0.4, 0.9, 0.6, -0.2, 0.1, 0.7, 0.4, -0.5, 1.2, 0.1, 0.6, -1.3, 0.9, 1.1, 0.2, 0.1</code>.</p>
+<ul>
+<li><p>1.1 Make a density plot</p></li>
+<li><p>1.2 Make a Q-Q plot</p></li>
+<li><p>1.3 Test the normality with a test</p></li>
+</ul>
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise #2</h2>
+<p>The following sample is rainfall (acre-feet) in a location:</p>
+<p><code>1202.6, 830.1, 372.4, 345.5, 321.2, 244.3, 163.0, 147.8, 95.0, 87.0</code></p>
+<p><code>81.2, 68.5, 47.3, 41.1, 36.6, 29.0, 28.6, 26.3, 26.0, 24.4</code></p>
+<p><code>21.4, 17.3, 11.5, 4.9, 4.9, 1.0</code></p>
+<p>Is the sample from a normal distribution? If not, can you make a normal transformation for the sample?</p>
+</div>
+<div id="exercise-3" class="section level2">
+<h2>Exercise #3</h2>
+<p>Can you make up a sample that is NOT from a normal distribution? Then</p>
+<ul>
+<li><p>3.1 Make a density plot of the sample</p></li>
+<li><p>3.2 Make a Q-Q plot</p></li>
+<li><p>3.3 Test the normality with a test</p></li>
+</ul>
+<p>Now conduct the BOX-COX transformation for the sample, and for the new sample:</p>
+<ul>
+<li><p>3.4 Make a density plot</p></li>
+<li><p>3.5 Make a Q-Q plot</p></li>
+<li><p>3.6 Test the normality</p></li>
+</ul>
+</div>
+<div id="exercise-4" class="section level2">
+<h2>Exercise #4</h2>
+<p>Suppose you have a sample, which is from 2 populations:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Generate a sample</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="kw">rnorm</span>(<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">1</span>))</span></code></pre></div>
+<p>Can you make a normal transformation for the sample? Why or why not?</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
