@@ -531,28 +531,29 @@ div.tocify {
 <span id="cb2-2"><a href="#cb2-2"></a>x        &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="fl">5.0</span>, <span class="fl">5.0</span>, <span class="dt">by=</span><span class="fl">0.01</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a></span>
 <span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Compute the density for each element in x</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>density1 &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Plot Density</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="kw">plot</span>(x, density1, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
-<span id="cb2-9"><a href="#cb2-9"></a>     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="dv">2</span>, </span>
-<span id="cb2-10"><a href="#cb2-10"></a>     <span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">5.0</span>, <span class="fl">5.0</span>),</span>
-<span id="cb2-11"><a href="#cb2-11"></a>     <span class="dt">main=</span><span class="st">&quot;PDF of normal distributions&quot;</span>)</span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co"># Compute and plot the density from another normal</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>density2  &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="kw">lines</span>(x, density2, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
-<span id="cb2-16"><a href="#cb2-16"></a>     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="dv">2</span>)</span>
-<span id="cb2-17"><a href="#cb2-17"></a></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="co"># Compute and plot the density from another normal</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>density3  &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dv">0</span>, <span class="dv">3</span>)</span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="kw">lines</span>(x, density3, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
-<span id="cb2-21"><a href="#cb2-21"></a>     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="dv">2</span>)</span>
-<span id="cb2-22"><a href="#cb2-22"></a></span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="co"># Add legends</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="kw">text</span>(<span class="op">-</span><span class="dv">4</span>, <span class="fl">0.35</span>, <span class="st">&quot;N(0,1)&quot;</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,   <span class="dt">cex=</span><span class="dv">2</span>)</span>
-<span id="cb2-25"><a href="#cb2-25"></a><span class="kw">text</span>(<span class="op">-</span><span class="dv">4</span>, <span class="fl">0.30</span>, <span class="st">&quot;N(1,1)&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,  <span class="dt">cex=</span><span class="dv">2</span>)</span>
-<span id="cb2-26"><a href="#cb2-26"></a><span class="kw">text</span>(<span class="op">-</span><span class="dv">4</span>, <span class="fl">0.25</span>, <span class="st">&quot;N(0,3)&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">cex=</span><span class="dv">2</span>)</span></code></pre></div>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># Mean = 0, sd = 1</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>density1 &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># Plot Density</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="kw">plot</span>(x, density1, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
+<span id="cb2-10"><a href="#cb2-10"></a>     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="dv">2</span>, </span>
+<span id="cb2-11"><a href="#cb2-11"></a>     <span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">5.0</span>, <span class="fl">5.0</span>),</span>
+<span id="cb2-12"><a href="#cb2-12"></a>     <span class="dt">main=</span><span class="st">&quot;PDF of normal distributions&quot;</span>)</span>
+<span id="cb2-13"><a href="#cb2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co"># Compute and plot the density from another normal</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>density2  &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="kw">lines</span>(x, density2, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
+<span id="cb2-17"><a href="#cb2-17"></a>     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="dv">2</span>)</span>
+<span id="cb2-18"><a href="#cb2-18"></a></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="co"># Compute and plot the density from another normal</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a>density3  &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="kw">lines</span>(x, density3, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
+<span id="cb2-22"><a href="#cb2-22"></a>     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="dv">2</span>)</span>
+<span id="cb2-23"><a href="#cb2-23"></a></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="co"># Add legends</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="kw">text</span>(<span class="op">-</span><span class="dv">4</span>, <span class="fl">0.35</span>, <span class="st">&quot;N(0, 1)&quot;</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,   <span class="dt">cex=</span><span class="dv">2</span>)</span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="kw">text</span>(<span class="op">-</span><span class="dv">4</span>, <span class="fl">0.30</span>, <span class="st">&quot;N(1, 1)&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,  <span class="dt">cex=</span><span class="dv">2</span>)</span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="kw">text</span>(<span class="op">-</span><span class="dv">4</span>, <span class="fl">0.25</span>, <span class="st">&quot;N(0, 9)&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">cex=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="S05_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <hr />
 </div>
@@ -610,7 +611,7 @@ div.tocify {
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sample3
-## W = 0.98007, p-value = 0.8866</code></pre>
+## W = 0.97658, p-value = 0.8101</code></pre>
 <p>From the output, the p-value &gt; 0.05 shows that we fail to reject the null hypothesis, which means the distribution of our data is not significantly different from the normal distribution. In other words, the distribution of our data is normal.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Shapiro-Wilk test of sample 4</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="kw">shapiro.test</span>(sample4)</span></code></pre></div>
@@ -618,7 +619,7 @@ div.tocify {
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sample4
-## W = 0.8636, p-value = 0.003228</code></pre>
+## W = 0.94601, p-value = 0.2035</code></pre>
 </div>
 <div id="lilliefors-test" class="section level2">
 <h2>Lilliefors test</h2>
@@ -629,14 +630,14 @@ div.tocify {
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  sample1
-## D = 0.036326, p-value = 0.7494</code></pre>
+## D = 0.033121, p-value = 0.8554</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Lilliefors test of sample 2</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="kw">lillie.test</span>(sample2)</span></code></pre></div>
 <pre><code>## 
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  sample2
-## D = 0.059524, p-value = 0.0816</code></pre>
+## D = 0.079847, p-value = 0.003463</code></pre>
 <hr />
 </div>
 </div>
@@ -647,7 +648,7 @@ div.tocify {
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Sample 5 is from a log-normal distribution</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a>sample5  &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">rnorm</span>(<span class="dv">200</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
 <span id="cb15-3"><a href="#cb15-3"></a></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># Plot density function of sample 1</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># Plot density function of sample 5</span></span>
 <span id="cb15-5"><a href="#cb15-5"></a><span class="kw">ggdensity</span>(sample5, <span class="dt">main =</span> <span class="st">&quot;Density plot of sample 5&quot;</span>, </span>
 <span id="cb15-6"><a href="#cb15-6"></a>          <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">color =</span><span class="st">&quot;blue&quot;</span>, <span class="dt">lwd=</span><span class="fl">1.5</span>)</span></code></pre></div>
 <p><img src="S05_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
@@ -657,13 +658,12 @@ div.tocify {
 <h1>Normal transformation</h1>
 <p>When the sample follows a log-normal distribution, it’s straightforward to make a logarithmic transformation. Such as:</p>
 <p><span class="math display">\[ x_{i}^{&#39;}= ln(x_{i})\]</span></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Sample 5 is from a log-normal distribution</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>sample5  &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">rnorm</span>(<span class="dv">200</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb16-3"><a href="#cb16-3"></a>sample6  &lt;-<span class="st"> </span><span class="kw">log</span>(sample5)</span>
-<span id="cb16-4"><a href="#cb16-4"></a></span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="co"># Plot density function of sample 1</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="kw">ggdensity</span>(sample6, <span class="dt">main =</span> <span class="st">&quot;Density plot of sample 6&quot;</span>, </span>
-<span id="cb16-7"><a href="#cb16-7"></a>          <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">color =</span><span class="st">&quot;blue&quot;</span>, <span class="dt">lwd=</span><span class="fl">1.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Sample 6 is taking log on sample 5 which is from a log-normal distribution</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>sample6  &lt;-<span class="st"> </span><span class="kw">log</span>(sample5)</span>
+<span id="cb16-3"><a href="#cb16-3"></a></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="co"># Plot density function of sample 6</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="kw">ggdensity</span>(sample6, <span class="dt">main =</span> <span class="st">&quot;Density plot of sample 6&quot;</span>, </span>
+<span id="cb16-6"><a href="#cb16-6"></a>          <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">color =</span><span class="st">&quot;blue&quot;</span>, <span class="dt">lwd=</span><span class="fl">1.5</span>)</span></code></pre></div>
 <p><img src="S05_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>The Box-Cox transformation is commonly used to transfer a non-normal dependent variables into a normal shape. The basic idea behind this method is to find some value for <span class="math inline">\(\lambda\)</span> such that the transformed data is as close to normally distributed as possible, using the following formula:</p>
 <p><span class="math display">\[x_{i}^{&#39;}= ln(x_{i}), \lambda = 0\]</span> <span class="math display">\[x_{i}^{&#39;}= \frac{x_{i}^{\lambda}-1}{\lambda}, \lambda \ne 0\]</span></p>
@@ -683,7 +683,7 @@ div.tocify {
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  y
-## D = 0.17972, p-value = 0.01455</code></pre>
+## D = 0.18513, p-value = 0.01014</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># BOX-COX transformation, get lambda</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a>lambda &lt;-<span class="st"> </span><span class="kw">boxcoxfit</span>(y)<span class="op">$</span>lambda</span>
 <span id="cb21-3"><a href="#cb21-3"></a></span>
@@ -702,7 +702,7 @@ div.tocify {
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  y_new
-## D = 0.10949, p-value = 0.475</code></pre>
+## D = 0.081348, p-value = 0.8803</code></pre>
 </div>
 <div id="in-class-exercises" class="section level1">
 <h1>In-class exercises</h1>

@@ -76,6 +76,7 @@ In R, the `dnorm()` returns the probability density of a normal distribution:
 x        <- seq(-5.0, 5.0, by=0.01)
 
 # Compute the density for each element in x
+# Mean = 0, sd = 1
 density1 <- dnorm(x, 0, 1)
 
 # Plot Density
@@ -95,9 +96,9 @@ lines(x, density3, col="red", xlab="", ylab="Density",
      type="l", lwd=3, cex=2)
 
 # Add legends
-text(-4, 0.35, "N(0,1)", col="black",   cex=2)
-text(-4, 0.30, "N(1,1)", col="blue",  cex=2)
-text(-4, 0.25, "N(0,3)", col="red", cex=2)
+text(-4, 0.35, "N(0, 1)", col="black",   cex=2)
+text(-4, 0.30, "N(1, 1)", col="blue",  cex=2)
+text(-4, 0.25, "N(0, 9)", col="red", cex=2)
 
 ```
 
@@ -199,7 +200,7 @@ In geology, many processes lead to a log-normal, so often that it has been said 
 # Sample 5 is from a log-normal distribution
 sample5  <- exp(rnorm(200, 0, 1))
 
-# Plot density function of sample 1
+# Plot density function of sample 5
 ggdensity(sample5, main = "Density plot of sample 5", 
           xlab = "x", color ="blue", lwd=1.5)
 ```
@@ -212,11 +213,10 @@ When the sample follows a log-normal distribution, it's straightforward to make 
 
 $$ x_{i}^{'}= ln(x_{i})$$
 ```{r}
-# Sample 5 is from a log-normal distribution
-sample5  <- exp(rnorm(200, 0, 1))
+# Sample 6 is taking log on sample 5 which is from a log-normal distribution
 sample6  <- log(sample5)
 
-# Plot density function of sample 1
+# Plot density function of sample 6
 ggdensity(sample6, main = "Density plot of sample 6", 
           xlab = "x", color ="blue", lwd=1.5)
 ```
