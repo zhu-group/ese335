@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Section 07 Two-sample Z-test and t-test</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 66px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h2 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h3 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h4 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h5 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h6 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Environmental Data Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Syllabus.html">
+    <span class="fa fa-bell-o"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="Schedule.html">
+    <span class="fa fa-calendar"></span>
+     
+    Schedule
+  </a>
+</li>
+<li>
+  <a href="Resource.html">
+    <span class="fa fa-wrench"></span>
+     
+    Resource
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-laptop"></span>
+     
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="A01.html">Assignment 01</a>
+    </li>
+    <li>
+      <a href="A02.html">Assignment 02</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Section 07 Two-sample Z-test and t-test</h1>
+
+</div>
+
+
+<hr />
+<div id="prerequisites" class="section level1">
+<h1>Prerequisites</h1>
+<p>Load the libraries with R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(ggpubr)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(nortest)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(ggplot2)</span></code></pre></div>
+<hr />
+</div>
+<div id="section-example-pm2.5-in-shenzhen-and-guangzhou" class="section level1">
+<h1>Section Example: PM2.5 in Shenzhen and Guangzhou</h1>
+<p><img src="figs/PM_PRD.jpg" alt="drawing" width="600"/></p>
+<p><a href="https://image.baidu.com/search/detail?ct=503316480&amp;z=&amp;tn=baiduimagedetail&amp;ipn=d&amp;word=%E7%8F%A0%E4%B8%89%E8%A7%92%20%E7%A9%BA%E6%B0%94%E6%B1%A1%E6%9F%93&amp;step_word=&amp;ie=utf-8&amp;in=&amp;cl=2&amp;lm=-1&amp;st=-1&amp;hd=&amp;latest=&amp;copyright=&amp;cs=3586034044,4215113255&amp;os=1099056367,4194659787&amp;simid=3586034044,4215113255&amp;pn=73&amp;rn=1&amp;di=7060663421280190465&amp;ln=1585&amp;fr=&amp;fmq=1647172268205_R&amp;fm=result&amp;ic=&amp;s=undefined&amp;se=&amp;sme=&amp;tab=0&amp;width=&amp;height=&amp;face=undefined&amp;is=0,0&amp;istype=2&amp;ist=&amp;jit=&amp;bdtype=0&amp;spn=0&amp;pi=0&amp;gsm=1e&amp;objurl=https%3A%2F%2Fgimg2.baidu.com%2Fimage_search%2Fsrc%3Dhttp%253A%252F%252Fview-cache.book118.com%252Fview18%252FM02%252F13%252F20%252FwKh2D2CsspGAXqMfAAEoSo4_p_w393.png%26refer%3Dhttp%253A%252F%252Fview-cache.book118.com%26app%3D2002%26size%3Df9999%2C10000%26q%3Da80%26n%3D0%26g%3D0n%26fmt%3Dauto%3Fsec%3D1649764271%26t%3Ddad67976f2a3b5f28378714ccfc85f58&amp;rpstart=0&amp;rpnum=0&amp;adpicid=0&amp;nojc=undefined&amp;dyTabStr=MCw2LDUsMSw0LDMsMiw3LDgsOQ%3D%3D&amp;ctd=1647172353474%5E3_1519X667%1">Figure Source</a></p>
+<p>Suppose we want to compare PM2.5 levels in Shenzhen and Guangzhou. To do so, PM2.5 concentrations are measured by two groups with the same instrument.</p>
+<p>In 2020, <code>10</code> observations are made in Shenzhen:</p>
+<p><code>25.6, 23.7, 21.9, 26.0, 24.5, 22.4, 26.7, 24.6, 22.7, 23.8</code></p>
+<p>and <code>12</code> observations are made in Guangzhou:</p>
+<p><code>27.1, 24.2, 27.9, 33.3, 26.4, 28.7, 25.6, 23.2, 24.0, 27.1, 26.2, 24.4</code></p>
+<p>We know from previous data that PM2.5 levels in the two cities generally follow normal distributions. And the standard deviation for Shenzhen and Guangzhou is <code>2.0</code> ug/m<sup>3</sup> and <code>3.0</code> ug/m<sup>3</sup>, respectively.</p>
+<p>It seems Shenzhen has a lower PM2.5 level than Guangzhou. Can such a difference be explained on the basis of chance variation? Can you explain why the spread of the data also contributes to the difference?</p>
+<hr />
+</div>
+<div id="the-z-test" class="section level1">
+<h1>The Z-test</h1>
+<p>Recall the definition of Z-Ratio:</p>
+<p><span class="math display">\[Z=\frac {Estimate - Parameter} {SD(Estimate)}  \]</span></p>
+<p>Since the task is to compare PM2.5 in the two cities, in the statistical framework, it would be:</p>
+<ul>
+<li><p>H0: Mean PM2.5 level in Shenzhen is the same as that in Guangzhou (<span class="math inline">\(\mu_1 = \mu_2\)</span>)</p></li>
+<li><p>H1: Mean PM2.5 level in Shenzhen is not the same as that in Guangzhou (<span class="math inline">\(\mu_1 \ne \mu_2\)</span>)</p></li>
+</ul>
+<p>To test the hypothesis (H0), we will use <em>Z-Ratio</em> again, which is defined as:</p>
+<p><span class="math display">\[Z=\frac {Estimate - Parameter} {SD(Estimate)}  \]</span> In this case, <span class="math inline">\(Estimate\)</span> is the difference between sample averages ($ - $), and <span class="math inline">\(Parameter\)</span> is the difference between population mean (<span class="math inline">\(\mu_1 - \mu_2\)</span>).</p>
+<p><span class="math display">\[Z=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {SD(\overline{X_1} - \overline{X_2}) }   \]</span> If the two samples are from two <strong>normal</strong> distributions, <span class="math inline">\(SD(\overline{X1} - \overline{X_2})\)</span> can be determined as:</p>
+<p><span class="math display">\[ SD(\overline{X_1} - \overline{X_2}) = \sqrt { \frac{\sigma_1^2} {n_1} +  \frac{\sigma_2^2} {n_2} }   \]</span> where <span class="math inline">\(\sigma_1\)</span> and <span class="math inline">\(\sigma_2\)</span> is the standard deviation of the two populations, and <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> is the size of the two samples. Now we have:</p>
+<p><span class="math display">\[Z=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {\sqrt { \frac{\sigma_1^2} {n_1} +  \frac{\sigma_2^2} {n_2} } }   \]</span> and <span class="math inline">\(Z \sim N(0,1)\)</span>.</p>
+<p>Assuming H0 is true, we get <span class="math inline">\(Z\)</span> is <code>-2.16</code>. Then with R, we can compute the two-side p-value for this statistic.</p>
+<p>Before computing <span class="math inline">\(Z\)</span>, let’s check the data first.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Shenzhen sample</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>SZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">25.6</span>, <span class="fl">23.7</span>, <span class="fl">21.9</span>, <span class="fl">26.0</span>, <span class="fl">24.5</span>, <span class="fl">22.4</span>, <span class="fl">26.7</span>, <span class="fl">24.6</span>, <span class="fl">22.7</span>, <span class="fl">23.8</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>SZ_n      &lt;-<span class="st"> </span><span class="kw">length</span>(SZ_PM2<span class="fl">.5</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Shenzhen population sigma</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>SZ_sigma  &lt;-<span class="st"> </span><span class="fl">2.0</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Guangzhou sample</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>GZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">27.1</span>, <span class="fl">24.2</span>, <span class="fl">27.9</span>, <span class="fl">33.3</span>, <span class="fl">26.4</span>, <span class="fl">28.7</span>, <span class="fl">25.6</span>, <span class="fl">23.2</span>, <span class="fl">24.0</span>, <span class="fl">27.1</span>, <span class="fl">26.2</span>, <span class="fl">24.4</span>)</span>
+<span id="cb2-9"><a href="#cb2-9"></a>GZ_n      &lt;-<span class="st"> </span><span class="kw">length</span>(GZ_PM2<span class="fl">.5</span>)</span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># Guangzhou population sigma</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>GZ_sigma  &lt;-<span class="st"> </span><span class="fl">3.0</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co"># Make data frame, create a data table</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>PM2<span class="fl">.5</span>_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">PM2.5 =</span> <span class="kw">c</span>(SZ_PM2<span class="fl">.5</span>, GZ_PM2<span class="fl">.5</span>),</span>
+<span id="cb2-15"><a href="#cb2-15"></a>                         <span class="dt">City =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;Shenzhen&quot;</span>,SZ_n),<span class="kw">rep</span>(<span class="st">&quot;Guangzhou&quot;</span>,GZ_n)))</span>
+<span id="cb2-16"><a href="#cb2-16"></a></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="co"># Compare boxplots</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="co"># %&gt;% means pipe</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>PM2<span class="fl">.5</span>_data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">as.character</span>(City), <span class="dt">y=</span>PM2<span class="fl">.5</span>)) <span class="op">+</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill=</span><span class="st">&quot;steelblue&quot;</span>) <span class="op">+</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;PM2.5 Distribution by City&quot;</span>, <span class="dt">x=</span><span class="st">&quot;City&quot;</span>, <span class="dt">y=</span><span class="st">&quot;ug/m3&quot;</span>)</span></code></pre></div>
+<p><img src="S07_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Check normality - density plot</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>PM2<span class="fl">.5</span>_data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>PM2<span class="fl">.5</span>, <span class="dt">color=</span>City)) <span class="op">+</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="st">  </span><span class="kw">geom_density</span>()</span></code></pre></div>
+<p><img src="S07_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Check normality - qqplot</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>PM2<span class="fl">.5</span>_data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">sample =</span> PM2<span class="fl">.5</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="st">  </span><span class="kw">geom_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_qq</span>() <span class="op">+</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>City)</span></code></pre></div>
+<p><img src="S07_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Check normality Shapiro-Wilk test</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">shapiro.test</span>(SZ_PM2<span class="fl">.5</span>)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  SZ_PM2.5
+## W = 0.9644, p-value = 0.8346</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">shapiro.test</span>(GZ_PM2<span class="fl">.5</span>)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  GZ_PM2.5
+## W = 0.89343, p-value = 0.1305</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Sample difference</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">mean</span>(SZ_PM2<span class="fl">.5</span>) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(GZ_PM2<span class="fl">.5</span>)</span></code></pre></div>
+<pre><code>## [1] -2.318333</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Get Z-ratio</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>Z        &lt;-<span class="st"> </span>(<span class="kw">mean</span>(SZ_PM2<span class="fl">.5</span>) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(GZ_PM2<span class="fl">.5</span>)) <span class="op">/</span><span class="st"> </span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="st">            </span><span class="kw">sqrt</span>( SZ_sigma<span class="op">^</span><span class="dv">2</span><span class="op">/</span>SZ_n <span class="op">+</span><span class="st"> </span>GZ_sigma<span class="op">^</span><span class="dv">2</span><span class="op">/</span>GZ_n )</span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co"># Find the two-side p-value</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co"># The pnorm function gives the Cumulative Distribution Function (CDF) </span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co"># of the Normal distribution in R, which is the probability that </span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co"># the variable takes a value lower or equal to a threshold (here |Z|).</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>P_value   &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">-</span><span class="kw">pnorm</span>(<span class="kw">abs</span>(Z), <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>))<span class="op">*</span><span class="dv">2</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="kw">print</span>(P_value)</span></code></pre></div>
+<pre><code>## [1] 0.0306292</code></pre>
+<p>OK, we have a probability of about <code>3.06%</code> getting a statistic (<span class="math inline">\(Z\)</span>) as extreme or more extreme than the observed statistic (<code>-2.16</code>), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, the mean PM2.5 level in Shenzhen is NOT the same as that in Guangzhou.</p>
+<hr />
+</div>
+<div id="independent-two-sample-t-test" class="section level1">
+<h1>Independent two-sample t-test</h1>
+<p>As we saw from the last Section, SDs of populations (<span class="math inline">\(\sigma_1\)</span> and <span class="math inline">\(\sigma_2\)</span>) are generally unknown. In this case, we need to use sample SE as an estimate of the population SD, and the the proceeding Z test becomes the t test:</p>
+<p><span class="math display">\[ t =\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {SE(\overline{X_1} - \overline{X_2}) } \]</span> For a independent two-sample t-test (Note: we use the “equal SD” method in here, see page 40 in [R.S.] for more):</p>
+<p><span class="math display">\[ SE(\overline{X_1} - \overline{X_2}) = s_p \sqrt { \frac{1} {n_1} +  \frac{1} {n_2} }   \]</span> <span class="math inline">\(s_p\)</span> is <em>pooled SD</em>, or pooled estimate of standard deviation.</p>
+<p><span class="math display">\[ s_p = \sqrt { \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2} {n_1 + n_2 -2} }\]</span> where <span class="math inline">\(s_1\)</span> and <span class="math inline">\(s_2\)</span> is the standard deviation of the two samples. And the number of degrees of freedom associated with <span class="math inline">\(s_p\)</span> is the sum of degrees of freedom from the individual estimates.</p>
+<p>Finally, we have the <span class="math inline">\(t\)</span> statistic from an independent two-sample t-test being:</p>
+<p><span class="math display">\[t=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } { \sqrt { \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2} {n_1 + n_2 -2} (\frac{n_1+n_2} {n_1n_2}) }} \]</span> And <span class="math inline">\(t\)</span> statistic follows a Student’s t distribution on <span class="math inline">\(n_1 + n_2 - 2\)</span> degrees of freedom.</p>
+<p>Let’s use the observations again, but now we have no information about the population SDs. Therefore, we need to conduct an independent two-sample t-test.</p>
+<ul>
+<li><p>H0: Mean PM2.5 level in Shenzhen is the same as that in Guangzhou (<span class="math inline">\(\mu_1 = \mu_2\)</span>)</p></li>
+<li><p>H1: Mean PM2.5 level in Shenzhen is not the same as that in Guangzhou (<span class="math inline">\(\mu_1 \ne \mu_2\)</span>)</p></li>
+</ul>
+<p>In this case, <span class="math inline">\(\overline X_1 - \overline X_2\)</span> is again <code>-2.32</code>, <span class="math inline">\(SE(\overline{X_1} - \overline{X_2})\)</span> is <code>0.98</code>, assuming H0 is true (<span class="math inline">\(\mu_1 - \mu_2 = 0\)</span>), we have <span class="math inline">\(t\)</span>=<code>-2.37</code>.</p>
+<p>Then the p-value can be calculated manually:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Shenzhen sample</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>SZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">25.6</span>, <span class="fl">23.7</span>, <span class="fl">21.9</span>, <span class="fl">26.0</span>, <span class="fl">24.5</span>, <span class="fl">22.4</span>, <span class="fl">26.7</span>, <span class="fl">24.6</span>, <span class="fl">22.7</span>, <span class="fl">23.8</span>)</span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co"># Guangzhou sample</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>GZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">27.1</span>, <span class="fl">24.2</span>, <span class="fl">27.9</span>, <span class="fl">33.3</span>, <span class="fl">26.4</span>, <span class="fl">28.7</span>, <span class="fl">25.6</span>, <span class="fl">23.2</span>, <span class="fl">24.0</span>, <span class="fl">27.1</span>, <span class="fl">26.2</span>, <span class="fl">24.4</span>)</span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co"># Sample difference</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="kw">mean</span>(SZ_PM2<span class="fl">.5</span>) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(GZ_PM2<span class="fl">.5</span>)</span></code></pre></div>
+<pre><code>## [1] -2.318333</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Get sample size, degrees of freedom, and sd</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>n1        &lt;-<span class="st"> </span><span class="kw">length</span>(SZ_PM2<span class="fl">.5</span>)</span>
+<span id="cb15-3"><a href="#cb15-3"></a>df1       &lt;-<span class="st"> </span>n1 <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>sd1       &lt;-<span class="st"> </span><span class="kw">sd</span>(SZ_PM2<span class="fl">.5</span>)</span>
+<span id="cb15-5"><a href="#cb15-5"></a></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="co"># Get sample size, degrees of freedom, and sd</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>n2        &lt;-<span class="st"> </span><span class="kw">length</span>(GZ_PM2<span class="fl">.5</span>)</span>
+<span id="cb15-8"><a href="#cb15-8"></a>df2       &lt;-<span class="st"> </span>n2 <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>sd2       &lt;-<span class="st"> </span><span class="kw">sd</span>(GZ_PM2<span class="fl">.5</span>)</span>
+<span id="cb15-10"><a href="#cb15-10"></a></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="co"># SE of the sample difference</span></span>
+<span id="cb15-12"><a href="#cb15-12"></a>SE        &lt;-<span class="st"> </span><span class="kw">sqrt</span>( (df1<span class="op">*</span>sd1<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>df2<span class="op">*</span>sd2<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(df1<span class="op">+</span>df2) <span class="op">*</span><span class="st"> </span>(n1<span class="op">+</span>n2)<span class="op">/</span>(n1<span class="op">*</span>n2) )</span>
+<span id="cb15-13"><a href="#cb15-13"></a></span>
+<span id="cb15-14"><a href="#cb15-14"></a><span class="co"># Get t-ratio</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a>t         &lt;-<span class="st"> </span>(<span class="kw">mean</span>(SZ_PM2<span class="fl">.5</span>) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(GZ_PM2<span class="fl">.5</span>))<span class="op">/</span>SE</span>
+<span id="cb15-16"><a href="#cb15-16"></a></span>
+<span id="cb15-17"><a href="#cb15-17"></a><span class="co"># Find the two-side p-value</span></span>
+<span id="cb15-18"><a href="#cb15-18"></a><span class="co"># The pt function gives the Cumulative Distribution Function (CDF) </span></span>
+<span id="cb15-19"><a href="#cb15-19"></a><span class="co"># of the Student&#39;s t distribution in R, which is the probability that </span></span>
+<span id="cb15-20"><a href="#cb15-20"></a><span class="co"># the variable takes a value lower or equal to a threshold (here |t|).</span></span>
+<span id="cb15-21"><a href="#cb15-21"></a>P_value  &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">-</span><span class="kw">pt</span>(<span class="kw">abs</span>(t), <span class="dt">df=</span>df1<span class="op">+</span>df2))<span class="op">*</span><span class="dv">2</span></span>
+<span id="cb15-22"><a href="#cb15-22"></a></span>
+<span id="cb15-23"><a href="#cb15-23"></a><span class="kw">print</span>(P_value)</span></code></pre></div>
+<pre><code>## [1] 0.02796399</code></pre>
+<p>Now, we have a probability of about <code>2.80%</code> getting a statistic (<span class="math inline">\(t\)</span>) as extreme or more extreme than the observed statistic (<code>-2.37</code>), assuming H0 is true. This is a small probability, and is likely due to chance. We can reject H0 given the observations. Thus, the mean PM2.5 level in Shenzhen is not the same as that in Guangzhou.</p>
+<hr />
+</div>
+<div id="independent-two-sample-t-test-with-r" class="section level1">
+<h1>Independent two-sample t-test with R</h1>
+<p>In R, you can simply conduct the previous independent two-sample t-test as:</p>
+<ul>
+<li><p>H0: Mean PM2.5 level in Shenzhen is the same as that in Guangzhou (<span class="math inline">\(\mu_1 = \mu_2\)</span>)</p></li>
+<li><p>H1: Mean PM2.5 level in Shenzhen is not the same as that in Guangzhou (<span class="math inline">\(\mu_1 \ne \mu_2\)</span>)</p></li>
+</ul>
+<p>In R, this is done by:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Shenzhen sample</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>SZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">25.6</span>, <span class="fl">23.7</span>, <span class="fl">21.9</span>, <span class="fl">26.0</span>, <span class="fl">24.5</span>, <span class="fl">22.4</span>, <span class="fl">26.7</span>, <span class="fl">24.6</span>, <span class="fl">22.7</span>, <span class="fl">23.8</span>)</span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># Guangzhou sample</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>GZ_PM2<span class="fl">.5</span>  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">27.1</span>, <span class="fl">24.2</span>, <span class="fl">27.9</span>, <span class="fl">33.3</span>, <span class="fl">26.4</span>, <span class="fl">28.7</span>, <span class="fl">25.6</span>, <span class="fl">23.2</span>, <span class="fl">24.0</span>, <span class="fl">27.1</span>, <span class="fl">26.2</span>, <span class="fl">24.4</span>)</span>
+<span id="cb17-6"><a href="#cb17-6"></a></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="co"># Call t.test function</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="co"># Since H1 states a different PM2.5 value in Shenzhen, </span></span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="co"># we need to compute the two-sided p-value</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="kw">t.test</span>(SZ_PM2<span class="fl">.5</span>, GZ_PM2<span class="fl">.5</span>, <span class="dt">alternative=</span><span class="st">&quot;two.sided&quot;</span>, <span class="dt">var.equal=</span>T)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  SZ_PM2.5 and GZ_PM2.5
+## t = -2.3699, df = 20, p-value = 0.02796
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -4.3589379 -0.2777288
+## sample estimates:
+## mean of x mean of y 
+##  24.19000  26.50833</code></pre>
+<p>As you notice, here we set <code>alternative="two.sided"</code>, this means we are testing whether the two population means are different (one could be smaller or larger than the other), and this requires a two-sided p-value. We set <code>var.equal = T</code> when call the <code>t.test()</code> function. By doing so, we assume an “equal SD” method, please see page <code>40</code> in [R.S] for more. By default, R uses the “unequal SD” method, which returns a slightly different t statistic and d.f. We will look at this in the future.</p>
+<hr />
+</div>
+<div id="in-class-exercises" class="section level1">
+<h1>In-class exercises</h1>
+<div id="exercise-1" class="section level2">
+<h2>Exercise #1</h2>
+<p>Two labs (Lab 1 and 2) use the same method to measure the total suspended particulate (TSP) concentration of one air sample. The readings are as follow:</p>
+<ul>
+<li><p>Lab 1: <code>14.7, 14.8, 15.2, 15.6</code></p></li>
+<li><p>Lab2: <code>14.6, 15.0, 15.2</code></p></li>
+</ul>
+<p>Based on the data, are results from the two labs consistent?</p>
+<ul>
+<li><p>1.1 What is the H0 and H1?</p></li>
+<li><p>1.2 Do you use one-side or two-side p-value?</p></li>
+<li><p>1.3 Are results from the two labs consistent?</p></li>
+</ul>
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise #2</h2>
+<p>A local environmental officer wants to compare two rivers to see if there are any difference in chemical oxygen demand (COD). From river A, the officer randomly collected <code>15</code> water bottles, and COD is measured as follows:</p>
+<p><code>915.4, 789.3, 828.2, 811.4, 832.4, 841.7, 871.6, 830.8, 884.5, 847.5, 841.4, 936.7, 977.0, 825.2, 707.9</code></p>
+<p>From river B, the officer randomly collected <code>10</code> water bottles with COD read as:</p>
+<p><code>804.0, 779.8, 749.3, 877.4, 753.8, 778.6, 807.5, 913.3, 784.8, 659.7</code></p>
+<ul>
+<li><p>2.1 Plot two boxplots side by side</p></li>
+<li><p>2.2 Check the normality of the two samples</p></li>
+<li><p>2.3 Do you use a Z-test or a t-test?</p></li>
+<li><p>2.4 What is the H0 and H1?</p></li>
+<li><p>2.5 Do you use one-side or two-side p-value?</p></li>
+<li><p>2.6 Report your findings</p></li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
