@@ -621,7 +621,7 @@ div.tocify {
 <li><p>Before-and-after observations on the same subjects (e.g. pollutant levels before and after a particular treatment).</p></li>
 <li><p>A comparison of two different methods of measurement or two different treatments where the measurements/treatments are applied to the same subjects (e.g. pollutant measurements using a remote sensing method and a <em>in situ</em> technology).</p></li>
 </ul>
-<p>The paired-sample t-test is the same as the <a href="https://zhu-group.github.io/ese335/S07.html#One_sample_t-test">one-sample t-test</a> as the difference (<span class="math inline">\(D\)</span>) between the two populations (<span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>) is tested against zero.</p>
+<p>The paired-sample t-test is the same as the <a href="https://zhu-group.github.io/ese335/S06.html#One_sample_t-test">one-sample t-test</a> as the difference (<span class="math inline">\(D\)</span>) between the two populations (<span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>) is tested against zero.</p>
 <p>Recall the definition of t-Ratio:</p>
 <p><span class="math display">\[t=\frac {Estimate - Parameter} {SE(Estimate)}  \]</span> Here the standard error (SE) refers to the sample. If <span class="math inline">\(s\)</span> is the sample SD of the difference, the SE for the estimate (<span class="math inline">\(\overline {D}\)</span>) is:</p>
 <p><span class="math display">\[SE(\overline {D})=\frac {s} {\sqrt{n}}\]</span> For a paired sample t-test:</p>
@@ -755,7 +755,7 @@ div.tocify {
 <p><span class="math display">\[ -16.9 \le \mu_D \le -2.0  \]</span> This is exactly the same as the R output. Now, we understand that this range represents that <code>95%</code> of the time the unknown population mean (<span class="math inline">\(\mu_D\)</span>) would fall within the range between <code>-16.9</code> and <code>-2.0</code>. As such, mean PM2.5 level in 2020 Feb. is lower than that in 2019 by <code>16.9</code> to <code>2.0</code> ug m<sup>-3</sup> (95% CI). Or another way to put it, PM2.5 level in 2020 Feb. on average is lower than that in 2019 by <code>16.9</code> to <code>2.0</code> ug m<sup>-3</sup> (95% CI).</p>
 <p>A general way to write the CI (<code>100(1-x)%</code> confidence level) of unknown population mean (<span class="math inline">\(\mu_D\)</span>) would be:</p>
 <p><span class="math display">\[ \overline{D} - t_{df=n-1}(1-0.5x) \frac {s} {\sqrt{n}} \le \mu_D \le \overline{D} + t_{df=n-1}(1-0.5x) \frac {s} {\sqrt{n}}  \]</span> where <span class="math inline">\(t_{df=n-1}(1-0.5x)\)</span> is the <code>100(1-0.5x)</code>th percentile of the t distribution on <span class="math inline">\(n-1\)</span> degrees of freedom.</p>
-<p>In fact, we have seen CI as default R output from the <a href="https://zhu-group.github.io/ese335/S07.html#One_sample_t-test_with_R">one-sample t-test</a> and <a href="https://zhu-group.github.io/ese335/S08.html#Independent_two-sample_t-test_with_R">independent two-sample t-test</a>. You should be able to explain the meaning of each CI. Please try.</p>
+<p>In fact, we have seen CI as default R output from the <a href="https://zhu-group.github.io/ese335/S06.html#One_sample_t-test">one-sample t-test</a> and <a href="https://zhu-group.github.io/ese335/S07.html#Independent_two-sample_t-test_with_R">independent two-sample t-test</a>. You should be able to explain the meaning of each CI. Please try.</p>
 <hr />
 </div>
 <div id="in-class-exercises" class="section level1">
