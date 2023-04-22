@@ -1,0 +1,129 @@
+---
+title: "Assignment 05"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+**Out: 04/24 10:20 **  
+**Due: 05/17 10:20 **  
+
+***
+
+# Instructions  
+
+**Collaboration:**  
+
+Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements: 
+
+* Cite your collaborators **fully and completely** (*e.g.*, "XXX explained to me what is asked in problem set 3"). Or cite online resources (*e.g.*, "I got inspired by reading XXX") that helped you.
+
+* Write your scripts and report **independently** - the scripts and report must come from you only.
+
+**Submitting your assignment:**  
+
+Submit your R scripts and report to TA (12232237@mail.sustech.edu.cn)
+
+**Late Submission:**   
+
+Late submissions will not receive any credit. 
+
+***
+
+**Hint:** Please follow the general steps of hypothesis testing as introduced in the lecture.
+
+***
+
+# 1. Sitting duration and blood pressure
+
+Your professor wants to study the relationship between sitting duration and his blood pressure. In 13 days, he measured how long he sits (in hours) and his blood pressure (mm Hg) immediately after it. The data are sorted and listed in the table.
+
+|Day|Sitting duration (hour)|Blood pressure (mm Hg)|
+|:--|:----------------------|:---------------------|
+|1	|2.88	                  |84                    |
+|2	|2.51	                  |86                    |
+|3	|2.22	                  |96                    |
+|4	|2.16	                  |93                    |
+|5	|2.05	                  |94                    |
+|6	|1.93	                  |101                   |
+|7	|1.67	                  |103                   |
+|8	|1.49	                  |102                   |
+|9	|1.25	                  |100                   |
+|10	|1.21	                  |108                   |
+|11	|1.15	                  |104                   |
+|12	|1.12	                  |102                   |
+|13	|0.73	                  |111                   |
+
+**1.1 [5 points]** Is there a linear relationship between sitting duration and blood pressure for your professor? 
+
+**1.2 [5 points]** On average, how high will your professor's blood pressure be after he sits for `1.80` hours (give the `95%` confidence interval)?
+
+***
+
+# 2. AQI near a highway
+
+To investigate the influence factors of AQI near a highway, a researcher measured the air pressure (hPa), air temperature (degree), relative humidity (%), and traffic flow rate (cars per hour) in 15 days.
+
+|Day|	AQI |	Pressure|	Temperature |	Humidity | Traffic |
+|:--|:----|:--------|:------------|:--------:|---------|
+|1	|367	|999.9	  |20.2	        |44	       |357      |
+|2	|307	|999.4	  |21.1	        |56	       |256      |
+|3	|280	|999.1	  |19.3	        |20	       |270      |
+|4	|388	|999.6	  |17.5	        |31	       |541      |
+|5	|268	|998.5	  |16.9	        |60	       |254      |
+|6	|347	|1000.8	  |22.5	        |48	       |337      |
+|7	|308	|1002.0	  |13.6	        |76	       |411      |
+|8	|247	|999.4	  |21.2	        |62	       |280      |
+|9	|289	|1002.7	  |23.5	        |60	       |281      |
+|10	|200	|1003.2	  |18.6	        |74	       |88       |
+|11	|329	|996.6	  |25.0	        |68	       |275      |
+|12	|385	|1003.0	  |23.6	        |69	       |358      |
+|13	|337	|1004.3	  |17.0	        |50	       |380      |
+|14	|337	|1000.4	  |27.2	        |36	       |268      |
+|15	|394	|998.3	  |14.1	        |63	       |523      |
+
+
+**2.1 [5 points]** Build a best model between `AQI` and potential variables. 
+
+**2.2 [10 points]** Based on your best model, how high will AQI be in this site at the specific conditions as follow? Provide the `95%` confidence interval.  
+
+*	Condition 1: Pressure `1003.0 hPa`, temperature `25.0 °C`, humidity `70%,` and traffic flow rate `450` cars per hour.  
+
+*	Condition 2: Pressure `1001.0 hPa`, temperature `15.0 °C`, humidity `50%`, and traffic flow rate `300` cars per hour.
+
+
+***
+
+# 3. Car and its engine 
+
+In this problem set we use the in-built data set `mtcars` to describe different models of a car with their various engine specifications. 
+
+In `mtcars` data set, the transmission mode (automatic or manual) is described by the column `am`, which is a binary value (`0` is automatic or `1` is manual). 
+
+Load the data via:
+```{r, eval=F}
+# Load data
+data(mtcars)
+```
+
+**3.1 [5 points]** Fit a logistic regression model between the columns `am` and `3` other columns - gross horsepower `hp`, weight `wt` (in `1000` lbs), and number of cylinders `cyl`.
+
+**3.2 [10 points]**  Which independent variable has a significant slope? Update your logistic regression model by excluding the independent variable(s) with insignificant slope. Compute McFadden’s R^2^ and  the probability cutoff.
+
+**3.3 [10 points]** Using the updated model from step `3.2`, make predictions of `am` (automatic or manual) for the following `2` cars:
+
++ Car 1: gross horsepower of `140`, weight of `3000` lbs
+
++ Car 2: gross horsepower of `90`, weight of `2000` lbs
+
+***
+
+# 4. Solving problems
+
+**4.1 [15 points]** [SS], p38-39, Problem 1.2. 
+
+**4.2 [15 points]** [SS], p39, Problem 1.6. 
+

@@ -11,7 +11,7 @@
 
 
 
-<title>Section 04 Review of statistic basics (II)</title>
+<title>Assignment 05</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -491,150 +491,278 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Section 04 Review of statistic basics (II)</h1>
+<h1 class="title toc-ignore">Assignment 05</h1>
 
 </div>
 
 
+<p><strong>Out: 04/24 10:20 </strong><br />
+<strong>Due: 05/17 10:20 </strong></p>
 <hr />
-<p><strong><em>Pre-class reading:</em></strong> [RS] p1-22</p>
-<hr />
-<div id="prerequisites" class="section level1">
-<h1>Prerequisites</h1>
-<p>Install the following package:</p>
+<div id="instructions" class="section level1">
+<h1>Instructions</h1>
+<p><strong>Collaboration:</strong></p>
+<p>Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements:</p>
 <ul>
-<li><code>gtools</code></li>
+<li><p>Cite your collaborators <strong>fully and completely</strong> (<em>e.g.</em>, “XXX explained to me what is asked in problem set 3”). Or cite online resources (<em>e.g.</em>, “I got inspired by reading XXX”) that helped you.</p></li>
+<li><p>Write your scripts and report <strong>independently</strong> - the scripts and report must come from you only.</p></li>
 </ul>
-<p>Load the library with R:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(gtools)</span></code></pre></div>
+<p><strong>Submitting your assignment:</strong></p>
+<p>Submit your R scripts and report to TA (<a href="mailto:12232237@mail.sustech.edu.cn" class="email">12232237@mail.sustech.edu.cn</a>)</p>
+<p><strong>Late Submission:</strong></p>
+<p>Late submissions will not receive any credit.</p>
 <hr />
-</div>
-<div id="section-example-a-new-technology-to-remove-pollutant-x" class="section level1">
-<h1>Section Example: a new technology to remove pollutant X</h1>
-<p><img src="figs/sampling.jpg" alt="drawing" width="600"/></p>
-<p><a href="https://www.alamy.com/zouping-china-march-15-2021-agricultural-technicians-take-samples-of-wheat-soil-at-the-jiaoqiao-town-base-of-the-cultivated-land-soil-environmental-quality-improvement-experiment-and-demonstration-project-in-zouping-city-shandong-province-china-march-15-2021-photo-by-dong-naide-costfotosipa-usa-image415007617.html">Figure Source</a></p>
-<p>Suppose we want to test whether a new technology is useful in removing pollutant X. To do so, we prepare <code>6</code> cases, randomly select <code>3</code> cases and apply the technology, leaving the rest without treatment. Then we measure X levels from the two groups (assuming no unit).</p>
-<ul>
-<li><p>Group A (new technology applied): <code>1.0</code>, <code>2.0</code>, <code>3.0</code></p></li>
-<li><p>Group B (no treatment): <code>2.0</code>, <code>3.0</code>, <code>4.0</code></p></li>
-</ul>
-<p>So the mean of group A is <code>2.0</code>, mean of group B is <code>3.0</code>, with an observed difference of <code>-1.0</code>. One may argue the difference is caused by the new technology; while it is also possible that the difference could be driven by randomization when no treatment being applied.</p>
-<p>So the question is: can the observations back up the usefulness of the new technology?</p>
+<p><strong>Hint:</strong> Please follow the general steps of hypothesis testing as introduced in the lecture.</p>
 <hr />
 </div>
-<div id="a-randomization-test-example" class="section level1">
-<h1>A randomization test example</h1>
-<p>Recall the processes of <a href="https://zhu-group.github.io/ese335/S03.html#Hypothesis_tests">hypothesis testing</a> in Section 03.</p>
-<p>Given the research question in the previous example, we write hypotheses as:</p>
-<ul>
-<li><p>H<sub>0</sub>: The new technology can NOT remove X</p></li>
-<li><p>H<sub>1</sub>: The new technology does have effects in removing X</p></li>
-</ul>
-<p>Let’s assume H<sub>0</sub> is true, what is the chance of randomization leads to the observed or more extreme difference? In other words, what is the chance of grouping leads to the <strong>observed or more extreme difference</strong> given H<sub>0</sub> is true? This can be written as:</p>
-<p><span class="math display">\[P(diff &lt;= -1.0 | H_{0} )\]</span> Since the sample size is small, we can write all possible groupings (combinations) for A with R.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Need `gtools` package</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">library</span>(gtools)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Obs from group A</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>Obs_A   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>)</span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Obs from group B</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>Obs_B   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.0</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>)</span>
-<span id="cb2-9"><a href="#cb2-9"></a></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># Compute the difference, d</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>Obs_difference &lt;-<span class="st"> </span><span class="kw">mean</span>(Obs_A) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(Obs_B)</span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="kw">print</span>(Obs_difference)</span></code></pre></div>
-<pre><code>## [1] -1</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Given H0 is true, we assume that A and B are from the same population</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># So the total possible groupings for A is C(6,3) </span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>Obs_all     &lt;-<span class="st"> </span><span class="kw">c</span>(Obs_A, Obs_B)</span>
-<span id="cb4-4"><a href="#cb4-4"></a>Groupings_A &lt;-<span class="st"> </span><span class="kw">combinations</span>(<span class="kw">length</span>(Obs_all), <span class="kw">length</span>(Obs_A), Obs_all, F)</span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co"># Show all possible groupings of A</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">print</span>(Groupings_A)</span></code></pre></div>
-<pre><code>##       [,1] [,2] [,3]
-##  [1,]    1    2    3
-##  [2,]    1    2    2
-##  [3,]    1    2    3
-##  [4,]    1    2    4
-##  [5,]    1    3    2
-##  [6,]    1    3    3
-##  [7,]    1    3    4
-##  [8,]    1    2    3
-##  [9,]    1    2    4
-## [10,]    1    3    4
-## [11,]    2    3    2
-## [12,]    2    3    3
-## [13,]    2    3    4
-## [14,]    2    2    3
-## [15,]    2    2    4
-## [16,]    2    3    4
-## [17,]    3    2    3
-## [18,]    3    2    4
-## [19,]    3    3    4
-## [20,]    2    3    4</code></pre>
-<p>Next, we can compute all possible differences:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Make an empty list</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>difference &lt;-<span class="st"> </span><span class="kw">c</span>()</span>
-<span id="cb6-3"><a href="#cb6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># Loop all possible grouping methods for A</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">dim</span>(Groupings_A)[<span class="dv">1</span>]){</span>
-<span id="cb6-6"><a href="#cb6-6"></a>  </span>
-<span id="cb6-7"><a href="#cb6-7"></a>  <span class="co"># Mean of group A</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>  mean_A &lt;-<span class="st"> </span><span class="kw">mean</span>(Groupings_A[i,])</span>
-<span id="cb6-9"><a href="#cb6-9"></a>  </span>
-<span id="cb6-10"><a href="#cb6-10"></a>  <span class="co"># Mean of group B</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a>  mean_B &lt;-<span class="st"> </span>(<span class="kw">sum</span>(Obs_all)<span class="op">-</span><span class="kw">sum</span>(Groupings_A[i,]))<span class="op">/</span><span class="kw">length</span>(Obs_B)</span>
-<span id="cb6-12"><a href="#cb6-12"></a>  </span>
-<span id="cb6-13"><a href="#cb6-13"></a>  <span class="co"># Store difference</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a>  difference &lt;-<span class="st"> </span><span class="kw">c</span>(difference, mean_A <span class="op">-</span><span class="st"> </span>mean_B)</span>
-<span id="cb6-15"><a href="#cb6-15"></a>}</span>
-<span id="cb6-16"><a href="#cb6-16"></a></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="co"># Show all possible differences</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a><span class="kw">print</span>(difference)</span></code></pre></div>
-<pre><code>##  [1] -1.0000000 -1.6666667 -1.0000000 -0.3333333 -1.0000000 -0.3333333  0.3333333 -1.0000000 -0.3333333  0.3333333 -0.3333333  0.3333333  1.0000000 -0.3333333  0.3333333  1.0000000  0.3333333  1.0000000  1.6666667  1.0000000</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Plot all possible differences</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">hist</span>(difference)</span>
-<span id="cb8-3"><a href="#cb8-3"></a></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># Add a vertical line</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">abline</span>(<span class="dt">v=</span>Obs_difference, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lwd=</span><span class="dv">5</span>, <span class="dt">lty=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="S04_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>OK, given H<sub>0</sub> is true, what is the chance that grouping leads to the observed or more extreme difference? From the above plot, we count that there are <code>5</code> cases out of <code>20</code> cases that the difference is as extreme or more extreme than <code>-1.0</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Compute p-value</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">length</span>( <span class="kw">which</span>(difference <span class="op">&lt;=</span><span class="st"> </span>Obs_difference) )<span class="op">/</span><span class="kw">length</span>(difference)</span></code></pre></div>
-<pre><code>## [1] 0.25</code></pre>
-<p>The p-value, in this case, is <code>0.25</code>, which is not a small value (compared with <code>0.05</code>). So we can not rule out that H<sub>0</sub>, meaning the observations fail to back up the usefulness of the new technology.</p>
-<p>Now change the observations to:</p>
-<ul>
-<li><p>Group A (new technology applied): <code>1.0</code>, <code>2.0</code>, <code>3.0</code></p></li>
-<li><p>Group B (no treatment): <code>20.0</code>, <code>30.0</code>, <code>40.0</code></p></li>
-</ul>
-<p>Re-compute the p-value, see what would change. Can you explain why?</p>
+<div id="sitting-duration-and-blood-pressure" class="section level1">
+<h1>1. Sitting duration and blood pressure</h1>
+<p>Your professor wants to study the relationship between sitting duration and his blood pressure. In 13 days, he measured how long he sits (in hours) and his blood pressure (mm Hg) immediately after it. The data are sorted and listed in the table.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Day</th>
+<th align="left">Sitting duration (hour)</th>
+<th align="left">Blood pressure (mm Hg)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">2.88</td>
+<td align="left">84</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">2.51</td>
+<td align="left">86</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">2.22</td>
+<td align="left">96</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">2.16</td>
+<td align="left">93</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">2.05</td>
+<td align="left">94</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">1.93</td>
+<td align="left">101</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">1.67</td>
+<td align="left">103</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">1.49</td>
+<td align="left">102</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">1.25</td>
+<td align="left">100</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">1.21</td>
+<td align="left">108</td>
+</tr>
+<tr class="odd">
+<td align="left">11</td>
+<td align="left">1.15</td>
+<td align="left">104</td>
+</tr>
+<tr class="even">
+<td align="left">12</td>
+<td align="left">1.12</td>
+<td align="left">102</td>
+</tr>
+<tr class="odd">
+<td align="left">13</td>
+<td align="left">0.73</td>
+<td align="left">111</td>
+</tr>
+</tbody>
+</table>
+<p><strong>1.1 [5 points]</strong> Is there a linear relationship between sitting duration and blood pressure for your professor?</p>
+<p><strong>1.2 [5 points]</strong> On average, how high will your professor’s blood pressure be after he sits for <code>1.80</code> hours (give the <code>95%</code> confidence interval)?</p>
 <hr />
 </div>
-<div id="probability-density-function-pdf" class="section level1">
-<h1>Probability Density Function (PDF)</h1>
-<p>In probability theory, a probability density function (PDF) <span class="math inline">\(f(x)\)</span>, or density of a <strong>continuous random variable</strong>, is a function that describes the relative likelihood (probability or chance) for this random variable <span class="math inline">\(X\)</span> to take on a given value <span class="math inline">\(x\)</span>.</p>
-<p>Probability density function is defined by following formula: <span class="math display">\[ P(a \le X \le b) = \int_a^b f(x) ~ dx \]</span></p>
+<div id="aqi-near-a-highway" class="section level1">
+<h1>2. AQI near a highway</h1>
+<p>To investigate the influence factors of AQI near a highway, a researcher measured the air pressure (hPa), air temperature (degree), relative humidity (%), and traffic flow rate (cars per hour) in 15 days.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Day</th>
+<th align="left">AQI</th>
+<th align="left">Pressure</th>
+<th align="left">Temperature</th>
+<th align="center">Humidity</th>
+<th>Traffic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">367</td>
+<td align="left">999.9</td>
+<td align="left">20.2</td>
+<td align="center">44</td>
+<td>357</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">307</td>
+<td align="left">999.4</td>
+<td align="left">21.1</td>
+<td align="center">56</td>
+<td>256</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">280</td>
+<td align="left">999.1</td>
+<td align="left">19.3</td>
+<td align="center">20</td>
+<td>270</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">388</td>
+<td align="left">999.6</td>
+<td align="left">17.5</td>
+<td align="center">31</td>
+<td>541</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">268</td>
+<td align="left">998.5</td>
+<td align="left">16.9</td>
+<td align="center">60</td>
+<td>254</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">347</td>
+<td align="left">1000.8</td>
+<td align="left">22.5</td>
+<td align="center">48</td>
+<td>337</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">308</td>
+<td align="left">1002.0</td>
+<td align="left">13.6</td>
+<td align="center">76</td>
+<td>411</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">247</td>
+<td align="left">999.4</td>
+<td align="left">21.2</td>
+<td align="center">62</td>
+<td>280</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">289</td>
+<td align="left">1002.7</td>
+<td align="left">23.5</td>
+<td align="center">60</td>
+<td>281</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">200</td>
+<td align="left">1003.2</td>
+<td align="left">18.6</td>
+<td align="center">74</td>
+<td>88</td>
+</tr>
+<tr class="odd">
+<td align="left">11</td>
+<td align="left">329</td>
+<td align="left">996.6</td>
+<td align="left">25.0</td>
+<td align="center">68</td>
+<td>275</td>
+</tr>
+<tr class="even">
+<td align="left">12</td>
+<td align="left">385</td>
+<td align="left">1003.0</td>
+<td align="left">23.6</td>
+<td align="center">69</td>
+<td>358</td>
+</tr>
+<tr class="odd">
+<td align="left">13</td>
+<td align="left">337</td>
+<td align="left">1004.3</td>
+<td align="left">17.0</td>
+<td align="center">50</td>
+<td>380</td>
+</tr>
+<tr class="even">
+<td align="left">14</td>
+<td align="left">337</td>
+<td align="left">1000.4</td>
+<td align="left">27.2</td>
+<td align="center">36</td>
+<td>268</td>
+</tr>
+<tr class="odd">
+<td align="left">15</td>
+<td align="left">394</td>
+<td align="left">998.3</td>
+<td align="left">14.1</td>
+<td align="center">63</td>
+<td>523</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.1 [5 points]</strong> Build a best model between <code>AQI</code> and potential variables.</p>
+<p><strong>2.2 [10 points]</strong> Based on your best model, how high will AQI be in this site at the specific conditions as follow? Provide the <code>95%</code> confidence interval.</p>
+<ul>
+<li><p>Condition 1: Pressure <code>1003.0 hPa</code>, temperature <code>25.0 °C</code>, humidity <code>70%,</code> and traffic flow rate <code>450</code> cars per hour.</p></li>
+<li><p>Condition 2: Pressure <code>1001.0 hPa</code>, temperature <code>15.0 °C</code>, humidity <code>50%</code>, and traffic flow rate <code>300</code> cars per hour.</p></li>
+</ul>
 <hr />
-<div id="exercise-1" class="section level2">
-<h2>Exercise #1</h2>
-<p>Suppose we want to test another new technology, to check whether it is useful in <strong>increasing</strong> student’s scores. To do so, we recruit <code>9</code> students, randomly select <code>5</code> of them to apply this technology, leaving the rest students without treatment. Then we measure scores from the two groups:</p>
-<ul>
-<li><p>Group A (new technology applied): <code>2.0</code>, <code>3.0</code>, <code>4.0</code>, <code>5.0</code>, <code>6.0</code></p></li>
-<li><p>Group B (no treatment): <code>1.0</code>, <code>2.0</code>, <code>3.0</code>, <code>4.0</code></p></li>
-</ul>
-<p>Do the observations back up the usefulness of such new technology? Please use a significant level of <code>0.10</code>.</p>
 </div>
-<div id="exercise-2" class="section level2">
-<h2>Exercise #2</h2>
-<p>Suppose we want to test another new technology, to check whether it <strong>has impact</strong> on (could increase or reduce) student’s scores. To do so, we recruit <code>9</code> students, randomly select <code>5</code> of them to apply this technology, leaving the rest students without treatment. Then we measure scores from the two groups:</p>
+<div id="car-and-its-engine" class="section level1">
+<h1>3. Car and its engine</h1>
+<p>In this problem set we use the in-built data set <code>mtcars</code> to describe different models of a car with their various engine specifications.</p>
+<p>In <code>mtcars</code> data set, the transmission mode (automatic or manual) is described by the column <code>am</code>, which is a binary value (<code>0</code> is automatic or <code>1</code> is manual).</p>
+<p>Load the data via:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load data</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">data</span>(mtcars)</span></code></pre></div>
+<p><strong>3.1 [5 points]</strong> Fit a logistic regression model between the columns <code>am</code> and <code>3</code> other columns - gross horsepower <code>hp</code>, weight <code>wt</code> (in <code>1000</code> lbs), and number of cylinders <code>cyl</code>.</p>
+<p><strong>3.2 [10 points]</strong> Which independent variable has a significant slope? Update your logistic regression model by excluding the independent variable(s) with insignificant slope. Compute McFadden’s R<sup>2</sup> and the probability cutoff.</p>
+<p><strong>3.3 [10 points]</strong> Using the updated model from step <code>3.2</code>, make predictions of <code>am</code> (automatic or manual) for the following <code>2</code> cars:</p>
 <ul>
-<li><p>Group A (new technology applied): <code>2.0</code>, <code>3.0</code>, <code>4.0</code>, <code>5.0</code>, <code>6.0</code></p></li>
-<li><p>Group B (no treatment): <code>1.0</code>, <code>2.0</code>, <code>3.0</code>, <code>4.0</code></p></li>
+<li><p>Car 1: gross horsepower of <code>140</code>, weight of <code>3000</code> lbs</p></li>
+<li><p>Car 2: gross horsepower of <code>90</code>, weight of <code>2000</code> lbs</p></li>
 </ul>
-<p>What is the p-value now? Why is it different from the p-value from the previous exercise #1?</p>
+<hr />
 </div>
+<div id="solving-problems" class="section level1">
+<h1>4. Solving problems</h1>
+<p><strong>4.1 [15 points]</strong> [SS], p38-39, Problem 1.2.</p>
+<p><strong>4.2 [15 points]</strong> [SS], p39, Problem 1.6.</p>
 </div>
 
 
