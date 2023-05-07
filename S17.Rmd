@@ -1,0 +1,180 @@
+---
+title: "Section 17 Logistic regression"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+***
+
+# Prerequisites
+
+Load the libraries with R:
+
+```{r,eval=F}
+library(pscl)
+library(InformationValue)
+```
+
+***
+
+# Section example: PM~2.5~ pollution and population density
+
+It is well known that cities with higher population density tend to suffer from more severe PM~2.5~ pollution; that is, PM levels in those cities are more likely to violate air quality standards. This is due to elevated emissions from human activities in urban areas - and usually, more population means more emissions. Well, PM~2.5~ levels could be high in less-populated cities as well due to a number of reasons, such as industrial distribution, wildfires, or secondary formation downwind.
+
+<img src="figs/air-pollution-feature.jpg" alt="drawing" width="700"/> 
+
+[Photo source](https://https://vitalrecord.tamhsc.edu/ma-johnson-awarded-interdisciplinary-research-leader-grant/pm2-5-unhealthy-air-pollution-dust-smoke-in-the-urban-city-low/)
+
+To test whether population density (people per km^2^) could influence PM~2.5~ exceeding, we gather the overall PM2.5 exceeding (`1` means exceeding) in Jan. in `20` cities.
+
+City  |Population density |PM~2.5~ exceeding |
+|:---:|:-----------------:|:--------------:|
+|1    |797                |0               |
+|2    |3652               |1               |
+|3    |384                |0               |
+|4    |876                |0               |
+|5    |1156               |0               |
+|6    |5282               |1               |
+|7    |3602               |0               |
+|8    |4305               |1               |
+|9    |6451               |1               |
+|10   |939                |1               |
+|11   |2725               |1               |
+|12   |296                |0               |
+|13   |1187               |0               |
+|14   |4819               |0               |
+|15   |7856               |1               |
+|16   |1074               |0               |
+|17   |1444               |0               |
+|18   |2620               |1               |
+|19   |417                |0               |
+|20   |3232               |1               |
+
+Here are the questions we want to solve:
+
++ Can we build a model to predict the probability of PM~2.5~ exceeding using population density? 
+
++ If there are two cities with the population density of `1000` and `5000`, how to predict the PM2.5 exceeding for the two cities?
+
+***
+
+# Logistic regression
+
+## Defination
+
+The *logistic regression* is a regression model in which the dependent variable has **categorical values** such as `true`/`false`, `pass`/`fail`, `win`/`lose`, `alive`/`dead`, or `healthy`/`sick`. It actually measures the probability of a **binary response** as the value of the dependent variable based on the mathematical equation relating it with the independent variables.
+
+For a binary dependent variable *Y*, we denote:
+
+$$p = \mathrm {P}(Y=1)$$
+In the logistic regression, we assume a **linear relationship** between the independent variable *X* and the **log-odds** (also called *logit*) of the event that $Y = 1$. This linear relationship can be written as follows:
+
+$$\mathrm {ln}(\frac {p} {1-p}) = \beta_0 + \beta_1 x$$
+Once we know $\beta_0$ and $\beta_1$, $p$ would be determined as:
+
+$$p = \frac{e^{\beta_0 + \beta_1x}} {1 + e^{\beta_0 + \beta_1x}} = \frac {1} {1+e^{-(\beta_0 + \beta_1x)}}$$
+
+*p* follows a standard logistic function. This is the reason why such a regression is called "logistic".
+
+## Odds and odds ratio
+
+*Odds* provide a measure of the likelihood of a particular outcome. Odds are calculated as the ratio of the probability of events happening to the probability that do not:
+
+$$\mathrm {odds} = \frac {p} {1-p}$$
+In logistic regression, odds would be:
+
+$$\mathrm {odds} = e^{\beta_0 + \beta_1x}$$
+For a continuous independent variable *X*, we define the *odds ratio* (OR) as how many times odds increase for every 1-unit increase in the *x*.
+
+$$\mathrm {OR} = \frac {e^{\beta_0 + \beta_1 (x+1)}} {e^{\beta_0 + \beta_1 x}}=e^{\beta_1}$$
+
+So odds ratio provides an interpretation for the logistic regression slope $\beta_1$.
+
+## Likelihood
+
+The *likelihood* function (short as likelihood) expresses the likelihood of parameter values occurring given the observed data. It assumes that the parameters are unknown. The likelihood function is different from the probability density function (PDF), which expresses the probability of observing our data given the underlying distribution parameters. PDF assumes that the parameters are known. The likelihood function and PDF are just two different views of the same event.
+
+For logistic regression, we use the *maximum likelihood estimation* (MLE) to fit the regression curve. 
+
+***
+
+# Logistic regression with R
+
+## Model fitting
+
+To fit the logistic regression model in R, we use `glm()` function:
+
+```{r}
+
+# Population per km2
+Pop <- c(797,  3652,   384,   876,  1156, 
+         5282,  3602,  4305,  6451, 939,  
+         2725,   296,  1187,  4819,  7856,
+         1074,  1444,  2620,   417,  3232)
+
+# PM exceeding
+PM  <- c( 0,     1,    0,   0,   0, 
+          1,     0,    1,   1,   1,
+          1,     0,    0,   0,   1,
+          0,     0,    1,   0,   1)
+
+# Make a data frame
+PM_data <- data.frame(Pop, PM)
+str(PM_data)
+
+# Fit the regression model
+logistic <- glm( PM ~ Pop, data = PM_data, family = binomial)
+
+# Print model detail
+summary(logistic)
+```
+
+Form the output, we see that both slope (`Pop`) and intercept are statistically significant (`0.01` < p-value < `0.05`), the regression model is then:
+
+$$\mathrm {ln}(\frac {p} {1-p}) = -2.41 + 0.000864 Pop $$
+
+## McFadden's R^2^
+
+We use R^2^ in the linear regression as a measure of how well a model fits the data. Here in logistic regression, we use a pseudo R^2^, called McFadden's R^2^, to indicate how the model fits the data. To get McFadden's R^2^, use the `pR2()` function from the `pscl` package.
+
+```{r,eval=F}
+pR2(logistic)["McFadden"]
+```
+
+## Setting probability cutoff
+
+The default cutoff prediction probability score is `0.5` - any individual with a probability of default greater than `0.5` will be predicted to the same outcome (`0` or `1`). But sometimes, tuning the probability cutoff can improve the accuracy. We can use the `optimalCutoff()` function from the `InformationValue` package to find the optimal cutoff to improve the prediction.
+
+```{r,eval=F}
+# Find optimal cutoff probability to use to maximize accuracy
+predicted_value <- predict(logistic, PM_data, type="response")
+optimalCutoff(PM_data$PM, predicted_value)[1]
+```
+We end up with a cutoff of `0.2475699`.
+
+## Making predictions
+
+Suppose we want to predict PM2.5 exceeding in two new cities (population density is `1000` and `5000`, respectively) with the fitted model, this can be done as follows:
+
+```{r,eval=F}
+# Define new cities where we want to make predictions
+new_cities <- data.frame(Pop = c(1000, 5000))
+
+#predict probability of defaulting
+predict(logistic, new_cities, type="response")
+```
+We end up with prediction of `0.1755572` and  `0.8708232`, so based on this, we say PM~2.5~ in city `1` will not exceed (< `0.2475699`), while that in city `2` will exceed (> `0.2475699`).
+
+# In-class exercises
+
+## Exercise #1
+
+* Make up `5` cities with certain population densities and PM2.5 exceeding, re-build the logistic model.
+
+* Compute the McFadden's R2, and find find the optimal probability cutoff.
+
+* Now predict PM2.5 exceeding in `3` new cities (population density is `300`, `1500`, and `30000`, respectively) with your model.
