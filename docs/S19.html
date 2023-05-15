@@ -531,7 +531,7 @@ div.tocify {
 </ul>
 <p><strong>1. Load the daily new cases data</strong></p>
 <p>Download the <code>.csv</code> data from <a href="https://zhu-group.github.io/ese335/download/COVID_2020_data.csv">here</a>, take a quick glance at the file. This file contains COVID cases from <code>Dec. 31, 2019</code> to <code>Nov. 09, 2020</code>.</p>
-<p>Then move the file (<code>COVID_2020_data.csv</code>， ~ 4MB) to your <code>working directory</code>, load the file using <code>read.csv()</code>, and convert it to a <code>tibble</code> (name it as <code>COVID_tbl</code>) using the <code>as_tibble()</code> function. If you don’t know how to handle <code>tibble</code> data, please check <a href="https://zhu-group.github.io/ese335/Sup01.html">Supplement 01 Data wrangling and quick plots</a>.</p>
+<p>Then move the file (<code>COVID_2020_data.csv</code>， ~ 4MB) to your <code>working directory</code>, load the file using <code>read.csv()</code>, and convert it to a <code>tibble</code> (name it as <code>COVID_tbl</code>) using the <code>as_tibble()</code> function. If you don’t know how to handle <code>tibble</code> data, please check <a href="https://zhu-group.github.io/ese335/S02.html">Section 02 Data wrangling and quick plots</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Read in the COVID-19 data</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>COVID_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;COVID_2020_data.csv&quot;</span>, <span class="dt">header =</span> T)</span>
 <span id="cb2-3"><a href="#cb2-3"></a></span>
@@ -544,7 +544,7 @@ div.tocify {
 <span id="cb2-10"><a href="#cb2-10"></a><span class="co"># Show data</span></span>
 <span id="cb2-11"><a href="#cb2-11"></a>COVID_tbl</span></code></pre></div>
 <p><strong>2. Get the daily total number of newly reported cases worldwide</strong></p>
-<p>What you just read from <code>COVID_2020_data.csv</code> is the daily number of new cases of COVID-19 by country worldwide (the <code>cases</code> column). Nect we will try to get daily <strong>total</strong> number of new cases of COVID-19 over the world.</p>
+<p>What you just read from <code>COVID_2020_data.csv</code> is the daily number of new cases of COVID-19 by country worldwide (the <code>cases</code> column). Notice we will try to get daily <strong>total</strong> number of new cases of COVID-19 over the world.</p>
 <p>[Hint] You may find the following lines useful:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Get global daily new cases</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>COVID_tbl &lt;-<span class="st"> </span>COVID_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -657,7 +657,7 @@ div.tocify {
 <span id="cb11-10"><a href="#cb11-10"></a><span class="kw">exp</span>(forecast_30days<span class="op">$</span>lower[day_forward,<span class="dv">1</span>])</span>
 <span id="cb11-11"><a href="#cb11-11"></a><span class="kw">exp</span>(forecast_30days<span class="op">$</span>upper[day_forward,<span class="dv">1</span>])</span></code></pre></div>
 <p><strong>11. Verify the predictions</strong></p>
-<p>Now download the latest data from <a href="https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/data.csv">ECDC</a>, compute the global total number of new cases of COVID-19 on <code>Nov. 10, 2020</code> and <code>Nov. 30, 2020</code> .</p>
+<p>Now download the latest data from <a href="https://zhu-group.github.io/ese335/download/COVID_2020_data_new.csv">ECDC</a>, compute the global total number of new cases of COVID-19 on <code>Nov. 10, 2020</code> and <code>Nov. 30, 2020</code> .</p>
 <p>Compare this number with the predicted value from the previous step. Do you get a reasonable prediction?</p>
 <p><strong>12. [optional] Even more: Fit a SARIMA model</strong></p>
 <p>In fact, the <code>global_cases_ts_log</code> shows weekly cycles, this is not well considered in the model. You can make an even better ARIMA model by removing this pattern, or by fitting a SARIMA model, where “S” stands for seasonal. Look at package <a href="https://cran.r-project.org/web/packages/sarima/sarima.pdf">sarima</a> for more.</p>

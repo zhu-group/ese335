@@ -62,7 +62,7 @@ In this part, we will learn the necessary steps to fitting ARIMA models to time 
 
 Download the `.csv` data from [here](https://zhu-group.github.io/ese335/download/COVID_2020_data.csv), take a quick glance at the file. This file contains COVID cases from `Dec. 31, 2019` to `Nov. 09, 2020`.
 
-Then move the file (`COVID_2020_data.csv`， ~ 4MB) to your `working directory`, load the file using `read.csv()`, and convert it to a `tibble` (name it as `COVID_tbl`) using the `as_tibble()` function. If you don't know how to handle `tibble` data, please check [Supplement 01 Data wrangling and quick plots](https://zhu-group.github.io/ese335/Sup01.html).
+Then move the file (`COVID_2020_data.csv`， ~ 4MB) to your `working directory`, load the file using `read.csv()`, and convert it to a `tibble` (name it as `COVID_tbl`) using the `as_tibble()` function. If you don't know how to handle `tibble` data, please check [Section 02 Data wrangling and quick plots](https://zhu-group.github.io/ese335/S02.html).
 
 ```{r, eval=F}
 # Read in the COVID-19 data
@@ -80,7 +80,7 @@ COVID_tbl
 
 **2. Get the daily total number of newly reported cases worldwide**
 
-What you just read from `COVID_2020_data.csv` is the daily number of new cases of COVID-19 by country worldwide (the `cases` column). Nect we will try to get daily **total** number of new cases of COVID-19 over the world.
+What you just read from `COVID_2020_data.csv` is the daily number of new cases of COVID-19 by country worldwide (the `cases` column). Notice we will try to get daily **total** number of new cases of COVID-19 over the world.
 
 [Hint] You may find the following lines useful:
 
@@ -248,7 +248,7 @@ exp(forecast_30days$upper[day_forward,1])
 
 **11. Verify the predictions**
 
-Now download the latest data from [ECDC](https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/data.csv), compute the global total number of new cases of COVID-19 on `Nov. 10, 2020` and `Nov. 30, 2020` . 
+Now download the latest data from [ECDC](https://zhu-group.github.io/ese335/download/COVID_2020_data_new.csv), compute the global total number of new cases of COVID-19 on `Nov. 10, 2020` and `Nov. 30, 2020` . 
 
 Compare this number with the predicted value from the previous step. Do you get a reasonable prediction?
 
