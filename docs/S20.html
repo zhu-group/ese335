@@ -513,7 +513,7 @@ div.tocify {
 <div id="passing-the-data-set" class="section level2">
 <h2>1. Passing the data set</h2>
 <p>First of all, you need to tell R what data set to use in plotting. This is done by passing a <em>data.frame</em> object to the <code>ggplot()</code> function. Here the data frame object should contain <strong>all</strong> features needed to make the plot you want. Unlike base graphics in R and other languages, <code>ggplot()</code> does not take vectors as arguments.</p>
-<p>In previous sections, you learn how to use the pipe operator (<code>%&gt;%</code>) to pass a data set (<code>tibble</code> object) produced through <a href="https://zhu-group.github.io/ese335/Sup01.html">data wrangling</a> to the <code>ggplot()</code> function. This is exactly what you need to do in this step.</p>
+<p>In previous sections, you learn how to use the pipe operator (<code>%&gt;%</code>) to pass a data set (<code>tibble</code> object) produced through <a href="https://zhu-group.github.io/ese335/S02.html">data wrangling</a> to the <code>ggplot()</code> function. This is exactly what you need to do in this step.</p>
 <p>Let’s use the <code>gapminder</code> data set. Now suppose we want to look at how GDP per capita (<code>gdpPercap</code>) changes from 1957 to 2007 for countries with names starting with the letter “C” in Asia or Europe. (I make up this subjective example, but hopefully, you can feel the power of the <code>dplyr</code> package!) We can then pass the subset of <code>gapminder</code> data to <code>ggplot</code> to make a scatter plot between <code>gdpPercap</code> and <code>year</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Make a simple scatter plot</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>gapminder <span class="op">%&gt;%</span></span>
@@ -717,7 +717,7 @@ div.tocify {
 </div>
 <div id="ggplot2s-grammar-of-graphics-and-beyond" class="section level1">
 <h1><code>ggplot2</code>’s grammar of graphics and beyond</h1>
-<p>We have covered some basics but critical steps of making plots with <code>ggplot2</code>. There are many more features that we don’t have time to go through in just one section. You can explore the full functionality of <code>ggplot2()</code> by studying the <a href="https://zhu-group.github.io/ese335/S21.html#Further_reading">further reading</a> listed at the end.</p>
+<p>We have covered some basics but critical steps of making plots with <code>ggplot2</code>. There are many more features that we don’t have time to go through in just one section. You can explore the full functionality of <code>ggplot2()</code> by studying the <a href="https://zhu-group.github.io/ese335/S20.html#Further_reading">further reading</a> listed at the end.</p>
 <p>To summarize, <code>ggplot2</code>’s grammar of graphics goes like:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># ggplot functions</span></span>
 <span id="cb24-2"><a href="#cb24-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> <span class="op">&lt;</span>DATA<span class="op">&gt;</span>) <span class="op">+</span><span class="st"> </span></span>
