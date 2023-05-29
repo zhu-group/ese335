@@ -632,28 +632,28 @@ div.tocify {
 <h2>An example</h2>
 <p>Consider the global temperature series record (<code>globtemp</code>) in the <code>astsa</code> package. The data are the global mean land and ocean temperature index from <code>1880</code> to <code>2015</code>, with the base period 1951-1980. We want to fit an ARIMA model to this time series.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Load data</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">library</span>(astsa)</span>
-<span id="cb11-3"><a href="#cb11-3"></a></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co"># Reset panel</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb11-6"><a href="#cb11-6"></a></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="co"># Plot</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="kw">plot</span>(globtemp, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Global Temperature Deviations&quot;</span>)</span></code></pre></div>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">library</span>(astsa)</span></code></pre></div>
+<pre><code>## Warning: package &#39;astsa&#39; was built under R version 4.0.3</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Reset panel</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co"># Plot</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="kw">plot</span>(globtemp, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Global Temperature Deviations&quot;</span>)</span></code></pre></div>
 <p><img src="S18_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>There is a clear trend, so the first step is to de-trend the data.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Fit a linear model</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>trModel &lt;-<span class="st"> </span><span class="kw">lm</span>(globtemp <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(globtemp)))</span>
-<span id="cb12-3"><a href="#cb12-3"></a></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># Get the residuals</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>residual &lt;-<span class="st"> </span><span class="kw">resid</span>(trModel)</span>
-<span id="cb12-6"><a href="#cb12-6"></a></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="co"># Plot the residual</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="kw">plot</span>(residual, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Fit a linear model</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>trModel &lt;-<span class="st"> </span><span class="kw">lm</span>(globtemp <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(globtemp)))</span>
+<span id="cb14-3"><a href="#cb14-3"></a></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co"># Get the residuals</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>residual &lt;-<span class="st"> </span><span class="kw">resid</span>(trModel)</span>
+<span id="cb14-6"><a href="#cb14-6"></a></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co"># Plot the residual</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="kw">plot</span>(residual, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
 <p><img src="S18_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Check acf anf pacf of the residuals</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">acf</span>(residual)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Check acf anf pacf of the residuals</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">acf</span>(residual)</span></code></pre></div>
 <p><img src="S18_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">pacf</span>(residual)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">pacf</span>(residual)</span></code></pre></div>
 <p><img src="S18_files/figure-html/unnamed-chunk-10-3.png" width="672" /></p>
 <p>Based on the acf and pacf plots, we guess it may be an ARIMA(1,0,0) model.</p>
 <hr />
