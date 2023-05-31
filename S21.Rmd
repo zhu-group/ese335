@@ -332,7 +332,7 @@ Mapbox    <- make_bbox(lon = Site_data$lon, lat = Site_data$lat, f = .1)
 
 # Pull the base map, ***you may need a VPN to download the base map ***
 # The keyword zoom defines the map resolution
-Base_map  <- get_map(location=Mapbox, zoom=10, maptype="terrain-background")
+Base_map  <- get_map(location=Mapbox, zoom=10, maptype="terrain", source="stamen")
 
 # Plot
 ggmap(Base_map) + 
@@ -385,8 +385,7 @@ Domain            <- make_bbox(lon = Mangkhut_data_new$lon,
                                lat = Mangkhut_data_new$lat, f = .1)
 
 # Get the base map
-Base_map          <- get_map(location=Domain, zoom=5, 
-                             maptype="terrain-background")
+Base_map          <- get_map(location=Domain, zoom=5, maptype="terrain", source="stamen")
 
 # Plot base map
 Map1              <- ggmap(Base_map)
