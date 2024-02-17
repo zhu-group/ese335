@@ -13,48 +13,42 @@
 
 <title>Syllabus</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
-
-
-
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
 
 
 
@@ -64,10 +58,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -84,40 +74,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 66px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h2 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h3 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h4 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h5 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h6 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -145,7 +111,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -157,7 +123,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -167,11 +133,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -183,13 +166,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -197,16 +179,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -250,7 +225,7 @@ $(document).ready(function () {
 <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -281,7 +256,7 @@ $(document).ready(function () {
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-laptop"></span>
      
     Assignments
@@ -314,7 +289,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -325,49 +300,88 @@ $(document).ready(function () {
 
 <hr />
 <p><strong>ESE 335 Environmental Data Analysis</strong><br />
-Monday 10:20-12:10<br />
-Wednesday (odd week only) 10:20-12:10<br />
-408, Teaching Building #3</p>
-<p><a href="https://zhu-group.github.io/ese335/Schedule.html">Schedule for 2023 Spring</a></p>
+Monday 19:00-21:00<br />
+Wednesday (odd week only) 19:00-21:00<br />
+108, Business School</p>
+<p><a href="https://zhu-group.github.io/ese335/Schedule.html">Schedule
+for 2024 Spring</a></p>
 <hr />
 <p><strong>Course Website</strong><br />
-<a href="https://zhu-group.github.io/ese335" class="uri">https://zhu-group.github.io/ese335</a></p>
+<a href="https://zhu-group.github.io/ese335"
+class="uri">https://zhu-group.github.io/ese335</a></p>
 <p><strong>Instructor</strong><br />
 Lei Zhu<br />
 <em>School of Environmental Science and Engineering<br />
 Office: 907, CoE North<br />
-Email: <a href="mailto:zhul3@sustech.edu.cn" class="email">zhul3@sustech.edu.cn</a><br />
+Email: <a href="mailto:zhul3@sustech.edu.cn"
+class="email">zhul3@sustech.edu.cn</a><br />
 Office Hours: By appointment</em></p>
 <p><strong>Teaching Assistant (TA)</strong><br />
-Weitao Fu<br />
+Yali Li<br />
 <em>School of Environmental Science and Engineering<br />
 Office: 903B, CoE North<br />
-Email: <a href="mailto:12232237@mail.sustech.edu.cn" class="email">12232237@mail.sustech.edu.cn</a><br />
-Office Hours: Thursday 14:00-17:00</em></p>
+Email: <a href="mailto:12332275@mail.sustech.edu.cn"
+class="email">12332275@mail.sustech.edu.cn</a><br />
+Office Hours: TBD</em></p>
 <p><strong>Credit</strong><br />
 The course has a credit of 3.0, with a total class hour of 48.</p>
 <p><strong>Course Description</strong><br />
-As an interdisciplinary field, environmental science gains insights from various data sets of field studies, lab experiments, remote sensing, and model simulations. Analyzing and visualizing data sets has become one of the most critical skills for carrying out environmental studies. However, SUSTech ESE undergraduate students often find their opportunities to access such courses confined, and specific training toward developing desired skills limited.</p>
-<p>This course will teach students how to apply suitable statistical methods and visualization tools to analyze environmental data. Topics include basics of statistics, features of environmental data, checking data sets, comparisons between two groups, comparisons among several groups, correlation tests, simple linear regression, multiple linear regression, logistic regression, and time series analysis. Students will also learn how to conduct data analysis and visualization properly using the <code>R</code> language.</p>
+As an interdisciplinary field, environmental science gains insights from
+various data sets of field studies, lab experiments, remote sensing, and
+model simulations. Analyzing and visualizing data sets has become one of
+the most critical skills for carrying out environmental studies.
+However, SUSTech ESE undergraduate students often find their
+opportunities to access such courses confined, and specific training
+toward developing desired skills limited.</p>
+<p>This course will teach students how to apply suitable statistical
+methods and visualization tools to analyze environmental data. Topics
+include basics of statistics, features of environmental data, checking
+data sets, comparisons between two groups, comparisons among several
+groups, correlation tests, simple linear regression, multiple linear
+regression, logistic regression, and time series analysis. Students will
+also learn how to conduct data analysis and visualization properly using
+the <code>R</code> language.</p>
 <p><strong>Course Objectives</strong><br />
-This course will facilitate student learning with pre-class readings, section examples, lectures, in-class exercises, assignments, exam, final project, and one-on-one interactions. At the end of the course, students should be able to analyze and visualize environmental data sets using suitable statistical methods and <code>R</code> tools. This course would also boost students’ programming skills, broadly applicable in their later study and research.</p>
+This course will facilitate student learning with pre-class readings,
+section examples, lectures, in-class exercises, assignments, exam, final
+project, and one-on-one interactions. At the end of the course, students
+should be able to analyze and visualize environmental data sets using
+suitable statistical methods and <code>R</code> tools. This course would
+also boost students’ programming skills, broadly applicable in their
+later study and research.</p>
 <p><strong>Pre-requisites</strong><br />
 Statistics or permission of the instructor.</p>
 <p><strong>Textbooks</strong></p>
 <ul>
-<li><p><strong>[RS]</strong> Ramsey F. and D. Schafer, <em>The Statistical Sleuth: A Course in Methods of Data Analysis</em>, Cengage Learning, 3<sup>rd</sup> Edition (May 2, 2012), 784 pages, ISBN-10: 1133490670, ISBN-13: 978-1133490678.</p></li>
-<li><p><strong>[SS]</strong> Shumway R. and D. Stoffer, <em>Time Series Analysis and Its Applications With R Examples</em>, Springer, 4<sup>th</sup> Edition (April 19, 2017), 575 pages, ISBN-10: 3319524518, ISBN-13: 978-3319524511.</p></li>
-<li><p>Other readings will be freely available from online resources and made available through the course website.</p></li>
+<li><p><strong>[RS]</strong> Ramsey F. and D. Schafer, <em>The
+Statistical Sleuth: A Course in Methods of Data Analysis</em>, Cengage
+Learning, 3<sup>rd</sup> Edition (May 2, 2012), 784 pages, ISBN-10:
+1133490670, ISBN-13: 978-1133490678.</p></li>
+<li><p><strong>[SS]</strong> Shumway R. and D. Stoffer, <em>Time Series
+Analysis and Its Applications With R Examples</em>, Springer,
+4<sup>th</sup> Edition (April 19, 2017), 575 pages, ISBN-10: 3319524518,
+ISBN-13: 978-3319524511.</p></li>
+<li><p>Other readings will be freely available from online resources and
+made available through the course website.</p></li>
 </ul>
 <p><strong>Course Requirements</strong></p>
 <ul>
-<li><p>Pre-class readings - Students are required to study the assigned readings prior to the class.</p></li>
-<li><p>Laptop - Bring laptops to the class to learn <code>R</code> programming.</p></li>
-<li><p>In-class exercises - You will be asked to finish 2-3 in-class exercises at the end of each section.</p></li>
-<li><p>Assignments - Assignments will be posted on this website. Due in class, no late assignments will be accepted.</p></li>
-<li><p>Exam - The exam will be an in-class test. You will be allowed to bring a two-paged (A4) cheat sheet.</p></li>
-<li><p>Final project - Each student will choose a question/topic of interest to study, make a poster, and present it to the whole class.</p></li>
-<li><p>Participation - Participation in discussions is encouraged. You are also welcome to Office Hours held by the instructor and TA for specific questions.</p></li>
+<li><p>Pre-class readings - Students are required to study the assigned
+readings prior to the class.</p></li>
+<li><p>Laptop - Bring laptops to the class to learn <code>R</code>
+programming.</p></li>
+<li><p>In-class exercises - You will be asked to finish 2-3 in-class
+exercises at the end of each section.</p></li>
+<li><p>Assignments - Assignments will be posted on this website. Due in
+class, no late assignments will be accepted.</p></li>
+<li><p>Exam - The exam will be an in-class test. You will be allowed to
+bring a two-paged (A4) cheat sheet.</p></li>
+<li><p>Final project - Each student will choose a question/topic of
+interest to study, make a poster, and present it to the whole
+class.</p></li>
+<li><p>Participation - Participation in discussions is encouraged. You
+are also welcome to Office Hours held by the instructor and TA for
+specific questions.</p></li>
 </ul>
 <p><strong>Grading</strong></p>
 <ul>
@@ -375,10 +389,14 @@ Statistics or permission of the instructor.</p>
 <li><p>Exam (30%)</p></li>
 <li><p>Final project - poster presentation (30%)</p></li>
 <li><p>Class participation (10%)</p></li>
-<li><p>Academic dishonesty - Just don’t. If you’re not interested in learning and doing the work, don’t do it. But, please don’t cheat or plagiarize. It’s insulting to both you and the instructor and no good comes from it.</p></li>
+<li><p>Academic dishonesty - Just don’t. If you’re not interested in
+learning and doing the work, don’t do it. But, please don’t cheat or
+plagiarize. It’s insulting to both you and the instructor and no good
+comes from it.</p></li>
 </ul>
 <p><strong>Schedule</strong></p>
-<p><a href="https://zhu-group.github.io/ese335/Schedule.html">Schedule for 2023 Spring</a></p>
+<p><a href="https://zhu-group.github.io/ese335/Schedule.html">Schedule
+for 2024 Spring</a></p>
 
 
 
@@ -389,7 +407,7 @@ Statistics or permission of the instructor.</p>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -407,7 +425,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
