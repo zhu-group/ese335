@@ -779,7 +779,7 @@ pipes <code>%&gt;%</code> to combine them.</p>
 <h2>Using <code>select()</code></h2>
 <p>Use the <code>select()</code> function to keep only the variables
 (columns) you select.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(Keeling_Data_tbl,year,co2,quality)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(Keeling_Data_tbl, year, co2, quality)</span></code></pre></div>
 <pre><code>## # A tibble: 791 × 3
 ##     year   co2 quality
 ##    &lt;int&gt; &lt;dbl&gt;   &lt;int&gt;
@@ -794,7 +794,7 @@ pipes <code>%&gt;%</code> to combine them.</p>
 ##  9  1958  313.       1
 ## 10  1958  315.       1
 ## # ℹ 781 more rows</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(Keeling_Data_tbl,co2)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(Keeling_Data_tbl, co2)</span></code></pre></div>
 <pre><code>## # A tibble: 791 × 1
 ##      co2
 ##    &lt;dbl&gt;
@@ -819,7 +819,7 @@ unlike anything we’ve seen in R before, let’s repeat what we’ve done
 above using pipes.</p>
 <p><code>x %&gt;% f(y)</code> is the same as <code>f(x, y)</code></p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>Keeling_Data_tbl <span class="sc">%&gt;%</span> </span>
-<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year,co2,quality)</span></code></pre></div>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, co2, quality)</span></code></pre></div>
 <pre><code>## # A tibble: 791 × 3
 ##     year   co2 quality
 ##    &lt;int&gt; &lt;dbl&gt;   &lt;int&gt;
@@ -871,7 +871,7 @@ of pipe later.</p>
 <code>quality == 1</code> , we can combine <code>select()</code> and
 <code>filter()</code> functions:</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a>Keeling_Data_tbl <span class="sc">%&gt;%</span> </span>
-<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year,co2,quality) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, co2, quality) <span class="sc">%&gt;%</span> </span>
 <span id="cb41-3"><a href="#cb41-3" tabindex="-1"></a>  <span class="fu">filter</span>(quality <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 784 × 3
 ##     year   co2 quality
@@ -895,7 +895,7 @@ really clean and easy to follow.</p>
 <p>Now try to group monthly data using the <code>group_by()</code>
 function, notice how the output tibble changes:</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a>Keeling_Data_tbl <span class="sc">%&gt;%</span> </span>
-<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year,month,co2,quality) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, month, co2, quality) <span class="sc">%&gt;%</span> </span>
 <span id="cb43-3"><a href="#cb43-3" tabindex="-1"></a>  <span class="fu">filter</span>(quality <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb43-4"><a href="#cb43-4" tabindex="-1"></a>  <span class="fu">group_by</span>(month)</span></code></pre></div>
 <pre><code>## # A tibble: 784 × 4
@@ -922,7 +922,7 @@ dataframe into multiple pieces</strong>, then we can run functions
 (<em>e.g.</em>, <code>mean()</code> or <code>sd()</code>) within
 <code>summarize()</code>.</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a>Keeling_Data_tbl <span class="sc">%&gt;%</span> </span>
-<span id="cb45-2"><a href="#cb45-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year,month,co2,quality) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="#cb45-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, month, co2, quality) <span class="sc">%&gt;%</span> </span>
 <span id="cb45-3"><a href="#cb45-3" tabindex="-1"></a>  <span class="fu">filter</span>(quality <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb45-4"><a href="#cb45-4" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span> </span>
 <span id="cb45-5"><a href="#cb45-5" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">monthly_mean =</span> <span class="fu">mean</span>(co2))</span></code></pre></div>
@@ -947,7 +947,7 @@ so-called <em>monthly climatology</em>.</p>
 <p>You can also use <code>arrange()</code> and <code>desc()</code> to
 sort the data:</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a>Keeling_Data_tbl <span class="sc">%&gt;%</span> </span>
-<span id="cb47-2"><a href="#cb47-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year,month,co2,quality) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="#cb47-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, month, co2, quality) <span class="sc">%&gt;%</span> </span>
 <span id="cb47-3"><a href="#cb47-3" tabindex="-1"></a>  <span class="fu">filter</span>(quality <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb47-4"><a href="#cb47-4" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span> </span>
 <span id="cb47-5"><a href="#cb47-5" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">monthly_mean =</span> <span class="fu">mean</span>(co2)) <span class="sc">%&gt;%</span> </span>
@@ -968,7 +968,7 @@ sort the data:</p>
 ## 11     6         362.
 ## 12     4         362.</code></pre>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a>Keeling_Data_tbl <span class="sc">%&gt;%</span> </span>
-<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year,month,co2,quality) <span class="sc">%&gt;%</span> </span>
+<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, month, co2, quality) <span class="sc">%&gt;%</span> </span>
 <span id="cb49-3"><a href="#cb49-3" tabindex="-1"></a>  <span class="fu">filter</span>(quality <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb49-4"><a href="#cb49-4" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span> </span>
 <span id="cb49-5"><a href="#cb49-5" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">monthly_mean =</span> <span class="fu">mean</span>(co2)) <span class="sc">%&gt;%</span> </span>
@@ -990,7 +990,7 @@ sort the data:</p>
 ## 12     9         356.</code></pre>
 <p>Let’s add more statistics to the monthly climatology:</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a>Keeling_Data_tbl <span class="sc">%&gt;%</span> </span>
-<span id="cb51-2"><a href="#cb51-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year,month,co2,quality) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-2"><a href="#cb51-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, month, co2, quality) <span class="sc">%&gt;%</span> </span>
 <span id="cb51-3"><a href="#cb51-3" tabindex="-1"></a>  <span class="fu">filter</span>(quality <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb51-4"><a href="#cb51-4" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span> </span>
 <span id="cb51-5"><a href="#cb51-5" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">monthly_mean =</span> <span class="fu">mean</span>(co2), <span class="at">monthly_sd =</span> <span class="fu">sd</span>(co2),</span>
