@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Section 06 One-sample Z-test and t-test</title>
+
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Environmental Data Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Syllabus.html">
+    <span class="fa fa-bell-o"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="Schedule.html">
+    <span class="fa fa-calendar"></span>
+     
+    Schedule
+  </a>
+</li>
+<li>
+  <a href="Resource.html">
+    <span class="fa fa-wrench"></span>
+     
+    Resource
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-laptop"></span>
+     
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="A01.html">Assignment 01</a>
+    </li>
+    <li>
+      <a href="A02.html">Assignment 02</a>
+    </li>
+    <li>
+      <a href="A03.html">Assignment 03</a>
+    </li>
+    <li>
+      <a href="A04.html">Assignment 04</a>
+    </li>
+    <li>
+      <a href="A05.html">Assignment 05</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Section 06 One-sample Z-test and
+t-test</h1>
+
+</div>
+
+
+<hr />
+<div id="prerequisites" class="section level1">
+<h1>Prerequisites</h1>
+<p>Load the libraries with R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(nortest)</span></code></pre></div>
+<hr />
+</div>
+<div id="section-example-span-calibration" class="section level1">
+<h1>Section Example: Span calibration</h1>
+<p><img src="figs/CO_freeway.jpg" alt="drawing" width="600"/></p>
+<p><a href="http://www.hongyuv.com/product/HY-VICO10-40.mhtml">Figure
+Source</a></p>
+<p>Suppose we want to determine the concentration of CO (carbon
+monoxide) near freeways with various conditions of traffic flow. The
+basic technique involves capturing air samples in special bags, and then
+determine the CO concentrations in a bag using an instrument called
+spectrophotometer. The spectrophotometers are quite delicate and have to
+be calibrated every day. This is done by measuring CO concentration in a
+<em>span gas</em>, where the concentration is precisely controlled at
+<code>70</code> ppm. If the spectrophotometer reads close to
+<code>70</code> ppm on the span gas, it’s ready for use; otherwise, it
+has to be adjusted.</p>
+<p>One day, we make five readings on span gas, and get:</p>
+<p><code>78, 83, 68, 72, 88</code></p>
+<p>So the error then is:</p>
+<p><code>8, 13, -2, 2, 18</code></p>
+<p>OK, <code>4</code> out of <code>5</code> of these numbers are higher
+than <code>0</code>, and some of them by quite a bit. Can this be
+explained on the basis of chance variation? Or does it show bias?</p>
+<hr />
+</div>
+<div id="instrument-error" class="section level1">
+<h1>Instrument error</h1>
+<p>Instrument error refers to the error of a measuring instrument, or
+the difference between the actual value and the value indicated by the
+instrument. There can be errors of various types, and the overall error
+is the sum of the individual errors. Here we focus on <strong>systematic
+errors</strong> and <strong>random errors</strong>.</p>
+<p>The size of the systematic error is sometimes referred to as the
+<strong>accuracy</strong>. For example the instrument may always
+indicate a value 5% higher than the actual value. A systematic error may
+arise because the instrument has been incorrectly
+<strong>calibrated</strong>, or perhaps because a defect has arisen in
+the instrument since it was calibrated. Instruments should be calibrated
+against a standard instrument that is known to be accurate, and ideally
+the calibration should be repeated at intervals.</p>
+<p>The range in amount of possible random errors is sometimes referred
+to as the <strong>precision</strong>. Random errors may arise because of
+the design of the instrument. In particular they may be subdivided
+between errors in the amount shown on the display, and how accurately
+the display can actually be read.</p>
+<hr />
+</div>
+<div id="the-z-ratio" class="section level1">
+<h1>The Z-Ratio</h1>
+<p>We also know that the spectrophotometer can measure CO concentration
+with an instrument random error of <code>10</code> ppm (<code>1</code>
+<span class="math inline">\(\sigma\)</span>). Instrument error generally
+follows a normal distribution. In this case, let’s now assume that the
+error follows a normal distribution <span class="math inline">\(N(\mu ,
+10)\)</span>, where <span class="math inline">\(\mu\)</span> is unknown.
+With this set-up, we can write:</p>
+<ul>
+<li><p>H0: The spectrophotometer has no bias (<span
+class="math inline">\(\mu = 0\)</span>)</p></li>
+<li><p>H1: The spectrophotometer has a positive bias (<span
+class="math inline">\(\mu &gt; 0\)</span>)</p></li>
+</ul>
+<p>To test the hypothesis (H0), let’s calculate the p-value assuming H0
+is true. Here we will use <em>Z-Ratio</em>, which is defined as:</p>
+<p><span class="math display">\[Z=\frac {Estimate - Parameter}
+{SD(Estimate)}  \]</span> In this case, <span
+class="math inline">\(Estimate\)</span> is the sample average (<span
+class="math inline">\(\overline{X}\)</span>), and <span
+class="math inline">\(Parameter\)</span> is the population mean (<span
+class="math inline">\(\mu\)</span>). Since the sample is from a normal
+population with a known (<span class="math inline">\(\sigma\)</span>),
+the SD of the sample average (<span
+class="math inline">\(\overline{X}\)</span>) is then <span
+class="math inline">\(\ {\sigma} / {\sqrt{n}}\)</span>, here <span
+class="math inline">\(n\)</span> is the sample size.</p>
+<p>For our job, it is then specified as:</p>
+<p><span class="math display">\[Z=\frac {\overline{X} - \mu} {\sigma /
+\sqrt{n}}   \]</span></p>
+<p>Basically, Z-Ratio describes how far do the observations deviate from
+the assumed mean.</p>
+<hr />
+</div>
+<div id="one-sample-z-test" class="section level1">
+<h1>One sample Z-test</h1>
+<p>In this case, <span class="math inline">\(\overline X\)</span> is
+<code>7.8</code>, as the mean of <code>8, 13, -2, 2, 18</code>, and
+<span class="math inline">\(\sigma\)</span> is <code>10</code>. Assuming
+H0 is true, we get <span class="math inline">\(Z\)</span> is
+<code>1.74</code>.</p>
+<p>If the sampling distribution of the estimate is normal, then the
+sampling distribution of <span class="math inline">\(Z\)</span> follows
+standard normal distribution by definition. Then with R, we can compute
+the p-value:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Sample</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>Sample   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">78</span>, <span class="dv">83</span>, <span class="dv">68</span>, <span class="dv">72</span>, <span class="dv">88</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># Baseline</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>Baseline <span class="ot">&lt;-</span> <span class="dv">70</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># Error</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>Error    <span class="ot">&lt;-</span> Sample <span class="sc">-</span> Baseline</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co"># Spectrophotometer error SD</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>SD       <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co"># Get Z-ratio</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>Z        <span class="ot">&lt;-</span> <span class="fu">mean</span>(Error)<span class="sc">/</span>(SD<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(Error)))</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co"># Find the one-side p-value</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co"># The pnorm function gives the Cumulative Distribution Function (CDF) </span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co"># of the Normal distribution in R, which is the probability that </span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co"># the variable takes a value lower or equal to a threshold (here Z).</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co"># Here we use 1-pnorm to get the probability that the </span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="co"># variable takes a value higher than the threshold (Z).</span></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>P_value   <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(Z, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="fu">print</span>(P_value)</span></code></pre></div>
+<pre><code>## [1] 0.04056795</code></pre>
+<p>OK, we have a probability of about <code>4.06%</code> getting a
+statistic (<span class="math inline">\(Z\)</span>) as extreme or more
+extreme than the observed statistic (<code>1.74</code>), assuming H0 is
+true. This is a small probability, and is NOT likely due to chance. We
+can reject H0 based on the observations. Thus, the spectrophotometer has
+postive bias based on the observations.</p>
+<p>Now change the spectrophotometer error to <code>20</code> and repeat
+the above steps. Can you explain what happens?</p>
+<hr />
+</div>
+<div id="the-t-ratio" class="section level1">
+<h1>The t-Ratio</h1>
+<p>In the previous example, we assume the SD (<span
+class="math inline">\(\sigma\)</span>) of instrument error is known.
+However, this is usually is not the case. Very often, the SD of an
+estimate is unknown. For example, the size of instrument error may vary
+from day to day, leading to a changing SD of instrument error. We need
+to replace Z-Ratio with <em>t-Ratio</em> in this situation.</p>
+<p>The <em>t-Ratio</em> is defined as:</p>
+<p><span class="math display">\[t=\frac {Estimate - Parameter}
+{SE(Estimate)}\]</span> Here the <em>Standard Error</em> (SE) refers to
+the sample. If <span class="math inline">\(s\)</span> is the sample SD,
+the SE for the average is</p>
+<p><span class="math display">\[SE(\overline {X})=\frac {s}
+{\sqrt{n}}\]</span> And we have:</p>
+<p><span class="math display">\[t=\frac {\overline{X} - \mu} { {s} /
+{\sqrt{n}}}  \]</span> If <span class="math inline">\(\overline
+{X}\)</span> is the average in a random sample of size <span
+class="math inline">\(n\)</span> from a normal population, the sampling
+distribution of its t-Ratio follows a Student’s t-distribution on <span
+class="math inline">\(n-1\)</span> degrees of freedom (df).</p>
+<p>The mathematical form of the PDF of a Student’s t distribution is
+very complicated. With R, we can easily plot different PDFs with the
+<code>dt()</code> function.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Make a vector from -5 to 5, with a step of 0.01 </span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>x        <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">5.0</span>, <span class="fl">5.0</span>, <span class="at">by=</span><span class="fl">0.01</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co"># Compute the density for each element in x</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co"># Set the degrees of freedom to be 30</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>density1 <span class="ot">&lt;-</span> <span class="fu">dt</span>(x, <span class="at">df=</span><span class="dv">30</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co"># Plot Density</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="fu">plot</span>(x, density1, <span class="at">col=</span><span class="st">&quot;purple&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>     <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">cex=</span><span class="dv">2</span>, </span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">5.0</span>, <span class="fl">5.0</span>),</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;PDF of t distributions&quot;</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co"># Compute and plot the density from another t distribution</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co"># Set the degrees of freedom to be 5</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>density2  <span class="ot">&lt;-</span> <span class="fu">dt</span>(x, <span class="at">df=</span><span class="dv">5</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="fu">lines</span>(x, density2, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>      <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co"># Compute and plot the density from another t distribution</span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>density3  <span class="ot">&lt;-</span> <span class="fu">dt</span>(x, <span class="at">df=</span><span class="dv">2</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="fu">lines</span>(x, density3, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>      <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="co"># Add legends</span></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="fu">text</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="fl">0.35</span>, <span class="st">&quot;t (df=30)&quot;</span>, <span class="at">col=</span><span class="st">&quot;purple&quot;</span>,   <span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="fu">text</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="fl">0.30</span>, <span class="st">&quot;t (df=5)&quot;</span>, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>,  <span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="fu">text</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="fl">0.25</span>, <span class="st">&quot;t (df=2)&quot;</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">cex=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="S06_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>As the sample size increases, the Student’s t distribution becomes
+more like a standard normal distribution (<code>n &gt; 30</code>).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Plot Density</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">plot</span>(x, density1, <span class="at">col=</span><span class="st">&quot;purple&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>     <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">cex=</span><span class="dv">2</span>, </span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">5.0</span>, <span class="fl">5.0</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;PDF of t and standard normal distributions&quot;</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co"># Compute and plot the density from the normal distribution</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>density4  <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="fu">lines</span>(x, density4, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Density&quot;</span>, </span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>      <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="fu">text</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="fl">0.35</span>, <span class="st">&quot;t (df=30)&quot;</span>, <span class="at">col=</span><span class="st">&quot;purple&quot;</span>,   <span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="fu">text</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="fl">0.30</span>, <span class="st">&quot;N(0,1)&quot;</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">cex=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="S06_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<hr />
+</div>
+<div id="one-sample-t-test" class="section level1">
+<h1>One sample t-test</h1>
+<p>Let’s use the observations again, but conduct a one-sample
+t-test.</p>
+<ul>
+<li><p>H0: The instrument has no bias (<span class="math inline">\(\mu =
+0\)</span>)</p></li>
+<li><p>H1: The instrument has a positive bias (<span
+class="math inline">\(\mu &gt; 0\)</span>)</p></li>
+</ul>
+<p>In this case, <span class="math inline">\(\overline X\)</span> is
+again <code>7.8</code>, <span class="math inline">\(SE(\overline
+X)\)</span> is <code>3.16</code> ,assuming H0 is true, we get <span
+class="math inline">\(t\)</span>=<code>2.16</code>.</p>
+<p>Then with R, we can compute the p-value:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Sample</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>Sample   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">78</span>, <span class="dv">83</span>, <span class="dv">68</span>, <span class="dv">72</span>, <span class="dv">88</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># Baseline</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>Baseline <span class="ot">&lt;-</span> <span class="dv">70</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># Error</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>Error    <span class="ot">&lt;-</span> Sample <span class="sc">-</span> Baseline</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co"># Get sample size and degrees of freedom</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>n        <span class="ot">&lt;-</span> <span class="fu">length</span>(Error)</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>df       <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co"># SE of the average</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>SE       <span class="ot">&lt;-</span> <span class="fu">sd</span>(Error)<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co"># Get t-ratio</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>t        <span class="ot">&lt;-</span> <span class="fu">mean</span>(Error)<span class="sc">/</span>SE</span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co"># Find the one-side p-value</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="co"># The pt function gives the Cumulative Distribution Function (CDF) </span></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co"># of the Student&#39;s t distribution in R, which is the probability that </span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="co"># the variable takes a value lower or equal to a threshold (here t).</span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="co"># Here we that 1-pt to get the probability that the </span></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="co"># variable takes a value higher than the threshold (t).</span></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>P_value  <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t, <span class="at">df=</span>df)</span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="fu">print</span>(P_value)</span></code></pre></div>
+<pre><code>## [1] 0.04844399</code></pre>
+<p>Now, we have a probability of about <code>4.84%</code> getting a
+statistic (<span class="math inline">\(t\)</span>) as extreme or more
+extreme than the observed statistic (<code>2.16</code>), assuming H0 is
+true. This is a small probability, and is NOT likely due to chance. We
+can reject H0 based on the observations. Thus, the instrument is
+positively biased based on the observations.</p>
+<hr />
+</div>
+<div id="one-sample-t-test-with-r" class="section level1">
+<h1>One sample t-test with R</h1>
+<p>It turns out you can perform the previous one-sample t-test simply
+as:</p>
+<ul>
+<li><p>H0: The instrument has no bias (<span class="math inline">\(\mu =
+70\)</span>)</p></li>
+<li><p>H1: The instrument has a positive bias (<span
+class="math inline">\(\mu &gt; 70\)</span>)</p></li>
+</ul>
+<p>In R, this is done by:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Sample</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>Sample   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">78</span>, <span class="dv">83</span>, <span class="dv">68</span>, <span class="dv">72</span>, <span class="dv">88</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># Call t.test function</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co"># Here we compare the sample average with a known mean (70)</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co"># Since H1 states a positive bias, </span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co"># we need to compute the one-side p-value</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="fu">t.test</span>(Sample, <span class="at">mu=</span><span class="dv">70</span>, <span class="at">alternative =</span><span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  Sample
+## t = 2.16, df = 4, p-value = 0.04844
+## alternative hypothesis: true mean is greater than 70
+## 95 percent confidence interval:
+##  70.1017     Inf
+## sample estimates:
+## mean of x 
+##      77.8</code></pre>
+<hr />
+</div>
+<div id="in-class-exercises" class="section level1">
+<h1>In-class exercises</h1>
+<div id="exercise-1" class="section level2">
+<h2>Exercise #1</h2>
+<p>To test an instrument is biased or not, we measure a standard sample
+(<code>4.55 mg/kg</code>) <code>5</code> times. And at each time, the
+observation is made independently. The readings are as follow:</p>
+<p><code>4.28, 4.40, 4.42, 4.35, 4.37</code></p>
+<ul>
+<li><p>1.1 Check the normality of the sample</p></li>
+<li><p>1.2 Do you use a Z-test or a t-test?</p></li>
+<li><p>1.3 What is the H0 and H1?</p></li>
+<li><p>1.4 Do you use one-side or two-side p-value?</p></li>
+<li><p>1.5 Is the instrument biased or not?</p></li>
+</ul>
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise #2</h2>
+<p>A student thinks people consume more energy when temperature is
+higher. To test this hypothesis, the student collects monthly energy
+costs for families from the previous year when temperature is
+<code>0.7</code> degree lower than the current year, and gets the mean
+cost per month was <code>200</code> RMB. The student then randomly
+samples <code>20</code> families and records their energy costs for the
+current year as fellow:</p>
+<p><code>199, 202, 202, 198, 196, 197, 201, 203, 198, 204,</code></p>
+<p><code>201, 203, 201, 203, 203, 202, 197, 200, 201, 197</code></p>
+<p>Do the data suppose the student’s hypothesis?</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
