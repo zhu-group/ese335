@@ -58,13 +58,13 @@ We should be able to build a histogram, but think about what is the chance that 
 
 ## Why is it so "normal"?
 
-The normal distribution is the most important probability distribution in statistics because it fits many natural phenomena. For example, heights, blood pressure, measurement error, and IQ scores follow the normal distribution. The reason why normal distribution is so "normal" in nature can be traced to the **Central Limit Theory**, which states that various **independent** factors influence a particular trait. When all these independent factors contribute to a phenomenon, their normalized sum tends to result in a normal distribution.
+The normal distribution is the most important probability distribution in statistics because it fits many natural phenomena. For example, heights, blood pressure, measurement error, and IQ scores follow the normal distribution. The reason why normal distribution is so "normal" in nature can be traced to the **Central Limit Theory**, which states that various **independent** factors influence a particular trait (see [Exercise #2 from Section 02](https://zhu-group.github.io/ese335/S03.html#Exercise_2) for more). When all these independent factors contribute to a phenomenon, their normalized sum tends to result in a normal distribution.
 
-The normal distribution is also known as Gaussian distribution or bell curve, which encompasses two basic terms - mean and standard deviation. It is a symmetrical arrangement of a data set in which most values cluster in the mean and the rest taper off symmetrically towards either extreme. 
+The normal distribution is also known as **Gaussian distribution** or bell curve, which encompasses two basic terms - mean and standard deviation. It is a symmetrical arrangement of a data set in which most values cluster in the mean and the rest taper off symmetrically towards either extreme. 
 
 ## PDF of a normal distribution
 
-An Normal random variable $X$ is defined as follows:
+An normal random variable $X$ is defined as follows:
 $$X \sim N(\mu, \sigma^2) $$
 where $\mu$ is the mean and $\sigma^2$ is the variance, both refer to features of the population. And the PDF of a normal distribution is written as:
 
@@ -106,15 +106,17 @@ text(-4, 0.25, "N(0, 9)", col="red", cex=2)
 
 # Normality Test  
 
-If the data set follows the normal distribution, it is easier to predict with high accuracy. If we would like to use **parametric** statistical tests (e.g., correlation, regression, t-test, ANOVA, Pearson’s correlation coefficient), the validity of these tests depends on the distribution. Parametric tests are only valid if the distribution is normal, otherwise, we violate the underlying assumption of normality. **Normality** and other assumptions should take seriously to have reliable and interpretable research and conclusions. 
+If the data set follows the normal distribution, it is easier to predict with high accuracy. If we would like to use **parametric** statistical tests (e.g., correlation, regression, t-test, ANOVA, Pearson’s correlation coefficient), the validity of these tests depends on the distribution. Parametric tests are only valid if the distribution is normal, otherwise, we violate the underlying assumption of normality.   
+
+**Normality** and other assumptions should take seriously to have reliable and interpretable research and conclusions.   
 
 If we found that the distribution of our data is not normal, we have to choose a **non-parametric** statistical test (e.g. Mann-Whitney test, Spearman’s correlation coefficient) or so-called distribution-free tests. 
 
-There are several possibilities to check normality, including visual inspections, such as normal plots/histograms,  Q-Q (quartile-quartile) plot, and statistical tests, such as Shapiro-Wilk test and Lilliefors (Kolmogorov–Smirnov) test.
+There are several possibilities to check normality, including visual inspections, such as normal plots/histograms,  Q-Q (quartile-quartile) plot, and statistical tests, such as Shapiro-Wilk test and Lilliefors (Improved Kolmogorov–Smirnov distribution) test.
 
 ## Density plot
 
-The simplest, of course, is to visually check whether the distribution is bell-shaped or not. 
+The simplest, of course, is to visually check whether a distribution has a bell shape or not. 
 
 Let's generate two samples, one is from $N(0,1)$, the other one is from a uniform distribution. Then plot the density functions of the two samples.
 
@@ -134,7 +136,7 @@ ggdensity(sample2, main = "Density plot of sample 2",
           xlab = "x", color ="red", lwd=1.5)
 ```
 
-Well, it seems sample 1 is more likely to be from a normal distribution than sample 2.
+Well, it seems `sample 1` is more likely to be from a normal distribution than `sample 2`.
 
 ## Q-Q plot
 
@@ -154,7 +156,9 @@ Here the gray area shows the acceptable deviation from the normal line.
 
 ## Shapiro-Wilk test
 
-The above visual observations are just sanity checks. To have a more reliable result, one needs to do a statistical test of the normality. Here the sample distribution is compared with the normal distribution. The null hypothesis of these tests is the sample distribution is normal. If we fail to reject the null hypothesis, the sample is normal. If the test is significant/we reject the null hypothesis, the sample distribution is non-normal.  
+The above visual observations are just sanity checks. To have a more reliable result, one needs to do a statistical test of the normality. Here the sample distribution is compared with the normal distribution.  
+
+The null hypothesis of these tests is ** the sample is from a normal distribution**. If we fail to reject the null hypothesis, the sample is normal. If the test is significant/we reject the null hypothesis, the sample distribution is non-normal.  
 
 The Shapiro-Wilk method is widely used to check normality of a **small sample** (size less than `30`). In R, the test is done with `shapiro.test()`.
 
@@ -169,7 +173,7 @@ sample4  <- sample2[1:25]
 shapiro.test(sample3)
 ```
 
-From the output, the p-value > 0.05 shows that we fail to reject the null hypothesis, which means the distribution of our data is not significantly different from the normal distribution. In other words, the distribution of our data is normal. 
+From the output, the `p-value > 0.05` shows that we fail to reject the null hypothesis, which means the distribution of our data is not significantly different from the normal distribution. In other words, the distribution of our data is normal. 
 
 ```{r}
 # Shapiro-Wilk test of sample 4
@@ -194,7 +198,7 @@ lillie.test(sample2)
 
 The log-normal distribution is found to the basic type of distribution of many geological/environmental variables. When the logarithms of values form a normal distribution, the original (antilog) values are log-normally distributed. It is a skewed distribution with many small values and fewer large values. Therefore the mean is usually greater than the mode. 
 
-In geology, many processes lead to a log-normal, so often that it has been said the log-normal is the normal of geology.
+In earth science, many processes lead to a log-normal, so often that it has been said the log-normal is the normal of earth science.
 
 ```{r}
 # Sample 5 is from a log-normal distribution
@@ -219,6 +223,9 @@ sample6  <- log(sample5)
 # Plot density function of sample 6
 ggdensity(sample6, main = "Density plot of sample 6", 
           xlab = "x", color ="blue", lwd=1.5)
+
+# Lilliefors test of sample 6
+lillie.test(sample6)
 ```
 
 The Box-Cox transformation is commonly used to transfer a non-normal dependent variables into a normal shape. The basic idea behind this method is to find some value for $\lambda$ such that the transformed data is as close to normally distributed as possible, using the following formula:
@@ -231,7 +238,7 @@ In R, you can find $\lambda$ using the `boxcoxfit()` function from the `geoR` pa
 ```{r}
 
 # Generate a sample
-y <- exp(runif(30,0,1)+runif(30,0,1)+runif(30,0,1))
+y <- exp(runif(40,0,1)+runif(40,0,1)+runif(40,0,1))
 
 # Plot the density
 ggdensity(y,main = "Density plot of sample", xlab = "x")
@@ -258,6 +265,8 @@ ggqqplot(y_new)
 lillie.test(y_new)
 ```
 
+***
+
 # In-class exercises
 
 ## Exercise #1
@@ -274,7 +283,7 @@ Is the following sample from a normal distribution?
 
 ## Exercise #2
 
-The following sample is rainfall (acre-feet) in a location:
+The following sample is rainfall (acre-feet) measured in a location:
 
 `1202.6, 830.1, 372.4, 345.5, 321.2, 244.3, 163.0, 147.8, 95.0, 87.0`
 
@@ -294,7 +303,7 @@ Can you make up a sample that is NOT from a normal distribution? Then
 
 + 3.3 Test the normality with a test
 
-Now conduct the BOX-COX transformation for the sample, and for the new sample:
+Now conduct the BOX-COX transformation for the sample, and for the transformed sample:
 
 + 3.4 Make a density plot 
 

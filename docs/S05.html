@@ -529,18 +529,20 @@ example, heights, blood pressure, measurement error, and IQ scores
 follow the normal distribution. The reason why normal distribution is so
 “normal” in nature can be traced to the <strong>Central Limit
 Theory</strong>, which states that various <strong>independent</strong>
-factors influence a particular trait. When all these independent factors
+factors influence a particular trait (see <a
+href="https://zhu-group.github.io/ese335/S03.html#Exercise_2">Exercise
+#2 from Section 02</a> for more). When all these independent factors
 contribute to a phenomenon, their normalized sum tends to result in a
 normal distribution.</p>
-<p>The normal distribution is also known as Gaussian distribution or
-bell curve, which encompasses two basic terms - mean and standard
-deviation. It is a symmetrical arrangement of a data set in which most
-values cluster in the mean and the rest taper off symmetrically towards
-either extreme.</p>
+<p>The normal distribution is also known as <strong>Gaussian
+distribution</strong> or bell curve, which encompasses two basic terms -
+mean and standard deviation. It is a symmetrical arrangement of a data
+set in which most values cluster in the mean and the rest taper off
+symmetrically towards either extreme.</p>
 </div>
 <div id="pdf-of-a-normal-distribution" class="section level2">
 <h2>PDF of a normal distribution</h2>
-<p>An Normal random variable <span class="math inline">\(X\)</span> is
+<p>An normal random variable <span class="math inline">\(X\)</span> is
 defined as follows: <span class="math display">\[X \sim N(\mu, \sigma^2)
 \]</span> where <span class="math inline">\(\mu\)</span> is the mean and
 <span class="math inline">\(\sigma^2\)</span> is the variance, both
@@ -588,9 +590,10 @@ predict with high accuracy. If we would like to use
 regression, t-test, ANOVA, Pearson’s correlation coefficient), the
 validity of these tests depends on the distribution. Parametric tests
 are only valid if the distribution is normal, otherwise, we violate the
-underlying assumption of normality. <strong>Normality</strong> and other
-assumptions should take seriously to have reliable and interpretable
-research and conclusions.</p>
+underlying assumption of normality.</p>
+<p><strong>Normality</strong> and other assumptions should take
+seriously to have reliable and interpretable research and
+conclusions.</p>
 <p>If we found that the distribution of our data is not normal, we have
 to choose a <strong>non-parametric</strong> statistical test
 (e.g. Mann-Whitney test, Spearman’s correlation coefficient) or
@@ -598,11 +601,11 @@ so-called distribution-free tests.</p>
 <p>There are several possibilities to check normality, including visual
 inspections, such as normal plots/histograms, Q-Q (quartile-quartile)
 plot, and statistical tests, such as Shapiro-Wilk test and Lilliefors
-(Kolmogorov–Smirnov) test.</p>
+(Improved Kolmogorov–Smirnov distribution) test.</p>
 <div id="density-plot" class="section level2">
 <h2>Density plot</h2>
-<p>The simplest, of course, is to visually check whether the
-distribution is bell-shaped or not.</p>
+<p>The simplest, of course, is to visually check whether a distribution
+has a bell shape or not.</p>
 <p>Let’s generate two samples, one is from <span
 class="math inline">\(N(0,1)\)</span>, the other one is from a uniform
 distribution. Then plot the density functions of the two samples.</p>
@@ -620,8 +623,8 @@ distribution. Then plot the density functions of the two samples.</p>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">ggdensity</span>(sample2, <span class="at">main =</span> <span class="st">&quot;Density plot of sample 2&quot;</span>, </span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>          <span class="at">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="at">color =</span><span class="st">&quot;red&quot;</span>, <span class="at">lwd=</span><span class="fl">1.5</span>)</span></code></pre></div>
 <p><img src="S05_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
-<p>Well, it seems sample 1 is more likely to be from a normal
-distribution than sample 2.</p>
+<p>Well, it seems <code>sample 1</code> is more likely to be from a
+normal distribution than <code>sample 2</code>.</p>
 </div>
 <div id="q-q-plot" class="section level2">
 <h2>Q-Q plot</h2>
@@ -647,11 +650,12 @@ line.</p>
 <h2>Shapiro-Wilk test</h2>
 <p>The above visual observations are just sanity checks. To have a more
 reliable result, one needs to do a statistical test of the normality.
-Here the sample distribution is compared with the normal distribution.
-The null hypothesis of these tests is the sample distribution is normal.
-If we fail to reject the null hypothesis, the sample is normal. If the
-test is significant/we reject the null hypothesis, the sample
-distribution is non-normal.</p>
+Here the sample distribution is compared with the normal
+distribution.</p>
+<p>The null hypothesis of these tests is ** the sample is from a normal
+distribution**. If we fail to reject the null hypothesis, the sample is
+normal. If the test is significant/we reject the null hypothesis, the
+sample distribution is non-normal.</p>
 <p>The Shapiro-Wilk method is widely used to check normality of a
 <strong>small sample</strong> (size less than <code>30</code>). In R,
 the test is done with <code>shapiro.test()</code>.</p>
@@ -667,18 +671,18 @@ the test is done with <code>shapiro.test()</code>.</p>
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sample3
-## W = 0.9398, p-value = 0.1464</code></pre>
-<p>From the output, the p-value &gt; 0.05 shows that we fail to reject
-the null hypothesis, which means the distribution of our data is not
-significantly different from the normal distribution. In other words,
-the distribution of our data is normal.</p>
+## W = 0.87685, p-value = 0.005955</code></pre>
+<p>From the output, the <code>p-value &gt; 0.05</code> shows that we
+fail to reject the null hypothesis, which means the distribution of our
+data is not significantly different from the normal distribution. In
+other words, the distribution of our data is normal.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Shapiro-Wilk test of sample 4</span></span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">shapiro.test</span>(sample4)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sample4
-## W = 0.91482, p-value = 0.03909</code></pre>
+## W = 0.96935, p-value = 0.6286</code></pre>
 </div>
 <div id="lilliefors-test" class="section level2">
 <h2>Lilliefors test</h2>
@@ -695,14 +699,14 @@ package:</p>
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  sample1
-## D = 0.032589, p-value = 0.8705</code></pre>
+## D = 0.046921, p-value = 0.3495</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Lilliefors test of sample 2</span></span>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">lillie.test</span>(sample2)</span></code></pre></div>
 <pre><code>## 
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  sample2
-## D = 0.09463, p-value = 0.0001663</code></pre>
+## D = 0.072371, p-value = 0.01269</code></pre>
 <hr />
 </div>
 </div>
@@ -714,8 +718,8 @@ logarithms of values form a normal distribution, the original (antilog)
 values are log-normally distributed. It is a skewed distribution with
 many small values and fewer large values. Therefore the mean is usually
 greater than the mode.</p>
-<p>In geology, many processes lead to a log-normal, so often that it has
-been said the log-normal is the normal of geology.</p>
+<p>In earth science, many processes lead to a log-normal, so often that
+it has been said the log-normal is the normal of earth science.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Sample 5 is from a log-normal distribution</span></span>
 <span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>sample5  <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">rnorm</span>(<span class="dv">200</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
 <span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
@@ -737,6 +741,13 @@ straightforward to make a logarithmic transformation. Such as:</p>
 <span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="fu">ggdensity</span>(sample6, <span class="at">main =</span> <span class="st">&quot;Density plot of sample 6&quot;</span>, </span>
 <span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>          <span class="at">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="at">color =</span><span class="st">&quot;blue&quot;</span>, <span class="at">lwd=</span><span class="fl">1.5</span>)</span></code></pre></div>
 <p><img src="S05_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Lilliefors test of sample 6</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="fu">lillie.test</span>(sample6)</span></code></pre></div>
+<pre><code>## 
+##  Lilliefors (Kolmogorov-Smirnov) normality test
+## 
+## data:  sample6
+## D = 0.060823, p-value = 0.06906</code></pre>
 <p>The Box-Cox transformation is commonly used to transfer a non-normal
 dependent variables into a normal shape. The basic idea behind this
 method is to find some value for <span
@@ -749,41 +760,42 @@ formula:</p>
 <p>In R, you can find <span class="math inline">\(\lambda\)</span> using
 the <code>boxcoxfit()</code> function from the <code>geoR</code>
 package. For example:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Generate a sample</span></span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">runif</span>(<span class="dv">30</span>,<span class="dv">0</span>,<span class="dv">1</span>)<span class="sc">+</span><span class="fu">runif</span>(<span class="dv">30</span>,<span class="dv">0</span>,<span class="dv">1</span>)<span class="sc">+</span><span class="fu">runif</span>(<span class="dv">30</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co"># Plot the density</span></span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="fu">ggdensity</span>(y,<span class="at">main =</span> <span class="st">&quot;Density plot of sample&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;x&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Generate a sample</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">runif</span>(<span class="dv">40</span>,<span class="dv">0</span>,<span class="dv">1</span>)<span class="sc">+</span><span class="fu">runif</span>(<span class="dv">40</span>,<span class="dv">0</span>,<span class="dv">1</span>)<span class="sc">+</span><span class="fu">runif</span>(<span class="dv">40</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co"># Plot the density</span></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="fu">ggdensity</span>(y,<span class="at">main =</span> <span class="st">&quot;Density plot of sample&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;x&quot;</span>)</span></code></pre></div>
 <p><img src="S05_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Plot Q-Q plot</span></span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="fu">ggqqplot</span>(y)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Plot Q-Q plot</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="fu">ggqqplot</span>(y)</span></code></pre></div>
 <p><img src="S05_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Lilliefors test </span></span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="fu">lillie.test</span>(y)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Lilliefors test </span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="fu">lillie.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  y
-## D = 0.16947, p-value = 0.02779</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># BOX-COX transformation, get lambda</span></span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="fu">boxcoxfit</span>(y)<span class="sc">$</span>lambda</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co"># BOX-COX transformation</span></span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>y_new <span class="ot">&lt;-</span> (y<span class="sc">^</span>lambda<span class="dv">-1</span>)<span class="sc">/</span>lambda</span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="co"># Plot the density</span></span>
-<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="fu">ggdensity</span>(y_new,<span class="at">main =</span> <span class="st">&quot;Density plot of sample&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;x&quot;</span>)</span></code></pre></div>
+## D = 0.17024, p-value = 0.005069</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># BOX-COX transformation, get lambda</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="fu">boxcoxfit</span>(y)<span class="sc">$</span>lambda</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a><span class="co"># BOX-COX transformation</span></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>y_new <span class="ot">&lt;-</span> (y<span class="sc">^</span>lambda<span class="dv">-1</span>)<span class="sc">/</span>lambda</span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a><span class="co"># Plot the density</span></span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a><span class="fu">ggdensity</span>(y_new,<span class="at">main =</span> <span class="st">&quot;Density plot of sample&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;x&quot;</span>)</span></code></pre></div>
 <p><img src="S05_files/figure-html/unnamed-chunk-10-3.png" width="672" /></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Plot Q-Q plot</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="fu">ggqqplot</span>(y_new)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># Plot Q-Q plot</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="fu">ggqqplot</span>(y_new)</span></code></pre></div>
 <p><img src="S05_files/figure-html/unnamed-chunk-10-4.png" width="672" /></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Lilliefors test </span></span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="fu">lillie.test</span>(y_new)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Lilliefors test </span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="fu">lillie.test</span>(y_new)</span></code></pre></div>
 <pre><code>## 
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  y_new
-## D = 0.088438, p-value = 0.7948</code></pre>
+## D = 0.068159, p-value = 0.9111</code></pre>
+<hr />
 </div>
 <div id="in-class-exercises" class="section level1">
 <h1>In-class exercises</h1>
@@ -799,7 +811,8 @@ package. For example:</p>
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
-<p>The following sample is rainfall (acre-feet) in a location:</p>
+<p>The following sample is rainfall (acre-feet) measured in a
+location:</p>
 <p><code>1202.6, 830.1, 372.4, 345.5, 321.2, 244.3, 163.0, 147.8, 95.0, 87.0</code></p>
 <p><code>81.2, 68.5, 47.3, 41.1, 36.6, 29.0, 28.6, 26.3, 26.0, 24.4</code></p>
 <p><code>21.4, 17.3, 11.5, 4.9, 4.9, 1.0</code></p>
@@ -816,7 +829,7 @@ Then</p>
 <li><p>3.3 Test the normality with a test</p></li>
 </ul>
 <p>Now conduct the BOX-COX transformation for the sample, and for the
-new sample:</p>
+transformed sample:</p>
 <ul>
 <li><p>3.4 Make a density plot</p></li>
 <li><p>3.5 Make a Q-Q plot</p></li>
@@ -826,8 +839,8 @@ new sample:</p>
 <div id="exercise-4" class="section level2">
 <h2>Exercise #4</h2>
 <p>Suppose you have a sample, which is from 2 populations:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Generate a sample</span></span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="fu">rnorm</span>(<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Generate a sample</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="fu">rnorm</span>(<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">1</span>))</span></code></pre></div>
 <p>Can you make a normal transformation for the sample? Why or why
 not?</p>
 </div>
