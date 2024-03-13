@@ -510,7 +510,7 @@ has to be adjusted.</p>
 <p><code>8, 13, -2, 2, 18</code></p>
 <p>OK, <code>4</code> out of <code>5</code> of these numbers are higher
 than <code>0</code>, and some of them by quite a bit. Can this be
-explained on the basis of chance variation? Or does it show bias?</p>
+explained on the basis of chance variation? Or is it biased high?</p>
 <hr />
 </div>
 <div id="instrument-error" class="section level1">
@@ -541,25 +541,26 @@ the display can actually be read.</p>
 with an instrument random error of <code>10</code> ppm (<code>1</code>
 <span class="math inline">\(\sigma\)</span>). Instrument error generally
 follows a normal distribution. In this case, let’s now assume that the
-error follows a normal distribution <span class="math inline">\(N(\mu ,
-10)\)</span>, where <span class="math inline">\(\mu\)</span> is unknown.
-With this set-up, we can write:</p>
+readings (measurements) follows a normal distribution <span
+class="math inline">\(N(\mu , 10)\)</span>, where <span
+class="math inline">\(\mu\)</span> is unknown. With this set-up, we can
+write:</p>
 <ul>
 <li><p>H0: The spectrophotometer has no bias (<span
-class="math inline">\(\mu = 0\)</span>)</p></li>
+class="math inline">\(\mu = 70\)</span>)</p></li>
 <li><p>H1: The spectrophotometer has a positive bias (<span
-class="math inline">\(\mu &gt; 0\)</span>)</p></li>
+class="math inline">\(\mu &gt; 70\)</span>)</p></li>
 </ul>
-<p>To test the hypothesis (H0), let’s calculate the p-value assuming H0
-is true. Here we will use <em>Z-Ratio</em>, which is defined as:</p>
+<p>To test this, let’s calculate the p-value assuming H0 is true. Here
+we will use <em>Z-Ratio</em>, which is defined as:</p>
 <p><span class="math display">\[Z=\frac {Estimate - Parameter}
 {SD(Estimate)}  \]</span> In this case, <span
-class="math inline">\(Estimate\)</span> is the sample average (<span
+class="math inline">\(Estimate\)</span> is the sample mean (<span
 class="math inline">\(\overline{X}\)</span>), and <span
 class="math inline">\(Parameter\)</span> is the population mean (<span
 class="math inline">\(\mu\)</span>). Since the sample is from a normal
-population with a known (<span class="math inline">\(\sigma\)</span>),
-the SD of the sample average (<span
+population with a known <span class="math inline">\(\sigma\)</span>, the
+SD of the sample mean (<span
 class="math inline">\(\overline{X}\)</span>) is then <span
 class="math inline">\(\ {\sigma} / {\sqrt{n}}\)</span>, here <span
 class="math inline">\(n\)</span> is the sample size.</p>
@@ -573,10 +574,10 @@ the assumed mean.</p>
 <div id="one-sample-z-test" class="section level1">
 <h1>One sample Z-test</h1>
 <p>In this case, <span class="math inline">\(\overline X\)</span> is
-<code>7.8</code>, as the mean of <code>8, 13, -2, 2, 18</code>, and
+<code>77.8</code>, as the mean of <code>78, 83, 68, 12, 88</code>, and
 <span class="math inline">\(\sigma\)</span> is <code>10</code>. Assuming
-H0 is true, we get <span class="math inline">\(Z\)</span> is
-<code>1.74</code>.</p>
+H0 is true (<span class="math inline">\(\mu\)</span> = 70), we get <span
+class="math inline">\(Z\)</span> is <code>1.74</code>.</p>
 <p>If the sampling distribution of the estimate is normal, then the
 sampling distribution of <span class="math inline">\(Z\)</span> follows
 standard normal distribution by definition. Then with R, we can compute
@@ -587,14 +588,14 @@ the p-value:</p>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># Baseline</span></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>Baseline <span class="ot">&lt;-</span> <span class="dv">70</span></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># Error</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>Error    <span class="ot">&lt;-</span> Sample <span class="sc">-</span> Baseline</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># Sample size</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>n        <span class="ot">&lt;-</span> <span class="fu">length</span>(Sample)</span>
 <span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co"># Spectrophotometer error SD</span></span>
 <span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>SD       <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
 <span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co"># Get Z-ratio</span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>Z        <span class="ot">&lt;-</span> <span class="fu">mean</span>(Error)<span class="sc">/</span>(SD<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(Error)))</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>Z        <span class="ot">&lt;-</span> (<span class="fu">mean</span>(Sample) <span class="sc">-</span> Baseline) <span class="sc">/</span> (SD<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
 <span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a></span>
 <span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co"># Find the one-side p-value</span></span>
 <span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co"># The pnorm function gives the Cumulative Distribution Function (CDF) </span></span>
@@ -693,13 +694,14 @@ more like a standard normal distribution (<code>n &gt; 30</code>).</p>
 t-test.</p>
 <ul>
 <li><p>H0: The instrument has no bias (<span class="math inline">\(\mu =
-0\)</span>)</p></li>
+70\)</span>)</p></li>
 <li><p>H1: The instrument has a positive bias (<span
-class="math inline">\(\mu &gt; 0\)</span>)</p></li>
+class="math inline">\(\mu &gt; 70\)</span>)</p></li>
 </ul>
 <p>In this case, <span class="math inline">\(\overline X\)</span> is
-again <code>7.8</code>, <span class="math inline">\(SE(\overline
-X)\)</span> is <code>3.16</code> ,assuming H0 is true, we get <span
+again <code>77.8</code>, <span class="math inline">\(SE(\overline
+X)\)</span> is <code>3.16</code>, assuming H0 is true (<span
+class="math inline">\(\mu\)</span> = 70), we get <span
 class="math inline">\(t\)</span>=<code>2.16</code>.</p>
 <p>Then with R, we can compute the p-value:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Sample</span></span>
@@ -708,28 +710,25 @@ class="math inline">\(t\)</span>=<code>2.16</code>.</p>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># Baseline</span></span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>Baseline <span class="ot">&lt;-</span> <span class="dv">70</span></span>
 <span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># Error</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>Error    <span class="ot">&lt;-</span> Sample <span class="sc">-</span> Baseline</span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co"># Get sample size and degrees of freedom</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>n        <span class="ot">&lt;-</span> <span class="fu">length</span>(Error)</span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>df       <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># Get sample size and degrees of freedom</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>n        <span class="ot">&lt;-</span> <span class="fu">length</span>(Sample)</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>df       <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co"># SE of the average</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>SE       <span class="ot">&lt;-</span> <span class="fu">sd</span>(Sample)<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
 <span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co"># SE of the average</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>SE       <span class="ot">&lt;-</span> <span class="fu">sd</span>(Error)<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co"># Get t-ratio</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>t        <span class="ot">&lt;-</span> (<span class="fu">mean</span>(Sample) <span class="sc">-</span> Baseline ) <span class="sc">/</span> SE</span>
 <span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co"># Get t-ratio</span></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>t        <span class="ot">&lt;-</span> <span class="fu">mean</span>(Error)<span class="sc">/</span>SE</span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a></span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co"># Find the one-side p-value</span></span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="co"># The pt function gives the Cumulative Distribution Function (CDF) </span></span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co"># of the Student&#39;s t distribution in R, which is the probability that </span></span>
-<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="co"># the variable takes a value lower or equal to a threshold (here t).</span></span>
-<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="co"># Here we that 1-pt to get the probability that the </span></span>
-<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="co"># variable takes a value higher than the threshold (t).</span></span>
-<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>P_value  <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t, <span class="at">df=</span>df)</span>
-<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="fu">print</span>(P_value)</span></code></pre></div>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co"># Find the one-side p-value</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co"># The pt function gives the Cumulative Distribution Function (CDF) </span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co"># of the Student&#39;s t distribution in R, which is the probability that </span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co"># the variable takes a value lower or equal to a threshold (here t).</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="co"># Here we that 1-pt to get the probability that the </span></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co"># variable takes a value higher than the threshold (t).</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>P_value  <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t, <span class="at">df=</span>df)</span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="fu">print</span>(P_value)</span></code></pre></div>
 <pre><code>## [1] 0.04844399</code></pre>
 <p>Now, we have a probability of about <code>4.84%</code> getting a
 statistic (<span class="math inline">\(t\)</span>) as extreme or more
@@ -754,7 +753,7 @@ class="math inline">\(\mu &gt; 70\)</span>)</p></li>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>Sample   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">78</span>, <span class="dv">83</span>, <span class="dv">68</span>, <span class="dv">72</span>, <span class="dv">88</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># Call t.test function</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co"># Here we compare the sample average with a known mean (70)</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co"># Here we compare the sample mean with a known mean (70)</span></span>
 <span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co"># Since H1 states a positive bias, </span></span>
 <span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co"># we need to compute the one-side p-value</span></span>
 <span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="fu">t.test</span>(Sample, <span class="at">mu=</span><span class="dv">70</span>, <span class="at">alternative =</span><span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
@@ -795,10 +794,10 @@ costs for families from the previous year when temperature is
 <code>0.7</code> degree lower than the current year, and gets the mean
 cost per month was <code>200</code> RMB. The student then randomly
 samples <code>20</code> families and records their energy costs for the
-current year as fellow:</p>
+current year as follows:</p>
 <p><code>199, 202, 202, 198, 196, 197, 201, 203, 198, 204,</code></p>
 <p><code>201, 203, 201, 203, 203, 202, 197, 200, 201, 197</code></p>
-<p>Do the data suppose the student’s hypothesis?</p>
+<p>Do the observations suppose the student’s hypothesis?</p>
 </div>
 </div>
 
