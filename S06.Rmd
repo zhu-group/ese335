@@ -116,13 +116,13 @@ In the previous example, we assume the SD ($\sigma$) of instrument error is know
 The *t-Ratio* is defined as:
 
 $$t=\frac {Estimate - Parameter} {SE(Estimate)}$$
-Here the *Standard Error* (SE) refers to the sample. If $s$ is the sample SD, the SE for the average is 
+Here the *Standard Error* (SE) refers to the sample. If $s$ is the sample SD, the SE for the sample mean is 
 
 $$SE(\overline {X})=\frac {s} {\sqrt{n}}$$
 And we have:
 
 $$t=\frac {\overline{X} - \mu} { {s} / {\sqrt{n}}}  $$
-If $\overline {X}$ is the average in a random sample of size $n$ from a normal population, the sampling distribution of its t-Ratio follows a Student's t-distribution on $n-1$ degrees of freedom (df). 
+If $\overline {X}$ is the mean of a random sample of size $n$ from a normal population, the sampling distribution of its t-Ratio follows a Student's t-distribution on $n-1$ degrees of freedom (df). 
 
 The mathematical form of the PDF of a Student's t distribution is very complicated. With R, we can easily plot different PDFs with the `dt()` function.
 
@@ -204,7 +204,7 @@ Baseline <- 70
 n        <- length(Sample)
 df       <- n - 1
 
-# SE of the average
+# SE of the sample mean
 SE       <- sd(Sample)/sqrt(n)
 
 # Get t-ratio

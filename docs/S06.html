@@ -629,12 +629,12 @@ to replace Z-Ratio with <em>t-Ratio</em> in this situation.</p>
 <p><span class="math display">\[t=\frac {Estimate - Parameter}
 {SE(Estimate)}\]</span> Here the <em>Standard Error</em> (SE) refers to
 the sample. If <span class="math inline">\(s\)</span> is the sample SD,
-the SE for the average is</p>
+the SE for the sample mean is</p>
 <p><span class="math display">\[SE(\overline {X})=\frac {s}
 {\sqrt{n}}\]</span> And we have:</p>
 <p><span class="math display">\[t=\frac {\overline{X} - \mu} { {s} /
 {\sqrt{n}}}  \]</span> If <span class="math inline">\(\overline
-{X}\)</span> is the average in a random sample of size <span
+{X}\)</span> is the mean of a random sample of size <span
 class="math inline">\(n\)</span> from a normal population, the sampling
 distribution of its t-Ratio follows a Student’s t-distribution on <span
 class="math inline">\(n-1\)</span> degrees of freedom (df).</p>
@@ -714,7 +714,7 @@ class="math inline">\(t\)</span>=<code>2.16</code>.</p>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>n        <span class="ot">&lt;-</span> <span class="fu">length</span>(Sample)</span>
 <span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>df       <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
 <span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co"># SE of the average</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co"># SE of the sample mean</span></span>
 <span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>SE       <span class="ot">&lt;-</span> <span class="fu">sd</span>(Sample)<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
 <span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a></span>
 <span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co"># Get t-ratio</span></span>
