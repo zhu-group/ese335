@@ -11,7 +11,7 @@
 
 
 
-<title>Schedule</title>
+<title>Assignment 02</title>
 
 <script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
@@ -209,6 +212,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -216,6 +288,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -291,292 +373,74 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Schedule</h1>
+<h1 class="title toc-ignore">Assignment 02</h1>
 
 </div>
 
 
-<p><strong>Class Time:</strong><br />
-Monday 19:00-21:00<br />
-Wednesday (odd week only) 19:00-21:00</p>
-<p><strong>Location:</strong><br />
-108, Business School</p>
-<p><strong>2024 Spring:</strong></p>
-<table style="width:100%;">
-<colgroup>
-<col width="3%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="47%" />
-<col width="10%" />
-<col width="31%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">Section</th>
-<th align="center">Week</th>
-<th align="center">Date</th>
-<th align="center">Day</th>
-<th align="left">Topic</th>
-<th align="center">Pre-class readings</th>
-<th align="center">Assignment</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">01</td>
-<td align="center">1</td>
-<td align="center">02/19</td>
-<td align="center">M.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese335/S01.html">Introduction and
-<code>R</code> tutorial</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">02</td>
-<td align="center">2</td>
-<td align="center">02/26</td>
-<td align="center">M.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese335/S02.html">Data wrangling and
-quick plots</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">03</td>
-<td align="center">2</td>
-<td align="center">02/28</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese335/S03.html">Review of statistic
-basics (I)</a></td>
-<td align="center">[RS] p1-22</td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">04</td>
-<td align="center">3</td>
-<td align="center">03/04</td>
-<td align="center">M.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese335/S04.html">Review of statistic
-basics (II)</a></td>
-<td align="center">[RS] p1-22</td>
-<td align="center"><a
-href="https://zhu-group.github.io/ese335/A01.html">Assignment
-01</a></td>
-</tr>
-<tr class="odd">
-<td align="center">05</td>
-<td align="center">4</td>
-<td align="center">03/11</td>
-<td align="center">M.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese335/S05.html">Normal
-distribution</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">06</td>
-<td align="center">4</td>
-<td align="center">03/13</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese335/S06.html">One-sample Z-test and
-t-test</a></td>
-<td align="center">[RS] p28-51</td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">07</td>
-<td align="center">5</td>
-<td align="center">03/18</td>
-<td align="center">M.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese335/S07.html">Two-sample Z-test and
-t-test</a></td>
-<td align="center">[RS] p28-51</td>
-<td align="center"><a
-href="https://zhu-group.github.io/ese335/A02.html">Assignment
-02</a></td>
-</tr>
-<tr class="even">
-<td align="center">08</td>
-<td align="center">6</td>
-<td align="center">03/25</td>
-<td align="center">M.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese335/S08.html">Paired sample t-test
-and confidence interval</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">09</td>
-<td align="center">6</td>
-<td align="center">03/27</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese335/S09.html">Assumptions for t
-tests</a></td>
-<td align="center">[RS] p58-106</td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">10</td>
-<td align="center">7</td>
-<td align="center">04/01</td>
-<td align="center">M.</td>
-<td align="left">One-way ANOVA</td>
-<td align="center">[RS] p113-140</td>
-<td align="center">Assignment 03</td>
-</tr>
-<tr class="odd">
-<td align="center">11</td>
-<td align="center">8</td>
-<td align="center">04/08</td>
-<td align="center">M.</td>
-<td align="left">Post-hoc test and Two-way ANOVA</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">12</td>
-<td align="center">8</td>
-<td align="center">04/10</td>
-<td align="center">W.</td>
-<td align="left">Covariance and Pearson correlation test</td>
-<td align="center"></td>
-<td align="center">Assignment 04</td>
-</tr>
-<tr class="odd">
-<td align="center">13</td>
-<td align="center">9</td>
-<td align="center">04/15</td>
-<td align="center">M.</td>
-<td align="left">Non-parametric tests</td>
-<td align="center">[RS] p85-102</td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">14</td>
-<td align="center">10</td>
-<td align="center">04/22</td>
-<td align="center">M.</td>
-<td align="left">Simple linear regression (I)</td>
-<td align="center">[RS] p176-198</td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">15</td>
-<td align="center">10</td>
-<td align="center">04/24</td>
-<td align="center">W.</td>
-<td align="left">Simple linear regression (II)</td>
-<td align="center">[RS] p207-227</td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">16</td>
-<td align="center">11</td>
-<td align="center">04/29</td>
-<td align="center">M.</td>
-<td align="left">Multiple linear regression</td>
-<td align="center">[RS] p237-261</td>
-<td align="center">Assignment 05</td>
-</tr>
-<tr class="odd">
-<td align="center">17</td>
-<td align="center">12</td>
-<td align="center">05/06</td>
-<td align="center">M.</td>
-<td align="left">Logistic regression</td>
-<td align="center">[RS] p601-622</td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">18</td>
-<td align="center">12</td>
-<td align="center">05/08</td>
-<td align="center">W.</td>
-<td align="left">Time series analysis (I)</td>
-<td align="center">[SS] p1-33 77-144</td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">19</td>
-<td align="center">13</td>
-<td align="center">05/13</td>
-<td align="center">M.</td>
-<td align="left">Time series analysis (II)</td>
-<td align="center">[SS] p1-33 77-144</td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">-</td>
-<td align="center">14</td>
-<td align="center">05/20</td>
-<td align="center">M.</td>
-<td align="left">Course review</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">-</td>
-<td align="center">14</td>
-<td align="center">05/22</td>
-<td align="center">W.</td>
-<td align="left">Course exam</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">20</td>
-<td align="center">15</td>
-<td align="center">05/27</td>
-<td align="center">M.</td>
-<td align="left">Plotting with <code>R</code> (I):
-<code>ggplot2</code></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">21</td>
-<td align="center">16</td>
-<td align="center">06/03</td>
-<td align="center">M.</td>
-<td align="left">Plotting with <code>R</code> (II): making maps</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">22</td>
-<td align="center">16</td>
-<td align="center">06/05</td>
-<td align="center">W.</td>
-<td align="left">Making websites with R Markdown</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center">TBD</td>
-<td align="center">-</td>
-<td align="left">Final project presentation (poster)</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody>
-</table>
+<p><strong>Out: 03/18 19:00 </strong><br />
+<strong>Due: 04/01 19:00 </strong></p>
+<hr />
+<div id="instructions" class="section level1">
+<h1>Instructions</h1>
+<p><strong>Collaboration:</strong></p>
+<p>Collaboration on solving the assignment is allowed, after you have
+thought about the problem sets on your own. It is also OK to get
+clarification (but not solutions) from online resources, again after you
+have thought about the problem sets on your own. There are two
+requirements:</p>
+<ul>
+<li><p>Cite your collaborators <strong>fully and completely</strong>
+(<em>e.g.</em>, “XXX explained to me what is asked in problem set 3”).
+Or cite online resources (<em>e.g.</em>, “I got inspired by reading
+XXX”) that helped you.</p></li>
+<li><p>Write your scripts and report <strong>independently</strong> -
+the scripts and report must come from you only.</p></li>
+</ul>
+<p><strong>Submitting your assignment:</strong></p>
+<p>Submit your R scripts and report to TA (<a
+href="mailto:12332275@mail.sustech.edu.cn"
+class="email">12332275@mail.sustech.edu.cn</a>)</p>
+<p><strong>Late Submission:</strong></p>
+<p>Late submissions will not receive any credit.</p>
+<hr />
+</div>
+<div id="solving-problems" class="section level1">
+<h1>1. Solving problems</h1>
+<p><strong>1.1 [10 points]</strong> [RS], p53, Exercise #15.</p>
+<hr />
+</div>
+<div id="north-america-rivers" class="section level1">
+<h1>2. North America rivers</h1>
+<p>Load <code>rivers</code> data sets (length of <code>141</code> rivers
+in North America) by calling <code>data(rivers)</code></p>
+<p><strong>2.1 [15 points]</strong> Make a density plot, a Q-Q plot, and
+a box plot;</p>
+<p><strong>2.2 [10 points]</strong> Is the sample from a normal
+distribution? If not, can you make a normal transformation for the
+sample?</p>
+<hr />
+</div>
+<div id="beaver-body-temperatures" class="section level1">
+<h1>3. Beaver body temperatures</h1>
+<p>Load <code>beaver1</code> and <code>beaver2</code> data sets (body
+temperature data of two beavers every 10 minutes) by calling
+<code>data(beavers)</code></p>
+<p><strong>3.1 [5 points]</strong> Visualize body temperature of the two
+beavers in multiple ways</p>
+<p><strong>3.2 [5 points]</strong> Check the normality of the two
+samples</p>
+<p><strong>3.3 [5 points]</strong> We need to check whether the body
+temperatures of the two beavers are the same. How to write H0 and H1
+then? Can H0 and H1 be exchanged?</p>
+<p><strong>3.4 [5 points]</strong> Do you use a Z-test or a t-test?
+Report your findings.</p>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -609,6 +473,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

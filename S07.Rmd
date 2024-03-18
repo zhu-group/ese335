@@ -55,10 +55,7 @@ Since the task is to compare PM2.5 in the two cities, in the statistical framewo
 
 + H1: Mean PM2.5 level in Shenzhen is not the same as that in Guangzhou ($\mu_1 \ne \mu_2$)
 
-To test the hypothesis (H0), we will use *Z-Ratio* again, which is defined as:
-
-$$Z=\frac {Estimate - Parameter} {SD(Estimate)}  $$
-In this case, $Estimate$ is the difference between sample averages ($\overline{X_1} -\overline{X_2} $), and $Parameter$ is the difference between population mean ($\mu_1 - \mu_2$). 
+To test the hypothesis (H0), we will use *Z-Ratio* again. In this case, $Estimate$ is the difference between sample averages ($\overline{X_1} -\overline{X_2}$), and $Parameter$ is the difference between population mean ($\mu_1 - \mu_2$). 
 
 $$Z=\frac { (\overline{X_1} - \overline{X_2} ) - (\mu_1 - \mu_2) } {SD(\overline{X_1} - \overline{X_2}) }   $$
 If the two samples are from two **normal** distributions, $SD(\overline{X1} - \overline{X_2})$ can be determined as:
@@ -224,7 +221,7 @@ GZ_PM2.5  <- c(27.1, 24.2, 27.9, 33.3, 26.4, 28.7, 25.6, 23.2, 24.0, 27.1, 26.2,
 t.test(SZ_PM2.5, GZ_PM2.5, alternative="two.sided", var.equal=T)
 ```
 
-As you notice, here we set `alternative="two.sided"`, this means we are testing whether the two population means are different (one could be smaller or larger than the other), and this requires a two-sided p-value. We set `var.equal = T` when call the `t.test()` function. By doing so, we assume an "equal SD" method, please see page `40` in [R.S] for more. By default, R uses the "unequal SD" method, which returns a slightly different t statistic and d.f. We will look at this in the future.
+As you notice, here we set `alternative="two.sided"`, this means we are testing whether the two population means are different (one could be smaller or larger than the other), and this requires a two-sided p-value. We set `var.equal = T` when call the `t.test()` function. By doing so, we assume an "equal SD" method, please see page 40 in [R.S] for more. By default, R uses the "unequal SD" method, which returns a slightly different t statistic and degrees of freedom. We will look at this in the future.
 
 ***
 
