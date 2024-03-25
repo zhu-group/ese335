@@ -679,26 +679,26 @@ have <span class="math inline">\(t\)</span>=<code>-2.73</code>.</p>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># PM2.5 in 2020 Feb.</span></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>PM2<span class="fl">.5</span>_2020  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">63</span>, <span class="dv">33</span>, <span class="dv">24</span>, <span class="dv">19</span>, <span class="dv">33</span>, <span class="dv">49</span>, <span class="dv">38</span>, <span class="dv">28</span>, <span class="dv">41</span>, <span class="dv">36</span>, <span class="dv">41</span>, <span class="dv">43</span>, <span class="dv">43</span>, <span class="dv">23</span>, <span class="dv">35</span>)</span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># Sample difference</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>Diff        <span class="ot">&lt;-</span> PM2<span class="fl">.5</span>_2020 <span class="sc">-</span> PM2<span class="fl">.5</span>_2019</span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co"># Get sample size, degrees of freedom, and sd</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>n           <span class="ot">&lt;-</span> <span class="fu">length</span>(Diff)</span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>df          <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>sd          <span class="ot">&lt;-</span> <span class="fu">sd</span>(Diff)</span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co"># Make data frame</span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>PM2<span class="fl">.5</span>_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">PM2.5 =</span> <span class="fu">c</span>(PM2<span class="fl">.5</span>_2019, PM2<span class="fl">.5</span>_2020),</span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>                         <span class="at">Year =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;2019-02&quot;</span>,n),<span class="fu">rep</span>(<span class="st">&quot;2020-02&quot;</span>,n)))</span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co"># Compare boxplots</span></span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>PM2<span class="fl">.5</span>_data <span class="sc">%&gt;%</span> </span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.character</span>(Year), <span class="at">y=</span>PM2<span class="fl">.5</span>)) <span class="sc">+</span></span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="st">&quot;steelblue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;PM2.5 Distribution by Year&quot;</span>, <span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;ug/m3&quot;</span>)</span></code></pre></div>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># Make data frame</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>PM2<span class="fl">.5</span>_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">PM2.5 =</span> <span class="fu">c</span>(PM2<span class="fl">.5</span>_2019, PM2<span class="fl">.5</span>_2020),</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>                         <span class="at">Year =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;2019-02&quot;</span>,n),<span class="fu">rep</span>(<span class="st">&quot;2020-02&quot;</span>,n)))</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co"># Compare boxplots</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>PM2<span class="fl">.5</span>_data <span class="sc">%&gt;%</span> </span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.character</span>(Year), <span class="at">y=</span>PM2<span class="fl">.5</span>)) <span class="sc">+</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="st">&quot;steelblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;PM2.5 Distribution by Year&quot;</span>, <span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;ug/m3&quot;</span>)</span></code></pre></div>
 <p><img src="S08_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Check normality, qqplot</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">ggqqplot</span>(Diff)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Sample difference</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>Diff        <span class="ot">&lt;-</span> PM2<span class="fl">.5</span>_2020 <span class="sc">-</span> PM2<span class="fl">.5</span>_2019</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># Get sample size, degrees of freedom, and sd</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>n           <span class="ot">&lt;-</span> <span class="fu">length</span>(Diff)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>df          <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>sd          <span class="ot">&lt;-</span> <span class="fu">sd</span>(Diff)</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co"># Check normality, qqplot</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="fu">ggqqplot</span>(Diff)</span></code></pre></div>
 <p><img src="S08_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Check normality, Shapiro-Wilk test</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">shapiro.test</span>(Diff)</span></code></pre></div>
@@ -724,7 +724,7 @@ have <span class="math inline">\(t\)</span>=<code>-2.73</code>.</p>
 <p>Now, we have a probability of about <code>1.6%</code> getting a
 statistic (<span class="math inline">\(t\)</span>) as extreme or more
 extreme than the observed statistic (<code>-2.73</code>), assuming H0 is
-true. This is a small probability, and is likely due to chance. We,
+true. This is a small probability, and is not likely due to chance. We,
 therefore, reject H0 given the observations. Thus, mean PM2.5 in the
 Feb. of 2020 is <strong>statistically significant</strong> different
 from that in 2019 in the given cities. The observations
@@ -828,7 +828,7 @@ falls between <code>-2.14</code> and <code>2.14</code> in theory, and
 <code>500</code> of those samples would fall outside the interval. For
 the <code>9500</code> samples that with <span
 class="math inline">\(t\)</span> ratio between <code>-2.14</code> and
-`2.14, so we have:</p>
+<code>2.14</code>, so we have:</p>
 <p><span class="math display">\[ -2.14 \le \frac { \overline{D}  - \mu_D
 } { {s} / \sqrt{n} } \le 2.14  \]</span> which is equivalent to say
 that, <code>9500</code> of the <code>10000</code> times the unknown
