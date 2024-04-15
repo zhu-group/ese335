@@ -548,9 +548,9 @@ assumes nothing about the underlying distribution (for example, that the
 data comes from a normal distribution). That’s compared to parametric
 test, which makes assumptions about a population’s parameters (for
 example, the mean or standard deviation); When the word “non-parametric”
-is used in stats, it doesn’t quite mean that you know nothing about the
-population. It usually means that you know the population data does not
-have a normal distribution.</p>
+is used in statistics, it doesn’t quite mean that you know nothing about
+the population. It usually means that you know the population data does
+not have a normal distribution.</p>
 <p>Situations to use non-parametric tests:</p>
 <ul>
 <li><p>The underlying distribution is <strong>not normal</strong>, thus
@@ -560,7 +560,8 @@ the normality assumption is not valid</p></li>
 start-rating)</p></li>
 <li><p>One or more assumptions of a parametric test have been
 violated</p></li>
-<li><p>The sample size is too small to run a parametric test</p></li>
+<li><p>The sample size is too small (less than <code>6</code>) to run a
+parametric test</p></li>
 <li><p>Outliers can not be removed</p></li>
 <li><p>Prefer to test for the median rather than the mean (e.g., very
 skewed distribution)</p></li>
@@ -580,7 +581,7 @@ non-parametric equivalent to the two-sample independent t-test.</p>
 <p>The requirements of using Mann–Whitney U test are:</p>
 <ul>
 <li><p>Random and independent samples</p></li>
-<li><p>For maximum accuracy, there should be <strong>no ties</strong>.
+<li><p>For maximum accuracy, there better be <strong>no ties</strong>.
 But there is a way to handle ties in the test.</p></li>
 </ul>
 <p>In the Mann–Whitney U test, we have:</p>
@@ -752,11 +753,11 @@ function in R:</p>
 ##  Spearman&#39;s rank correlation rho
 ## 
 ## data:  x and y
-## S = 72, p-value = 5.949e-06
+## S = 24, p-value = 6.477e-06
 ## alternative hypothesis: true rho is not equal to 0
 ## sample estimates:
 ##       rho 
-## 0.9458647</code></pre>
+## 0.9819549</code></pre>
 <hr />
 </div>
 <div id="kendall-correlation-test" class="section level1">
@@ -780,11 +781,11 @@ function in R:</p>
 ##  Kendall&#39;s rank correlation tau
 ## 
 ## data:  x and y
-## T = 175, p-value = 1.082e-09
+## T = 182, p-value = 1.637e-12
 ## alternative hypothesis: true tau is not equal to 0
 ## sample estimates:
 ##       tau 
-## 0.8421053</code></pre>
+## 0.9157895</code></pre>
 <hr />
 </div>
 <div id="summary-of-non-parametric-tests" class="section level1">
