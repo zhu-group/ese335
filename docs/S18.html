@@ -480,6 +480,13 @@ div.tocify {
 </div>
 
 
+<hr />
+<div id="prerequisites" class="section level1">
+<h1>Prerequisites</h1>
+<p>Load the libraries with R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(astsa)</span></code></pre></div>
+<hr />
+</div>
 <div id="section-example-co2-data" class="section level1">
 <h1>Section example: CO<sub>2</sub> data</h1>
 <p>Time series data are data points collected over a period of time as a
@@ -492,29 +499,29 @@ more.</p>
 <p>Let’s use the ‘Keeling_Data’ <a
 href="https://zhu-group.github.io/ese335/download/co2_mm_mlo.csv">CO<sub>2</sub>
 data</a> again as an example to take a closer look at a time series.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Read data</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>Keeling_Data     <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;co2_mm_mlo.csv&quot;</span>, <span class="at">header =</span> T)</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># Handel missing values</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>Keeling_Data<span class="sc">$</span>co2[<span class="fu">which</span>(Keeling_Data<span class="sc">$</span>co2<span class="sc">&lt;</span><span class="dv">0</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(Keeling_Data<span class="sc">$</span>co2)){</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="cf">if</span>( <span class="fu">is.na</span>(Keeling_Data<span class="sc">$</span>co2[i])){</span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    Keeling_Data<span class="sc">$</span>co2[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(Keeling_Data<span class="sc">$</span>co2[(i<span class="dv">-2</span>)<span class="sc">:</span>(i<span class="sc">+</span><span class="dv">2</span>)],<span class="at">na.rm=</span>T )</span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  }</span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Read data</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>Keeling_Data     <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;co2_mm_mlo.csv&quot;</span>, <span class="at">header =</span> T)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># Handel missing values</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>Keeling_Data<span class="sc">$</span>co2[<span class="fu">which</span>(Keeling_Data<span class="sc">$</span>co2<span class="sc">&lt;</span><span class="dv">0</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(Keeling_Data<span class="sc">$</span>co2)){</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>  <span class="cf">if</span>( <span class="fu">is.na</span>(Keeling_Data<span class="sc">$</span>co2[i])){</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    Keeling_Data<span class="sc">$</span>co2[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(Keeling_Data<span class="sc">$</span>co2[(i<span class="dv">-2</span>)<span class="sc">:</span>(i<span class="sc">+</span><span class="dv">2</span>)],<span class="at">na.rm=</span>T )</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  }</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>}</span></code></pre></div>
 <p>Notice that here we use 5-month average to replace the missing
 values.</p>
 <p>Use <code>ts()</code> to convert a vector into a time series. Use
 <code>?</code> to learn more.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Apply the ts() function</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>co2 <span class="ot">&lt;-</span> <span class="fu">ts</span>(Keeling_Data<span class="sc">$</span>co2, <span class="at">start=</span><span class="fu">c</span>(<span class="dv">1958</span>,<span class="dv">3</span>), <span class="at">frequency=</span><span class="dv">12</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># Quick plot</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">plot</span>(co2, <span class="at">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
-<p><img src="S18_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Check the data type</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">str</span>(co2)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Apply the ts() function</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>co2 <span class="ot">&lt;-</span> <span class="fu">ts</span>(Keeling_Data<span class="sc">$</span>co2, <span class="at">start=</span><span class="fu">c</span>(<span class="dv">1958</span>,<span class="dv">3</span>), <span class="at">frequency=</span><span class="dv">12</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># Quick plot</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="fu">plot</span>(co2, <span class="at">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<p><img src="S18_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Check the data type</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">str</span>(co2)</span></code></pre></div>
 <pre><code>##  Time-Series [1:791] from 1958 to 2024: 316 317 318 316 316 ...</code></pre>
 <hr />
 </div>
@@ -546,21 +553,21 @@ unit, over all periods. The seasonal figure is then centered.</p></li>
 seasonal figure (recycled as needed) from the original time
 series.</p></li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>co2_components <span class="ot">&lt;-</span> <span class="fu">decompose</span>(co2)</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">plot</span>(co2_components)</span></code></pre></div>
-<p><img src="S18_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>co2_components <span class="ot">&lt;-</span> <span class="fu">decompose</span>(co2)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">plot</span>(co2_components)</span></code></pre></div>
+<p><img src="S18_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>In the above example, <code>co2_components</code> contains the
 information/values of the three components. Check the distribution of
 the error component (<code>random</code>) to verify it’s a white
 noise.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Plot hist</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">hist</span>(co2_components<span class="sc">$</span>random, <span class="at">prob=</span><span class="cn">TRUE</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># Add a normal pdf curve</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="at">mean=</span><span class="fu">mean</span>(co2_components<span class="sc">$</span>random, <span class="at">na.rm=</span>T),</span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(co2_components<span class="sc">$</span>random, <span class="at">na.rm=</span>T)),</span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>      <span class="at">add=</span><span class="cn">TRUE</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="S18_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Plot hist</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">hist</span>(co2_components<span class="sc">$</span>random, <span class="at">prob=</span><span class="cn">TRUE</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Add a normal pdf curve</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="at">mean=</span><span class="fu">mean</span>(co2_components<span class="sc">$</span>random, <span class="at">na.rm=</span>T),</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(co2_components<span class="sc">$</span>random, <span class="at">na.rm=</span>T)),</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>      <span class="at">add=</span><span class="cn">TRUE</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="S18_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>As you can see the distribution is a Gaussian white noise, which is a
 particularly useful white noise series.</p>
 <hr />
@@ -602,17 +609,17 @@ class="math inline">\(\phi_1\)</span>, <span
 class="math inline">\(\phi_2\)</span>, …, <span
 class="math inline">\(\phi_p\)</span> are constants.</p>
 <p>The following R code can be used to obtain two AR(1) models:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Make two panels</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># ARIMA model (1,0,0)</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar=</span>.<span class="dv">9</span>), <span class="at">n=</span><span class="dv">100</span>), <span class="at">ylab=</span><span class="st">&quot;x&quot;</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="at">main=</span>(<span class="fu">expression</span>(<span class="fu">AR</span>(<span class="dv">1</span>)<span class="sc">~</span><span class="er">~~</span>phi<span class="sc">==+</span>.<span class="dv">9</span>)))</span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co"># ARIMA model (1,0,0)</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar=</span><span class="sc">-</span>.<span class="dv">9</span>), <span class="at">n=</span><span class="dv">100</span>), <span class="at">ylab=</span><span class="st">&quot;x&quot;</span>,</span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="at">main=</span>(<span class="fu">expression</span>(<span class="fu">AR</span>(<span class="dv">1</span>)<span class="sc">~</span><span class="er">~~</span>phi<span class="sc">==-</span>.<span class="dv">9</span>)))</span></code></pre></div>
-<p><img src="S18_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Make two panels</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># ARIMA model (1,0,0)</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar=</span>.<span class="dv">9</span>), <span class="at">n=</span><span class="dv">100</span>), <span class="at">ylab=</span><span class="st">&quot;x&quot;</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="at">main=</span>(<span class="fu">expression</span>(<span class="fu">AR</span>(<span class="dv">1</span>)<span class="sc">~</span><span class="er">~~</span>phi<span class="sc">==+</span>.<span class="dv">9</span>)))</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co"># ARIMA model (1,0,0)</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar=</span><span class="sc">-</span>.<span class="dv">9</span>), <span class="at">n=</span><span class="dv">100</span>), <span class="at">ylab=</span><span class="st">&quot;x&quot;</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="at">main=</span>(<span class="fu">expression</span>(<span class="fu">AR</span>(<span class="dv">1</span>)<span class="sc">~</span><span class="er">~~</span>phi<span class="sc">==-</span>.<span class="dv">9</span>)))</span></code></pre></div>
+<p><img src="S18_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="ma-model" class="section level2">
 <h2>MA model</h2>
@@ -632,17 +639,17 @@ defining equation are combined linearly to form the observed data.</p>
 <span class="math inline">\(\theta_2\)</span>, …, <span
 class="math inline">\(\theta_q\)</span> are parameters.</p>
 <p>The following R code can be used to obtain two MA(1) models:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Make two panels</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># ARIMA model (0,0,1)</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">ma=</span>.<span class="dv">9</span>), <span class="at">n=</span><span class="dv">100</span>), <span class="at">ylab=</span><span class="st">&quot;x&quot;</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="at">main=</span>(<span class="fu">expression</span>(<span class="fu">MA</span>(<span class="dv">1</span>)<span class="sc">~</span><span class="er">~~</span>theta<span class="sc">==+</span>.<span class="dv">9</span>)))</span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co"># ARIMA model (0,0,1)</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">ma=</span><span class="sc">-</span>.<span class="dv">9</span>), <span class="at">n=</span><span class="dv">100</span>), <span class="at">ylab=</span><span class="st">&quot;x&quot;</span>,</span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="at">main=</span>(<span class="fu">expression</span>(<span class="fu">MA</span>(<span class="dv">1</span>)<span class="sc">~</span><span class="er">~~</span>theta<span class="sc">==-</span>.<span class="dv">9</span>)))</span></code></pre></div>
-<p><img src="S18_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Make two panels</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># ARIMA model (0,0,1)</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">ma=</span>.<span class="dv">9</span>), <span class="at">n=</span><span class="dv">100</span>), <span class="at">ylab=</span><span class="st">&quot;x&quot;</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="at">main=</span>(<span class="fu">expression</span>(<span class="fu">MA</span>(<span class="dv">1</span>)<span class="sc">~</span><span class="er">~~</span>theta<span class="sc">==+</span>.<span class="dv">9</span>)))</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co"># ARIMA model (0,0,1)</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">ma=</span><span class="sc">-</span>.<span class="dv">9</span>), <span class="at">n=</span><span class="dv">100</span>), <span class="at">ylab=</span><span class="st">&quot;x&quot;</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="at">main=</span>(<span class="fu">expression</span>(<span class="fu">MA</span>(<span class="dv">1</span>)<span class="sc">~</span><span class="er">~~</span>theta<span class="sc">==-</span>.<span class="dv">9</span>)))</span></code></pre></div>
+<p><img src="S18_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="acf-and-pacf" class="section level2">
 <h2>ACF and PACF</h2>
@@ -661,26 +668,26 @@ class="math inline">\(x_{t-k}\)</span> that is not accounted for by lags
 <code>1</code> through <code>k−1</code>.</p>
 <p>To show ACF and the PACF of a AR model, AR(2), in R we can use the
 following lines:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Compute ACF and PACF of AR(2)</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>ACF <span class="ot">=</span> <span class="fu">ARMAacf</span>(<span class="at">ar=</span><span class="fu">c</span>(<span class="fl">1.5</span>,<span class="sc">-</span>.<span class="dv">75</span>), <span class="at">ma=</span><span class="dv">0</span>, <span class="dv">24</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>PACF <span class="ot">=</span> <span class="fu">ARMAacf</span>(<span class="at">ar=</span><span class="fu">c</span>(<span class="fl">1.5</span>,<span class="sc">-</span>.<span class="dv">75</span>), <span class="at">ma=</span><span class="dv">0</span>, <span class="dv">24</span>, <span class="at">pacf=</span><span class="cn">TRUE</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co"># Plot ACF and PACF of AR(2)</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="fu">plot</span>(ACF, <span class="at">type=</span><span class="st">&quot;h&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;lag&quot;</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">8</span>,<span class="dv">1</span>)); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="fu">plot</span>(PACF, <span class="at">type=</span><span class="st">&quot;h&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;lag&quot;</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">8</span>,<span class="dv">1</span>)); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span></code></pre></div>
-<p><img src="S18_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>To show ACF and the PACF of a MA model, MA(2), in R we can use the
-following lines:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Compute ACF and PACF of MA(2)</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>ACF <span class="ot">=</span> <span class="fu">ARMAacf</span>(<span class="at">ar=</span><span class="dv">0</span>, <span class="at">ma=</span><span class="fu">c</span>(<span class="fl">0.5</span>,<span class="fl">0.6</span>), <span class="dv">24</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>PACF <span class="ot">=</span> <span class="fu">ARMAacf</span>(<span class="at">ar=</span><span class="dv">0</span>, <span class="at">ma=</span><span class="fu">c</span>(<span class="fl">0.5</span>,<span class="fl">0.6</span>), <span class="dv">24</span>, <span class="at">pacf=</span><span class="cn">TRUE</span>)</span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Compute ACF and PACF of AR(2)</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>ACF <span class="ot">=</span> <span class="fu">ARMAacf</span>(<span class="at">ar=</span><span class="fu">c</span>(<span class="fl">1.5</span>,<span class="sc">-</span>.<span class="dv">75</span>), <span class="at">ma=</span><span class="dv">0</span>, <span class="dv">24</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>PACF <span class="ot">=</span> <span class="fu">ARMAacf</span>(<span class="at">ar=</span><span class="fu">c</span>(<span class="fl">1.5</span>,<span class="sc">-</span>.<span class="dv">75</span>), <span class="at">ma=</span><span class="dv">0</span>, <span class="dv">24</span>, <span class="at">pacf=</span><span class="cn">TRUE</span>)</span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co"># Plot ACF and PACF of MA(2)</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co"># Plot ACF and PACF of AR(2)</span></span>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="fu">plot</span>(ACF, <span class="at">type=</span><span class="st">&quot;h&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;lag&quot;</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">8</span>,<span class="dv">1</span>)); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span>
 <span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="fu">plot</span>(PACF, <span class="at">type=</span><span class="st">&quot;h&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;lag&quot;</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">8</span>,<span class="dv">1</span>)); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span></code></pre></div>
 <p><img src="S18_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>To show ACF and the PACF of a MA model, MA(2), in R we can use the
+following lines:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Compute ACF and PACF of MA(2)</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>ACF <span class="ot">=</span> <span class="fu">ARMAacf</span>(<span class="at">ar=</span><span class="dv">0</span>, <span class="at">ma=</span><span class="fu">c</span>(<span class="fl">0.5</span>,<span class="fl">0.6</span>), <span class="dv">24</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>PACF <span class="ot">=</span> <span class="fu">ARMAacf</span>(<span class="at">ar=</span><span class="dv">0</span>, <span class="at">ma=</span><span class="fu">c</span>(<span class="fl">0.5</span>,<span class="fl">0.6</span>), <span class="dv">24</span>, <span class="at">pacf=</span><span class="cn">TRUE</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co"># Plot ACF and PACF of MA(2)</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="fu">plot</span>(ACF, <span class="at">type=</span><span class="st">&quot;h&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;lag&quot;</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">8</span>,<span class="dv">1</span>)); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="fu">plot</span>(PACF, <span class="at">type=</span><span class="st">&quot;h&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;lag&quot;</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">8</span>,<span class="dv">1</span>)); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span></code></pre></div>
+<p><img src="S18_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Behavior of the ACF and PACF for ARMA Models can be summarized
 as:</p>
 <ul>
@@ -698,32 +705,32 @@ off</p></li>
 are the global mean land and ocean temperature index from
 <code>1850</code> to <code>2023</code>. We want to fit an ARIMA model to
 this time series.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="fu">library</span>(astsa)</span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># Reset panel</span></span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="fu">plot</span>(gtemp_both, <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Global Temperature Deviations&quot;</span>)</span></code></pre></div>
-<p><img src="S18_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">library</span>(astsa)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co"># Reset panel</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="fu">plot</span>(gtemp_both, <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Global Temperature Deviations&quot;</span>)</span></code></pre></div>
+<p><img src="S18_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>There is a clear trend, so the first step is to de-trend the
 data.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Fit a linear model</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>trModel <span class="ot">&lt;-</span> <span class="fu">lm</span>(gtemp_both <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(gtemp_both)))</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co"># Get the residuals</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>residual <span class="ot">&lt;-</span> <span class="fu">resid</span>(trModel)</span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co"># Plot the residual</span></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="fu">plot</span>(residual, <span class="at">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
-<p><img src="S18_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Check acf anf pacf of the residuals</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">acf</span>(residual)</span></code></pre></div>
-<p><img src="S18_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">pacf</span>(residual)</span></code></pre></div>
-<p><img src="S18_files/figure-html/unnamed-chunk-10-3.png" width="672" /></p>
-<p>Based on the acf and pacf plots, we guess it may be an ARIMA(1,0,0)
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Fit a linear model</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>trModel <span class="ot">&lt;-</span> <span class="fu">lm</span>(gtemp_both <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(gtemp_both)))</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co"># Get the residuals</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>residual <span class="ot">&lt;-</span> <span class="fu">resid</span>(trModel)</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co"># Plot the residual</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="fu">plot</span>(residual, <span class="at">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<p><img src="S18_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Check acf anf pacf of the residuals</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="fu">acf</span>(residual)</span></code></pre></div>
+<p><img src="S18_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">pacf</span>(residual)</span></code></pre></div>
+<p><img src="S18_files/figure-html/unnamed-chunk-11-3.png" width="672" /></p>
+<p>Based on the acf and pacf plots, we guess it may be an ARMA(3,0)
 model.</p>
 <hr />
 </div>

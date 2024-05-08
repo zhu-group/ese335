@@ -597,7 +597,8 @@ function in R:</p>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co"># Perform the Mann Whitney U test</span></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">wilcox.test</span>(Treat, Control, <span class="at">paired=</span>F, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning in wilcox.test.default(Treat, Control, paired = F, alternative = &quot;two.sided&quot;): 无法精確計算带连结的p值</code></pre>
+<pre><code>## Warning in wilcox.test.default(Treat, Control, paired = F, alternative =
+## &quot;two.sided&quot;): 无法精確計算带连结的p值</code></pre>
 <pre><code>## 
 ##  Wilcoxon rank sum test with continuity correction
 ## 
@@ -630,7 +631,8 @@ keywords:</p>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co"># Perform the Wilcoxon signed rank test</span></span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="fu">wilcox.test</span>(Treat, Control, <span class="at">paired=</span>T, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning in wilcox.test.default(Treat, Control, paired = T, alternative = &quot;two.sided&quot;): 无法精確計算带连结的p值</code></pre>
+<pre><code>## Warning in wilcox.test.default(Treat, Control, paired = T, alternative =
+## &quot;two.sided&quot;): 无法精確計算带连结的p值</code></pre>
 <pre><code>## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -693,7 +695,8 @@ function in R:</p>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Monthly ozone&quot;</span>, </span>
 <span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;Month&quot;</span>, <span class="at">y=</span><span class="st">&quot;Ozone [ppb]&quot;</span>) <span class="sc">+</span></span>
 <span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<pre><code>## Warning: Removed 37 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<pre><code>## Warning: Removed 37 rows containing non-finite values
+## (`stat_boxplot()`).</code></pre>
 <p><img src="S13_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Perform the Kruskal–Wallis test</span></span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">kruskal.test</span>(Ozone <span class="sc">~</span> Month, <span class="at">data =</span> airquality)</span></code></pre></div>
