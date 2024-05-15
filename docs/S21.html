@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Section 21 Plotting with R (II): making maps</title>
+
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Environmental Data Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Syllabus.html">
+    <span class="fa fa-bell-o"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="Schedule.html">
+    <span class="fa fa-calendar"></span>
+     
+    Schedule
+  </a>
+</li>
+<li>
+  <a href="Resource.html">
+    <span class="fa fa-wrench"></span>
+     
+    Resource
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-laptop"></span>
+     
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="A01.html">Assignment 01</a>
+    </li>
+    <li>
+      <a href="A02.html">Assignment 02</a>
+    </li>
+    <li>
+      <a href="A03.html">Assignment 03</a>
+    </li>
+    <li>
+      <a href="A04.html">Assignment 04</a>
+    </li>
+    <li>
+      <a href="A05.html">Assignment 05</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Section 21 Plotting with R (II): making
+maps</h1>
+
+</div>
+
+
+<hr />
+<div id="prerequisites" class="section level1">
+<h1>Prerequisites</h1>
+<p>Load the libraries with R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(rgdal)</span></code></pre></div>
+<pre><code>## 载入需要的程辑包：sp</code></pre>
+<pre><code>## Warning: 程辑包&#39;sp&#39;是用R版本4.3.3 来建造的</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">library</span>(plyr)</span></code></pre></div>
+<pre><code>## Warning: 程辑包&#39;plyr&#39;是用R版本4.3.3 来建造的</code></pre>
+<pre><code>## -----------------------------------------------------------------------------------------------</code></pre>
+<pre><code>## You have loaded plyr after dplyr - this is likely to cause problems.
+## If you need functions from both plyr and dplyr, please load plyr first, then dplyr:
+## library(plyr); library(dplyr)</code></pre>
+<pre><code>## -----------------------------------------------------------------------------------------------</code></pre>
+<pre><code>## 
+## 载入程辑包：&#39;plyr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:FSA&#39;:
+## 
+##     mapvalues</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggpubr&#39;:
+## 
+##     mutate</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     arrange, count, desc, failwith, id, mutate, rename, summarise, summarize</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">library</span>(ggsn)</span></code></pre></div>
+<pre><code>## 载入需要的程辑包：grid</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">library</span>(raster)</span></code></pre></div>
+<pre><code>## Warning: 程辑包&#39;raster&#39;是用R版本4.3.3 来建造的</code></pre>
+<pre><code>## 
+## 载入程辑包：&#39;raster&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggsn&#39;:
+## 
+##     scalebar</code></pre>
+<pre><code>## The following object is masked from &#39;package:EnvStats&#39;:
+## 
+##     cv</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     select</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">library</span>(ggmap)</span></code></pre></div>
+<pre><code>## Warning: 程辑包&#39;ggmap&#39;是用R版本4.3.3 来建造的</code></pre>
+<pre><code>## ℹ Google&#39;s Terms of Service: &lt;https://mapsplatform.google.com&gt;
+##   Stadia Maps&#39; Terms of Service: &lt;https://stadiamaps.com/terms-of-service/&gt;
+##   OpenStreetMap&#39;s Tile Usage Policy: &lt;https://operations.osmfoundation.org/policies/tiles/&gt;
+## ℹ Please cite ggmap if you use it! Use `citation(&quot;ggmap&quot;)` for details.</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="fu">library</span>(mapproj)</span></code></pre></div>
+<pre><code>## Warning: 程辑包&#39;mapproj&#39;是用R版本4.3.3 来建造的</code></pre>
+<pre><code>## 载入需要的程辑包：maps</code></pre>
+<pre><code>## Warning: 程辑包&#39;maps&#39;是用R版本4.3.3 来建造的</code></pre>
+<pre><code>## 
+## 载入程辑包：&#39;maps&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:plyr&#39;:
+## 
+##     ozone</code></pre>
+<pre><code>## The following object is masked from &#39;package:astsa&#39;:
+## 
+##     unemp</code></pre>
+<hr />
+</div>
+<div id="shape-file" class="section level1">
+<h1>Shape file</h1>
+<p><em>ESRI shapefile</em> (or shape file) is widely used in
+environmental science and geoscience. A shapefile consists of various
+files of the same name, but with different extensions. They should all
+be in one directory. Here we use the shape file of China map as an
+example, <a
+href="https://zhu-group.github.io/ese335/download/China_map.zip">download
+it</a>. Decompress it. Open the folder, you will see there are three
+files of different formats (<code>.dbf</code>, <code>.shp</code>,
+<code>.shx</code>). In R, we can read the shape file via:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="co"># Location of the .shp file </span></span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>Local_path <span class="ot">&lt;-</span> <span class="st">&quot;China_map/&quot;</span></span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a><span class="co"># Read china map, a shape file</span></span>
+<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a>China_map <span class="ot">&lt;-</span> rgdal<span class="sc">::</span><span class="fu">readOGR</span>(<span class="fu">paste0</span>(Local_path, <span class="st">&quot;bou2_4p.shp&quot;</span>))</span></code></pre></div>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## Warning: OGR support is provided by the sf and terra packages among others</code></pre>
+<pre><code>## OGR data source with driver: ESRI Shapefile 
+## Source: &quot;D:\repo\ese335\China_map\bou2_4p.shp&quot;, layer: &quot;bou2_4p&quot;
+## with 925 features
+## It has 7 fields
+## Integer64 fields read as strings:  BOU2_4M_ BOU2_4M_ID</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="co"># Check the attributes </span></span>
+<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a><span class="fu">class</span>(China_map)</span></code></pre></div>
+<pre><code>## [1] &quot;SpatialPolygonsDataFrame&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;sp&quot;</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a><span class="co"># Show variable names</span></span>
+<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a><span class="fu">names</span>(China_map)</span></code></pre></div>
+<pre><code>## [1] &quot;AREA&quot;       &quot;PERIMETER&quot;  &quot;BOU2_4M_&quot;   &quot;BOU2_4M_ID&quot; &quot;ADCODE93&quot;   &quot;ADCODE99&quot;   &quot;NAME&quot;</code></pre>
+<p>From here, we can see that there are <code>925</code> polygons, and R
+just follows the polygons defined by this object then line them each one
+up. If you want to see the data hidden in
+<code>SpatialPolygonsDataFrame</code>, we can use the operator
+<code>@</code>:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" tabindex="-1"></a><span class="co"># Check the attributes, use the operator @</span></span>
+<span id="cb44-2"><a href="#cb44-2" tabindex="-1"></a>map_data <span class="ot">&lt;-</span> China_map<span class="sc">@</span>data</span>
+<span id="cb44-3"><a href="#cb44-3" tabindex="-1"></a><span class="fu">head</span>(map_data)</span></code></pre></div>
+<pre><code>##      AREA PERIMETER BOU2_4M_ BOU2_4M_ID ADCODE93 ADCODE99
+## 0  54.447    68.489        2         23   230000   230000
+## 1 129.113   129.933        3         15   150000   150000
+## 2 175.591    84.905        4         65   650000   650000
+## 3  21.315    41.186        5         22   220000   220000
+## 4  15.603    38.379        6         21   210000   210000
+## 5  41.508    76.781        7         62   620000   620000
+##                                                 NAME
+## 0                          \xba\xda\xc1\xfa\xbd\xadʡ
+## 1          \xc4\xda\xc3ɹ\xc5\xd7\xd4\xd6\xce\xc7\xf8
+## 2 \xd0½\xaeά\xce\xe1\xb6\xfb\xd7\xd4\xd6\xce\xc7\xf8
+## 3                                  \xbc\xaa\xc1\xd6ʡ
+## 4                                  \xc1\xc9\xc4\xfeʡ
+## 5                                  \xb8\xca\xcb\xe0ʡ</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a><span class="fu">tail</span>(map_data)</span></code></pre></div>
+<pre><code>##     AREA PERIMETER BOU2_4M_ BOU2_4M_ID ADCODE93 ADCODE99
+## 919    0     0.012      921       3099   810000   810000
+## 920    0     0.037      922       3110   810000   810000
+## 921    0     0.018      923       3109   810000   810000
+## 922    0     0.014      924       3112   810000   810000
+## 923    0     0.079      925       3114   810000   810000
+## 924    0     0.011      926       3115   810000   810000
+##                                                  NAME
+## 919 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8
+## 920 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8
+## 921 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8
+## 922 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8
+## 923 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8
+## 924 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="co"># Convert characters</span></span>
+<span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a>China_map<span class="sc">$</span>NAME <span class="ot">&lt;-</span> <span class="fu">iconv</span>(China_map<span class="sc">$</span>NAME, <span class="st">&quot;GBK&quot;</span>)</span>
+<span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a><span class="co"># Check the attributes, use the operator @</span></span>
+<span id="cb48-4"><a href="#cb48-4" tabindex="-1"></a>map_data <span class="ot">&lt;-</span> China_map<span class="sc">@</span>data</span>
+<span id="cb48-5"><a href="#cb48-5" tabindex="-1"></a><span class="fu">head</span>(map_data)</span></code></pre></div>
+<pre><code>##      AREA PERIMETER BOU2_4M_ BOU2_4M_ID ADCODE93 ADCODE99             NAME
+## 0  54.447    68.489        2         23   230000   230000         黑龙江省
+## 1 129.113   129.933        3         15   150000   150000     内蒙古自治区
+## 2 175.591    84.905        4         65   650000   650000 新疆维吾尔自治区
+## 3  21.315    41.186        5         22   220000   220000           吉林省
+## 4  15.603    38.379        6         21   210000   210000           辽宁省
+## 5  41.508    76.781        7         62   620000   620000           甘肃省</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a><span class="fu">tail</span>(map_data)</span></code></pre></div>
+<pre><code>##     AREA PERIMETER BOU2_4M_ BOU2_4M_ID ADCODE93 ADCODE99           NAME
+## 919    0     0.012      921       3099   810000   810000 香港特别行政区
+## 920    0     0.037      922       3110   810000   810000 香港特别行政区
+## 921    0     0.018      923       3109   810000   810000 香港特别行政区
+## 922    0     0.014      924       3112   810000   810000 香港特别行政区
+## 923    0     0.079      925       3114   810000   810000 香港特别行政区
+## 924    0     0.011      926       3115   810000   810000 香港特别行政区</code></pre>
+<p>Use <code>ggplot()</code> to plot the shape file:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a><span class="co"># Quick plot use ggplot</span></span>
+<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a><span class="fu">ggplot</span>(China_map, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group)) <span class="sc">+</span></span>
+<span id="cb52-3"><a href="#cb52-3" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">color =</span> <span class="st">&quot;grey40&quot;</span>) <span class="sc">+</span></span>
+<span id="cb52-4"><a href="#cb52-4" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">fill =</span> <span class="st">&#39;lightblue&#39;</span>)</span></code></pre></div>
+<pre><code>## Warning: `fortify(&lt;SpatialPolygonsDataFrame&gt;)` was deprecated in ggplot2 3.4.4.
+## ℹ Please migrate to sf.
+## ℹ The deprecated feature was likely used in the ggplot2 package.
+##   Please report the issue at &lt;https://github.com/tidyverse/ggplot2/issues&gt;.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+<pre><code>## Regions defined for each Polygons</code></pre>
+<p><img src="S21_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>This is certainly not very good-looking. Let’s first assign each
+province with an id:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" tabindex="-1"></a><span class="co"># Assign each province with an ID</span></span>
+<span id="cb55-2"><a href="#cb55-2" tabindex="-1"></a>China_map2     <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(China_map, <span class="at">id=</span><span class="fu">seq</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">924</span>)<span class="sc">-</span><span class="dv">1</span>) </span>
+<span id="cb55-3"><a href="#cb55-3" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" tabindex="-1"></a><span class="co"># Join two data sets by NAME</span></span>
+<span id="cb55-5"><a href="#cb55-5" tabindex="-1"></a>China_map_new  <span class="ot">&lt;-</span> <span class="fu">join</span>(<span class="fu">fortify</span>(China_map), China_map2, <span class="at">type =</span> <span class="st">&quot;full&quot;</span>)</span></code></pre></div>
+<pre><code>## Regions defined for each Polygons
+## Joining by: id</code></pre>
+<p>Here we use the <code>fortify()</code> function to include the lat
+and lon information. Now the new shape file can be plotted as:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" tabindex="-1"></a><span class="co"># Plot the new shape file</span></span>
+<span id="cb57-2"><a href="#cb57-2" tabindex="-1"></a><span class="fu">ggplot</span>(China_map_new, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> id, <span class="at">fill =</span> NAME)) <span class="sc">+</span></span>
+<span id="cb57-3"><a href="#cb57-3" tabindex="-1"></a>  <span class="co"># Plot the border</span></span>
+<span id="cb57-4"><a href="#cb57-4" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">color =</span> <span class="st">&#39;grey40&#39;</span>) <span class="sc">+</span></span>
+<span id="cb57-5"><a href="#cb57-5" tabindex="-1"></a>  <span class="fu">geom_polygon</span>() <span class="sc">+</span></span>
+<span id="cb57-6"><a href="#cb57-6" tabindex="-1"></a>  <span class="co"># Using different colors</span></span>
+<span id="cb57-7"><a href="#cb57-7" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">rainbow</span>(<span class="dv">33</span>), <span class="at">guide =</span> F) <span class="sc">+</span></span>
+<span id="cb57-8"><a href="#cb57-8" tabindex="-1"></a>  <span class="fu">coord_map</span>()</span></code></pre></div>
+<pre><code>## Warning: The `guide` argument in `scale_*()` cannot be `FALSE`. This was deprecated in ggplot2 3.3.4.
+## ℹ Please use &quot;none&quot; instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+<p><img src="S21_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>We can also edit the original shape file by adding new information.
+For example, here we want to add both <code>NAME_EN</code> and
+<code>POP</code> onto the shape file:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" tabindex="-1"></a><span class="co"># Name in Chinese</span></span>
+<span id="cb59-2"><a href="#cb59-2" tabindex="-1"></a><span class="co"># This is the same as the NAME in the original shape file</span></span>
+<span id="cb59-3"><a href="#cb59-3" tabindex="-1"></a>NAME    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;北京市&quot;</span>  , <span class="st">&quot;天津市&quot;</span>   , <span class="st">&quot;河北省&quot;</span>      , <span class="st">&quot;山西省&quot;</span>   , <span class="st">&quot;内蒙古自治区&quot;</span>    , </span>
+<span id="cb59-4"><a href="#cb59-4" tabindex="-1"></a>             <span class="st">&quot;辽宁省&quot;</span>  , <span class="st">&quot;吉林省&quot;</span>   , <span class="st">&quot;黑龙江省&quot;</span>    , <span class="st">&quot;上海市&quot;</span>   , <span class="st">&quot;江苏省&quot;</span>          , </span>
+<span id="cb59-5"><a href="#cb59-5" tabindex="-1"></a>             <span class="st">&quot;浙江省&quot;</span>  , <span class="st">&quot;安徽省&quot;</span>   , <span class="st">&quot;福建省&quot;</span>      , <span class="st">&quot;江西省&quot;</span>   , <span class="st">&quot;山东省&quot;</span>          , </span>
+<span id="cb59-6"><a href="#cb59-6" tabindex="-1"></a>             <span class="st">&quot;河南省&quot;</span>  , <span class="st">&quot;湖北省&quot;</span>   , <span class="st">&quot;湖南省&quot;</span>      , <span class="st">&quot;广东省&quot;</span>   , <span class="st">&quot;广西壮族自治区&quot;</span>  , </span>
+<span id="cb59-7"><a href="#cb59-7" tabindex="-1"></a>             <span class="st">&quot;海南省&quot;</span>  , <span class="st">&quot;重庆市&quot;</span>   , <span class="st">&quot;四川省&quot;</span>      , <span class="st">&quot;贵州省&quot;</span>   , <span class="st">&quot;云南省&quot;</span>          , </span>
+<span id="cb59-8"><a href="#cb59-8" tabindex="-1"></a>             <span class="st">&quot;西藏自治区&quot;</span>, <span class="st">&quot;陕西省&quot;</span> , <span class="st">&quot;甘肃省&quot;</span>      , <span class="st">&quot;青海省&quot;</span>   , <span class="st">&quot;宁夏回族自治区&quot;</span>  , </span>
+<span id="cb59-9"><a href="#cb59-9" tabindex="-1"></a>             <span class="st">&quot;新疆维吾尔自治区&quot;</span>     , <span class="st">&quot;台湾省&quot;</span>      , <span class="st">&quot;香港特别行政区&quot;</span>)</span>
+<span id="cb59-10"><a href="#cb59-10" tabindex="-1"></a></span>
+<span id="cb59-11"><a href="#cb59-11" tabindex="-1"></a><span class="co"># Name in English accordingly</span></span>
+<span id="cb59-12"><a href="#cb59-12" tabindex="-1"></a>NAME_EN <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Beijing&quot;</span> , <span class="st">&quot;Tianjin&quot;</span>  , <span class="st">&quot;Hebei&quot;</span>       , <span class="st">&quot;Shanxi&quot;</span>   , <span class="st">&quot;Inner Mongolia&quot;</span>  ,</span>
+<span id="cb59-13"><a href="#cb59-13" tabindex="-1"></a>             <span class="st">&quot;Liaoning&quot;</span>, <span class="st">&quot;Jilin&quot;</span>    , <span class="st">&quot;Heilongjiang&quot;</span>, <span class="st">&quot;Shanghai&quot;</span> , <span class="st">&quot;Jiangsu&quot;</span>         ,</span>
+<span id="cb59-14"><a href="#cb59-14" tabindex="-1"></a>             <span class="st">&quot;Zhejiang&quot;</span>, <span class="st">&quot;Anhui&quot;</span>    , <span class="st">&quot;Fujian&quot;</span>      , <span class="st">&quot;Jiangxi&quot;</span>  , <span class="st">&quot;Shandong&quot;</span>        ,</span>
+<span id="cb59-15"><a href="#cb59-15" tabindex="-1"></a>             <span class="st">&quot;Henan&quot;</span>   , <span class="st">&quot;Hubei&quot;</span>    , <span class="st">&quot;Hunan&quot;</span>       , <span class="st">&quot;Guangdong&quot;</span>, <span class="st">&quot;Guangxi&quot;</span>         ,</span>
+<span id="cb59-16"><a href="#cb59-16" tabindex="-1"></a>             <span class="st">&quot;Hainan&quot;</span>  , <span class="st">&quot;Chongqing&quot;</span>, <span class="st">&quot;Sichuan&quot;</span>     , <span class="st">&quot;Guizhou&quot;</span>  , <span class="st">&quot;Yunnan&quot;</span>          ,</span>
+<span id="cb59-17"><a href="#cb59-17" tabindex="-1"></a>             <span class="st">&quot;Tibet&quot;</span>   , <span class="st">&quot;Shaanxi&quot;</span>  , <span class="st">&quot;Gansu&quot;</span>       , <span class="st">&quot;Qinghai&quot;</span>  , <span class="st">&quot;Ningxia&quot;</span>         ,</span>
+<span id="cb59-18"><a href="#cb59-18" tabindex="-1"></a>             <span class="st">&quot;Xinjiang&quot;</span>             , <span class="st">&quot;Taiwan&quot;</span>      , <span class="st">&quot;Hong Kong&quot;</span>     )</span>
+<span id="cb59-19"><a href="#cb59-19" tabindex="-1"></a></span>
+<span id="cb59-20"><a href="#cb59-20" tabindex="-1"></a><span class="co"># Population of each province, from the 2021 census</span></span>
+<span id="cb59-21"><a href="#cb59-21" tabindex="-1"></a>Pop     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">21893095</span>  , <span class="dv">13866009</span>   , <span class="dv">74610235</span>      ,  <span class="dv">34915616</span>  ,  <span class="dv">24049155</span>         , </span>
+<span id="cb59-22"><a href="#cb59-22" tabindex="-1"></a>             <span class="dv">42591407</span>  , <span class="dv">24073453</span>   , <span class="dv">31850088</span>      ,  <span class="dv">24870895</span>  ,  <span class="dv">84748016</span>         , </span>
+<span id="cb59-23"><a href="#cb59-23" tabindex="-1"></a>             <span class="dv">64567588</span>  , <span class="dv">61027171</span>   , <span class="dv">41540086</span>      ,  <span class="dv">45188635</span>  , <span class="dv">101527453</span>         , </span>
+<span id="cb59-24"><a href="#cb59-24" tabindex="-1"></a>             <span class="dv">99365519</span>  , <span class="dv">57752557</span>   , <span class="dv">66444864</span>      , <span class="dv">126012510</span>  ,  <span class="dv">50126804</span>         , </span>
+<span id="cb59-25"><a href="#cb59-25" tabindex="-1"></a>             <span class="dv">10081232</span>  , <span class="dv">32054159</span>   , <span class="dv">83674866</span>      ,  <span class="dv">38562148</span>  ,  <span class="dv">47209277</span>         , </span>
+<span id="cb59-26"><a href="#cb59-26" tabindex="-1"></a>              <span class="dv">3648100</span>  , <span class="dv">39528999</span>   , <span class="dv">25019831</span>      ,   <span class="dv">5923957</span>  ,   <span class="dv">7202654</span>         , </span>
+<span id="cb59-27"><a href="#cb59-27" tabindex="-1"></a>             <span class="dv">25852345</span>               , <span class="dv">23561236</span>      ,   <span class="dv">7474200</span>       )</span>
+<span id="cb59-28"><a href="#cb59-28" tabindex="-1"></a></span>
+<span id="cb59-29"><a href="#cb59-29" tabindex="-1"></a><span class="co"># Make data frame</span></span>
+<span id="cb59-30"><a href="#cb59-30" tabindex="-1"></a>Popdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(NAME, NAME_EN, Pop)</span>
+<span id="cb59-31"><a href="#cb59-31" tabindex="-1"></a></span>
+<span id="cb59-32"><a href="#cb59-32" tabindex="-1"></a><span class="co"># Joint the data by NAME</span></span>
+<span id="cb59-33"><a href="#cb59-33" tabindex="-1"></a>China_map_pop <span class="ot">&lt;-</span> <span class="fu">join</span>(China_map_new, Popdata, <span class="at">type =</span> <span class="st">&quot;full&quot;</span>)</span></code></pre></div>
+<pre><code>## Joining by: NAME</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb61-2"><a href="#cb61-2" tabindex="-1"></a><span class="fu">ggplot</span>(China_map_pop, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> id, <span class="at">fill =</span> Pop)) <span class="sc">+</span></span>
+<span id="cb61-3"><a href="#cb61-3" tabindex="-1"></a>  <span class="fu">geom_polygon</span>() <span class="sc">+</span></span>
+<span id="cb61-4"><a href="#cb61-4" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">color =</span> <span class="st">&quot;grey40&quot;</span>) <span class="sc">+</span></span>
+<span id="cb61-5"><a href="#cb61-5" tabindex="-1"></a>  <span class="fu">coord_map</span>()</span></code></pre></div>
+<p><img src="S21_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>With some efforts, this can plot can be made much better:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" tabindex="-1"></a><span class="fu">ggplot</span>(China_map_pop, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group, <span class="at">fill=</span>Pop)) <span class="sc">+</span></span>
+<span id="cb62-2"><a href="#cb62-2" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Population&quot;</span>)<span class="sc">+</span></span>
+<span id="cb62-3"><a href="#cb62-3" tabindex="-1"></a>  <span class="fu">geom_polygon</span>()<span class="sc">+</span></span>
+<span id="cb62-4"><a href="#cb62-4" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">color =</span> <span class="st">&quot;grey40&quot;</span>)<span class="sc">+</span></span>
+<span id="cb62-5"><a href="#cb62-5" tabindex="-1"></a>  <span class="co"># Try a different color theme</span></span>
+<span id="cb62-6"><a href="#cb62-6" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(<span class="at">colours=</span><span class="fu">rev</span>(<span class="fu">heat.colors</span>(<span class="dv">20</span>)),<span class="at">na.value=</span><span class="st">&quot;grey90&quot;</span>,</span>
+<span id="cb62-7"><a href="#cb62-7" tabindex="-1"></a>                       <span class="at">guide =</span> <span class="fu">guide_colourbar</span>(<span class="at">barwidth =</span> <span class="fl">0.8</span>, <span class="at">barheight =</span> <span class="dv">10</span>)) <span class="sc">+</span> </span>
+<span id="cb62-8"><a href="#cb62-8" tabindex="-1"></a>  <span class="co"># Projects a portion of the earth</span></span>
+<span id="cb62-9"><a href="#cb62-9" tabindex="-1"></a>  <span class="fu">coord_map</span>() <span class="sc">+</span> </span>
+<span id="cb62-10"><a href="#cb62-10" tabindex="-1"></a>  <span class="co"># Change theme</span></span>
+<span id="cb62-11"><a href="#cb62-11" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb62-12"><a href="#cb62-12" tabindex="-1"></a>  <span class="co"># Change labels</span></span>
+<span id="cb62-13"><a href="#cb62-13" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Population&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb62-14"><a href="#cb62-14" tabindex="-1"></a>  <span class="co"># Add map scale</span></span>
+<span id="cb62-15"><a href="#cb62-15" tabindex="-1"></a>  ggsn<span class="sc">::</span><span class="fu">scalebar</span>(<span class="at">data =</span> China_map_pop, <span class="at">dist =</span> <span class="dv">500</span>, <span class="at">dist_unit =</span> <span class="st">&quot;km&quot;</span>,</span>
+<span id="cb62-16"><a href="#cb62-16" tabindex="-1"></a>                 <span class="at">border.size =</span> <span class="fl">0.4</span>, <span class="at">st.size =</span> <span class="dv">2</span>,</span>
+<span id="cb62-17"><a href="#cb62-17" tabindex="-1"></a>                 <span class="at">box.fill =</span> <span class="fu">c</span>(<span class="st">&#39;black&#39;</span>,<span class="st">&#39;white&#39;</span>),</span>
+<span id="cb62-18"><a href="#cb62-18" tabindex="-1"></a>                 <span class="at">transform =</span> <span class="cn">TRUE</span>, <span class="at">model =</span> <span class="st">&quot;WGS84&quot;</span>) </span></code></pre></div>
+<p><img src="S21_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>You can only select one (or more) province and add one point to the
+plot:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" tabindex="-1"></a><span class="do">## Extract Guangdong and Hong Kong from the data</span></span>
+<span id="cb63-2"><a href="#cb63-2" tabindex="-1"></a>GD_HK <span class="ot">&lt;-</span> <span class="fu">subset</span>(China_map_pop, NAME <span class="sc">==</span> <span class="st">&quot;广东省&quot;</span> <span class="sc">|</span> NAME <span class="sc">==</span> <span class="st">&quot;香港特别行政区&quot;</span>) </span>
+<span id="cb63-3"><a href="#cb63-3" tabindex="-1"></a></span>
+<span id="cb63-4"><a href="#cb63-4" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb63-5"><a href="#cb63-5" tabindex="-1"></a><span class="fu">ggplot</span>(GD_HK,<span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb63-6"><a href="#cb63-6" tabindex="-1"></a>  <span class="co"># Polygon</span></span>
+<span id="cb63-7"><a href="#cb63-7" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb63-8"><a href="#cb63-8" tabindex="-1"></a>  <span class="co"># Border</span></span>
+<span id="cb63-9"><a href="#cb63-9" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">color =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb63-10"><a href="#cb63-10" tabindex="-1"></a>  <span class="co"># Add one point: SUSTech (lat:22.59670, lon:113.98201)</span></span>
+<span id="cb63-11"><a href="#cb63-11" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">x =</span> <span class="fl">113.98201</span>, <span class="at">y =</span> <span class="fl">22.59670</span>, <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb63-12"><a href="#cb63-12" tabindex="-1"></a>  <span class="co"># Add label</span></span>
+<span id="cb63-13"><a href="#cb63-13" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="fl">113.98201</span>, <span class="at">y =</span> <span class="fl">22.59670+0.25</span>, <span class="at">label =</span> <span class="st">&quot;SUSTech&quot;</span>) <span class="sc">+</span></span>
+<span id="cb63-14"><a href="#cb63-14" tabindex="-1"></a>  <span class="co"># Projects a portion of the earth</span></span>
+<span id="cb63-15"><a href="#cb63-15" tabindex="-1"></a>  <span class="fu">coord_map</span>()</span></code></pre></div>
+<p><img src="S21_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<hr />
+</div>
+<div id="raster-data" class="section level1">
+<h1>Raster data</h1>
+<p><strong>Raster</strong> files have a much more compact data structure
+than vectors. Because of their regular structure, the coordinates do not
+need to be recorded for each pixel or cell in the rectangular extent. A
+raster is defined by:</p>
+<ul>
+<li><p>CRS (coordinate reference system)</p></li>
+<li><p>Coordinates of its origin</p></li>
+<li><p>A distance or cell size in each direction</p></li>
+<li><p>A dimension or numbers of cells in each direction</p></li>
+<li><p>An array of cell values</p></li>
+</ul>
+<p>Given this structure, coordinates for any cell can be computed and
+don’t need to be stored.</p>
+<p>The <code>raster</code> package is a major extension of spatial data
+classes to access large rasters and in particular, to process very large
+files. It includes <code>RasterLayer</code> and functions for converting
+among different classes and operators for computations on the raster
+data.</p>
+<p>We can use <code>raster()</code> to read in raster files. Download
+this <a
+href="https://zhu-group.github.io/ese335/download/wc2.1_10m_wind_11.tif">tiff
+file</a> (<code>wc2.1_10m_wind_11.tif</code>, ~ 2.4MB), which is the
+mean wind speed (m s<sup>-1</sup>) in Nov. from 1970-2000 provided by
+the <a href="https://worldclim.org/data/worldclim21.html">WorldClim</a>.
+The data is at a resolution of <code>10</code> minutes (~
+<code>340</code> km<sup>2</sup>).</p>
+<p>In R, we can load it as:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" tabindex="-1"></a><span class="co"># Read the tiff file</span></span>
+<span id="cb64-2"><a href="#cb64-2" tabindex="-1"></a>Wind_Nov <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="st">&quot;wc2.1_10m_wind_11.tif&quot;</span>)</span>
+<span id="cb64-3"><a href="#cb64-3" tabindex="-1"></a></span>
+<span id="cb64-4"><a href="#cb64-4" tabindex="-1"></a><span class="co"># Look at the raster attributes</span></span>
+<span id="cb64-5"><a href="#cb64-5" tabindex="-1"></a>Wind_Nov</span></code></pre></div>
+<pre><code>## class      : RasterLayer 
+## dimensions : 1080, 2160, 2332800  (nrow, ncol, ncell)
+## resolution : 0.1666667, 0.1666667  (x, y)
+## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : wc2.1_10m_wind_11.tif 
+## names      : wc2.1_10m_wind_11 
+## values     : 0.40025, 15.78051  (min, max)</code></pre>
+<p>We can plot it using <code>plot()</code> or <code>image()</code>
+function:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" tabindex="-1"></a><span class="co"># Quick plot using plot()</span></span>
+<span id="cb66-2"><a href="#cb66-2" tabindex="-1"></a><span class="fu">plot</span>(Wind_Nov, <span class="at">main=</span><span class="st">&quot;Wind speed in Nov.&quot;</span>)</span></code></pre></div>
+<p><img src="S21_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" tabindex="-1"></a><span class="co"># Set color</span></span>
+<span id="cb67-2"><a href="#cb67-2" tabindex="-1"></a>col <span class="ot">&lt;-</span> <span class="fu">terrain.colors</span>(<span class="dv">30</span>)</span>
+<span id="cb67-3"><a href="#cb67-3" tabindex="-1"></a></span>
+<span id="cb67-4"><a href="#cb67-4" tabindex="-1"></a><span class="co"># Quick using image()</span></span>
+<span id="cb67-5"><a href="#cb67-5" tabindex="-1"></a><span class="fu">image</span>(Wind_Nov,  <span class="at">main=</span><span class="st">&quot;Wind speed in Nov.&quot;</span>, <span class="at">col=</span>col)</span>
+<span id="cb67-6"><a href="#cb67-6" tabindex="-1"></a></span>
+<span id="cb67-7"><a href="#cb67-7" tabindex="-1"></a><span class="co"># Add contour lines</span></span>
+<span id="cb67-8"><a href="#cb67-8" tabindex="-1"></a><span class="fu">contour</span>(Wind_Nov, <span class="at">add=</span>T, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="S21_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<p>Or with <code>ggplot()</code>, we can make a better map:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a><span class="co"># Convert the raster to a date.frame</span></span>
+<span id="cb68-2"><a href="#cb68-2" tabindex="-1"></a>Wind_Nov_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(Wind_Nov, <span class="at">xy =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb68-3"><a href="#cb68-3" tabindex="-1"></a></span>
+<span id="cb68-4"><a href="#cb68-4" tabindex="-1"></a><span class="co"># Check the data structure</span></span>
+<span id="cb68-5"><a href="#cb68-5" tabindex="-1"></a><span class="fu">str</span>(Wind_Nov_df)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    2332800 obs. of  3 variables:
+##  $ x                : num  -180 -180 -180 -179 -179 ...
+##  $ y                : num  89.9 89.9 89.9 89.9 89.9 ...
+##  $ wc2.1_10m_wind_11: num  NA NA NA NA NA NA NA NA NA NA ...</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a><span class="co"># Making plot</span></span>
+<span id="cb70-2"><a href="#cb70-2" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb70-3"><a href="#cb70-3" tabindex="-1"></a>  <span class="fu">geom_raster</span>(<span class="at">data =</span> Wind_Nov_df,  </span>
+<span id="cb70-4"><a href="#cb70-4" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">fill =</span> wc2<span class="fl">.1</span>_10m_wind_11)) <span class="sc">+</span> </span>
+<span id="cb70-5"><a href="#cb70-5" tabindex="-1"></a>  <span class="co"># Change labels</span></span>
+<span id="cb70-6"><a href="#cb70-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Latitude&quot;</span>, <span class="at">y=</span><span class="st">&quot;Longitude&quot;</span>) <span class="sc">+</span></span>
+<span id="cb70-7"><a href="#cb70-7" tabindex="-1"></a>  <span class="co"># Change theme</span></span>
+<span id="cb70-8"><a href="#cb70-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb70-9"><a href="#cb70-9" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb70-10"><a href="#cb70-10" tabindex="-1"></a>  <span class="co"># Change legend</span></span>
+<span id="cb70-11"><a href="#cb70-11" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>( <span class="st">&quot;Wind speed (m/s)&quot;</span>, <span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>),</span>
+<span id="cb70-12"><a href="#cb70-12" tabindex="-1"></a>                       <span class="at">low =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb70-13"><a href="#cb70-13" tabindex="-1"></a>                       <span class="at">high =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb70-14"><a href="#cb70-14" tabindex="-1"></a>                       <span class="at">n.breaks =</span> <span class="dv">10</span>,</span>
+<span id="cb70-15"><a href="#cb70-15" tabindex="-1"></a>                       <span class="at">space =</span> <span class="st">&quot;Lab&quot;</span>,</span>
+<span id="cb70-16"><a href="#cb70-16" tabindex="-1"></a>                       <span class="at">na.value =</span> <span class="st">&quot;grey50&quot;</span>,</span>
+<span id="cb70-17"><a href="#cb70-17" tabindex="-1"></a>                       <span class="at">guide =</span> <span class="st">&quot;colourbar&quot;</span>,</span>
+<span id="cb70-18"><a href="#cb70-18" tabindex="-1"></a>                       <span class="at">aesthetics =</span> <span class="st">&quot;fill&quot;</span>) <span class="sc">+</span></span>
+<span id="cb70-19"><a href="#cb70-19" tabindex="-1"></a>  <span class="co"># Adjust the theme</span></span>
+<span id="cb70-20"><a href="#cb70-20" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">16</span>),</span>
+<span id="cb70-21"><a href="#cb70-21" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">16</span>, <span class="at">angle=</span><span class="dv">90</span>),</span>
+<span id="cb70-22"><a href="#cb70-22" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>),</span>
+<span id="cb70-23"><a href="#cb70-23" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>),</span>
+<span id="cb70-24"><a href="#cb70-24" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb70-25"><a href="#cb70-25" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb70-26"><a href="#cb70-26" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,</span>
+<span id="cb70-27"><a href="#cb70-27" tabindex="-1"></a>        <span class="at">legend.key =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb70-28"><a href="#cb70-28" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb70-29"><a href="#cb70-29" tabindex="-1"></a>  <span class="co"># Add a title</span></span>
+<span id="cb70-30"><a href="#cb70-30" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Wind Speed in Nov.&quot;</span>) </span></code></pre></div>
+<p><img src="S21_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>You can also use <code>crop()</code> function to select an area of
+interest:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" tabindex="-1"></a><span class="co"># Define the crop extent</span></span>
+<span id="cb71-2"><a href="#cb71-2" tabindex="-1"></a>Crop_box <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">125</span>,<span class="dv">15</span>,<span class="dv">30</span>)</span>
+<span id="cb71-3"><a href="#cb71-3" tabindex="-1"></a></span>
+<span id="cb71-4"><a href="#cb71-4" tabindex="-1"></a><span class="co"># Crop the raster</span></span>
+<span id="cb71-5"><a href="#cb71-5" tabindex="-1"></a>Wind_Nov_crop <span class="ot">&lt;-</span> <span class="fu">crop</span>(Wind_Nov, Crop_box)</span>
+<span id="cb71-6"><a href="#cb71-6" tabindex="-1"></a></span>
+<span id="cb71-7"><a href="#cb71-7" tabindex="-1"></a><span class="co"># Plot cropped DEM</span></span>
+<span id="cb71-8"><a href="#cb71-8" tabindex="-1"></a><span class="fu">plot</span>(Wind_Nov_crop, <span class="at">main=</span><span class="st">&quot;Wind speed in Nov.&quot;</span>)</span></code></pre></div>
+<p><img src="S21_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<hr />
+</div>
+<div id="adding-features-to-a-base-map" class="section level1">
+<h1>Adding features to a base map</h1>
+<div id="add-points" class="section level2">
+<h2>Add points</h2>
+<p>Suppose we want to plot site locations on a city scale, and we want
+to add a base map that shows road, terrain, and built-up areas. This can
+be done with the <code>ggmap()</code> package:</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a><span class="co"># Site information</span></span>
+<span id="cb72-2"><a href="#cb72-2" tabindex="-1"></a>Site_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SUSTech&quot;</span>, <span class="st">&quot;Longhua&quot;</span>, <span class="st">&quot;Xichong&quot;</span>, <span class="st">&quot;Baoan&quot;</span>, <span class="st">&quot;Kuiyong&quot;</span>)</span>
+<span id="cb72-3"><a href="#cb72-3" tabindex="-1"></a>Site_lon  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">114.06667</span>,<span class="fl">114.02200</span>,<span class="fl">114.56111</span>,<span class="fl">113.89606</span>,<span class="fl">114.42824</span>)</span>
+<span id="cb72-4"><a href="#cb72-4" tabindex="-1"></a>Site_lat  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">22.61667</span>,<span class="fl">22.72882</span>,<span class="fl">22.48077</span>,<span class="fl">22.53965</span>,<span class="fl">22.63427</span>)</span>
+<span id="cb72-5"><a href="#cb72-5" tabindex="-1"></a>Site_type <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Urban&quot;</span>, <span class="st">&quot;Urban&quot;</span>, <span class="st">&quot;Background&quot;</span>, <span class="st">&quot;Urban&quot;</span>, <span class="st">&quot;Rural&quot;</span>)</span>
+<span id="cb72-6"><a href="#cb72-6" tabindex="-1"></a>  </span>
+<span id="cb72-7"><a href="#cb72-7" tabindex="-1"></a><span class="co"># Make a data frame</span></span>
+<span id="cb72-8"><a href="#cb72-8" tabindex="-1"></a>Site_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">name=</span>Site_name, <span class="at">lon=</span>Site_lon, <span class="at">lat=</span>Site_lat, <span class="at">type=</span>Site_type)</span>
+<span id="cb72-9"><a href="#cb72-9" tabindex="-1"></a></span>
+<span id="cb72-10"><a href="#cb72-10" tabindex="-1"></a><span class="co"># Get the lat and lon range</span></span>
+<span id="cb72-11"><a href="#cb72-11" tabindex="-1"></a>Mapbox    <span class="ot">&lt;-</span> <span class="fu">make_bbox</span>(<span class="at">lon =</span> Site_data<span class="sc">$</span>lon, <span class="at">lat =</span> Site_data<span class="sc">$</span>lat, <span class="at">f =</span> .<span class="dv">1</span>)</span>
+<span id="cb72-12"><a href="#cb72-12" tabindex="-1"></a></span>
+<span id="cb72-13"><a href="#cb72-13" tabindex="-1"></a><span class="co"># Pull the base map</span></span>
+<span id="cb72-14"><a href="#cb72-14" tabindex="-1"></a><span class="co"># The keyword zoom defines the map resolution</span></span>
+<span id="cb72-15"><a href="#cb72-15" tabindex="-1"></a><span class="co"># Here we use base map from stadiamaps</span></span>
+<span id="cb72-16"><a href="#cb72-16" tabindex="-1"></a><span class="co"># To obtain an API key and enable services, </span></span>
+<span id="cb72-17"><a href="#cb72-17" tabindex="-1"></a><span class="co"># go to https://client.stadiamaps.com/signup/</span></span>
+<span id="cb72-18"><a href="#cb72-18" tabindex="-1"></a><span class="co"># Then use register_stadiamaps() to set the API key</span></span>
+<span id="cb72-19"><a href="#cb72-19" tabindex="-1"></a>Base_map  <span class="ot">&lt;-</span> <span class="fu">get_stadiamap</span>(Mapbox, <span class="at">zoom =</span> <span class="dv">10</span>, <span class="at">maptype =</span> <span class="st">&quot;stamen_terrain&quot;</span>)</span></code></pre></div>
+<pre><code>## ℹ © Stadia Maps © Stamen Design © OpenMapTiles © OpenStreetMap contributors.</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a><span class="fu">ggmap</span>(Base_map)</span></code></pre></div>
+<p><img src="S21_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb75-2"><a href="#cb75-2" tabindex="-1"></a><span class="fu">ggmap</span>(Base_map) <span class="sc">+</span> </span>
+<span id="cb75-3"><a href="#cb75-3" tabindex="-1"></a>  <span class="co"># Add sites</span></span>
+<span id="cb75-4"><a href="#cb75-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>Site_data, <span class="fu">aes</span>(<span class="at">x=</span>lon, <span class="at">y=</span>lat, <span class="at">fill=</span>type, <span class="at">shape=</span>type), </span>
+<span id="cb75-5"><a href="#cb75-5" tabindex="-1"></a>             <span class="at">color=</span><span class="st">&quot;white&quot;</span>, <span class="at">cex=</span><span class="fl">5.5</span>) <span class="sc">+</span> <span class="co"># plot the points</span></span>
+<span id="cb75-6"><a href="#cb75-6" tabindex="-1"></a>  <span class="co"># Change color</span></span>
+<span id="cb75-7"><a href="#cb75-7" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>), </span>
+<span id="cb75-8"><a href="#cb75-8" tabindex="-1"></a>                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Background&quot;</span>, <span class="st">&quot;Rural&quot;</span>,<span class="st">&quot;Urban&quot;</span>), <span class="at">name=</span><span class="cn">NULL</span>) <span class="sc">+</span> </span>
+<span id="cb75-9"><a href="#cb75-9" tabindex="-1"></a>  <span class="co"># Change shape</span></span>
+<span id="cb75-10"><a href="#cb75-10" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">21</span>,<span class="dv">22</span>,<span class="dv">24</span>), </span>
+<span id="cb75-11"><a href="#cb75-11" tabindex="-1"></a>                     <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Background&quot;</span>, <span class="st">&quot;Rural&quot;</span>,<span class="st">&quot;Urban&quot;</span>), <span class="at">name=</span><span class="cn">NULL</span>) <span class="sc">+</span> </span>
+<span id="cb75-12"><a href="#cb75-12" tabindex="-1"></a>  <span class="co"># Change labels and title</span></span>
+<span id="cb75-13"><a href="#cb75-13" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Latitude&quot;</span>, <span class="at">y=</span><span class="st">&quot;Longitude&quot;</span>, <span class="at">title=</span><span class="st">&quot;Monitoring sites&quot;</span>) <span class="sc">+</span> <span class="co"># label the axes</span></span>
+<span id="cb75-14"><a href="#cb75-14" tabindex="-1"></a>  <span class="co"># Change theme</span></span>
+<span id="cb75-15"><a href="#cb75-15" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb75-16"><a href="#cb75-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;bottom&quot;</span>, </span>
+<span id="cb75-17"><a href="#cb75-17" tabindex="-1"></a>        <span class="at">legend.key  =</span> <span class="fu">element_rect</span>(<span class="at">colour =</span> <span class="st">&quot;white&quot;</span>), </span>
+<span id="cb75-18"><a href="#cb75-18" tabindex="-1"></a>        <span class="at">axis.text   =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">0.75</span>)), </span>
+<span id="cb75-19"><a href="#cb75-19" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">45</span>, <span class="at">vjust=</span><span class="fl">0.5</span>)) </span></code></pre></div>
+<p><img src="S21_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
+</div>
+<div id="add-a-path" class="section level2">
+<h2>Add a path</h2>
+<p>Download the <a
+href="https://zhu-group.github.io/ese335/download/Mangkhut.txt">track of
+Typhoon Mangkhut</a>, and read via:</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" tabindex="-1"></a><span class="co"># Read the data</span></span>
+<span id="cb76-2"><a href="#cb76-2" tabindex="-1"></a>Mangkhut_data       <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Mangkhut.txt&quot;</span>)</span>
+<span id="cb76-3"><a href="#cb76-3" tabindex="-1"></a></span>
+<span id="cb76-4"><a href="#cb76-4" tabindex="-1"></a><span class="co"># Get path and max wind speed</span></span>
+<span id="cb76-5"><a href="#cb76-5" tabindex="-1"></a>Mangkhut_lat        <span class="ot">&lt;-</span> Mangkhut_data<span class="sc">$</span>V4<span class="sc">*</span><span class="fl">0.1</span></span>
+<span id="cb76-6"><a href="#cb76-6" tabindex="-1"></a>Mangkhut_lon        <span class="ot">&lt;-</span> Mangkhut_data<span class="sc">$</span>V5<span class="sc">*</span><span class="fl">0.1</span></span>
+<span id="cb76-7"><a href="#cb76-7" tabindex="-1"></a>Mangkhut_pressure   <span class="ot">&lt;-</span> Mangkhut_data<span class="sc">$</span>V6</span>
+<span id="cb76-8"><a href="#cb76-8" tabindex="-1"></a>Mangkhut_max_speed  <span class="ot">&lt;-</span> Mangkhut_data<span class="sc">$</span>V7<span class="sc">*</span><span class="fl">0.514</span></span></code></pre></div>
+<p>let’s plot the max wind speed on the map:</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" tabindex="-1"></a><span class="co"># Make a data frame for ggplot</span></span>
+<span id="cb77-2"><a href="#cb77-2" tabindex="-1"></a>Mangkhut_data_new <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">lat=</span>Mangkhut_lat,<span class="at">lon=</span>Mangkhut_lon,</span>
+<span id="cb77-3"><a href="#cb77-3" tabindex="-1"></a>                                <span class="at">pressure=</span>Mangkhut_pressure, <span class="at">speed=</span>Mangkhut_max_speed)</span>
+<span id="cb77-4"><a href="#cb77-4" tabindex="-1"></a></span>
+<span id="cb77-5"><a href="#cb77-5" tabindex="-1"></a><span class="co"># Get the domain</span></span>
+<span id="cb77-6"><a href="#cb77-6" tabindex="-1"></a>Domain            <span class="ot">&lt;-</span> <span class="fu">make_bbox</span>(<span class="at">lon =</span> Mangkhut_data_new<span class="sc">$</span>lon, </span>
+<span id="cb77-7"><a href="#cb77-7" tabindex="-1"></a>                               <span class="at">lat =</span> Mangkhut_data_new<span class="sc">$</span>lat, <span class="at">f =</span> .<span class="dv">1</span>)</span>
+<span id="cb77-8"><a href="#cb77-8" tabindex="-1"></a></span>
+<span id="cb77-9"><a href="#cb77-9" tabindex="-1"></a><span class="co"># Get the base map</span></span>
+<span id="cb77-10"><a href="#cb77-10" tabindex="-1"></a>Base_map          <span class="ot">&lt;-</span> <span class="fu">get_stadiamap</span>(Domain, <span class="at">zoom =</span> <span class="dv">5</span>, <span class="at">maptype =</span> <span class="st">&quot;stamen_terrain&quot;</span>)</span></code></pre></div>
+<pre><code>## ℹ © Stadia Maps © Stamen Design © OpenMapTiles © OpenStreetMap contributors.</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" tabindex="-1"></a><span class="co"># Show base map</span></span>
+<span id="cb79-2"><a href="#cb79-2" tabindex="-1"></a><span class="fu">ggmap</span>(Base_map)</span></code></pre></div>
+<p><img src="S21_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a><span class="co"># Plot base map</span></span>
+<span id="cb80-2"><a href="#cb80-2" tabindex="-1"></a>Map1              <span class="ot">&lt;-</span> <span class="fu">ggmap</span>(Base_map)</span>
+<span id="cb80-3"><a href="#cb80-3" tabindex="-1"></a></span>
+<span id="cb80-4"><a href="#cb80-4" tabindex="-1"></a><span class="co"># Plot the path</span></span>
+<span id="cb80-5"><a href="#cb80-5" tabindex="-1"></a>Map1 <span class="sc">+</span> </span>
+<span id="cb80-6"><a href="#cb80-6" tabindex="-1"></a>  <span class="co"># Plot the track </span></span>
+<span id="cb80-7"><a href="#cb80-7" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">data =</span> Mangkhut_data_new, </span>
+<span id="cb80-8"><a href="#cb80-8" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">color=</span>speed), <span class="at">size=</span><span class="fl">1.5</span>, </span>
+<span id="cb80-9"><a href="#cb80-9" tabindex="-1"></a>            <span class="at">lineend =</span> <span class="st">&quot;round&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb80-10"><a href="#cb80-10" tabindex="-1"></a>  <span class="co"># Set the color</span></span>
+<span id="cb80-11"><a href="#cb80-11" tabindex="-1"></a>  <span class="fu">scale_colour_gradient</span>(<span class="st">&quot;Max Wind Speed (m/s)&quot;</span>, <span class="at">low =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>, </span>
+<span id="cb80-12"><a href="#cb80-12" tabindex="-1"></a>                        <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">60</span>, <span class="at">by =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb80-13"><a href="#cb80-13" tabindex="-1"></a>  <span class="co"># Change labels</span></span>
+<span id="cb80-14"><a href="#cb80-14" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Latitude&quot;</span>, <span class="at">y=</span><span class="st">&quot;Longitude&quot;</span>, <span class="at">title=</span><span class="st">&quot;Typhoon Mangkhut Track&quot;</span>) <span class="sc">+</span> <span class="co"># label the axes</span></span>
+<span id="cb80-15"><a href="#cb80-15" tabindex="-1"></a>  <span class="fu">theme_bw</span>() </span></code></pre></div>
+<pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+<p><img src="S21_files/figure-html/unnamed-chunk-18-2.png" width="672" /></p>
+<hr />
+</div>
+</div>
+<div id="in-class-exercises" class="section level1">
+<h1>In-class exercises</h1>
+<div id="exercise-1" class="section level2">
+<h2>Exercise #1</h2>
+<p>Plot wind speed in Nov. near your hometown (a <code>10</code> degree
+by <code>10</code> degree domain) using the <code>Wind_Nov</code>
+object.</p>
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise #2</h2>
+<p>Plot a map of your home city (zoom=12), and add a few points to the
+map.</p>
+<hr />
+</div>
+</div>
+<div id="further-reading" class="section level1">
+<h1>Further reading</h1>
+<ul>
+<li><p><a
+href="https://cengel.github.io/rspatial/2_spDataTypes.nb.html">Introduction
+to Spatial Data Types in R</a></p></li>
+<li><p><a href="https://cengel.github.io/rspatial/">Introduction to
+Mapping and Spatial Analysis with R</a></p></li>
+<li><p><a href="https://cran.r-project.org/web/views/Spatial.html">CRAN
+Task View: Analysis of Spatial Data</a></p></li>
+<li><p><a href="https://hautahi.com/rmaps">Mapping Spatial Data in
+R</a></p></li>
+<li><p><a
+href="https://www.neonscience.org/resources/learning-hub/tutorials/raster-data-r">Raster
+Data in R - The Basics</a></p></li>
+<li><p><a
+href="https://cfss.uchicago.edu/notes/raster-maps-with-ggmap/">Drawing
+raster maps with ggmap</a></p></li>
+<li><p>Roger S. Bivand, Edzer J. Pebesma, Virgilio Gómez-Rubio, Applied
+Spatial Data Analysis with R.</p></li>
+</ul>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -484,9 +484,23 @@ div.tocify {
 <div id="prerequisites" class="section level1">
 <h1>Prerequisites</h1>
 <p>Load the libraries with R:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(BSDA)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(FSA)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(BSDA)</span></code></pre></div>
+<pre><code>## Warning: 程辑包&#39;BSDA&#39;是用R版本4.3.3 来建造的</code></pre>
+<pre><code>## 载入需要的程辑包：lattice</code></pre>
+<pre><code>## 
+## 载入程辑包：&#39;BSDA&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:datasets&#39;:
+## 
+##     Orange</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">library</span>(FSA)</span></code></pre></div>
+<pre><code>## Warning: 程辑包&#39;FSA&#39;是用R版本4.3.3 来建造的</code></pre>
+<pre><code>## Registered S3 methods overwritten by &#39;FSA&#39;:
+##   method       from
+##   confint.boot car 
+##   hist.boot    car</code></pre>
+<pre><code>## ## FSA v0.9.5. See citation(&#39;FSA&#39;) if used in publication.
+## ## Run fishR() for related website and fishR(&#39;IFAR&#39;) for related book.</code></pre>
 <hr />
 </div>
 <div id="section-example-soil-organic-matter" class="section level1">
@@ -591,14 +605,14 @@ But there is a way to handle ties in the test.</p></li>
 </ul>
 <p>The Mann–Whitney U test is done with the <code>wilcox.test()</code>
 function in R:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Make up samples</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>Treat     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>Control   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">9</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co"># Perform the Mann Whitney U test</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">wilcox.test</span>(Treat, Control, <span class="at">paired=</span>F, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning in wilcox.test.default(Treat, Control, paired = F, alternative =
-## &quot;two.sided&quot;): 无法精確計算带连结的p值</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Make up samples</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>Treat     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>Control   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">9</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co"># Perform the Mann Whitney U test</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="fu">wilcox.test</span>(Treat, Control, <span class="at">paired=</span>F, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in wilcox.test.default(Treat, Control, paired = F, alternative = &quot;two.sided&quot;):
+## 无法精確計算带连结的p值</code></pre>
 <pre><code>## 
 ##  Wilcoxon rank sum test with continuity correction
 ## 
@@ -625,14 +639,14 @@ normally distributed.</p>
 <p>The Wilcoxon signed rank test is also done with the
 <code>wilcox.test()</code> function in R, but with different
 keywords:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Make up samples</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>Treat     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>Control   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">9</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co"># Perform the Wilcoxon signed rank test</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="fu">wilcox.test</span>(Treat, Control, <span class="at">paired=</span>T, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning in wilcox.test.default(Treat, Control, paired = T, alternative =
-## &quot;two.sided&quot;): 无法精確計算带连结的p值</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Make up samples</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>Treat     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>Control   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">9</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co"># Perform the Wilcoxon signed rank test</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="fu">wilcox.test</span>(Treat, Control, <span class="at">paired=</span>T, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in wilcox.test.default(Treat, Control, paired = T, alternative = &quot;two.sided&quot;):
+## 无法精確計算带连结的p值</code></pre>
 <pre><code>## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -647,7 +661,7 @@ keywords:</p>
 neither normal nor symmetrical, use the sign test. The sign test is done
 with the <code>SIGN.test()</code> function from the <code>BSDA</code>
 package R:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">SIGN.test</span>(Treat, Control, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">SIGN.test</span>(Treat, Control, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Dependent-samples Sign-Test
 ## 
@@ -686,20 +700,19 @@ data.</p>
 </ul>
 <p>The Kruskal–Wallis test is done with the <code>kruskal.test()</code>
 function in R:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="fu">require</span>(graphics)</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># Boxplots</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(<span class="at">x=</span>Month, <span class="at">y=</span>Ozone, <span class="at">group=</span>Month, <span class="at">fill=</span>Month)) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Monthly ozone&quot;</span>, </span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;Month&quot;</span>, <span class="at">y=</span><span class="st">&quot;Ozone [ppb]&quot;</span>) <span class="sc">+</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<pre><code>## Warning: Removed 37 rows containing non-finite values
-## (`stat_boxplot()`).</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="fu">require</span>(graphics)</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co"># Boxplots</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(<span class="at">x=</span>Month, <span class="at">y=</span>Ozone, <span class="at">group=</span>Month, <span class="at">fill=</span>Month)) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Monthly ozone&quot;</span>, </span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;Month&quot;</span>, <span class="at">y=</span><span class="st">&quot;Ozone [ppb]&quot;</span>) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 37 rows containing non-finite values (`stat_boxplot()`).</code></pre>
 <p><img src="S13_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Perform the Kruskal–Wallis test</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">kruskal.test</span>(Ozone <span class="sc">~</span> Month, <span class="at">data =</span> airquality)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Perform the Kruskal–Wallis test</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="fu">kruskal.test</span>(Ozone <span class="sc">~</span> Month, <span class="at">data =</span> airquality)</span></code></pre></div>
 <pre><code>## 
 ##  Kruskal-Wallis rank sum test
 ## 
@@ -712,7 +725,7 @@ from others, post-hoc testing can be conducted. The most common post-hoc
 test for the Kruskal–Wallis test is the <em>Dunn test</em>, here
 conducted with the <code>dunnTest()</code> function in the
 <code>FSA</code> package.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">dunnTest</span>(Ozone <span class="sc">~</span> Month, <span class="at">data=</span>airquality, <span class="at">method=</span><span class="st">&quot;bh&quot;</span>)      </span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">dunnTest</span>(Ozone <span class="sc">~</span> Month, <span class="at">data=</span>airquality, <span class="at">method=</span><span class="st">&quot;bh&quot;</span>)      </span></code></pre></div>
 <pre><code>## Warning: Month was coerced to a factor.</code></pre>
 <pre><code>## Warning: Some rows deleted from &#39;x&#39; and &#39;g&#39; because missing data.</code></pre>
 <pre><code>## Dunn (1964) Kruskal-Wallis multiple comparison</code></pre>
@@ -746,21 +759,21 @@ negative correlation. A <span class="math inline">\(\rho\)</span> of
 </ul>
 <p>The Spearman correlation is done with the <code>cor.test()</code>
 function in R:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Make up some random values</span></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>x<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">20</span>,<span class="dv">0</span>,<span class="fl">0.5</span>)</span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co"># Perform the Spearman correlation test</span></span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="fu">cor.test</span>(x, y, <span class="at">method=</span><span class="st">&quot;spearman&quot;</span>, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>, <span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="co"># Make up some random values</span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>x<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">20</span>,<span class="dv">0</span>,<span class="fl">0.5</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a><span class="co"># Perform the Spearman correlation test</span></span>
+<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a><span class="fu">cor.test</span>(x, y, <span class="at">method=</span><span class="st">&quot;spearman&quot;</span>, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>, <span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Spearman&#39;s rank correlation rho
 ## 
 ## data:  x and y
-## S = 98, p-value = 4.506e-06
+## S = 64, p-value = 6.217e-06
 ## alternative hypothesis: true rho is not equal to 0
 ## sample estimates:
 ##       rho 
-## 0.9263158</code></pre>
+## 0.9518797</code></pre>
 <hr />
 </div>
 <div id="kendall-correlation-test" class="section level1">
@@ -778,17 +791,17 @@ there are many tied ranks</strong>.</p>
 </ul>
 <p>The Kendall correlation is also done with the <code>cor.test()</code>
 function in R:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Perform the Kendall correlation test</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="fu">cor.test</span>(x, y, <span class="at">method=</span><span class="st">&quot;kendall&quot;</span>, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>, <span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co"># Perform the Kendall correlation test</span></span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a><span class="fu">cor.test</span>(x, y, <span class="at">method=</span><span class="st">&quot;kendall&quot;</span>, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>, <span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Kendall&#39;s rank correlation tau
 ## 
 ## data:  x and y
-## T = 173, p-value = 4.608e-09
+## T = 176, p-value = 4.965e-10
 ## alternative hypothesis: true tau is not equal to 0
 ## sample estimates:
 ##       tau 
-## 0.8210526</code></pre>
+## 0.8526316</code></pre>
 <hr />
 </div>
 <div id="summary-of-non-parametric-tests" class="section level1">
