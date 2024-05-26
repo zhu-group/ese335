@@ -491,11 +491,11 @@ maps</h1>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">library</span>(plyr)</span></code></pre></div>
 <pre><code>## Warning: 程辑包&#39;plyr&#39;是用R版本4.3.3 来建造的</code></pre>
-<pre><code>## -----------------------------------------------------------------------------------------------</code></pre>
+<pre><code>## ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</code></pre>
 <pre><code>## You have loaded plyr after dplyr - this is likely to cause problems.
 ## If you need functions from both plyr and dplyr, please load plyr first, then dplyr:
 ## library(plyr); library(dplyr)</code></pre>
-<pre><code>## -----------------------------------------------------------------------------------------------</code></pre>
+<pre><code>## ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</code></pre>
 <pre><code>## 
 ## 载入程辑包：&#39;plyr&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:FSA&#39;:
@@ -587,35 +587,21 @@ up. If you want to see the data hidden in
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" tabindex="-1"></a><span class="co"># Check the attributes, use the operator @</span></span>
 <span id="cb44-2"><a href="#cb44-2" tabindex="-1"></a>map_data <span class="ot">&lt;-</span> China_map<span class="sc">@</span>data</span>
 <span id="cb44-3"><a href="#cb44-3" tabindex="-1"></a><span class="fu">head</span>(map_data)</span></code></pre></div>
-<pre><code>##      AREA PERIMETER BOU2_4M_ BOU2_4M_ID ADCODE93 ADCODE99
-## 0  54.447    68.489        2         23   230000   230000
-## 1 129.113   129.933        3         15   150000   150000
-## 2 175.591    84.905        4         65   650000   650000
-## 3  21.315    41.186        5         22   220000   220000
-## 4  15.603    38.379        6         21   210000   210000
-## 5  41.508    76.781        7         62   620000   620000
-##                                                 NAME
-## 0                          \xba\xda\xc1\xfa\xbd\xadʡ
-## 1          \xc4\xda\xc3ɹ\xc5\xd7\xd4\xd6\xce\xc7\xf8
-## 2 \xd0½\xaeά\xce\xe1\xb6\xfb\xd7\xd4\xd6\xce\xc7\xf8
-## 3                                  \xbc\xaa\xc1\xd6ʡ
-## 4                                  \xc1\xc9\xc4\xfeʡ
-## 5                                  \xb8\xca\xcb\xe0ʡ</code></pre>
+<pre><code>##      AREA PERIMETER BOU2_4M_ BOU2_4M_ID ADCODE93 ADCODE99                                               NAME
+## 0  54.447    68.489        2         23   230000   230000                          \xba\xda\xc1\xfa\xbd\xadʡ
+## 1 129.113   129.933        3         15   150000   150000          \xc4\xda\xc3ɹ\xc5\xd7\xd4\xd6\xce\xc7\xf8
+## 2 175.591    84.905        4         65   650000   650000 \xd0½\xaeά\xce\xe1\xb6\xfb\xd7\xd4\xd6\xce\xc7\xf8
+## 3  21.315    41.186        5         22   220000   220000                                  \xbc\xaa\xc1\xd6ʡ
+## 4  15.603    38.379        6         21   210000   210000                                  \xc1\xc9\xc4\xfeʡ
+## 5  41.508    76.781        7         62   620000   620000                                  \xb8\xca\xcb\xe0ʡ</code></pre>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a><span class="fu">tail</span>(map_data)</span></code></pre></div>
-<pre><code>##     AREA PERIMETER BOU2_4M_ BOU2_4M_ID ADCODE93 ADCODE99
-## 919    0     0.012      921       3099   810000   810000
-## 920    0     0.037      922       3110   810000   810000
-## 921    0     0.018      923       3109   810000   810000
-## 922    0     0.014      924       3112   810000   810000
-## 923    0     0.079      925       3114   810000   810000
-## 924    0     0.011      926       3115   810000   810000
-##                                                  NAME
-## 919 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8
-## 920 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8
-## 921 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8
-## 922 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8
-## 923 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8
-## 924 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8</code></pre>
+<pre><code>##     AREA PERIMETER BOU2_4M_ BOU2_4M_ID ADCODE93 ADCODE99                                              NAME
+## 919    0     0.012      921       3099   810000   810000 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8
+## 920    0     0.037      922       3110   810000   810000 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8
+## 921    0     0.018      923       3109   810000   810000 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8
+## 922    0     0.014      924       3112   810000   810000 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8
+## 923    0     0.079      925       3114   810000   810000 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8
+## 924    0     0.011      926       3115   810000   810000 \xcf\xe3\xb8\xdb\xccر\xf0\xd0\xd0\xd5\xfe\xc7\xf8</code></pre>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="co"># Convert characters</span></span>
 <span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a>China_map<span class="sc">$</span>NAME <span class="ot">&lt;-</span> <span class="fu">iconv</span>(China_map<span class="sc">$</span>NAME, <span class="st">&quot;GBK&quot;</span>)</span>
 <span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a><span class="co"># Check the attributes, use the operator @</span></span>
