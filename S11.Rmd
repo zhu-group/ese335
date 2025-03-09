@@ -1,0 +1,315 @@
+---
+title: "Section 11 Post-hoc test and Two-way ANOVA"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+***
+
+# Prerequisites
+
+Load the libraries with R:
+```{r}
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(randtests)
+library(moments)
+library(outliers)
+library(nortest)
+```
+
+***
+
+# Post-hoc test after one-way ANOVA 
+
+We saw from [the last section](https://zhu-group.github.io/ese335/S10.html) that one-way ANOVA is used to test whether means among populations are the same. Once a one-way ANOVA is done, and significant differences are identified, one would be more interested in finding out **which specific groups’s means (compared with each other) are different**. The test compares all possible pairs of means. And this is so-called the *post-hoc test* of one-way ANOVA. 
+
+There are a great number of different post hoc tests that you can use. Here we introduce the *Tukey's Test* (or Tukey procedure), also called *Tukey’s Honest Significant Difference* (Tukey's HSD) test, which is the most common and widely accepted method. See [RS] ch. 6 (p.149-170) and [post hoc ANOVA tests](https://pure.aston.ac.uk/ws/files/14501361/Statnote_6.pdf) for other tests and when to use those.
+
+Let's use the [Cd example from the last section](https://zhu-group.github.io/ese335/S10.html#Section_Example:_Removal_of_cadmium_from_soil_by_plants) for the one-way ANOVA and its Tukey's test.
+
+```{r}
+# Sub-samples
+Control  <- c(0.64, 0.91, 0.84, 0.41, 1.58, 0.48, 0.88, 0.74, 1.09, 1.28)
+P1       <- c(1.20, 1.17, 0.76, 0.92, 0.65, 1.14, 1.05, 1.28, 0.89, 1.06)
+P2       <- c(0.25, 1.31, 0.43, 1.18, 1.02, 0.83, 1.02, 0.66, 0.70, 0.83)
+P3       <- c(0.63, 0.30, 0.49, 0.01, 0.63, 0.69, 0.68, 0.34, 1.09, 0.42)
+
+# Make data frame
+Cd_data  <- data.frame(Cd=c(Control, P1, P2, P3),
+                       group=c(rep("Control", length(Control)),
+                              rep("Plant 1", length(P1)),
+                              rep("Plant 2", length(P2)),
+                              rep("Plant 3", length(P3)) ))
+
+# Compare boxplots
+ggplot(Cd_data, aes(x=group, y=Cd, fill=group)) +
+  geom_boxplot() +
+  labs(title="Soil Cd concentrations under different conditions", 
+       x="Group", y="Cd concentration [mg/kg]") +
+  theme_classic()
+
+# Perform the one-way ANOVA
+res_aov <- aov(Cd ~ group, data=Cd_data)
+summary(res_aov)
+
+# Post-hoc test with the Hukey test
+TukeyHSD(res_aov)
+```
+```{r, fig.width=8, fig.height=10}  
+# Plot the 95% (default) CI of the difference
+plot(TukeyHSD(res_aov))
+```
+
+Tukey's test shows a significant difference in mean Cd concentration in the field with Plant #1 and field with Plant #3, and no significant difference between other pairs.
+
+***
+
+# Section Example: Removal of cadmium from the soil by multiple approaches
+
+Now suppose we would like to test whether other approaches could have an impact on soil Cd concentration. Instead of using plants (#1, #2, and #3) alone, we also try physical (with chemical #1 and #2) and chemical (#1, #2, #3, and #4) treatment method. We measure Cd concentration from each combination. 
+
+The results are list in the [Cd dataset](https://zhu-group.github.io/ese335/download/cd_data.csv), which contains `96` rows and `4` variables:
+
++ Physical: type of chemical used: factor level: 1 and 2
++ Chemical: type of physical method used: factor level: 1, 2, 3, and 4
++ Plant: type of Plant used: factor level: 1, 2, and 3
++ Cd: soil Cd concentration
+
+In R import the data:
+
+```{r}
+# Read csv
+cd_data <- read.csv("cd_data.csv", header=T)
+
+# Change to factor type using tibble
+cd_data_tbl <- as_tibble(cd_data) %>% 
+  mutate(Chemical = factor(Chemical, ordered = TRUE)) %>% 
+  mutate(Physical = factor(Physical, ordered = TRUE)) %>% 
+  mutate(Plant    = factor(Plant   , ordered = TRUE))   
+
+# Quick check
+glimpse(cd_data_tbl)
+
+# Boxplot - Physical
+ggplot(cd_data_tbl, aes(x = Physical, y = Cd, fill = Physical)) +
+  geom_boxplot() +
+  theme_classic()
+
+# Boxplot - Chemical
+ggplot(cd_data_tbl, aes(x = Chemical, y = Cd, fill = Chemical)) +
+  geom_boxplot() +
+  theme_classic()
+
+# Boxplot - Plant
+ggplot(cd_data_tbl, aes(x = Plant, y = Cd, fill = Plant)) +
+  geom_boxplot() +
+  theme_classic()
+```
+
+Here we convert `cd_data` to `cd_data_tbl`, which has a new format `tibble`. See [Section 02 Data wrangling and quick plots](https://zhu-group.github.io/ese335/S02.html) for more.
+
+***
+
+# Two-way ANOVA with R
+
+A two-way ANOVA is used to estimate how the mean of a quantitative variable changes according to the levels of **two factors**. Use a two-way ANOVA when you want to know how two independent variables, in combination, affect a dependent variable.
+
+In the proceeding example, we can use a two-way ANOVA to find out if the chemical type and plant type have an effect on average Cd concentration.
+
+A two-way ANOVA with *interaction* tests three null hypotheses (H0) at the same time:
+
++ There is no difference in group means at any level of the first independent variable.
+
++ There is no difference in group means at any level of the second independent variable.
+
++ The effect of one independent variable does not depend on the effect of the other independent variable (a.k.a. no interaction effect).
+
+A two-way ANOVA without interaction (a.k.a. an **additive** two-way ANOVA) only tests the first two of these hypotheses.
+
+Here for our example, we use the two-way ANOVA will test whether the independent variables (chemical type and plant type) have an effect on the dependent variable (average Cd concentration). We also want to check if there is an interaction effect between two independent variables – for example, it’s possible that plant treatment affects the soil’ ability to take up chemical compounds.
+
+In this setup, H0 are:
+
++ There is no difference in mean Cd concentration at any level of the chemical type.
+
++ There is no difference in mean Cd concentration at any level of the plant type.
+
++ The effect of chemical type does not depend on the effect of plant type (a.k.a. no interaction effect between chemical and plant treatment).
+
+And the corresponding H1 are:
+
++ There is a difference in mean Cd concentration by chemical type
+
++ There is a difference in mean Cd concentration by plant type
+
++ There is an interaction effect between chemical type and plant type on average Cd concentration
+
+To test the hypotheses in R:
+
+```{r}
+# Test the interaction term
+two_way_interaction <- aov(Cd ~ Chemical * Plant, data = cd_data_tbl)
+summary(two_way_interaction)
+
+# Additive two-way ANOVA
+two_way_additive <- aov(Cd ~ Chemical + Plant, data = cd_data_tbl)
+summary(two_way_additive)
+```
+
+To test whether two variables have an interaction effect in ANOVA, simply use an asterisk (`*`) instead of a plus-sign (`+`) in the model.
+
+In the output table, the `Chemical:Plant` variable has a low sum-of-squares value and a high p-value, which means there is not much variation that can be explained by the interaction between chemical and plant type.
+
+Similar to the one-way ANOVA, we can use the Tukey's test lets us see which groups are different from one another.
+
+```{r}
+TukeyHSD(two_way_additive)
+plot(TukeyHSD(two_way_additive))
+```
+
+This output shows the pairwise differences between the `4` types of chemical (`$Chemical`) and between the `3` types of plants (`$Plant`), with the average difference (`diff`), the lower and upper bounds of the `95%` confidence interval (`lwr` and `uwr`) and the p-value of the difference (`p-adj`).
+
+From the post-hoc test results, we see that there are significant differences (`p < 0.05`) between:
+
++ Chemical type 4 and 3,
+
++ Chemical type 3 and 2,
+
+but no difference among plant types.
+
+***
+
+# ANOVA procedure
+
+As a parametric method, ANOVA has its assumptions as well: 
+
++ Independence of observations
+
++ Normally-distributed dependent variable 
+
++ Homogeneity of variance (a.k.a. *homoscedasticity*)
+
+The first two assumptions are the same as the t-test. The last one refers that the variation around the mean for each group being compared should be similar among all groups. This is usually checked after running the model by examining the residuals. If the data fail to meet this assumption, we may be able to use a non-parametric alternative.
+
+In the following, we will use the proceeding example to go through each step of ANOVA.
+
+## 1 Check data
+
++ Visual checking
+
++ Statistical test: independence, normality, and outliers
+
+```{r}
+
+# Quick plots
+
+# Boxplot - Chemical
+ggplot(cd_data_tbl, aes(x = Chemical, y = Cd, fill = Chemical)) +
+  geom_boxplot() +
+  theme_classic()
+
+# Boxplot - Plant
+ggplot(cd_data_tbl, aes(x = Plant, y = Cd, fill = Plant)) +
+  geom_boxplot() +
+  theme_classic()
+
+# Check independence of the dependent variable
+runs.test(cd_data_tbl$Cd)
+
+# Check normality
+# Sample size > 30, use the Lilliefors test
+lillie.test(cd_data_tbl$Cd)
+
+# Check outliers
+# After examining the data, we decide to keep this value
+grubbs.test(cd_data_tbl$Cd)
+```
+
+## 2 Write down H0 and H1
+
+H0 are:
+
++ There is no difference in mean Cd concentration at any level of the chemical type.
+
++ There is no difference in mean Cd concentration at any level of the plant type.
+
++ The effect of chemical type does not depend on the effect of plant type.
+
+H1 are:
+
++ There is a difference in mean Cd concentration by chemical type
+
++ There is a difference in mean Cd concentration by plant type
+
++ There is an interaction effect between chemical type and plant type on average Cd concentration
+
+## 3 ANOVA with R
+
+Build the ANOVA model with and without the interaction term:
+
+```{r}
+# Test the interaction term
+two_way_interaction <- aov(Cd ~ Chemical * Plant, data = cd_data_tbl)
+summary(two_way_interaction)
+
+# Additive two-way ANOVA
+two_way_additive <- aov(Cd ~ Chemical + Plant, data = cd_data_tbl)
+summary(two_way_additive)
+```
+
+## 4 Check homoscedasticity of residuals
+
+To check whether the model fits the assumption of homoscedasticity, look at the model diagnostic plots in R using the `plot()` function:
+
+```{r}
+par(mfrow=c(2,2))
+plot(two_way_additive)
+par(mfrow=c(1,1))
+```
+
+The diagnostic plots show the unexplained variance (*residuals*) across the range of the observed data.
+
+Each plot gives a specific piece of information about the model fit. Here are things to check:
+
++ The red line representing the mean of the residuals should be **horizontal and centered on zero** (or on one, in the scale-location plot), meaning that there are no large outliers that would cause bias in the model. This means the variance of residuals don't change too much.
+
++ The normal Q-Q plot plots a regression between the theoretical residuals of a perfectly-heteroscedastic model and the actual residuals of your model, so the **closer to a slope of 1** this is the better. 
+
+If the model fails to fit the assumption of homoscedasticity, we need to use a non-parametric test instead.
+
+## 5 Tukey's test with R
+
+Check pairwise difference:
+
+```{r}
+TukeyHSD(two_way_additive)
+plot(TukeyHSD(two_way_additive))
+```
+
+## 6 Report the results
+
++ A brief description of the variables you tested
+
++ The *F*-value, degrees of freedom, and p-values for each independent variable
+
++ What the results mean.
+
+In our example, we can report the results as:
+
+We found a statistically significant difference in average Cd concentration by chemical type (`F(3)=5.5, p < 0.001`). Plant type leads to no statistically significant difference in average Cd concentration.
+
+A Tukey post-hoc test revealed that chemical type 3 resulted in a lower Cd concentration on average than chemical type 2 (`0.60` mg/kg), chemical type 3 resulted in a lower Cd concentration on average than chemical type 4 (`0.45` mg/kg), chemical type 1 resulted in a lower Cd concentration on average than chemical type 2 (`0.44` mg/kg). 
+
+***
+
+# In-class exercises
+
+## Exercise #1
+
+Use `cd_data_tbl` to find out if the physical type and plant type affect average Cd concentration. Follow the ANOVA procedure step 1-6. 

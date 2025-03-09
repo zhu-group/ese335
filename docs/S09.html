@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Section 09 Assumptions for t tests</title>
+
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Environmental Data Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Syllabus.html">
+    <span class="fa fa-bell-o"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="Schedule.html">
+    <span class="fa fa-calendar"></span>
+     
+    Schedule
+  </a>
+</li>
+<li>
+  <a href="Resource.html">
+    <span class="fa fa-wrench"></span>
+     
+    Resource
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-laptop"></span>
+     
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="A01.html">Assignment 01</a>
+    </li>
+    <li>
+      <a href="A02.html">Assignment 02</a>
+    </li>
+    <li>
+      <a href="A03.html">Assignment 03</a>
+    </li>
+    <li>
+      <a href="A04.html">Assignment 04</a>
+    </li>
+    <li>
+      <a href="A05.html">Assignment 05</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Section 09 Assumptions for t tests</h1>
+
+</div>
+
+
+<hr />
+<div id="prerequisites" class="section level1">
+<h1>Prerequisites</h1>
+<p>Load the libraries with R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(randtests)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">library</span>(outliers)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">library</span>(EnvStats)</span></code></pre></div>
+<pre><code>## Warning: 程辑包&#39;EnvStats&#39;是用R版本4.3.3 来建造的</code></pre>
+<pre><code>## 
+## 载入程辑包：&#39;EnvStats&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:moments&#39;:
+## 
+##     kurtosis, skewness</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     predict, predict.lm</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">library</span>(nortest)</span></code></pre></div>
+<hr />
+</div>
+<div id="section-example-cloud-seeding-to-increase-rainfall"
+class="section level1">
+<h1>Section Example: Cloud seeding to increase rainfall</h1>
+<p><img src="figs/cloudseeding.jpg" alt="drawing" width="600"/></p>
+<p><a
+href="https://dekhnews.com/wp-content/uploads/2016/11/cloud-seeding.png">Figure
+Source</a></p>
+<p>Cloud seeding is the process where substances like dry ice and silver
+iodide are put into clouds in an attempt to make precipitation fall.
+Cloud seeding has also been used to dissipate fog and weaken some
+storms.</p>
+<p>The case study in [RS] 3.1 provides an example of cloud seeding.
+Rainfall (acre-feet) were measured before and after the seeding. See
+page <code>59-60</code> for more.</p>
+<ul>
+<li>Rainfall from Unseeded Days (n=<code>26</code>):</li>
+</ul>
+<p><code>1202.6, 830.1, 372.4, 345.5, 321.2, 244.3, 163.0, 147.8, 95.0, 87.0, 81.2, 68.5, 47.3</code></p>
+<p><code>41.1, 36.6, 29.0, 28.6, 26.3, 26.0, 24.4, 21.4, 17.3, 11.5, 4.9, 4.9, 1.0</code></p>
+<ul>
+<li>Rainfall from Seeded Days (n=<code>26</code>):</li>
+</ul>
+<p><code>2745.6, 1697.1, 1656.4, 978.0, 703.4, 489.1, 430.0, 334.1, 302.8, 274.7, 274.7, 255.0</code></p>
+<p><code>242.5, 200.7, 198.6, 129.6, 119.0, 118.3, 115.3, 92.4, 40.6, 32.7, 31.4, 17.5, 7.7, 4.1</code></p>
+<p>Suppose we want to know whether cloud seeding has an effect on
+rainfall in this experiment. If so, by how much?</p>
+<p>Let’s look at the data first:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Samples</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>Unseeded <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1202.6</span>, <span class="fl">830.1</span>, <span class="fl">372.4</span>, <span class="fl">345.5</span>, <span class="fl">321.2</span>, <span class="fl">244.3</span>, <span class="fl">163.0</span>, <span class="fl">147.8</span>, <span class="fl">95.0</span>, <span class="fl">87.0</span>, </span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>              <span class="fl">81.2</span>, <span class="fl">68.5</span>, <span class="fl">47.3</span>, <span class="fl">41.1</span>, <span class="fl">36.6</span>, <span class="fl">29.0</span>, <span class="fl">28.6</span>, <span class="fl">26.3</span>, <span class="fl">26.0</span>, <span class="fl">24.4</span>, <span class="fl">21.4</span>, </span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>              <span class="fl">17.3</span>, <span class="fl">11.5</span>, <span class="fl">4.9</span>, <span class="fl">4.9</span>, <span class="fl">1.0</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="fu">shapiro.test</span>(Unseeded)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  Unseeded
+## W = 0.60219, p-value = 3.134e-07</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>Seeded   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2745.6</span>, <span class="fl">1697.1</span>, <span class="fl">1656.4</span>, <span class="fl">978.0</span>, <span class="fl">703.4</span>, <span class="fl">489.1</span>, <span class="fl">430.0</span>, <span class="fl">334.1</span>, <span class="fl">302.8</span>, </span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>              <span class="fl">274.7</span>, <span class="fl">274.7</span>, <span class="fl">255.0</span>, <span class="fl">242.5</span>, <span class="fl">200.7</span>, <span class="fl">198.6</span>, <span class="fl">129.6</span>, <span class="fl">119.0</span>, <span class="fl">118.3</span>, </span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>              <span class="fl">115.3</span>, <span class="fl">92.4</span>, <span class="fl">40.6</span>, <span class="fl">32.7</span>, <span class="fl">31.4</span>, <span class="fl">17.5</span>, <span class="fl">7.7</span>, <span class="fl">4.1</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="fu">shapiro.test</span>(Seeded)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  Seeded
+## W = 0.65626, p-value = 1.411e-06</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Make data frame</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>Rainfall_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Rainfall =</span> <span class="fu">c</span>(Unseeded, Seeded),</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>                            <span class="at">Seeded=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;No&quot;</span>,<span class="fu">length</span>(Unseeded)),</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>                                      <span class="fu">rep</span>(<span class="st">&quot;Yes&quot;</span>,<span class="fu">length</span>(Seeded))))</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co"># Compare boxplots</span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="fu">ggplot</span>(Rainfall_data, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.character</span>(Seeded), <span class="at">y=</span>Rainfall)) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="st">&quot;steelblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Rainfall Distribution&quot;</span>, <span class="at">x=</span><span class="st">&quot;Seeded&quot;</span>, <span class="at">y=</span><span class="st">&quot;Rainfall [acre-feet]&quot;</span>)</span></code></pre></div>
+<p><img src="S09_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>What do you observe? Are the samples from normal distributions?</p>
+<hr />
+</div>
+<div id="independence" class="section level1">
+<h1>Independence</h1>
+<p>The <em>Wald–Wolfowitz runs test</em> (or simply <em>runs test</em>)
+is a non-parametric statistical test that checks a
+<strong>randomness</strong> hypothesis for a two-valued (binary) data
+sequence. More precisely, it can be used to test the hypothesis that the
+elements of the sequence are mutually <strong>independent</strong>. A
+<em>run</em> of a sequence is a maximal non-empty segment of the
+sequence consisting of adjacent equal elements.</p>
+<p>For a sample, it is converted to a binary data sequence by taking the
+data in the given order and marking with <code>+</code> the data greater
+than the median, and with <code>–</code> the data less than the median.
+This is why the method is also called <em>runs above-and-below the
+median test</em>.</p>
+<p>The null and alternative hypotheses of the runs test are:</p>
+<ul>
+<li><p>H0: The data was produced in a random manner</p></li>
+<li><p>H1: The data was not produced in a random manner</p></li>
+</ul>
+<p>In R, the runs test is done with the <code>runs.test()</code>
+function from the <code>randtests</code> library:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Create a sample</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>Sample1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">16</span>, <span class="dv">16</span>, <span class="dv">15</span>, <span class="dv">14</span>, <span class="dv">18</span>, <span class="dv">19</span>, <span class="dv">21</span>, <span class="dv">13</span>, <span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">16</span>, <span class="dv">16</span>, <span class="dv">15</span>, <span class="dv">14</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co"># Perform Runs test</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="fu">runs.test</span>(Sample1)</span></code></pre></div>
+<pre><code>## 
+##  Runs Test
+## 
+## data:  Sample1
+## statistic = -0.26914, runs = 7, n1 = 7, n2 = 6, n = 13, p-value = 0.7878
+## alternative hypothesis: nonrandomness</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Make a new sample, </span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co"># where the second half is correlated with the first half</span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>Sample2 <span class="ot">&lt;-</span> <span class="fu">c</span>(Sample1,Sample1<span class="sc">*</span><span class="dv">2</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co"># Perform Runs test</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="fu">runs.test</span>(Sample2)</span></code></pre></div>
+<pre><code>## 
+##  Runs Test
+## 
+## data:  Sample2
+## statistic = -5.2026, runs = 2, n1 = 15, n2 = 15, n = 30, p-value = 1.966e-07
+## alternative hypothesis: nonrandomness</code></pre>
+<hr />
+</div>
+<div id="normality" class="section level1">
+<h1>Normality</h1>
+<p>Even though we have been emphasizing that normality is the key
+assumption of t-tools (<a
+href="https://zhu-group.github.io/ese335/S06.html#One_sample_t-test">one-sample</a>,
+<a
+href="https://zhu-group.github.io/ese335/S07.html#Independent_two-sample_t-test">independent
+two-sample</a>, and <a
+href="https://zhu-group.github.io/ese335/S08.html#The_paired_sample_t-test">paired
+samples</a>). It turns out t-tools are <strong>very robust</strong> to
+samples from non-normal populations, as long as the sample sizes are
+reasonably large (larger than <code>50</code>, this is arbitrary, but
+generally should be larger than <code>30</code>).</p>
+<p>To demonstrate this, we draw samples from log-normal distributions
+and conduct the t-test. Run the following R scripts:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Total simulations</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>Total_simulations <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co"># Population 1, form a log normal distribution</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">1</span>, <span class="fl">0.2</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="fu">lillie.test</span>(pop1)</span></code></pre></div>
+<pre><code>## 
+##  Lilliefors (Kolmogorov-Smirnov) normality test
+## 
+## data:  pop1
+## D = 0.044374, p-value &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="fu">skewness</span>(pop1)</span></code></pre></div>
+<pre><code>## [1] 0.5700565</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Population 2, form a log normal distribution</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">2</span>, <span class="fl">0.6</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="fu">lillie.test</span>(pop2)</span></code></pre></div>
+<pre><code>## 
+##  Lilliefors (Kolmogorov-Smirnov) normality test
+## 
+## data:  pop2
+## D = 0.1185, p-value &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">skewness</span>(pop2)</span></code></pre></div>
+<pre><code>## [1] 2.24794</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># Sample size</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>N1 <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>N2 <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a><span class="co"># List to store p-value</span></span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a><span class="co"># Run simulation</span></span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>Total_simulations){</span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a>  <span class="co"># Sample 1</span></span>
+<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a>  s1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(pop1,N1)</span>
+<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a>  <span class="co"># Sample 2</span></span>
+<span id="cb24-13"><a href="#cb24-13" tabindex="-1"></a>  s2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(pop2,N2)</span>
+<span id="cb24-14"><a href="#cb24-14" tabindex="-1"></a>  <span class="co"># Do t-test, despite of the normality</span></span>
+<span id="cb24-15"><a href="#cb24-15" tabindex="-1"></a>  p_value <span class="ot">&lt;-</span> <span class="fu">c</span>(p_value, <span class="fu">t.test</span>(s1,s2,<span class="at">var.equal=</span>T)<span class="sc">$</span>p.value)</span>
+<span id="cb24-16"><a href="#cb24-16" tabindex="-1"></a>}</span>
+<span id="cb24-17"><a href="#cb24-17" tabindex="-1"></a></span>
+<span id="cb24-18"><a href="#cb24-18" tabindex="-1"></a><span class="co"># Check the robustness</span></span>
+<span id="cb24-19"><a href="#cb24-19" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(p_value<span class="sc">&lt;</span><span class="fl">0.05</span>))<span class="sc">/</span>Total_simulations</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>For small samples, t-tools are also robust if the skewness in the
+populations differs not much.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="co"># Population 1, form a log normal distribution</span></span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">1</span>, <span class="fl">0.2</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a><span class="fu">skewness</span>(pop1)</span></code></pre></div>
+<pre><code>## [1] 0.6147801</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="co"># Population 2, form a log normal distribution</span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">2</span>, <span class="fl">0.6</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a><span class="fu">skewness</span>(pop2)</span></code></pre></div>
+<pre><code>## [1] 2.281493</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co"># Sample size</span></span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>N1 <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a>N2 <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a><span class="co"># List to store p-value</span></span>
+<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" tabindex="-1"></a><span class="co"># Run simulation</span></span>
+<span id="cb30-9"><a href="#cb30-9" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>Total_simulations){</span>
+<span id="cb30-10"><a href="#cb30-10" tabindex="-1"></a>  <span class="co"># Sample 1</span></span>
+<span id="cb30-11"><a href="#cb30-11" tabindex="-1"></a>  s1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(pop1,N1)</span>
+<span id="cb30-12"><a href="#cb30-12" tabindex="-1"></a>  <span class="co"># Sample 2</span></span>
+<span id="cb30-13"><a href="#cb30-13" tabindex="-1"></a>  s2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(pop2,N2)</span>
+<span id="cb30-14"><a href="#cb30-14" tabindex="-1"></a>  <span class="co"># Do t-test, despite of the normality</span></span>
+<span id="cb30-15"><a href="#cb30-15" tabindex="-1"></a>  p_value <span class="ot">&lt;-</span> <span class="fu">c</span>(p_value, <span class="fu">t.test</span>(s1,s2,<span class="at">var.equal=</span>T)<span class="sc">$</span>p.value)</span>
+<span id="cb30-16"><a href="#cb30-16" tabindex="-1"></a>}</span>
+<span id="cb30-17"><a href="#cb30-17" tabindex="-1"></a></span>
+<span id="cb30-18"><a href="#cb30-18" tabindex="-1"></a><span class="co"># Check the robustness</span></span>
+<span id="cb30-19"><a href="#cb30-19" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(p_value<span class="sc">&lt;</span><span class="fl">0.05</span>))<span class="sc">/</span>Total_simulations</span></code></pre></div>
+<pre><code>## [1] 0.991</code></pre>
+<p><strong>The bottom line is:</strong></p>
+<p>When the skewness in the populations differs too much (especially
+when the sample sizes are small), the t-tools are not robust, thus may
+result in misleading outputs.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="co"># Total simulations</span></span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>Total_simulations <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="co"># Population 1, form a log normal distribution</span></span>
+<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">1</span>, <span class="fl">0.2</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a><span class="fu">skewness</span>(pop1)</span></code></pre></div>
+<pre><code>## [1] 0.6109037</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="co"># Population 2, form a log normal distribution</span></span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>(<span class="dv">4000</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a><span class="fu">skewness</span>(pop2)</span></code></pre></div>
+<pre><code>## [1] 19.26272</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="co"># Sample size</span></span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a>N1 <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a>N2 <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="co"># List to store p-value</span></span>
+<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a><span class="co"># Run simulation</span></span>
+<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>Total_simulations){</span>
+<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a>  <span class="co"># Sample 1</span></span>
+<span id="cb36-11"><a href="#cb36-11" tabindex="-1"></a>  s1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(pop1,N1)</span>
+<span id="cb36-12"><a href="#cb36-12" tabindex="-1"></a>  <span class="co"># Sample 2</span></span>
+<span id="cb36-13"><a href="#cb36-13" tabindex="-1"></a>  s2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(pop2,N2)</span>
+<span id="cb36-14"><a href="#cb36-14" tabindex="-1"></a>  <span class="co"># Do t-test, despite of the normality</span></span>
+<span id="cb36-15"><a href="#cb36-15" tabindex="-1"></a>  p_value <span class="ot">&lt;-</span> <span class="fu">c</span>(p_value, <span class="fu">t.test</span>(s1,s2,<span class="at">var.equal=</span>T)<span class="sc">$</span>p.value)</span>
+<span id="cb36-16"><a href="#cb36-16" tabindex="-1"></a>}</span>
+<span id="cb36-17"><a href="#cb36-17" tabindex="-1"></a></span>
+<span id="cb36-18"><a href="#cb36-18" tabindex="-1"></a><span class="co"># Check the robustness</span></span>
+<span id="cb36-19"><a href="#cb36-19" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(p_value<span class="sc">&lt;</span><span class="fl">0.05</span>))<span class="sc">/</span>Total_simulations</span></code></pre></div>
+<pre><code>## [1] 0.07</code></pre>
+<hr />
+</div>
+<div id="equal-variance-of-populations" class="section level1">
+<h1>Equal variance of populations</h1>
+<div id="welch-t-ratio" class="section level2">
+<h2>Welch t-ratio</h2>
+<p>The <a
+href="https://zhu-group.github.io/ese335/S07.html#Independent_two-sample_t-test">independent
+two-sample t-test</a> requires the two populations to have the same
+variance, and sample SDs are independent estimates. However, such an
+assumption is not necessarily the case in reality. One may employ the
+individual sample SD (s<sub>1</sub> and s<sub>2</sub>) as separate
+estimates of their respective population standard deviations, rather
+than polling to obtain a single estimate of a population SD. The
+standard error of the difference in two population means is then:</p>
+<p><span class="math display">\[ SE_W(\overline{X_1} - \overline{X_2})
+=  \sqrt { \frac{s_1^2} {n_1} + \frac{s_2^2} {n_2} }   \]</span> This
+ends up the <em>Welch t-ratio</em>:</p>
+<p><span class="math display">\[t=\frac { (\overline{X_1} -
+\overline{X_2} ) - (\mu_1 - \mu_2) } { \sqrt { \frac{s_1^2} {n_1} +
+\frac{s_2^2} {n_2} } } \]</span></p>
+<p>which approximately follows a t-distribution with d.f.<sub>W</sub>
+degrees of freedom:</p>
+<p><span class="math display">\[ d.f._W =  \frac {SE_W^4(\overline{X_1}
+- \overline{X_2})} { \frac{SE^4(\overline{X_1})} {n_1-1} +
+\frac{SE^4(\overline{X_2})} {n_2-1}  }   \]</span> where <span
+class="math inline">\(SE(\overline{X_1})=\frac
+{s_1}{\sqrt{n_1}}\)</span> and <span
+class="math inline">\(SE(\overline{X_2})=\frac
+{s_2}{\sqrt{n_2}}\)</span>.</p>
+</div>
+<div id="welch-two-sample-t-test" class="section level2">
+<h2>Welch two-sample t-test</h2>
+<p>Let’s use the observations again, but now we have no information
+about the population SDs. Therefore, we need to conduct an independent
+two-sample t-test.</p>
+<ul>
+<li><p>H0: Mean PM2.5 level in Shenzhen is the same as that in Guangzhou
+(<span class="math inline">\(\mu_1 = \mu_2\)</span>)</p></li>
+<li><p>H1: Mean PM2.5 level in Shenzhen is not the same as that in
+Guangzhou (<span class="math inline">\(\mu_1 \ne
+\mu_2\)</span>)</p></li>
+</ul>
+<p>In this case, <span class="math inline">\(\overline X_1 - \overline
+X_2\)</span> is <code>-2.32</code>, <span
+class="math inline">\(SE_W(\overline{X_1} - \overline{X_2})\)</span> is
+<code>0.93</code>, assuming H0 is true (<span
+class="math inline">\(\mu_1 - \mu_2 = 0\)</span>), we have <span
+class="math inline">\(t\)</span>=<code>-2.48</code>.</p>
+<p>Then the p-value can be calculated manually:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="co"># Shenzhen </span></span>
+<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a>SZ_PM2<span class="fl">.5</span>  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">25.6</span>, <span class="fl">23.7</span>, <span class="fl">21.9</span>, <span class="fl">26.0</span>, <span class="fl">24.5</span>, <span class="fl">22.4</span>, <span class="fl">26.7</span>, <span class="fl">24.6</span>, <span class="fl">22.7</span>, <span class="fl">23.8</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a><span class="co"># Guangzhou</span></span>
+<span id="cb38-5"><a href="#cb38-5" tabindex="-1"></a>GZ_PM2<span class="fl">.5</span>  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">27.1</span>, <span class="fl">24.2</span>, <span class="fl">27.9</span>, <span class="fl">33.3</span>, <span class="fl">26.4</span>, <span class="fl">28.7</span>, <span class="fl">25.6</span>, <span class="fl">23.2</span>, <span class="fl">24.0</span>, <span class="fl">27.1</span>, <span class="fl">26.2</span>, <span class="fl">24.4</span>)</span>
+<span id="cb38-6"><a href="#cb38-6" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" tabindex="-1"></a><span class="co"># Sample difference</span></span>
+<span id="cb38-8"><a href="#cb38-8" tabindex="-1"></a><span class="fu">mean</span>(SZ_PM2<span class="fl">.5</span>) <span class="sc">-</span> <span class="fu">mean</span>(GZ_PM2<span class="fl">.5</span>)</span></code></pre></div>
+<pre><code>## [1] -2.318333</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="co"># Get sample size, degrees of freedom, and sd</span></span>
+<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a>n1        <span class="ot">&lt;-</span> <span class="fu">length</span>(SZ_PM2<span class="fl">.5</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a>df1       <span class="ot">&lt;-</span> n1 <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb40-4"><a href="#cb40-4" tabindex="-1"></a>sd1       <span class="ot">&lt;-</span> <span class="fu">sd</span>(SZ_PM2<span class="fl">.5</span>)</span>
+<span id="cb40-5"><a href="#cb40-5" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" tabindex="-1"></a>n2        <span class="ot">&lt;-</span> <span class="fu">length</span>(GZ_PM2<span class="fl">.5</span>)</span>
+<span id="cb40-7"><a href="#cb40-7" tabindex="-1"></a>df2       <span class="ot">&lt;-</span> n2 <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb40-8"><a href="#cb40-8" tabindex="-1"></a>sd2       <span class="ot">&lt;-</span> <span class="fu">sd</span>(GZ_PM2<span class="fl">.5</span>)</span>
+<span id="cb40-9"><a href="#cb40-9" tabindex="-1"></a></span>
+<span id="cb40-10"><a href="#cb40-10" tabindex="-1"></a><span class="co"># SE of the difference</span></span>
+<span id="cb40-11"><a href="#cb40-11" tabindex="-1"></a>SE_W      <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( sd1<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n1 <span class="sc">+</span> sd2<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n2 )</span>
+<span id="cb40-12"><a href="#cb40-12" tabindex="-1"></a></span>
+<span id="cb40-13"><a href="#cb40-13" tabindex="-1"></a><span class="co"># d.f.W</span></span>
+<span id="cb40-14"><a href="#cb40-14" tabindex="-1"></a>df_W      <span class="ot">&lt;-</span> SE_W<span class="sc">^</span><span class="dv">4</span><span class="sc">/</span>( (sd1<span class="sc">/</span><span class="fu">sqrt</span>(n1))<span class="sc">^</span><span class="dv">4</span><span class="sc">/</span>(n1<span class="dv">-1</span>) <span class="sc">+</span> (sd2<span class="sc">/</span><span class="fu">sqrt</span>(n2))<span class="sc">^</span><span class="dv">4</span><span class="sc">/</span>(n2<span class="dv">-1</span>) )</span>
+<span id="cb40-15"><a href="#cb40-15" tabindex="-1"></a></span>
+<span id="cb40-16"><a href="#cb40-16" tabindex="-1"></a><span class="co"># Get t-ratio</span></span>
+<span id="cb40-17"><a href="#cb40-17" tabindex="-1"></a>t         <span class="ot">&lt;-</span> (<span class="fu">mean</span>(SZ_PM2<span class="fl">.5</span>) <span class="sc">-</span> <span class="fu">mean</span>(GZ_PM2<span class="fl">.5</span>))<span class="sc">/</span>SE_W</span>
+<span id="cb40-18"><a href="#cb40-18" tabindex="-1"></a></span>
+<span id="cb40-19"><a href="#cb40-19" tabindex="-1"></a><span class="co"># Find the two-side p-value</span></span>
+<span id="cb40-20"><a href="#cb40-20" tabindex="-1"></a><span class="co"># The pt function gives the Cumulative Distribution Function (CDF) </span></span>
+<span id="cb40-21"><a href="#cb40-21" tabindex="-1"></a><span class="co"># of the Student&#39;s t distribution in R, which is the probability that </span></span>
+<span id="cb40-22"><a href="#cb40-22" tabindex="-1"></a><span class="co"># the variable takes a value lower or equal to a threshold (here |t|).</span></span>
+<span id="cb40-23"><a href="#cb40-23" tabindex="-1"></a>P_value  <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(<span class="fu">abs</span>(t), <span class="at">df=</span>df_W))<span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb40-24"><a href="#cb40-24" tabindex="-1"></a></span>
+<span id="cb40-25"><a href="#cb40-25" tabindex="-1"></a><span class="fu">print</span>(P_value)</span></code></pre></div>
+<pre><code>## [1] 0.0230154</code></pre>
+<p>Now, we have a probability of about <code>2.30%</code> getting a
+statistic (<span class="math inline">\(t\)</span>) as extreme or more
+extreme than the observed statistic (<code>-2.48</code>), assuming H0 is
+true. This is a small probability, and is likely due to chance. We can
+reject H0 given the observations. Thus, the mean PM2.5 level in Shenzhen
+is not the same as that in Guangzhou.</p>
+</div>
+<div id="welch-two-sample-t-test-with-r" class="section level2">
+<h2>Welch two-sample t-test with R</h2>
+<p>In R, you can simply conduct the previous independent two-sample
+t-test as:</p>
+<ul>
+<li><p>H0: Mean PM2.5 level in Shenzhen is the same as that in Guangzhou
+(<span class="math inline">\(\mu_1 = \mu_2\)</span>)</p></li>
+<li><p>H1: Mean PM2.5 level in Shenzhen is not the same as that in
+Guangzhou (<span class="math inline">\(\mu_1 \ne
+\mu_2\)</span>)</p></li>
+</ul>
+<p>In R, this is done by:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a><span class="co"># Shenzhen </span></span>
+<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a>SZ_PM2<span class="fl">.5</span>  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">25.6</span>, <span class="fl">23.7</span>, <span class="fl">21.9</span>, <span class="fl">26.0</span>, <span class="fl">24.5</span>, <span class="fl">22.4</span>, <span class="fl">26.7</span>, <span class="fl">24.6</span>, <span class="fl">22.7</span>, <span class="fl">23.8</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" tabindex="-1"></a><span class="co"># Guangzhou</span></span>
+<span id="cb42-5"><a href="#cb42-5" tabindex="-1"></a>GZ_PM2<span class="fl">.5</span>  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">27.1</span>, <span class="fl">24.2</span>, <span class="fl">27.9</span>, <span class="fl">33.3</span>, <span class="fl">26.4</span>, <span class="fl">28.7</span>, <span class="fl">25.6</span>, <span class="fl">23.2</span>, <span class="fl">24.0</span>, <span class="fl">27.1</span>, <span class="fl">26.2</span>, <span class="fl">24.4</span>)</span>
+<span id="cb42-6"><a href="#cb42-6" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" tabindex="-1"></a><span class="co"># Call t.test function</span></span>
+<span id="cb42-8"><a href="#cb42-8" tabindex="-1"></a><span class="co"># Since H1 states a different PM2.5 value in Shenzhen, </span></span>
+<span id="cb42-9"><a href="#cb42-9" tabindex="-1"></a><span class="co"># we need to compute the two-sided p-value</span></span>
+<span id="cb42-10"><a href="#cb42-10" tabindex="-1"></a><span class="fu">t.test</span>(SZ_PM2<span class="fl">.5</span>, GZ_PM2<span class="fl">.5</span>, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>, <span class="at">var.equal=</span>F)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  SZ_PM2.5 and GZ_PM2.5
+## t = -2.4829, df = 18.162, p-value = 0.02302
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -4.2787371 -0.3579296
+## sample estimates:
+## mean of x mean of y 
+##  24.19000  26.50833</code></pre>
+<p>Here we set <code>var.equal = F</code> when call the
+<code>t.test()</code> function. By doing so, we assume an “unequal SD”
+method. R uses this “unequal SD” method by default.</p>
+<hr />
+</div>
+</div>
+<div id="outliers" class="section level1">
+<h1>Outliers</h1>
+<p>An outlier is a value or an observation that is distant from other
+observations, or, a data point that differs significantly from other
+data points. Since the t-tools are based on average, they are
+<strong>not resistant</strong> to outliers. One or two outliers may
+affect a confidence interval or change a p-value enough to alter a
+conclusion completely.</p>
+<p>We previously checked outliers by looking at histogram, boxplot, and
+<code>1.5*IQR</code> of the data. In this sub-section, we will look at
+<code>4</code> more formal techniques/tests to detect outliers.</p>
+<div id="grubbs-test" class="section level2">
+<h2>Grubbs’ test</h2>
+<p><em>Grubbs’ test</em> allows detecting whether the highest or lowest
+value in a dataset is an outlier. The test <strong>detects one outlier
+at a time</strong> (highest or lowest value). Note that Grubbs’ test is
+not appropriate for a sample size of <code>6</code> or less.</p>
+<p>If we want to test the highest value, the null and alternative
+hypotheses are as follows:</p>
+<ul>
+<li><p>H0: The highest value is not an outlier</p></li>
+<li><p>H1: The highest value is an outlier</p></li>
+</ul>
+<p>If we want to test the lowest value, the null and alternative
+hypotheses are as follows:</p>
+<ul>
+<li><p>H0: The lowest value is not an outlier</p></li>
+<li><p>H1: The lowest value is an outlier</p></li>
+</ul>
+<p>To perform Grubbs’ test in R, use the <code>grubbs.test()</code>
+function from the <code>outliers</code> package:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" tabindex="-1"></a><span class="co"># Sample</span></span>
+<span id="cb44-2"><a href="#cb44-2" tabindex="-1"></a>Sample1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">2.0</span>, <span class="sc">-</span><span class="fl">7.0</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>, <span class="sc">-</span><span class="fl">1.1</span>, <span class="sc">-</span><span class="fl">1.3</span>, <span class="sc">-</span><span class="fl">0.3</span>, <span class="fl">1.6</span>, <span class="fl">8.3</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" tabindex="-1"></a><span class="co"># Boxplot</span></span>
+<span id="cb44-5"><a href="#cb44-5" tabindex="-1"></a><span class="fu">boxplot</span>(Sample1)</span></code></pre></div>
+<p><img src="S09_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a><span class="co"># Test for the highest value with Grubbs&#39; test</span></span>
+<span id="cb45-2"><a href="#cb45-2" tabindex="-1"></a><span class="fu">grubbs.test</span>(Sample1)</span></code></pre></div>
+<pre><code>## 
+##  Grubbs test for one outlier
+## 
+## data:  Sample1
+## G = 2.41000, U = 0.42399, p-value = 0.02523
+## alternative hypothesis: highest value 8.3 is an outlier</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a><span class="co"># Test for the lowest value with Grubbs&#39; test</span></span>
+<span id="cb47-2"><a href="#cb47-2" tabindex="-1"></a><span class="fu">grubbs.test</span>(Sample1, <span class="at">opposite =</span> T)</span></code></pre></div>
+<pre><code>## 
+##  Grubbs test for one outlier
+## 
+## data:  Sample1
+## G = 2.03700, U = 0.58849, p-value = 0.1473
+## alternative hypothesis: lowest value -7 is an outlier</code></pre>
+</div>
+<div id="dixons-test" class="section level2">
+<h2>Dixon’s test</h2>
+<p>Similar to Grubbs’ test, <em>Dixon’s test</em> is used to test
+whether a single low or high value is an outlier. Dixon’s test is
+<strong>more conservative</strong> than Grubbs’ test, and is most useful
+for a small sample size (usually less than <code>25</code>).</p>
+<p>To perform Dixon’s test in R, use the <code>dixon.test()</code>
+function from the <code>outliers</code> package.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a><span class="co"># Test for the highest value with Dixon&#39;s test</span></span>
+<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a><span class="fu">dixon.test</span>(Sample1)</span></code></pre></div>
+<pre><code>## 
+##  Dixon test for outliers
+## 
+## data:  Sample1
+## Q = 0.71845, p-value &lt; 2.2e-16
+## alternative hypothesis: highest value 8.3 is an outlier</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a><span class="co"># Test for the lowest value with Dixon&#39;s test</span></span>
+<span id="cb51-2"><a href="#cb51-2" tabindex="-1"></a><span class="fu">dixon.test</span>(Sample1, <span class="at">opposite =</span> T)</span></code></pre></div>
+<pre><code>## 
+##  Dixon test for outliers
+## 
+## data:  Sample1
+## Q = 0.66279, p-value = 0.01305
+## alternative hypothesis: lowest value -7 is an outlier</code></pre>
+</div>
+<div id="rosners-test" class="section level2">
+<h2>Rosner’s test</h2>
+<p><em>Rosner’s test</em> is used to detect <strong>several
+outliers</strong> at once (unlike Grubbs’ and Dixon’s test, which must
+be performed iteratively to screen for multiple outliers), and is
+designed to avoid the problem of masking, where an outlier that is close
+in value to another outlier can go undetected. Rosner’s test is most
+appropriate when the sample size is large (large than
+<code>20</code>).</p>
+<p>To perform Rosner’s test, we use the <code>rosnerTest()</code>
+function from the <code>EnvStats</code> package. This function requires
+at least <code>2</code> arguments: the data and the number of suspected
+outliers <code>k</code> (with <code>k = 3</code> as the default number
+of suspected outliers).</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" tabindex="-1"></a><span class="co"># New Sample</span></span>
+<span id="cb53-2"><a href="#cb53-2" tabindex="-1"></a>Sample2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="sc">-</span><span class="fl">0.6</span>, <span class="fl">0.2</span>, <span class="sc">-</span><span class="fl">7.0</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="fl">0.6</span>, <span class="sc">-</span><span class="fl">0.3</span>, <span class="sc">-</span><span class="fl">1.3</span>, <span class="fl">1.4</span>, </span>
+<span id="cb53-3"><a href="#cb53-3" tabindex="-1"></a>             <span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">1.2</span>, <span class="fl">1.4</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">1.2</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">2.5</span>, <span class="fl">0.1</span>, </span>
+<span id="cb53-4"><a href="#cb53-4" tabindex="-1"></a>             <span class="sc">-</span><span class="fl">1.7</span>, <span class="fl">0.6</span>, <span class="fl">0.3</span>, <span class="sc">-</span><span class="fl">2.3</span>, <span class="fl">0.6</span>, <span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">8.3</span>)</span>
+<span id="cb53-5"><a href="#cb53-5" tabindex="-1"></a></span>
+<span id="cb53-6"><a href="#cb53-6" tabindex="-1"></a><span class="co"># Boxplot</span></span>
+<span id="cb53-7"><a href="#cb53-7" tabindex="-1"></a><span class="fu">boxplot</span>(Sample2)</span></code></pre></div>
+<p><img src="S09_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a><span class="co"># Test for the suspected values with Rosner&#39;s test</span></span>
+<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a><span class="co"># number of suspected outliers is 2 (k=2)</span></span>
+<span id="cb54-3"><a href="#cb54-3" tabindex="-1"></a><span class="fu">rosnerTest</span>(Sample2, <span class="at">k=</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## 
+## Results of Outlier Test
+## -------------------------
+## 
+## Test Method:                     Rosner&#39;s Test for Outliers
+## 
+## Hypothesized Distribution:       Normal
+## 
+## Data:                            Sample2
+## 
+## Sample Size:                     27
+## 
+## Test Statistics:                 R.1 = 3.654294
+##                                  R.2 = 3.905099
+## 
+## Test Statistic Parameter:        k = 2
+## 
+## Alternative Hypothesis:          Up to 2 observations are not
+##                                  from the same Distribution.
+## 
+## Type I Error:                    5%
+## 
+## Number of Outliers Detected:     2
+## 
+##   i     Mean.i     SD.i Value Obs.Num    R.i+1 lambda.i+1 Outlier
+## 1 0 -0.2814815 2.348328   8.3      27 3.654294   2.858923    TRUE
+## 2 1 -0.6115385 1.635928  -7.0       5 3.905099   2.840774    TRUE</code></pre>
+</div>
+<div id="walshs-test" class="section level2">
+<h2>Walsh’s test</h2>
+<p><em>Walsh’s test</em> is a non-parametric test to detect multiple
+outliers in a data set. This test requires a large sample size (n &gt;
+<code>220</code> for a significance level of <code>0.05</code>), it can
+be used whenever the data are normally distributed or not.</p>
+<p>There is no R package to do Walsh’s test. The following R function
+(<code>walsh.test()</code>) is written by the instructor. The fucntion
+requires <code>4</code> keywords - <code>data</code> is the list of
+values from which outlier(s) are indeitified, <code>k</code> is the
+number of suspected outliers, <code>alpha</code> is the significance
+level set by the user, and <code>opposite</code> is <code>F</code> by
+default meaning the function will check the highest <code>k</code>
+values. Set <code>opposite</code> to <code>T</code> to check the lowest
+<code>k</code> values. The function check the <code>k</code> suspected
+outliers at once. Please see this <a
+href="http://www.statistics4u.info/fundstat_eng/ee_walsh_outliertest.html">page</a>
+for more about Walsh’s test.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" tabindex="-1"></a><span class="co"># Walsh&#39;s Outlier Test</span></span>
+<span id="cb56-2"><a href="#cb56-2" tabindex="-1"></a><span class="co"># By Lei Zhu, 03/29/2021</span></span>
+<span id="cb56-3"><a href="#cb56-3" tabindex="-1"></a><span class="co"># Details see:</span></span>
+<span id="cb56-4"><a href="#cb56-4" tabindex="-1"></a><span class="co"># http://www.statistics4u.com/fundstat_eng/ee_walsh_outliertest.html</span></span>
+<span id="cb56-5"><a href="#cb56-5" tabindex="-1"></a></span>
+<span id="cb56-6"><a href="#cb56-6" tabindex="-1"></a>walsh.test <span class="ot">&lt;-</span> <span class="cf">function</span>(data, k, alpha, <span class="at">opposite=</span>F){</span>
+<span id="cb56-7"><a href="#cb56-7" tabindex="-1"></a>  </span>
+<span id="cb56-8"><a href="#cb56-8" tabindex="-1"></a>  <span class="co"># Sample size</span></span>
+<span id="cb56-9"><a href="#cb56-9" tabindex="-1"></a>  n    <span class="ot">&lt;-</span> <span class="fu">length</span>(data)</span>
+<span id="cb56-10"><a href="#cb56-10" tabindex="-1"></a>  </span>
+<span id="cb56-11"><a href="#cb56-11" tabindex="-1"></a>  <span class="co"># sorted data</span></span>
+<span id="cb56-12"><a href="#cb56-12" tabindex="-1"></a>  data_new <span class="ot">&lt;-</span> <span class="fu">sort</span>(data)</span>
+<span id="cb56-13"><a href="#cb56-13" tabindex="-1"></a>  </span>
+<span id="cb56-14"><a href="#cb56-14" tabindex="-1"></a>  <span class="co"># Get parameters</span></span>
+<span id="cb56-15"><a href="#cb56-15" tabindex="-1"></a>  c    <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(<span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">*</span>n))</span>
+<span id="cb56-16"><a href="#cb56-16" tabindex="-1"></a>  p    <span class="ot">&lt;-</span> k <span class="sc">+</span> c</span>
+<span id="cb56-17"><a href="#cb56-17" tabindex="-1"></a>  b2   <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>alpha</span>
+<span id="cb56-18"><a href="#cb56-18" tabindex="-1"></a>  a    <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">+</span><span class="fu">sqrt</span>(b2)<span class="sc">*</span><span class="fu">sqrt</span>((c<span class="sc">-</span>b2)<span class="sc">/</span>(c<span class="dv">-1</span>)))<span class="sc">/</span>(c<span class="sc">-</span>b2<span class="dv">-1</span>)</span>
+<span id="cb56-19"><a href="#cb56-19" tabindex="-1"></a>  </span>
+<span id="cb56-20"><a href="#cb56-20" tabindex="-1"></a>  <span class="co"># Test</span></span>
+<span id="cb56-21"><a href="#cb56-21" tabindex="-1"></a>  <span class="cf">if</span>(opposite){</span>
+<span id="cb56-22"><a href="#cb56-22" tabindex="-1"></a>    <span class="co"># Test for the low values</span></span>
+<span id="cb56-23"><a href="#cb56-23" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">&quot;Walsh&#39;s test of low values&quot;</span>)</span>
+<span id="cb56-24"><a href="#cb56-24" tabindex="-1"></a>    w    <span class="ot">&lt;-</span> data_new[k]<span class="sc">-</span>(<span class="dv">1</span><span class="sc">+</span>a)<span class="sc">*</span>data_new[k<span class="sc">+</span><span class="dv">1</span>]<span class="sc">+</span>a<span class="sc">*</span>data_new[p]</span>
+<span id="cb56-25"><a href="#cb56-25" tabindex="-1"></a>    <span class="cf">if</span>( w <span class="sc">&lt;</span><span class="dv">0</span> ){</span>
+<span id="cb56-26"><a href="#cb56-26" tabindex="-1"></a>      <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;The lowest&quot;</span>,k,<span class="st">&quot;values are outlier:&quot;</span>))</span>
+<span id="cb56-27"><a href="#cb56-27" tabindex="-1"></a>      <span class="fu">print</span>(data_new[<span class="dv">1</span><span class="sc">:</span>k])</span>
+<span id="cb56-28"><a href="#cb56-28" tabindex="-1"></a>    }</span>
+<span id="cb56-29"><a href="#cb56-29" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb56-30"><a href="#cb56-30" tabindex="-1"></a>    <span class="co"># Test for the high values</span></span>
+<span id="cb56-31"><a href="#cb56-31" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">&quot;Walsh&#39;s test of high values&quot;</span>)</span>
+<span id="cb56-32"><a href="#cb56-32" tabindex="-1"></a>    w    <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">*</span>data_new[n<span class="sc">+</span><span class="dv">1</span><span class="sc">-</span>k]<span class="sc">+</span>(<span class="dv">1</span><span class="sc">+</span>a)<span class="sc">*</span>data_new[n<span class="sc">-</span>k]<span class="sc">+</span>a<span class="sc">*</span>data_new[n<span class="sc">+</span><span class="dv">1</span><span class="sc">-</span>p]</span>
+<span id="cb56-33"><a href="#cb56-33" tabindex="-1"></a>    <span class="cf">if</span>( w <span class="sc">&lt;</span> <span class="dv">0</span> ){</span>
+<span id="cb56-34"><a href="#cb56-34" tabindex="-1"></a>      <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;The highest&quot;</span>,k,<span class="st">&quot;values are outlier:&quot;</span>))</span>
+<span id="cb56-35"><a href="#cb56-35" tabindex="-1"></a>      <span class="fu">print</span>(data_new[(n<span class="sc">+</span><span class="dv">1-1</span>)<span class="sc">:</span>(n<span class="sc">+</span><span class="dv">1</span><span class="sc">-</span>k)])</span>
+<span id="cb56-36"><a href="#cb56-36" tabindex="-1"></a>    }</span>
+<span id="cb56-37"><a href="#cb56-37" tabindex="-1"></a>  }</span>
+<span id="cb56-38"><a href="#cb56-38" tabindex="-1"></a>}</span>
+<span id="cb56-39"><a href="#cb56-39" tabindex="-1"></a></span>
+<span id="cb56-40"><a href="#cb56-40" tabindex="-1"></a><span class="co"># Make up a sample</span></span>
+<span id="cb56-41"><a href="#cb56-41" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">runif</span>(<span class="dv">250</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="sc">-</span><span class="dv">90</span>, <span class="sc">-</span><span class="dv">91</span>, <span class="sc">-</span><span class="dv">100</span>, <span class="dv">90</span>, <span class="dv">91</span>, <span class="dv">100</span>)</span>
+<span id="cb56-42"><a href="#cb56-42" tabindex="-1"></a></span>
+<span id="cb56-43"><a href="#cb56-43" tabindex="-1"></a><span class="co"># Perform Walsh&#39;s test</span></span>
+<span id="cb56-44"><a href="#cb56-44" tabindex="-1"></a><span class="co"># Test for the 3 highest values</span></span>
+<span id="cb56-45"><a href="#cb56-45" tabindex="-1"></a><span class="fu">walsh.test</span>(sample, <span class="at">k=</span><span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;Walsh&#39;s test of high values&quot;
+## [1] &quot;The highest 3 values are outlier:&quot;
+## [1] 100  91  90</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" tabindex="-1"></a><span class="co"># Test for the 3 lowest values</span></span>
+<span id="cb58-2"><a href="#cb58-2" tabindex="-1"></a><span class="fu">walsh.test</span>(sample, <span class="at">k=</span><span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">opposite=</span>T)</span></code></pre></div>
+<pre><code>## [1] &quot;Walsh&#39;s test of low values&quot;
+## [1] &quot;The lowest 3 values are outlier:&quot;
+## [1] -100  -91  -90</code></pre>
+</div>
+<div id="summary-of-tests-to-detect-outliers" class="section level2">
+<h2>Summary of tests to detect outliers</h2>
+<p>Below is a brief summary of proceeding <code>4</code> tests:</p>
+<table>
+<colgroup>
+<col width="14%" />
+<col width="18%" />
+<col width="15%" />
+<col width="24%" />
+<col width="16%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Test</th>
+<th align="center">Normal population (approximately)</th>
+<th align="center">Sample size</th>
+<th align="center">Detect several outliers</th>
+<th align="center">R function</th>
+<th align="center">R Package</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Grubbs’ test</td>
+<td align="center">Yes</td>
+<td align="center"><span class="math inline">\(n \ge 6\)</span></td>
+<td align="center">No</td>
+<td align="center"><code>grubbs.test()</code></td>
+<td align="center"><code>outliers</code></td>
+</tr>
+<tr class="even">
+<td align="center">Dixon’s test</td>
+<td align="center">Yes</td>
+<td align="center"><span class="math inline">\(n \le 25\)</span></td>
+<td align="center">No</td>
+<td align="center"><code>dixon.test()</code></td>
+<td align="center"><code>outliers</code></td>
+</tr>
+<tr class="odd">
+<td align="center">Rosner’s test</td>
+<td align="center">Yes</td>
+<td align="center"><span class="math inline">\(n \ge 20\)</span></td>
+<td align="center">Yes</td>
+<td align="center"><code>rosnerTest()</code></td>
+<td align="center"><code>EnvStats</code></td>
+</tr>
+<tr class="even">
+<td align="center">Walsh’s test</td>
+<td align="center">No</td>
+<td align="center"><span class="math inline">\(n \ge 220
+^*\)</span></td>
+<td align="center">Yes</td>
+<td align="center"><code>walsh.test()</code></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(^*\)</span>For a significant level of
+<span class="math inline">\(\alpha\)</span>, <span
+class="math inline">\(Trunc(\sqrt{2n})&gt;1+\frac {1} {\alpha}\)</span>,
+where <span class="math inline">\(Trunc()\)</span> returns the
+ceiling.</p>
+</div>
+<div id="dealing-with-outliers" class="section level2">
+<h2>Dealing with outliers</h2>
+<p>Once outlier(s) is identified, one needs to adopt the <strong>careful
+examination strategy</strong>. See Display 3.6 (page <code>69</code>) in
+[RS] for more.</p>
+<hr />
+</div>
+</div>
+<div id="in-class-exercises" class="section level1">
+<h1>In-class exercises</h1>
+<div id="exercise-1" class="section level2">
+<h2>Exercise #1</h2>
+<p>Use different methods to remove outliers in the following
+observations:</p>
+<p><code>-4.44, -1.41, -0.78, -0.78, 0.55, 0.64, 1.05, 1.05, 1.72, 5.91, 9.30, 20.49</code></p>
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise #2</h2>
+<p>A local environmental officer wants to compare two fields to see if
+there are any differences in Cd concentrations. From field A, the
+officer randomly collected <code>20</code> samples, and Cd concentration
+(mg kg<sup>-1</sup>) is measured as follows:</p>
+<p><code>8.52, 5.91,  4.97, 5.02,  9.92,  20.12, 4.34,  4.35,  7.39,  4.74, 5.17, 10.65,  9.76</code></p>
+<p><code>6.70,  8.37,  3.61,  4.44,  15.29, 7.15, 10.07</code></p>
+<p>From field B, the officer randomly collected <code>13</code> samples
+with Cd concentrations read as:</p>
+<p><code>6.38, 10.59, 11.63, 18.62, 13.60,  6.60,  15.10, 12.31, 9.62,  9.00,  6.42,  4.81,  8.25</code></p>
+<ul>
+<li><p>2.1 Check the independence of samples</p></li>
+<li><p>2.2 Plot two boxplots side by side, are there any suspected
+outlier(s)?</p></li>
+<li><p>2.3 Use different methods to test the suspected
+outlier(s)</p></li>
+<li><p>2.4 Check the normality of the two samples, is the t-test
+suitable here?</p></li>
+<li><p>2.5 Do you use the independent two-sample or Welch two-sample
+t-test?</p></li>
+<li><p>2.6 What is the H0 and H1?</p></li>
+<li><p>2.7 Do you use a one-sided or two-sided p-value?</p></li>
+<li><p>2.8 Adopt the careful examination strategy, do the analyses give
+the same answer to the question of interest?</p></li>
+<li><p>2.9 Report your findings</p></li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
