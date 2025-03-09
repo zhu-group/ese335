@@ -492,7 +492,6 @@ div.tocify {
 </ul>
 <p>Load the library with R:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(gtools)</span></code></pre></div>
-<pre><code>## Warning: 程辑包&#39;gtools&#39;是用R版本4.3.2 来建造的</code></pre>
 <hr />
 </div>
 <div id="section-example-a-new-technology-to-remove-pollutant-x"
@@ -542,26 +541,26 @@ be written as:</p>
 <p><span class="math display">\[P(diff &lt;= -1.0 | H_{0} )\]</span>
 Since the sample size is small, we can write all possible groupings
 (combinations) for A with R.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Need `gtools` package</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">library</span>(gtools)</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># Obs from group A</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>Obs_A   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co"># Obs from group B</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>Obs_B   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.0</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co"># Compute the difference  </span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>Obs_difference <span class="ot">&lt;-</span> <span class="fu">mean</span>(Obs_A) <span class="sc">-</span> <span class="fu">mean</span>(Obs_B)</span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="fu">print</span>(Obs_difference)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Need `gtools` package</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">library</span>(gtools)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># Obs from group A</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>Obs_A   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># Obs from group B</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>Obs_B   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.0</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co"># Compute the difference  </span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>Obs_difference <span class="ot">&lt;-</span> <span class="fu">mean</span>(Obs_A) <span class="sc">-</span> <span class="fu">mean</span>(Obs_B)</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="fu">print</span>(Obs_difference)</span></code></pre></div>
 <pre><code>## [1] -1</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Given H0 is true, we assume that A and B are from the same population</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># So the total possible groupings for A is C(6,3) </span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>Obs_all     <span class="ot">&lt;-</span> <span class="fu">c</span>(Obs_A, Obs_B)</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>Groupings_A <span class="ot">&lt;-</span> <span class="fu">combinations</span>(<span class="fu">length</span>(Obs_all), <span class="fu">length</span>(Obs_A), Obs_all, F)</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co"># Show all possible groupings of A</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="fu">print</span>(Groupings_A)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Given H0 is true, we assume that A and B are from the same population</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co"># So the total possible groupings for A is C(6,3) </span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>Obs_all     <span class="ot">&lt;-</span> <span class="fu">c</span>(Obs_A, Obs_B)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>Groupings_A <span class="ot">&lt;-</span> <span class="fu">combinations</span>(<span class="fu">length</span>(Obs_all), <span class="fu">length</span>(Obs_A), Obs_all, F)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co"># Show all possible groupings of A</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="fu">print</span>(Groupings_A)</span></code></pre></div>
 <pre><code>##       [,1] [,2] [,3]
 ##  [1,]    1    2    3
 ##  [2,]    1    2    2
@@ -584,38 +583,38 @@ Since the sample size is small, we can write all possible groupings
 ## [19,]    3    3    4
 ## [20,]    2    3    4</code></pre>
 <p>Next, we can compute all possible differences:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Make an empty list</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>difference <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Loop all possible grouping methods for A</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(Groupings_A)[<span class="dv">1</span>]){</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  </span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>  <span class="co"># Mean of group A</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>  mean_A <span class="ot">&lt;-</span> <span class="fu">mean</span>(Groupings_A[i,])</span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>  </span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>  <span class="co"># Mean of group B</span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>  mean_B <span class="ot">&lt;-</span> (<span class="fu">sum</span>(Obs_all)<span class="sc">-</span><span class="fu">sum</span>(Groupings_A[i,]))<span class="sc">/</span><span class="fu">length</span>(Obs_B)</span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>  </span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>  <span class="co"># Store difference</span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>  difference <span class="ot">&lt;-</span> <span class="fu">c</span>(difference, mean_A <span class="sc">-</span> mean_B)</span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>}</span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="co"># Show all possible differences</span></span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="fu">print</span>(difference)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Make an empty list</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>difference <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># Loop all possible grouping methods for A</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(Groupings_A)[<span class="dv">1</span>]){</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  </span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>  <span class="co"># Mean of group A</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>  mean_A <span class="ot">&lt;-</span> <span class="fu">mean</span>(Groupings_A[i,])</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>  </span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>  <span class="co"># Mean of group B</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>  mean_B <span class="ot">&lt;-</span> (<span class="fu">sum</span>(Obs_all)<span class="sc">-</span><span class="fu">sum</span>(Groupings_A[i,]))<span class="sc">/</span><span class="fu">length</span>(Obs_B)</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>  </span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>  <span class="co"># Store difference</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>  difference <span class="ot">&lt;-</span> <span class="fu">c</span>(difference, mean_A <span class="sc">-</span> mean_B)</span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>}</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co"># Show all possible differences</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="fu">print</span>(difference)</span></code></pre></div>
 <pre><code>##  [1] -1.0000000 -1.6666667 -1.0000000 -0.3333333 -1.0000000 -0.3333333  0.3333333 -1.0000000 -0.3333333  0.3333333 -0.3333333  0.3333333  1.0000000 -0.3333333  0.3333333  1.0000000  0.3333333  1.0000000  1.6666667  1.0000000</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Plot all possible differences</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">hist</span>(difference)</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># Add a vertical line</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>Obs_difference, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">lwd=</span><span class="dv">5</span>, <span class="at">lty=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Plot all possible differences</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">hist</span>(difference)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># Add a vertical line</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>Obs_difference, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">lwd=</span><span class="dv">5</span>, <span class="at">lty=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="S04_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>OK, given H<sub>0</sub> is true, what is the chance that grouping
 leads to the observed or more extreme difference? From the above plot,
 we count that there are <code>5</code> cases out of <code>20</code>
 cases that the difference is as extreme or more extreme than
 <code>-1.0</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Compute p-value</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="fu">length</span>( <span class="fu">which</span>(difference <span class="sc">&lt;=</span> Obs_difference) )<span class="sc">/</span><span class="fu">length</span>(difference)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Compute p-value</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">length</span>( <span class="fu">which</span>(difference <span class="sc">&lt;=</span> Obs_difference) )<span class="sc">/</span><span class="fu">length</span>(difference)</span></code></pre></div>
 <pre><code>## [1] 0.25</code></pre>
 <p>The p-value, in this case, is <code>0.25</code>, which is not a small
 value (compared with <code>0.05</code>). So we can not rule out that
