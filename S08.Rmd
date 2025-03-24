@@ -70,12 +70,12 @@ The paired-sample t-test is the same as the [one-sample t-test](https://zhu-grou
 Recall the definition of t-Ratio:
 
 $$t=\frac {Estimate - Parameter} {SE(Estimate)}  $$
-Here the standard error (SE) refers to the sample. If $s$ is the sample SD of the difference, the SE for the estimate ($\overline {D}$) is: 
+Here the standard error (SE) refers to the sample. If $s_D$ is the sample SD of the difference, the SE for the estimate ($\overline {D}$) is: 
 
-$$SE(\overline {D})=\frac {s} {\sqrt{n}}$$
+$$SE(\overline {D})=\frac {s_D} {\sqrt{n}}$$
 For a paired sample t-test:
 
-$$ t =\frac { \overline{D}  - \mu_D } { {s} / \sqrt{n} } $$
+$$ t =\frac { \overline{D}  - \mu_D } { {s_D} / \sqrt{n} } $$
 And $t$ statistic follows a Student's t distribution on $n - 1$ degrees of freedom. 
 
 For our research question, 
@@ -177,8 +177,8 @@ Confidence intervals measure the degree of uncertainty or certainty in a samplin
 
 Let's use the definition of $t$ ratio to understand the confidence intervals. 
 
-$$ t =\frac { \overline{D}  - \mu_D } { {s} / \sqrt{n} } \sim t_{df=n-1} $$
-For a given t distribution on the degrees of freedom of n-1, `95%` of values in this distribution will fall between two endpoints that make the corresponding probability of `95%`. In this case (d.f.=`14`), it's `-2.14` and `2.14`:
+$$ t =\frac { \overline{D}  - \mu_D } { {s_D} / \sqrt{n} } \sim t_{df=n-1} $$
+For a given t distribution on the degrees of freedom of `n-1`, `95%` of values in this distribution will fall between two endpoints that make the corresponding probability of `95%`. In this case (d.f.=`14`), it's `-2.14` and `2.14`:
 
 ```{r}
 # Make a vector from -5 to 5, with a step of 0.01 
@@ -213,7 +213,7 @@ That is, if we randomly draw `10000` samples ($X_1 -X_2$), `9500` of those sampl
 $$ -2.14 \le \frac { \overline{D}  - \mu_D } { {s} / \sqrt{n} } \le 2.14  $$
 which is equivalent to say that, `9500` of the `10000` times the unknown population mean ($\mu_D$) would be within the following interval:
 
-$$ \overline{D} - 2.14 * \frac {s} {\sqrt{n}} \le \mu_D \le \overline{D} + 2.14 * \frac {s} {\sqrt{n}}  $$
+$$ \overline{D} - 2.14 \frac {s} {\sqrt{n}} \le \mu_D \le \overline{D} + 2.14  \frac {s} {\sqrt{n}}  $$
 and we have:
 
 $$ -16.9 \le \mu_D \le -2.0  $$
@@ -222,7 +222,7 @@ This is exactly the same as the R output. Now, we understand that this range rep
 A general way to write the CI (`100(1-x)%` confidence level) of unknown population mean ($\mu_D$) would be:
 
 $$ \overline{D} - t_{df=n-1}(1-0.5x) \frac {s} {\sqrt{n}} \le \mu_D \le \overline{D} + t_{df=n-1}(1-0.5x) \frac {s} {\sqrt{n}}  $$
-where $t_{df=n-1}(1-0.5x)$ is the `100(1-0.5x)`th percentile of the t distribution on $n-1$ degrees of freedom.
+where $t_{df=n-1}(1-0.5x)$ is the `100(1-0.5x)`th percentile of the t distribution on `n-1` degrees of freedom.
 
 In fact, we have seen CI as default R output from the [one-sample t-test](https://zhu-group.github.io/ese335/S06.html#One_sample_t-test) and [independent two-sample t-test](https://zhu-group.github.io/ese335/S07.html#Independent_two-sample_t-test_with_R). You should be able to explain the meaning of each CI. Please try. 
 

@@ -649,13 +649,13 @@ zero.</p>
 <p>Recall the definition of t-Ratio:</p>
 <p><span class="math display">\[t=\frac {Estimate - Parameter}
 {SE(Estimate)}  \]</span> Here the standard error (SE) refers to the
-sample. If <span class="math inline">\(s\)</span> is the sample SD of
+sample. If <span class="math inline">\(s_D\)</span> is the sample SD of
 the difference, the SE for the estimate (<span
 class="math inline">\(\overline {D}\)</span>) is:</p>
-<p><span class="math display">\[SE(\overline {D})=\frac {s}
+<p><span class="math display">\[SE(\overline {D})=\frac {s_D}
 {\sqrt{n}}\]</span> For a paired sample t-test:</p>
 <p><span class="math display">\[ t =\frac { \overline{D}  - \mu_D } {
-{s} / \sqrt{n} } \]</span> And <span class="math inline">\(t\)</span>
+{s_D} / \sqrt{n} } \]</span> And <span class="math inline">\(t\)</span>
 statistic follows a Student’s t distribution on <span
 class="math inline">\(n - 1\)</span> degrees of freedom.</p>
 <p>For our research question,</p>
@@ -791,11 +791,12 @@ class="math inline">\(\mu_D\)</span> will fall within the range between
 <p>Let’s use the definition of <span class="math inline">\(t\)</span>
 ratio to understand the confidence intervals.</p>
 <p><span class="math display">\[ t =\frac { \overline{D}  - \mu_D } {
-{s} / \sqrt{n} } \sim t_{df=n-1} \]</span> For a given t distribution on
-the degrees of freedom of n-1, <code>95%</code> of values in this
-distribution will fall between two endpoints that make the corresponding
-probability of <code>95%</code>. In this case (d.f.=<code>14</code>),
-it’s <code>-2.14</code> and <code>2.14</code>:</p>
+{s_D} / \sqrt{n} } \sim t_{df=n-1} \]</span> For a given t distribution
+on the degrees of freedom of <code>n-1</code>, <code>95%</code> of
+values in this distribution will fall between two endpoints that make
+the corresponding probability of <code>95%</code>. In this case
+(d.f.=<code>14</code>), it’s <code>-2.14</code> and
+<code>2.14</code>:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Make a vector from -5 to 5, with a step of 0.01 </span></span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>x        <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">5.0</span>, <span class="fl">5.0</span>, <span class="at">by=</span><span class="fl">0.01</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
@@ -834,8 +835,8 @@ class="math inline">\(t\)</span> ratio between <code>-2.14</code> and
 that, <code>9500</code> of the <code>10000</code> times the unknown
 population mean (<span class="math inline">\(\mu_D\)</span>) would be
 within the following interval:</p>
-<p><span class="math display">\[ \overline{D} - 2.14 * \frac {s}
-{\sqrt{n}} \le \mu_D \le \overline{D} + 2.14 * \frac {s}
+<p><span class="math display">\[ \overline{D} - 2.14 \frac {s}
+{\sqrt{n}} \le \mu_D \le \overline{D} + 2.14  \frac {s}
 {\sqrt{n}}  \]</span> and we have:</p>
 <p><span class="math display">\[ -16.9 \le \mu_D \le -2.0  \]</span>
 This is exactly the same as the R output. Now, we understand that this
@@ -854,8 +855,8 @@ class="math inline">\(\mu_D\)</span>) would be:</p>
 {s} {\sqrt{n}} \le \mu_D \le \overline{D} + t_{df=n-1}(1-0.5x) \frac {s}
 {\sqrt{n}}  \]</span> where <span
 class="math inline">\(t_{df=n-1}(1-0.5x)\)</span> is the
-<code>100(1-0.5x)</code>th percentile of the t distribution on <span
-class="math inline">\(n-1\)</span> degrees of freedom.</p>
+<code>100(1-0.5x)</code>th percentile of the t distribution on
+<code>n-1</code> degrees of freedom.</p>
 <p>In fact, we have seen CI as default R output from the <a
 href="https://zhu-group.github.io/ese335/S06.html#One_sample_t-test">one-sample
 t-test</a> and <a
