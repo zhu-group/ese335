@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Section 13 Non-parametric tests</title>
+
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Environmental Data Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Syllabus.html">
+    <span class="fa fa-bell-o"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="Schedule.html">
+    <span class="fa fa-calendar"></span>
+     
+    Schedule
+  </a>
+</li>
+<li>
+  <a href="Resource.html">
+    <span class="fa fa-wrench"></span>
+     
+    Resource
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-laptop"></span>
+     
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="A01.html">Assignment 01</a>
+    </li>
+    <li>
+      <a href="A02.html">Assignment 02</a>
+    </li>
+    <li>
+      <a href="A03.html">Assignment 03</a>
+    </li>
+    <li>
+      <a href="A04.html">Assignment 04</a>
+    </li>
+    <li>
+      <a href="A05.html">Assignment 05</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Section 13 Non-parametric tests</h1>
+
+</div>
+
+
+<hr />
+<div id="prerequisites" class="section level1">
+<h1>Prerequisites</h1>
+<p>Load the libraries with R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(BSDA)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(FSA)</span></code></pre></div>
+<hr />
+</div>
+<div id="section-example-soil-organic-matter" class="section level1">
+<h1>Section example: Soil organic matter</h1>
+<p>Given the following organic matter contents (unit: %) in different
+soil types, do organic matters differ among soil types?</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Soil type</th>
+<th align="left">Soil organic matter content (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">A</td>
+<td
+align="left"><code>2.0, 2.8, 3.3, 3.2, 4.4, 3.6, 1.9, 3.3, 2.8, 1.1</code></td>
+</tr>
+<tr class="even">
+<td align="center">B</td>
+<td
+align="left"><code>3.5, 2.8, 3.2, 3.5, 2.3, 2.4, 2.0, 1.6</code></td>
+</tr>
+<tr class="odd">
+<td align="center">C</td>
+<td
+align="left"><code>3.3, 3.6, 2.6, 3.1, 3.2, 3.3, 2.9, 3.4, 3.2, 3.2</code></td>
+</tr>
+<tr class="even">
+<td align="center">D</td>
+<td
+align="left"><code>3.2, 3.3, 3.2, 2.9, 3.3, 2.5, 2.6, 2.8</code></td>
+</tr>
+<tr class="odd">
+<td align="center">E</td>
+<td align="left"><code>2.6, 2.6, 2.9, 2.0, 2.0, 2.1</code></td>
+</tr>
+<tr class="even">
+<td align="center">F</td>
+<td align="left"><code>3.1, 2.9, 3.1, 2.5</code></td>
+</tr>
+<tr class="odd">
+<td align="center">G</td>
+<td align="left"><code>2.6, 2.2, 2.2, 2.5, 1.2, 1.2</code></td>
+</tr>
+<tr class="even">
+<td align="center">H</td>
+<td align="left"><code>2.5, 2.4, 3.0, 1.5</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="overview-of-non-parametric-tests" class="section level1">
+<h1>Overview of non-parametric tests</h1>
+<p>A non-parametric test, also known as a distribution-free test,
+assumes nothing about the underlying distribution (for example, that the
+data comes from a normal distribution). That’s compared to parametric
+test, which makes assumptions about a population’s parameters (for
+example, the mean or standard deviation); When the word “non-parametric”
+is used in statistics, it doesn’t quite mean that you know nothing about
+the population. It usually means that you know the population data does
+not have a normal distribution.</p>
+<p>Situations to use non-parametric tests:</p>
+<ul>
+<li><p>The underlying distribution is <strong>not normal</strong>, thus
+the normality assumption is not valid</p></li>
+<li><p>Data type is <strong>nominal</strong> (e.g., <code>pass</code> or
+<code>fail</code>) or <strong>ordinal</strong> (aka, ranks or
+start-rating)</p></li>
+<li><p>One or more assumptions of a parametric test have been
+violated</p></li>
+<li><p>The sample size is too small (less than <code>6</code>) to run a
+parametric test</p></li>
+<li><p>Outliers can not be removed</p></li>
+<li><p>Prefer to test for the median rather than the mean (e.g., very
+skewed distribution)</p></li>
+</ul>
+<p>Non-parametric tests have lower <em>power</em> compared to parametric
+tests - they often do not reject H0 when they should.</p>
+<hr />
+</div>
+<div id="mann-whitney-u-test" class="section level1">
+<h1>Mann-Whitney U test</h1>
+<p>The Mann–Whitney U test is also called the Mann–Whitney–Wilcoxon
+(MWW), Wilcoxon rank-sum test, or Wilcoxon–Mann–Whitney test. It is used
+to compare the differences between two independent samples when the
+sample distributions are not normally distributed and the sample sizes
+are small (<code>n &lt; 30</code>). It is considered to be the
+non-parametric equivalent to the two-sample independent t-test.</p>
+<p>The requirements of using Mann–Whitney U test are:</p>
+<ul>
+<li><p>Random and independent samples</p></li>
+<li><p>For maximum accuracy, there better be <strong>no ties</strong>.
+But there is a way to handle ties in the test.</p></li>
+</ul>
+<p>In the Mann–Whitney U test, we have:</p>
+<ul>
+<li><p>H0: There is no difference in the two population means</p></li>
+<li><p>H1: There is a difference in the two population means</p></li>
+</ul>
+<p>The Mann–Whitney U test is done with the <code>wilcox.test()</code>
+function in R:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Make up samples</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>Treat     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>Control   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">9</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co"># Perform the Mann Whitney U test</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">wilcox.test</span>(Treat, Control, <span class="at">paired=</span>F, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in wilcox.test.default(Treat, Control, paired = F, alternative = &quot;two.sided&quot;): 无法精確計算带连结的p值</code></pre>
+<pre><code>## 
+##  Wilcoxon rank sum test with continuity correction
+## 
+## data:  Treat and Control
+## W = 13, p-value = 0.468
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<hr />
+</div>
+<div id="wilcoxon-signed-rank-test" class="section level1">
+<h1>Wilcoxon signed rank test</h1>
+<p>The Wilcoxon signed rank test is a non-parametric alternative to
+paired t-test used to compare paired data. It’s used whendata are not
+normally distributed.</p>
+<p>The requirements of using the Wilcoxon signed rank test are:</p>
+<ul>
+<li><p>Random and independent samples</p></li>
+<li><p>Approximately <strong>symmetrical</strong> distributions</p></li>
+</ul>
+<p>In the Wilcoxon signed rank test, we have:</p>
+<ul>
+<li><p>H0: There is no difference in the two population means</p></li>
+<li><p>H1: There is a difference in the two population means</p></li>
+</ul>
+<p>The Wilcoxon signed rank test is also done with the
+<code>wilcox.test()</code> function in R, but with different
+keywords:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Make up samples</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>Treat     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>Control   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">9</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co"># Perform the Wilcoxon signed rank test</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="fu">wilcox.test</span>(Treat, Control, <span class="at">paired=</span>T, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in wilcox.test.default(Treat, Control, paired = T, alternative = &quot;two.sided&quot;): 无法精確計算带连结的p值</code></pre>
+<pre><code>## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  Treat and Control
+## V = 5, p-value = 0.2932
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<hr />
+</div>
+<div id="sign-test" class="section level1">
+<h1>Sign test</h1>
+<p>When the distribution of differences between paired data values is
+neither normal nor symmetrical, use the sign test. The sign test is done
+with the <code>SIGN.test()</code> function from the <code>BSDA</code>
+package R:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">SIGN.test</span>(Treat, Control, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div>
+<pre><code>## 
+##  Dependent-samples Sign-Test
+## 
+## data:  Treat and Control
+## S = 2, p-value = 0.6875
+## alternative hypothesis: true median difference is not equal to 0
+## 95 percent confidence interval:
+##  -4.9  2.0
+## sample estimates:
+## median of x-y 
+##            -2 
+## 
+## Achieved and Interpolated Confidence Intervals: 
+## 
+##                   Conf.Level L.E.pt U.E.pt
+## Lower Achieved CI     0.7812   -4.0      2
+## Interpolated CI       0.9500   -4.9      2
+## Upper Achieved CI     0.9688   -5.0      2</code></pre>
+<hr />
+</div>
+<div id="kruskalwallis-test" class="section level1">
+<h1>Kruskal–Wallis test</h1>
+<p>The Kruskal–Wallis test, also known as Kruskal–Wallis H test or
+one-way ANOVA on ranks, is an alternative for the one-way analysis of
+variance (ANOVA). The test is for checking whether samples originate
+from the same distribution. It is used for comparing two or more
+independent samples. It extends the Mann–Whitney U test, which is used
+for comparing only two groups.</p>
+<p>The test assumes that the observations are independent. That is, it
+is not appropriate for paired observations or repeated measures
+data.</p>
+<p>In the Kruskal–Wallis test, we have:</p>
+<ul>
+<li><p>H0: There is no difference among population means</p></li>
+<li><p>H1: There is a difference among population means</p></li>
+</ul>
+<p>The Kruskal–Wallis test is done with the <code>kruskal.test()</code>
+function in R:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="fu">require</span>(graphics)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># Boxplots</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(<span class="at">x=</span>Month, <span class="at">y=</span>Ozone, <span class="at">group=</span>Month, <span class="at">fill=</span>Month)) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Monthly ozone&quot;</span>, </span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;Month&quot;</span>, <span class="at">y=</span><span class="st">&quot;Ozone [ppb]&quot;</span>) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 37 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<p><img src="S13_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Perform the Kruskal–Wallis test</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">kruskal.test</span>(Ozone <span class="sc">~</span> Month, <span class="at">data =</span> airquality)</span></code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  Ozone by Month
+## Kruskal-Wallis chi-squared = 29.267, df = 4, p-value = 6.901e-06</code></pre>
+<p>The outcome of the Kruskal–Wallis test tells you if there are
+differences among the group means, but doesn’t tell you which groups are
+different from other groups. To determine which groups are different
+from others, post-hoc testing can be conducted. The most common post-hoc
+test for the Kruskal–Wallis test is the <em>Dunn test</em>, here
+conducted with the <code>dunnTest()</code> function in the
+<code>FSA</code> package.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">dunnTest</span>(Ozone <span class="sc">~</span> Month, <span class="at">data=</span>airquality, <span class="at">method=</span><span class="st">&quot;bh&quot;</span>)      </span></code></pre></div>
+<pre><code>## Warning: Month was coerced to a factor.</code></pre>
+<pre><code>## Warning: Some rows deleted from &#39;x&#39; and &#39;g&#39; because missing data.</code></pre>
+<pre><code>## Dunn (1964) Kruskal-Wallis multiple comparison</code></pre>
+<pre><code>##   p-values adjusted with the Benjamini-Hochberg method.</code></pre>
+<pre><code>##    Comparison            Z      P.unadj        P.adj
+## 1       5 - 6 -0.925158616 3.548834e-01 4.436043e-01
+## 2       5 - 7 -4.419470641 9.894296e-06 9.894296e-05
+## 3       6 - 7 -2.244208032 2.481902e-02 4.963804e-02
+## 4       5 - 8 -4.132813422 3.583496e-05 1.791748e-04
+## 5       6 - 8 -2.038635487 4.148642e-02 6.914403e-02
+## 6       7 - 8  0.286657218 7.743748e-01 8.604164e-01
+## 7       5 - 9 -1.321202283 1.864339e-01 2.663342e-01
+## 8       6 - 9  0.002538555 9.979745e-01 9.979745e-01
+## 9       7 - 9  3.217199124 1.294487e-03 4.314957e-03
+## 10      8 - 9  2.922827778 3.468683e-03 8.671708e-03</code></pre>
+<hr />
+</div>
+<div id="spearman-correlation-test" class="section level1">
+<h1>Spearman correlation test</h1>
+<p>The Spearman correlation test is a rank-based test that does not
+require assumptions about the distribution of the data. The correlation
+coefficient from the test, <span class="math inline">\(\rho\)</span>,
+ranges from <code>-1</code> to <code>–1</code>, with <code>+1</code>
+being a perfect positive correlation and <code>–1</code> being a perfect
+negative correlation. A <span class="math inline">\(\rho\)</span> of
+<code>0</code> represents no correlation.</p>
+<p>In the Spearman correlation test, we have:</p>
+<ul>
+<li><p>H0: The populations do not correlate with each other</p></li>
+<li><p>H1: The populations correlate with each other</p></li>
+</ul>
+<p>The Spearman correlation is done with the <code>cor.test()</code>
+function in R:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Make up some random values</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>x<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">20</span>,<span class="dv">0</span>,<span class="fl">0.5</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co"># Perform the Spearman correlation test</span></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="fu">cor.test</span>(x, y, <span class="at">method=</span><span class="st">&quot;spearman&quot;</span>, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>, <span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<pre><code>## 
+##  Spearman&#39;s rank correlation rho
+## 
+## data:  x and y
+## S = 66, p-value = 6.158e-06
+## alternative hypothesis: true rho is not equal to 0
+## sample estimates:
+##       rho 
+## 0.9503759</code></pre>
+<hr />
+</div>
+<div id="kendall-correlation-test" class="section level1">
+<h1>Kendall correlation test</h1>
+<p>The Kendall correlation test is also a rank-based test. The
+correlation coefficient from the test is <span
+class="math inline">\(\tau\)</span>, ranging from <code>-1</code> to
+<code>+1</code>.</p>
+<p>Used the Kendall correlation when <strong>the sample size is small or
+there are many tied ranks</strong>.</p>
+<p>In the Kendall correlation test, we have:</p>
+<ul>
+<li><p>H0: The populations do not correlate with each other</p></li>
+<li><p>H1: The populations correlate with each other</p></li>
+</ul>
+<p>The Kendall correlation is also done with the <code>cor.test()</code>
+function in R:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Perform the Kendall correlation test</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="fu">cor.test</span>(x, y, <span class="at">method=</span><span class="st">&quot;kendall&quot;</span>, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>, <span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<pre><code>## 
+##  Kendall&#39;s rank correlation tau
+## 
+## data:  x and y
+## T = 172, p-value = 9.061e-09
+## alternative hypothesis: true tau is not equal to 0
+## sample estimates:
+##       tau 
+## 0.8105263</code></pre>
+<hr />
+</div>
+<div id="summary-of-non-parametric-tests" class="section level1">
+<h1>Summary of non-parametric tests</h1>
+<table>
+<colgroup>
+<col width="19%" />
+<col width="32%" />
+<col width="48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Purpose</th>
+<th align="center">Parametric</th>
+<th align="center">Alternative non-parametric</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Checking independence</td>
+<td align="center"></td>
+<td align="center"><a
+href="https://zhu-group.github.io/ese335/S09.html#Independence">Runs
+test</a></td>
+</tr>
+<tr class="even">
+<td align="center">Checking normality</td>
+<td align="center"></td>
+<td align="center"><a
+href="https://zhu-group.github.io/ese335/S05.html#Shapiro-Wilk_test">Shapiro-Wilk
+test</a>, <a
+href="https://zhu-group.github.io/ese335/S05.html#Lilliefors_test">Lillifors
+test</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Checking Outliers</td>
+<td align="center"><a
+href="https://zhu-group.github.io/ese335/S09.html#Grubbs%E2%80%99_test">Grubbs’
+test</a>, <a
+href="https://zhu-group.github.io/ese335/S09.html#Dixon%E2%80%99s_test">Dixon’s
+test</a>, <a
+href="https://zhu-group.github.io/ese335/S09.html#Rosner%E2%80%99s_test">Rosner’s
+test</a></td>
+<td align="center"><a
+href="https://zhu-group.github.io/ese335/S09.html#Walsh%E2%80%99s_test">Walsh’s
+test</a></td>
+</tr>
+<tr class="even">
+<td align="center">Comparing means of two independent populations</td>
+<td align="center"><a
+href="https://zhu-group.github.io/ese335/S07.html#Independent_two-sample_t-test_with_R">t
+test</a></td>
+<td align="center"><a
+href="https://zhu-group.github.io/ese335/S13.html#Mann-Whitney_U_test">Mann-Whitney
+U test</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Comparing means of two paired populations</td>
+<td align="center"><a
+href="https://zhu-group.github.io/ese335/S08.html#Paired_sample_t-test_with_R">paired
+t test</a></td>
+<td align="center"><a
+href="https://zhu-group.github.io/ese335/S13.html#Wilcoxon_signed_rank_test">Wilcoxon
+signed rank</a>, <a
+href="https://zhu-group.github.io/ese335/S13.html#Sign_test">Signed
+test</a></td>
+</tr>
+<tr class="even">
+<td align="center">Comparing means of more than 2 independent
+populations</td>
+<td align="center"><a
+href="https://zhu-group.github.io/ese335/S10.html#One-way_ANOVA_with_R">One-way
+ANOVA</a></td>
+<td align="center"><a
+href="https://zhu-group.github.io/ese335/S13.html#Kruskal%E2%80%93Wallis_test">Kruskal–Wallis
+test</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Checking correlation</td>
+<td align="center"><a
+href="https://zhu-group.github.io/ese335/S12.html#Pearson_correlation_test_procedure">Pearson
+test</a></td>
+<td align="center"><a
+href="https://zhu-group.github.io/ese335/S13.html#Spearman_correlation_test">Spearman
+test</a>, <a
+href="https://zhu-group.github.io/ese335/S13.html#Kendall_correlation_test">Kendall
+test</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="in-class-exercises" class="section level1">
+<h1>In-class exercises</h1>
+<div id="exercise-1" class="section level2">
+<h2>Exercise #1</h2>
+<p>Using data from the section example, do organic matters differ among
+soil types? Report your results.</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
