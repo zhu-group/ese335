@@ -600,10 +600,10 @@ variables:</p>
 <span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="fu">glimpse</span>(cd_data_tbl)</span></code></pre></div>
 <pre><code>## Rows: 96
 ## Columns: 4
-## $ Physical &lt;ord&gt; 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1,…
-## $ Chemical &lt;ord&gt; 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1,…
-## $ Plant    &lt;ord&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3,…
-## $ Cd       &lt;dbl&gt; 1.71, 2.04, 0.90, 2.19, 1.62, 1.27, 1.24, 1.55, 0.76, 2.45, 1.09, 1.52, 1.97, 1.37, 0.61, 0.49, 0.58, 2.81, 1.74, 1.40, 0.71, 1.04, 0.50, 1.26, 0.60, 1.66, 0.37, 1.58, 0.20, 1.67, 0.34, 0.26, 0.83, 0.39, 1.74, 1.69, 1.…</code></pre>
+## $ Physical &lt;ord&gt; 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, …
+## $ Chemical &lt;ord&gt; 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, …
+## $ Plant    &lt;ord&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, …
+## $ Cd       &lt;dbl&gt; 1.71, 2.04, 0.90, 2.19, 1.62, 1.27, 1.24, 1.55, 0.76, 2.45, 1.09, 1.52, 1.97, 1.37, 0.61, 0.49, 0.58, 2.81, 1.74, 1.4…</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Boxplot - Physical</span></span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="fu">ggplot</span>(cd_data_tbl, <span class="fu">aes</span>(<span class="at">x =</span> Physical, <span class="at">y =</span> Cd, <span class="at">fill =</span> Physical)) <span class="sc">+</span></span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
@@ -869,13 +869,32 @@ residuals of a perfectly-heteroscedastic model and the actual residuals
 of your model, so the <strong>closer to a slope of 1</strong> this is
 the better.</p></li>
 </ul>
-<p>If the model fails to fit the assumption of homoscedasticity, we need
-to use a non-parametric test instead.</p>
+<p>Statistically, we can use the Bartlett test to verify that
+assumption. Bartlett test is <strong>sensitive to departures from
+normality</strong>. Alternatively, the Levene test is an alternative to
+the Bartlett test that is less sensitive to departures from
+normality.</p>
+<ul>
+<li>H0: The samples are from populations with equal variances</li>
+<li>H1: At least one population variance is not equal to the
+others.</li>
+</ul>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="co"># Test homogeneity of variances</span></span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a><span class="fu">bartlett.test</span>(Cd <span class="sc">~</span> group, <span class="at">data=</span>Cd_data)</span></code></pre></div>
+<pre><code>## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  Cd by group
+## Bartlett&#39;s K-squared = 2.839, df = 3, p-value = 0.4171</code></pre>
+<p>We see from the results, the assumption of equal variances is valid
+(<code>p-value &gt; 0.05</code>). If the model fails to fit the
+assumption of homoscedasticity, we need to use a non-parametric test
+instead.</p>
 </div>
 <div id="tukeys-test-with-r" class="section level2">
 <h2>5 Tukey’s test with R</h2>
 <p>Check pairwise difference:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="fu">TukeyHSD</span>(two_way_additive)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="fu">TukeyHSD</span>(two_way_additive)</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
 ## 
@@ -895,8 +914,8 @@ to use a non-parametric test instead.</p>
 ## 2-1 -0.022500 -0.3578973 0.3128973 0.9860108
 ## 3-1  0.170625 -0.1647723 0.5060223 0.4490216
 ## 3-2  0.193125 -0.1422723 0.5285223 0.3597295</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">TukeyHSD</span>(two_way_additive))</span></code></pre></div>
-<p><img src="S11_files/figure-html/unnamed-chunk-10-1.png" width="672" /><img src="S11_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">TukeyHSD</span>(two_way_additive))</span></code></pre></div>
+<p><img src="S11_files/figure-html/unnamed-chunk-11-1.png" width="672" /><img src="S11_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
 </div>
 <div id="report-the-results" class="section level2">
 <h2>6 Report the results</h2>

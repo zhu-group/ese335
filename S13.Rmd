@@ -17,6 +17,8 @@ Load the libraries with R:
 library(BSDA)
 library(ggplot2)
 library(FSA)
+library(tidyr)
+library(dplyr)
 ```
 
 ***
@@ -168,6 +170,39 @@ dunnTest(Ozone ~ Month, data=airquality, method="bh")
 ```
 
 ***
+# Levene test
+
+The Levene test checks whether several groups have the same variance in the population (homoscedasticity). Levene test is therefore used to test the null hypothesis that the samples to be compared come from a population with the same variance. 
+
++ H0: The samples are from populations with equal variances 
++ H1: At least one population variance is not equal to the others  
+
+A big advantage of Levene test is that it is very stable against violations of the normal distribution. This makes Levene test is used in many statistics programs. 
+
+```{r}
+# Sub-samples
+Control  <- c(0.64, 0.91, 0.84, 0.41, 1.58, 0.48, 0.88, 0.74, 1.09, 1.28)
+P1       <- c(1.20, 1.17, 0.76, 0.92, 0.65, 1.14, 1.05, 1.28, 0.89, 1.06)
+P2       <- c(0.25, 1.31, 0.43, 1.18, 1.02, 0.83, 1.02, 0.66, 0.70, 0.83)
+P3       <- c(0.63, 0.30, 0.49, 0.01, 0.63, 0.69, 0.68, 0.34, 1.09, 0.42)
+
+# Make data frame
+Cd_data  <- data.frame(Cd=c(Control, P1, P2, P3),
+                       group=c(rep("Control", length(Control)),
+                               rep("Plant 1", length(P1)),
+                               rep("Plant 2", length(P2)),
+                               rep("Plant 3", length(P3))) )
+
+# Change to factor type using tibble
+cd_data_tbl <- as_tibble(Cd_data) %>% 
+  mutate(group = factor(group, ordered = TRUE))
+
+# Test homogeneity of variances
+require(car)
+leveneTest(Cd ~ group, data=cd_data_tbl)    
+```
+
+***
 
 # Spearman correlation test
 
@@ -223,6 +258,7 @@ Purpose|Parametric|Alternative non-parametric |
 |Comparing means of two independent populations  | [t test](https://zhu-group.github.io/ese335/S07.html#Independent_two-sample_t-test_with_R)   | [Mann-Whitney U test](https://zhu-group.github.io/ese335/S13.html#Mann-Whitney_U_test) |
 |Comparing means of two paired populations  | [paired t test](https://zhu-group.github.io/ese335/S08.html#Paired_sample_t-test_with_R)   | [Wilcoxon signed rank](https://zhu-group.github.io/ese335/S13.html#Wilcoxon_signed_rank_test), [Signed test](https://zhu-group.github.io/ese335/S13.html#Sign_test) |
 |Comparing means of more than 2 independent populations  | [One-way ANOVA](https://zhu-group.github.io/ese335/S10.html#One-way_ANOVA_with_R) | [Kruskal–Wallis test](https://zhu-group.github.io/ese335/S13.html#Kruskal%E2%80%93Wallis_test) |
+|Checking homogeneity of variances| [Bartlett test](https://zhu-group.github.io/ese335/S11.html#4_Check_homoscedasticity_of_residuals) | [Levene Test](https://zhu-group.github.io/ese335/S13.html#Levene_test) |
 |Checking correlation  | [Pearson test](https://zhu-group.github.io/ese335/S12.html#Pearson_correlation_test_procedure)  | [Spearman test](https://zhu-group.github.io/ese335/S13.html#Spearman_correlation_test), [Kendall test](https://zhu-group.github.io/ese335/S13.html#Kendall_correlation_test)|
 
 ***

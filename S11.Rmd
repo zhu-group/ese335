@@ -283,7 +283,17 @@ Each plot gives a specific piece of information about the model fit. Here are th
 
 + The normal Q-Q plot plots a regression between the theoretical residuals of a perfectly-heteroscedastic model and the actual residuals of your model, so the **closer to a slope of 1** this is the better. 
 
-If the model fails to fit the assumption of homoscedasticity, we need to use a non-parametric test instead.
+Statistically, we can use the Bartlett test to verify that assumption. Bartlett test is **sensitive to departures from normality**. Alternatively, the Levene test is an alternative to the Bartlett test that is less sensitive to departures from normality. 
+
++ H0: The samples are from populations with equal variances 
++ H1: At least one population variance is not equal to the others.
+
+```{r}
+# Test homogeneity of variances
+bartlett.test(Cd ~ group, data=Cd_data)
+```
+
+We see from the results, the assumption of equal variances is valid (`p-value > 0.05`). If the model fails to fit the assumption of homoscedasticity, we need to use a non-parametric test instead.
 
 ## 5 Tukey's test with R
 
