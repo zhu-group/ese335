@@ -559,9 +559,9 @@ For example:</p>
 <p><img src="S12_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Compute covariance</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">cov</span>(x,y)</span></code></pre></div>
-<pre><code>## [1] 7.6107</code></pre>
+<pre><code>## [1] 9.189225</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">cov</span>(<span class="dv">2</span><span class="sc">*</span>x,<span class="dv">2</span><span class="sc">*</span>y)</span></code></pre></div>
-<pre><code>## [1] 30.4428</code></pre>
+<pre><code>## [1] 36.7569</code></pre>
 <p>As you can see, covariance provides only <strong>direction</strong>
 of the relationship. However, it does not indicate the
 <strong>strength</strong> of the relationship.</p>
@@ -623,14 +623,14 @@ correlation test. That is:</p>
 ##  Runs Test
 ## 
 ## data:  x
-## statistic = 0.45947, runs = 12, n1 = 10, n2 = 10, n = 20, p-value = 0.6459
+## statistic = -1.3784, runs = 8, n1 = 10, n2 = 10, n = 20, p-value = 0.1681
 ## alternative hypothesis: nonrandomness</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">runs.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Runs Test
 ## 
 ## data:  y
-## statistic = 0.45947, runs = 12, n1 = 10, n2 = 10, n = 20, p-value = 0.6459
+## statistic = -0.45947, runs = 10, n1 = 10, n2 = 10, n = 20, p-value = 0.6459
 ## alternative hypothesis: nonrandomness</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Check normality</span></span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co"># Sample size &lt; 30, use the Shapiro-Wilk test</span></span>
@@ -639,28 +639,28 @@ correlation test. That is:</p>
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  x
-## W = 0.95598, p-value = 0.4671</code></pre>
+## W = 0.96047, p-value = 0.5534</code></pre>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  y
-## W = 0.95501, p-value = 0.4496</code></pre>
+## W = 0.95254, p-value = 0.4073</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Check outliers</span></span>
 <span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">grubbs.test</span>(x)</span></code></pre></div>
 <pre><code>## 
 ##  Grubbs test for one outlier
 ## 
 ## data:  x
-## G = 2.08813, U = 0.75843, p-value = 0.2774
-## alternative hypothesis: lowest value -2.36054303149529 is an outlier</code></pre>
+## G = 1.73697, U = 0.83285, p-value = 0.7348
+## alternative hypothesis: highest value 1.07772314185509 is an outlier</code></pre>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="fu">grubbs.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Grubbs test for one outlier
 ## 
 ## data:  y
-## G = 2.06155, U = 0.76454, p-value = 0.3011
-## alternative hypothesis: lowest value -5.0337268631221 is an outlier</code></pre>
+## G = 1.9264, U = 0.7944, p-value = 0.4465
+## alternative hypothesis: lowest value -4.06430819756834 is an outlier</code></pre>
 </div>
 <div id="write-down-h0-and-h1" class="section level2">
 <h2>2 Write down H0 and H1</h2>
@@ -685,13 +685,13 @@ correlation test.</p>
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  x and y
-## t = 20.571, df = 18, p-value = 5.924e-14
+## t = 10.953, df = 18, p-value = 2.162e-09
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  0.9475189 0.9919828
+##  0.8341982 0.9733583
 ## sample estimates:
 ##       cor 
-## 0.9793862</code></pre>
+## 0.9324902</code></pre>
 <p>Here the method is set to <code>pearson</code>, H1 as
 <code>two.sided</code>, and a significant level of <code>0.95</code>
 (default value used by R).</p>
