@@ -12,6 +12,21 @@ output:
 
 # Prerequisites
 
+```{r}
+# 1. Install maptools:  
+# install.packages("maptools", repos = "https://packagemanager.posit.co/cran/2023-10-13")
+
+# 2. Install ggsn:
+# devtools::install_github('oswaldosantos/ggsn')
+
+# 3. Install rgdal: 
+# install.packages("rgdal", repos = "https://packagemanager.posit.co/cran/2023-10-13")
+
+# 4. To obtain an API key and enable services:
+# https://client.stadiamaps.com/signup/
+# Then use register_stadiamaps(key = "YOUR-API-KEY") to set the API key
+```
+
 Load the libraries with R:
 
 ```{r}
@@ -323,7 +338,8 @@ Mapbox    <- make_bbox(lon = Site_data$lon, lat = Site_data$lat, f = .1)
 # Here we use base map from stadiamaps
 # To obtain an API key and enable services, 
 # go to https://client.stadiamaps.com/signup/
-# Then use register_stadiamaps() to set the API key
+# Then use register_stadiamaps(key = "YOUR-API-KEY") to set the API key
+
 Base_map  <- get_stadiamap(Mapbox, zoom = 10, maptype = "stamen_terrain")
 ggmap(Base_map)
 
