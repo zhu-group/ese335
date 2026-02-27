@@ -452,15 +452,6 @@ div.tocify {
     <li>
       <a href="A02.html">Assignment 02</a>
     </li>
-    <li>
-      <a href="A03.html">Assignment 03</a>
-    </li>
-    <li>
-      <a href="A04.html">Assignment 04</a>
-    </li>
-    <li>
-      <a href="A05.html">Assignment 05</a>
-    </li>
   </ul>
 </li>
       </ul>
@@ -488,6 +479,7 @@ div.tocify {
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span></code></pre></div>
+<pre><code>## Warning: 程序包&#39;gapminder&#39;是用R版本4.5.2 来建造的</code></pre>
 <hr />
 <p><em>This section is modified from the excellent <a
 href="https://r4ds.had.co.nz/data-visualisation.html#introduction-1">Data
@@ -533,12 +525,12 @@ Europe. (I make up this subjective example, but hopefully, you can feel
 the power of the <code>dplyr</code> package!) We can then pass the
 subset of <code>gapminder</code> data to <code>ggplot</code> to make a
 scatter plot between <code>gdpPercap</code> and <code>year</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Make a simple scatter plot</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap) ) <span class="sc">+</span> </span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Make a simple scatter plot</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap) ) <span class="sc">+</span> </span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="S18_files/figure-html/unnamed-chunk-2-1.png" alt="" width="672" /></p>
 </div>
 <div id="mapping-the-aesthetics" class="section level2">
@@ -553,12 +545,12 @@ your plot. Aesthetics include things like the <code>size</code>,
 (<code>alpha</code>) of the points. You can display a point (like the
 one below) in different ways by changing the values of its aesthetic
 properties.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Add an aesthetic - color</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country) ) <span class="sc">+</span> </span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Add an aesthetic - color</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country) ) <span class="sc">+</span> </span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="S18_files/figure-html/unnamed-chunk-3-1.png" alt="" width="672" /></p>
 <p>To map an aesthetic to a variable, associate the name of the
 aesthetic to the name of the variable inside <code>aes()</code>.
@@ -572,12 +564,12 @@ values.</p>
 <code>country</code> to the <code>size</code> aesthetic in the same way.
 In this case, the exact size of each point would reveal its class
 affiliation.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Add an aesthetic - size</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">size=</span>country) ) <span class="sc">+</span> </span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Add an aesthetic - size</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">size=</span>country) ) <span class="sc">+</span> </span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <pre><code>## Warning: Using size for a discrete variable is not advised.</code></pre>
 <p><img src="S18_files/figure-html/unnamed-chunk-4-1.png" alt="" width="672" /></p>
 <p>We get a warning here, because mapping an unordered variable
@@ -585,35 +577,35 @@ affiliation.</p>
 not a good idea. We can ignore the warning for now.</p>
 <p>Similarly, we could map <code>country</code> to the
 <code>shape</code> or <code>alpha</code> aesthetic:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Add an aesthetic - shape</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">shape=</span>country) ) <span class="sc">+</span> </span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="S18_files/figure-html/unnamed-chunk-5-1.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Add an aesthetic - transparency</span></span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Add an aesthetic - shape</span></span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">alpha=</span>country) ) <span class="sc">+</span> </span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">shape=</span>country) ) <span class="sc">+</span> </span>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="S18_files/figure-html/unnamed-chunk-5-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Add an aesthetic - transparency</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">alpha=</span>country) ) <span class="sc">+</span> </span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <pre><code>## Warning: Using alpha for a discrete variable is not advised.</code></pre>
 <p><img src="S18_files/figure-html/unnamed-chunk-5-2.png" alt="" width="672" /></p>
 <p>You can even combine more than one aesthetic:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Add two aesthetics - color + shape</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country, <span class="at">shape=</span>country) ) <span class="sc">+</span> </span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="S18_files/figure-html/unnamed-chunk-6-1.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Add two aesthetics - shape + size</span></span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Add two aesthetics - color + shape</span></span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country, <span class="at">shape=</span>continent, <span class="at">size=</span>country) ) <span class="sc">+</span> </span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country, <span class="at">shape=</span>country) ) <span class="sc">+</span> </span>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="S18_files/figure-html/unnamed-chunk-6-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Add two aesthetics - shape + size</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country, <span class="at">shape=</span>continent, <span class="at">size=</span>country) ) <span class="sc">+</span> </span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <pre><code>## Warning: Using size for a discrete variable is not advised.</code></pre>
 <p><img src="S18_files/figure-html/unnamed-chunk-7-1.png" alt="" width="672" /></p>
 <p>Once you map an aesthetic, <code>ggplot2</code> takes care of the
@@ -639,13 +631,13 @@ for example <code>?geom_smooth</code>.</p>
 <p>In <code>ggplot2</code>, you can use “+” to add another geom to the
 plot. In the plot below, we add a smoothed line to the scatter plots
 from the individual country.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Use two geoms - point + smooth line</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country) ) <span class="sc">+</span> </span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Use two geoms - point + smooth line</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country) ) <span class="sc">+</span> </span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="S18_files/figure-html/unnamed-chunk-8-1.png" alt="" width="672" /></p>
 </div>
@@ -656,14 +648,14 @@ add the plot’s main title and perhaps change the X and Y axis titles.
 This can be accomplished using the <code>labs</code> layer, meant for
 specifying the labels. However, manipulating the size, the color of the
 labels is the job of the ‘Theme’.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Change labels</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country) ) <span class="sc">+</span> </span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;GDP per captia from 1957 to 2007&quot;</span>, <span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;GDP per captia&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Change labels</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country) ) <span class="sc">+</span> </span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;GDP per captia from 1957 to 2007&quot;</span>, <span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;GDP per captia&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="S18_files/figure-html/unnamed-chunk-9-1.png" alt="" width="672" /></p>
 </div>
@@ -683,21 +675,21 @@ to set the <code>name</code> using the
 <code>scale_color_discrete()</code> function, where the color part
 belongs to the color attribute and the <em>discrete</em> because the
 legend is based on a factor variable.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Change the theme</span></span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country) ) <span class="sc">+</span> </span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;GDP per captia from 1957 to 2007&quot;</span>, <span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;GDP per captia&quot;</span>) <span class="sc">+</span></span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>, <span class="at">face=</span><span class="st">&quot;bold&quot;</span>), </span>
-<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a>        <span class="at">axis.text.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a>        <span class="at">axis.text.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
-<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a>        <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>),</span>
-<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a>        <span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>)) <span class="sc">+</span> </span>
-<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name=</span><span class="st">&quot;Country Name&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Change the theme</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country) ) <span class="sc">+</span> </span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;GDP per captia from 1957 to 2007&quot;</span>, <span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;GDP per captia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>, <span class="at">face=</span><span class="st">&quot;bold&quot;</span>), </span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a>        <span class="at">axis.text.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a>        <span class="at">axis.text.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a>        <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>),</span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a>        <span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>)) <span class="sc">+</span> </span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name=</span><span class="st">&quot;Country Name&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="S18_files/figure-html/unnamed-chunk-10-1.png" alt="" width="672" /></p>
 </div>
@@ -712,43 +704,43 @@ data. To facet your plot by a single variable, use
 to <code>facet_wrap()</code> should be discrete.</p>
 <p>Let’s split our plot into two facets based on
 <code>continent</code>:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Using the facets</span></span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country) ) <span class="sc">+</span> </span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
-<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;GDP per captia from 1957 to 2007&quot;</span>, <span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;GDP per captia&quot;</span>) <span class="sc">+</span></span>
-<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>, <span class="at">face=</span><span class="st">&quot;bold&quot;</span>), </span>
-<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a>        <span class="at">axis.text.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a>        <span class="at">axis.text.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
-<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a>        <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>),</span>
-<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a>        <span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>)) <span class="sc">+</span> </span>
-<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name=</span><span class="st">&quot;Country Name&quot;</span>) <span class="sc">+</span></span>
-<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> continent)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Using the facets</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country) ) <span class="sc">+</span> </span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;GDP per captia from 1957 to 2007&quot;</span>, <span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;GDP per captia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>, <span class="at">face=</span><span class="st">&quot;bold&quot;</span>), </span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a>        <span class="at">axis.text.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a>        <span class="at">axis.text.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a>        <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>),</span>
+<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a>        <span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>)) <span class="sc">+</span> </span>
+<span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name=</span><span class="st">&quot;Country Name&quot;</span>) <span class="sc">+</span></span>
+<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> continent)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="S18_files/figure-html/unnamed-chunk-11-1.png" alt="" width="672" /></p>
 <p>One way to change the layout the facets is specifying
 <code>ncol</code> and <code>nrow</code> options in the
 <code>facet_wrap()</code> function:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Using the facets - 2 rows (2x1)</span></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country) ) <span class="sc">+</span> </span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
-<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;GDP per captia from 1957 to 2007&quot;</span>, <span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;GDP per captia&quot;</span>) <span class="sc">+</span></span>
-<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>, <span class="at">face=</span><span class="st">&quot;bold&quot;</span>), </span>
-<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a>        <span class="at">axis.text.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>        <span class="at">axis.text.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
-<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a>        <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>),</span>
-<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a>        <span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>)) <span class="sc">+</span> </span>
-<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name=</span><span class="st">&quot;Country Name&quot;</span>) <span class="sc">+</span></span>
-<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> continent, <span class="at">nrow=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Using the facets - 2 rows (2x1)</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country) ) <span class="sc">+</span> </span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;GDP per captia from 1957 to 2007&quot;</span>, <span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;GDP per captia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>, <span class="at">face=</span><span class="st">&quot;bold&quot;</span>), </span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a>        <span class="at">axis.text.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>        <span class="at">axis.text.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
+<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a>        <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>),</span>
+<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a>        <span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>)) <span class="sc">+</span> </span>
+<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name=</span><span class="st">&quot;Country Name&quot;</span>) <span class="sc">+</span></span>
+<span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> continent, <span class="at">nrow=</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="S18_files/figure-html/unnamed-chunk-12-1.png" alt="" width="672" /></p>
 </div>
@@ -760,28 +752,8 @@ the size of the current graphics device. It’s smart enough to guess the
 type of graphics device from the extension. Let’s save the above figure
 to a local path <code>D://ese335</code> with a name
 <code>myplot.png</code>:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Save a ggplot figure</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
-<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country) ) <span class="sc">+</span> </span>
-<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
-<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;GDP per captia from 1957 to 2007&quot;</span>, <span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;GDP per captia&quot;</span>) <span class="sc">+</span></span>
-<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>, <span class="at">face=</span><span class="st">&quot;bold&quot;</span>), </span>
-<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a>        <span class="at">axis.text.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a>        <span class="at">axis.text.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
-<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a>        <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>),</span>
-<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a>        <span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>)) <span class="sc">+</span> </span>
-<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name=</span><span class="st">&quot;Country Name&quot;</span>) <span class="sc">+</span></span>
-<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> continent, <span class="at">nrow=</span><span class="dv">2</span>)</span>
-<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a>  <span class="fu">ggsave</span>(<span class="st">&quot;myplot.png&quot;</span>)  <span class="co"># save a stored ggplot</span></span></code></pre></div>
-<p>You can also change the plot size (<code>width</code> and
-<code>height</code>) and resolution (<code>dpi</code>) by setting
-corresponding options. Use <code>?ggsave()</code> for more.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Save a ggplot object</span></span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Save a ggplot figure</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
 <span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
 <span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
 <span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country) ) <span class="sc">+</span> </span>
@@ -796,10 +768,30 @@ corresponding options. Use <code>?ggsave()</code> for more.</p>
 <span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a>        <span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>)) <span class="sc">+</span> </span>
 <span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name=</span><span class="st">&quot;Country Name&quot;</span>) <span class="sc">+</span></span>
 <span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> continent, <span class="at">nrow=</span><span class="dv">2</span>)</span>
-<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a></span>
-<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a><span class="co"># And later save it to a stored figure</span></span>
-<span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;myplot2.png&quot;</span>, <span class="at">plot=</span>plot1, <span class="at">width=</span><span class="dv">20</span>,</span>
-<span id="cb23-20"><a href="#cb23-20" tabindex="-1"></a>       <span class="at">height=</span><span class="dv">10</span>, <span class="at">units=</span><span class="st">&quot;cm&quot;</span>, <span class="at">dpi=</span><span class="dv">400</span>)</span></code></pre></div>
+<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a>  <span class="fu">ggsave</span>(<span class="st">&quot;myplot.png&quot;</span>)  <span class="co"># save a stored ggplot</span></span></code></pre></div>
+<p>You can also change the plot size (<code>width</code> and
+<code>height</code>) and resolution (<code>dpi</code>) by setting
+corresponding options. Use <code>?ggsave()</code> for more.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># Save a ggplot object</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( continent<span class="sc">==</span><span class="st">&quot;Asia&quot;</span> <span class="sc">|</span> continent<span class="sc">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="sc">%&gt;%</span>   </span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>( <span class="fu">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">==</span><span class="st">&quot;C&quot;</span> ) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>gdpPercap, <span class="at">color=</span>country) ) <span class="sc">+</span> </span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;GDP per captia from 1957 to 2007&quot;</span>, <span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;GDP per captia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>, <span class="at">face=</span><span class="st">&quot;bold&quot;</span>), </span>
+<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a>        <span class="at">axis.text.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a>        <span class="at">axis.text.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
+<span id="cb24-13"><a href="#cb24-13" tabindex="-1"></a>        <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>),</span>
+<span id="cb24-14"><a href="#cb24-14" tabindex="-1"></a>        <span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>)) <span class="sc">+</span> </span>
+<span id="cb24-15"><a href="#cb24-15" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name=</span><span class="st">&quot;Country Name&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-16"><a href="#cb24-16" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> continent, <span class="at">nrow=</span><span class="dv">2</span>)</span>
+<span id="cb24-17"><a href="#cb24-17" tabindex="-1"></a></span>
+<span id="cb24-18"><a href="#cb24-18" tabindex="-1"></a><span class="co"># And later save it to a stored figure</span></span>
+<span id="cb24-19"><a href="#cb24-19" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;myplot2.png&quot;</span>, <span class="at">plot=</span>plot1, <span class="at">width=</span><span class="dv">20</span>,</span>
+<span id="cb24-20"><a href="#cb24-20" tabindex="-1"></a>       <span class="at">height=</span><span class="dv">10</span>, <span class="at">units=</span><span class="st">&quot;cm&quot;</span>, <span class="at">dpi=</span><span class="dv">400</span>)</span></code></pre></div>
 <hr />
 </div>
 </div>
@@ -814,18 +806,18 @@ href="https://zhu-group.github.io/ese335/S20.html#Further_reading">further
 reading</a> listed at the end.</p>
 <p>To summarize, <code>ggplot2</code>’s grammar of graphics goes
 like:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># ggplot functions</span></span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>) <span class="sc">+</span> </span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>  <span class="er">&lt;</span>GEOM_FUNCTION<span class="sc">&gt;</span>(</span>
-<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>     <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="sc">&lt;</span>MAPPINGS<span class="sc">&gt;</span>),</span>
-<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>     <span class="at">stat =</span> <span class="sc">&lt;</span>STAT<span class="sc">&gt;</span>, </span>
-<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>     <span class="at">position =</span> <span class="sc">&lt;</span>POSITION<span class="sc">&gt;</span></span>
-<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>  <span class="er">&lt;</span>COORDINATE_FUNCTION<span class="sc">&gt;</span> <span class="sc">+</span></span>
-<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a>  <span class="er">&lt;</span>FACET_FUNCTION<span class="sc">&gt;</span></span>
-<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a></span>
-<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a><span class="co"># Save a ggplot figure  </span></span>
-<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a><span class="fu">ggsave</span>()  </span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># ggplot functions</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>) <span class="sc">+</span> </span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>  <span class="er">&lt;</span>GEOM_FUNCTION<span class="sc">&gt;</span>(</span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>     <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="sc">&lt;</span>MAPPINGS<span class="sc">&gt;</span>),</span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>     <span class="at">stat =</span> <span class="sc">&lt;</span>STAT<span class="sc">&gt;</span>, </span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>     <span class="at">position =</span> <span class="sc">&lt;</span>POSITION<span class="sc">&gt;</span></span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a>  <span class="er">&lt;</span>COORDINATE_FUNCTION<span class="sc">&gt;</span> <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a>  <span class="er">&lt;</span>FACET_FUNCTION<span class="sc">&gt;</span></span>
+<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a><span class="co"># Save a ggplot figure  </span></span>
+<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a><span class="fu">ggsave</span>()  </span></code></pre></div>
 <p>The template takes <em>seven parameters</em>, the bracketed words
 that appear in the template. We have no time to cover <code>STAT</code>,
 <code>POSITION</code>, and <code>COORDINATE_FUNCTION</code>, which you
