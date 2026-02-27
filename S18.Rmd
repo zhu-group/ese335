@@ -1,5 +1,5 @@
 ---
-title: "Section 18 Time series analysis (I)"
+title: "Section 18 Plotting with R (I): `ggplot2`"
 output:
   html_document:
     toc: true
@@ -14,224 +14,320 @@ output:
 
 Load the libraries with R:
 
+```{r}
+library(dplyr)
+library(ggplot2)
+library(gapminder)
+```
+
+***
+
+*This section is modified from the excellent [Data visualisation](https://r4ds.had.co.nz/data-visualisation.html#introduction-1) and [How to make any plot in `ggplot2`?](http://r-statistics.co/ggplot2-Tutorial-With-R.html), both are freely available online.*
+
+`ggplot2` is the most elegant and aesthetically pleasing graphics framework available in R. It implements the **grammar of graphics**, a coherent system for describing and building graphs. It can significantly improve your plots' quality and make you much more efficient in creating them. With that being said, the learning curve is steep because the way you make plots with `ggplot2` is very different from base graphics making in R and in other languages. The distinctive feature of the `ggplot2` framework is the way you make plots through **adding layers**. Here we will learn the steps of making a plot with `ggplot2`. More about `ggplot2`, check [How to make any plot in `ggplot2`?](http://r-statistics.co/ggplot2-Tutorial-With-R.html).
+
+***
+
+# Steps of plotting with `ggplot2`
+
+## 1. Passing the data set
+
+First of all, you need to tell R what data set to use in plotting. This is done by passing a *data.frame* object to the `ggplot()` function. Here the data frame object should contain **all** features needed to make the plot you want. Unlike base graphics in R and other languages, `ggplot()` does not take vectors as arguments.
+
+In previous sections, you learn how to use the pipe operator (`%>%`) to pass a data set (`tibble` object) produced through [data wrangling](https://zhu-group.github.io/ese335/S02.html) to the `ggplot()` function. This is exactly what you need to do in this step. 
+
+Let's use the `gapminder` data set. Now suppose we want to look at how GDP per capita (`gdpPercap`) changes from 1957 to 2007 for countries with names starting with the letter "C" in Asia or Europe. (I make up this subjective example, but hopefully, you can feel the power of the `dplyr` package!) We can then pass the subset of `gapminder` data to `ggplot` to make a scatter plot between `gdpPercap` and `year`. 
+
+```{r}
+
+# Make a simple scatter plot
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap) ) + 
+  geom_point()
+```
+
+## 2. Mapping the aesthetics
+
+The plot above, however, can not distinguish countries as all points are plotted in the same manner. In fact, we would like to add `country` as the third variable to the two dimensional scatter plot. By doing so, we are mapping the scatter plot to an *aesthetic*. An aesthetic is a visual property of the objects in your plot. Aesthetics include things like the `size`,  `shape`, `color`, or even transparency (`alpha`) of the points. You can display a point (like the one below) in different ways by changing the values of its aesthetic properties. 
+
+```{r}
+
+# Add an aesthetic - color
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point()
+
+```
+
+To map an aesthetic to a variable, associate the name of the aesthetic to the name of the variable inside `aes()`. `ggplot2` will automatically assign a unique level of the aesthetic (here a unique color) to each unique value of the variable, a process known as *scaling*. `ggplot2` will also add a *legend* that explains which levels correspond to which values.
+
+In the above example, we mapped `country` to the `color` aesthetic, but we could have mapped `country` to the `size` aesthetic in the same way. In this case, the exact size of each point would reveal its class affiliation. 
+
+```{r}
+
+# Add an aesthetic - size
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, size=country) ) + 
+  geom_point()
+
+```
+
+We get a warning here, because mapping an unordered variable (`country`) to an ordered aesthetic (`size`) is not a good idea. We can ignore the warning for now.
+
+Similarly, we could map `country` to the `shape` or `alpha` aesthetic:
+
+```{r}
+
+# Add an aesthetic - shape
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, shape=country) ) + 
+  geom_point()
+
+# Add an aesthetic - transparency
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, alpha=country) ) + 
+  geom_point()
+
+```
+
+You can even combine more than one aesthetic:
+
+```{r}
+
+# Add two aesthetics - color + shape
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country, shape=country) ) + 
+  geom_point()
+
+```
+
+```{r}
+
+# Add two aesthetics - shape + size
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country, shape=continent, size=country) ) + 
+  geom_point()
+
+```
+
+Once you map an aesthetic, `ggplot2` takes care of the rest. It selects a reasonable scale to use with the aesthetic, and it constructs a legend that explains the mapping between levels and values.
+
+## 3. Adding more geometric objects
+
+In the previous steps, we make a scatter plot between `gdpPercap` and `year`. The plot uses a visual object to represent the data. In `ggplot2` syntax, we say the plot uses a geometrical object or *geom*. 
+
+People often describe plots by the type of geom that the plot uses. For example, bar charts use bar geoms, line charts use line geoms, boxplots use boxplot geoms, and so on. `ggplot2` provides over 40 geoms, and extension packages provide even more (see [here](https://exts.ggplot2.tidyverse.org/gallery/) for a sampling). The best way to get a comprehensive overview is [ggplot2 cheatsheet](https://nyu-cdsc.github.io/learningr/assets/data-visualization-2.1.pdf). To learn more about any single geom, use `?`, for example `?geom_smooth`.
+
+In `ggplot2`, you can use "+" to add another geom to the plot. In the plot below, we add a smoothed line to the scatter plots from the individual country.
+
+```{r}
+
+# Use two geoms - point + smooth line
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point() + 
+  geom_smooth()
+```
+
+## 4. Changing the labels
+
+Now that you have drawn the main parts of the plot. You might want to add the plot’s main title and perhaps change the X and Y axis titles. This can be accomplished using the `labs` layer, meant for specifying the labels. However, manipulating the size, the color of the labels is the job of the ‘Theme’.
+
+```{r}
+
+# Change labels
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point() + 
+  geom_smooth() +
+  labs(title="GDP per captia from 1957 to 2007", x="Year", y="GDP per captia")
+```
+
+## 5. Adjusting the theme
+
+Very often, we want to customize our plot to make it looks better. For example we may need to increase the size of the labels and/or change the legend title. Adjusting the size of labels can be done using the `theme()` function by setting the`plot.title`, `axis.text.x`, and `axis.text.y` option. They need to be specified inside the `element_text()`. If you want to remove any of them, set it to `element_blank()`, and it will vanish entirely. 
+
+Adjusting the legend title is a bit tricky. If your legend is that of a `color` attribute and it varies based on a factor, you need to set the `name` using the `scale_color_discrete()` function, where the color part belongs to the color attribute and the *discrete* because the legend is based on a factor variable.
+
+```{r}
+
+# Change the theme
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point() + 
+  geom_smooth() +
+  labs(title="GDP per captia from 1957 to 2007", x="Year", y="GDP per captia") +
+  theme_bw() +
+  theme(plot.title=element_text(size=20, face="bold"), 
+        axis.text.x=element_text(size=10), 
+        axis.text.y=element_text(size=10),
+        axis.title.x=element_text(size=20),
+        axis.title.y=element_text(size=20)) + 
+  scale_color_discrete(name="Country Name")
+```
+
+## 6. Using the facets
+
+For categorical variables, it is particularly useful to split your plot into *facets*, subplots that each display one subset of the data. To facet your plot by a single variable, use `facet_wrap()`. The first argument of `facet_wrap()` should be a formula, which you create with `~` followed by a variable name. The variable that you pass to `facet_wrap()` should be discrete.
+
+Let's split our plot into two facets based on `continent`:
+
+```{r}
+
+# Using the facets
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point() + 
+  geom_smooth() +
+  labs(title="GDP per captia from 1957 to 2007", x="Year", y="GDP per captia") +
+  theme_bw() +
+  theme(plot.title=element_text(size=20, face="bold"), 
+        axis.text.x=element_text(size=10), 
+        axis.text.y=element_text(size=10),
+        axis.title.x=element_text(size=20),
+        axis.title.y=element_text(size=20)) + 
+  scale_color_discrete(name="Country Name") +
+  facet_wrap( ~ continent)
+```
+
+One way to change the layout the facets is specifying `ncol` and `nrow` options in the `facet_wrap()` function:
+
+```{r}
+
+# Using the facets - 2 rows (2x1)
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point() + 
+  geom_smooth() +
+  labs(title="GDP per captia from 1957 to 2007", x="Year", y="GDP per captia") +
+  theme_bw() +
+  theme(plot.title=element_text(size=20, face="bold"), 
+        axis.text.x=element_text(size=10), 
+        axis.text.y=element_text(size=10),
+        axis.title.x=element_text(size=20),
+        axis.title.y=element_text(size=20)) + 
+  scale_color_discrete(name="Country Name") +
+  facet_wrap( ~ continent, nrow=2)
+```
+
+## 7. Saving the plot
+
+Finally, you can save the above plot uisng the `ggsave()` function. The default is to save the last plot that you displayed, using the size of the current graphics device. It's smart enough to guess the type of graphics device from the extension. Let's save the above figure to a local path `D://ese335` with a name `myplot.png`:
+
+```{r, eval=F}
+
+# Save a ggplot figure
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point() + 
+  geom_smooth() +
+  labs(title="GDP per captia from 1957 to 2007", x="Year", y="GDP per captia") +
+  theme_bw() +
+  theme(plot.title=element_text(size=20, face="bold"), 
+        axis.text.x=element_text(size=10), 
+        axis.text.y=element_text(size=10),
+        axis.title.x=element_text(size=20),
+        axis.title.y=element_text(size=20)) + 
+  scale_color_discrete(name="Country Name") +
+  facet_wrap( ~ continent, nrow=2)
+  ggsave("myplot.png")  # save a stored ggplot
+
+```
+
+You can also change the plot size (`width` and `height`) and resolution (`dpi`) by setting corresponding options. Use `?ggsave()` for more.
+
 ```{r,eval=F}
-library(astsa)
+
+# Save a ggplot object
+plot1 <- gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point() + 
+  geom_smooth() +
+  labs(title="GDP per captia from 1957 to 2007", x="Year", y="GDP per captia") +
+  theme_bw() +
+  theme(plot.title=element_text(size=20, face="bold"), 
+        axis.text.x=element_text(size=10), 
+        axis.text.y=element_text(size=10),
+        axis.title.x=element_text(size=20),
+        axis.title.y=element_text(size=20)) + 
+  scale_color_discrete(name="Country Name") +
+  facet_wrap( ~ continent, nrow=2)
+
+# And later save it to a stored figure
+ggsave("myplot2.png", plot=plot1, width=20,
+       height=10, units="cm", dpi=400)
 ```
 
 ***
 
-# Section example: CO~2~ data
+# `ggplot2`'s grammar of graphics and beyond
 
-Time series data are data points collected over a period of time as a **sequence of time gap**. Time series data analysis means analyzing the available data to find out the pattern or trend in the data to predict some future values which will, in turn, help more effective and optimize decisions. Time series analysis examples are Financial, Stock prices, Weather data, Utility Studies and many more. 
+We have covered some basics but critical steps of making plots with `ggplot2`. There are many more features that we don't have time to go through in just one section. You can explore the full functionality of `ggplot2()` by studying the [further reading](https://zhu-group.github.io/ese335/S20.html#Further_reading) listed at the end. 
 
-Let's use the 'Keeling_Data' [CO~2~ data](https://zhu-group.github.io/ese335/download/co2_mm_mlo.csv) again as an example to take a closer look at a time series.
+To summarize, `ggplot2`'s grammar of graphics goes like:
 
-```{r}
+```{r, eval=F}
 
-# Read data
-Keeling_Data     <- read.csv(file = "co2_mm_mlo.csv", header = T)
+# ggplot functions
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(
+     mapping = aes(<MAPPINGS>),
+     stat = <STAT>, 
+     position = <POSITION>
+  ) +
+  <COORDINATE_FUNCTION> +
+  <FACET_FUNCTION>
 
-# Handel missing values
-Keeling_Data$co2[which(Keeling_Data$co2<0)] <- NA
-
-for(i in 1:length(Keeling_Data$co2)){
-  if( is.na(Keeling_Data$co2[i])){
-    Keeling_Data$co2[i] <- mean(Keeling_Data$co2[(i-2):(i+2)],na.rm=T )
-  }
-}
+# Save a ggplot figure  
+ggsave()  
 ```
 
-Notice that here we use 5-month average to replace the missing values.
+The template takes *seven parameters*, the bracketed words that appear in the template. We have no time to cover `STAT`, `POSITION`, and `COORDINATE_FUNCTION`, which you can learn by yourself following  the [further reading](hhttps://zhu-group.github.io/ese335/S20.html#Further_reading). In practice, you rarely need to supply all seven parameters to make a plot because `ggplot2` will provide useful defaults for everything except the data, the mappings, and the geom function.
 
-Use `ts()` to convert a vector into a time series. Use `?` to learn more.
+The seven parameters in the template compose the grammar of graphics, a formal system for building plots. The grammar of graphics is based on the insight that you can uniquely describe any plot as a combination of a data set, a geom, a set of mappings, a stat, a position adjustment, a coordinate system, and a faceting scheme. 
 
-```{r}
-# Apply the ts() function
-co2 <- ts(Keeling_Data$co2, start=c(1958,3), frequency=12)
-
-# Quick plot
-plot(co2, type="l")
-
-# Check the data type
-str(co2)
-```
+With this, you can make any type of plot with `ggplot2()`!
 
 ***
 
-# Quick look: components of a time series
+# R Graph Gallery
 
-Generally, an environmental time series, $Y(t)$, has three components: trend $T(t)$, seasonality (e.g., 12-month cycle) $S(t)$, and error $e(t)$. 
+A good way to learn `ggplot2` is to browse plots (and scripts!) in the R Graph Gallery, such as:
 
-$$ Y(t) = T(t) + S(t) + e(t)$$
-Here the error $e(t)$ part is called **white noise**. A white noise ($w_t$) is a collection of **uncorrelated random variables** with mean `0` and finite variance, denoted as:
-$$w_t \sim wn(0,\sigma^2)$$
+* [The R Graph Gallery](https://www.r-graph-gallery.com/index.html)
+* [Top 50 `ggplot2` Visualizations](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
+* [`ggplot2` extensions](https://exts.ggplot2.tidyverse.org/gallery/)
+* [Plotly R Open Source Graphing Library](https://plotly.com/r/)
 
-In R, you can use `decompose()` to quickly decompose a time series into the three components, particularly for environmental data set. Here is how it works:
-
-* The function first determines the trend component using a *moving average* (if filter is `NULL`, a symmetric window with equal weights is used), and removes it from the time series. 
-
-* Then, the seasonal figure is computed by averaging, for each time unit, over all periods. The seasonal figure is then centered. 
-
-* Finally, the error component is determined by removing trend and seasonal figure (recycled as needed) from the original time series.
-
-```{r}
-co2_components <- decompose(co2)
-plot(co2_components)
-```
-
-In the above example, `co2_components` contains the information/values of the three components. Check the distribution of the error component (`random`) to verify it's a white noise.
-
-```{r}
-# Plot hist
-hist(co2_components$random, prob=TRUE)
-
-# Add a normal pdf curve
-curve(dnorm(x, mean=mean(co2_components$random, na.rm=T),
-            sd=sd(co2_components$random, na.rm=T)),
-      add=TRUE, col="red")
-```
-
-As you can see the distribution is a Gaussian white noise, which is a particularly useful white noise series.
-
-***
-
-*This section is based on the chapters of Time Series Analysis and Its Applications With R Example by Robert H. Shumway and David S. Stoffer.*
-
-# ARIMA modeling
-
-ARIMA is the abbreviation for *AutoRegressive Integrated Moving Average*. *Auto Regressive* (AR) terms refer to the lags of the differenced series, *Moving Average* (MA) terms refer to the lags of errors and `I` is the number of difference used to make the time series *stationary*.
-
-Here stationary actually refers *weakly stationary* time series, which is a finite variance process such that:
-
-* The mean value of time-series is constant over time
-
-* The autovariance function does not change over time
-
-* Seasonality effect is minimal
-
-## AR model
-
-Autoregressive models are based on the idea that the current value of the series, $x_t$, can be explained as a function of `p` past values, $x_{t-1}$, $x_{t-2}$, ..., $x_{t-p}$, where `p` determines the number of steps into the past needed to forecast the current value. 
-
-An *autoregressive* (AR) model of order *p*, abbreviated `AR(p)`, is of the form
-
-$$x_t = \phi_1x_{t-1} + \phi_2x_{t-2} + ... + \phi_px_{t-p} + w_t$$
-
-where $x_t$ is stationary, $w_t \sim wn(0, \sigma^2_w)$, and $\phi_1$, $\phi_2$, ...,  $\phi_p$ are constants.
-
-The following R code can be used to obtain two AR(1) models:
-
-```{r}
-# Make two panels
-par(mfrow=c(2,1))
-
-# ARIMA model (1,0,0)
-plot(arima.sim(list(order=c(1,0,0), ar=.9), n=100), ylab="x",
-main=(expression(AR(1)~~~phi==+.9)))
-
-# ARIMA model (1,0,0)
-plot(arima.sim(list(order=c(1,0,0), ar=-.9), n=100), ylab="x",
-main=(expression(AR(1)~~~phi==-.9)))
-```
-
-## MA model
-
-As an alternative to the autoregressive representation in which the $x_t$ on the left-hand side of the equation are assumed to be combined linearly, the *moving average* (MA) model of order `q`, abbreviated as `MA(q)`, assumes the white noise $w_t$ on the right-hand side of the defining equation are combined linearly to form the observed data.
-
-The moving average model of order `q`, or `MA(q)` model, is defined to be
-
-$$x_t = w_t + \theta_1w_{t-1} + \theta_2w_{t-2} + ... + \theta_qw_{t-q} $$
-
-where $w_t \sim wn(0, \sigma^2_w)$, and $\theta_1$, $\theta_2$, ..., $\theta_q$ are parameters.
-
-The following R code can be used to obtain two MA(1) models:
-
-```{r}
-# Make two panels
-par(mfrow=c(2,1))
-
-# ARIMA model (0,0,1)
-plot(arima.sim(list(order=c(0,0,1), ma=.9), n=100), ylab="x",
-main=(expression(MA(1)~~~theta==+.9)))
-
-# ARIMA model (0,0,1)
-plot(arima.sim(list(order=c(0,0,1), ma=-.9), n=100), ylab="x",
-main=(expression(MA(1)~~~theta==-.9)))
-```
-
-## ACF and PACF
-
-The autocorrelation function (ACF) measures the linear predictability of the series at time `t`, say $x_t$, using only the value $x_s$.
-
-The partial auto-correlation function (PACF) is a measure of the correlation between observations of a time series that are separated by `k` time units ($x_t$ and $x_{t-k}$), with linear dependence removed. In other words, the partial autocorrelation at lag `k` is the autocorrelation between $x_t$ and $x_{t-k}$ that is not accounted for by lags `1` through `k−1`.
-
-To show ACF and the PACF of a AR model, AR(2), in R we can use the following lines: 
-
-```{r}
-# Compute ACF and PACF of AR(2)
-ACF = ARMAacf(ar=c(1.5,-.75), ma=0, 24)[-1]
-PACF = ARMAacf(ar=c(1.5,-.75), ma=0, 24, pacf=TRUE)
-
-# Plot ACF and PACF of AR(2)
-par(mfrow=c(1,2))
-plot(ACF, type="h", xlab="lag", ylim=c(-.8,1)); abline(h=0)
-plot(PACF, type="h", xlab="lag", ylim=c(-.8,1)); abline(h=0)
-```
-
-To show ACF and the PACF of a MA model, MA(2), in R we can use the following lines: 
-
-```{r}
-# Compute ACF and PACF of MA(2)
-ACF = ARMAacf(ar=0, ma=c(0.5,0.6), 24)[-1]
-PACF = ARMAacf(ar=0, ma=c(0.5,0.6), 24, pacf=TRUE)
-
-# Plot ACF and PACF of MA(2)
-par(mfrow=c(1,2))
-plot(ACF, type="h", xlab="lag", ylim=c(-.8,1)); abline(h=0)
-plot(PACF, type="h", xlab="lag", ylim=c(-.8,1)); abline(h=0)
-```
-
-Behavior of the ACF and PACF for ARMA Models can be summarized as:
-
-* AR(p): ACF Tails off; PACF Cuts off after lag `p`
-
-* MA(q): ACF Cuts off after lag `q`; PACF Tails off
-
-* ARMA(p, q): ACF Tails off; PACF Tails off
-
-## An example
-
-Consider the global temperature series record (`gtemp_both`) in the `astsa` package. The data are the global mean land and ocean temperature index from `1850` to `2023`. We want to fit an ARIMA model to this time series.
-
-```{r}
-# Load data
-library(astsa)
-
-# Reset panel
-par(mfrow=c(1,1))
-
-# Plot
-plot(gtemp_both, type="l", ylab="Global Temperature Deviations")
-```
-
-There is a clear trend, so the first step is to de-trend the data.
-
-```{r}
-# Fit a linear model
-trModel <- lm(gtemp_both ~ c(1:length(gtemp_both)))
-
-# Get the residuals
-residual <- resid(trModel)
-
-# Plot the residual
-plot(residual, type="l")
-
-# Check acf anf pacf of the residuals
-acf(residual)
-pacf(residual)
-```
-
-Based on the acf and pacf plots, we guess it may be an ARMA(3,0) model.
+Find the plots you want to mimic, edit and customize the scripts based on your need.
 
 ***
 
@@ -239,10 +335,22 @@ Based on the acf and pacf plots, we guess it may be an ARMA(3,0) model.
 
 ## Exercise #1
 
-Use the data of the Southern Oscillation Index (SOI; `soi`) data from the `astsa` package. 
+Can you reproduce the following figure (`myfirstplot.png`, width 25 cm, height 20 cm, and dpi 400) with `ggplot2`?
 
-* Practice the `decompose()` function.
+<img src="figs/myfirstplot.png" alt="drawing" width="700"/>
 
-* Build an ARMA model [Hint: you may want to de-seasonalize the data before fitting the model]
+***
 
- 
+# Further reading
+
+* [A Layered Grammar of Graphics ](http://vita.had.co.nz/papers/layered-grammar.pdf)
+
+* [`ggplot2`: elegant graphics for data analysis](https://ggplot2-book.org/)
+
+* [Data Visualization with `ggplot2` Cheat Sheet](https://nyu-cdsc.github.io/learningr/assets/data-visualization-2.1.pdf)
+
+* [Data visualisation](https://r4ds.had.co.nz/data-visualisation.html#introduction-1)
+
+* [`ggplot2` Short Tutorial](http://r-statistics.co/ggplot2-Tutorial-With-R.html)
+
+* [`ggplot2` Quickref](http://r-statistics.co/ggplot2-cheatsheet.html)

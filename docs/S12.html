@@ -13,7 +13,7 @@
 
 <title>Section 12 Covariance and Pearson correlation test</title>
 
-<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
@@ -33,8 +33,8 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -57,7 +57,7 @@
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -68,7 +68,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -556,12 +556,12 @@ For example:</p>
 <span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
 <span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co"># Double x and y </span></span>
 <span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">2</span><span class="sc">*</span>x,<span class="dv">2</span><span class="sc">*</span>y)</span></code></pre></div>
-<p><img src="S12_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="S12_files/figure-html/unnamed-chunk-2-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Compute covariance</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">cov</span>(x,y)</span></code></pre></div>
-<pre><code>## [1] 11.32003</code></pre>
+<pre><code>## [1] 13.02455</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">cov</span>(<span class="dv">2</span><span class="sc">*</span>x,<span class="dv">2</span><span class="sc">*</span>y)</span></code></pre></div>
-<pre><code>## [1] 45.28013</code></pre>
+<pre><code>## [1] 52.09819</code></pre>
 <p>As you can see, covariance provides only <strong>direction</strong>
 of the relationship. However, it does not indicate the
 <strong>strength</strong> of the relationship.</p>
@@ -616,7 +616,7 @@ correlation test. That is:</p>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
 <span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co"># Scatter plot</span></span>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="fu">plot</span>(x,y)</span></code></pre></div>
-<p><img src="S12_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="S12_files/figure-html/unnamed-chunk-3-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Check independence of the dependent variable</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">runs.test</span>(x)</span></code></pre></div>
 <pre><code>## 
@@ -639,28 +639,28 @@ correlation test. That is:</p>
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  x
-## W = 0.95404, p-value = 0.4325</code></pre>
+## W = 0.9402, p-value = 0.2418</code></pre>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  y
-## W = 0.93401, p-value = 0.1844</code></pre>
+## W = 0.92469, p-value = 0.122</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Check outliers</span></span>
 <span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">grubbs.test</span>(x)</span></code></pre></div>
 <pre><code>## 
 ##  Grubbs test for one outlier
 ## 
 ## data:  x
-## G = 1.78514, U = 0.82345, p-value = 0.651
-## alternative hypothesis: highest value 2.12788537389252 is an outlier</code></pre>
+## G = 1.66774, U = 0.84591, p-value = 0.869
+## alternative hypothesis: highest value 1.80379617798263 is an outlier</code></pre>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="fu">grubbs.test</span>(y)</span></code></pre></div>
 <pre><code>## 
 ##  Grubbs test for one outlier
 ## 
 ## data:  y
-## G = 1.59721, U = 0.85867, p-value = 1
-## alternative hypothesis: highest value 4.07548591140244 is an outlier</code></pre>
+## G = 1.65348, U = 0.84853, p-value = 0.8987
+## alternative hypothesis: highest value 3.56281618900257 is an outlier</code></pre>
 </div>
 <div id="write-down-h0-and-h1" class="section level2">
 <h2>2 Write down H0 and H1</h2>
@@ -685,13 +685,13 @@ correlation test.</p>
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  x and y
-## t = 17.332, df = 18, p-value = 1.123e-12
+## t = 28.547, df = 18, p-value &lt; 2.2e-16
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  0.9274462 0.9888189
+##  0.9721290 0.9957875
 ## sample estimates:
-##       cor 
-## 0.9713225</code></pre>
+##      cor 
+## 0.989136</code></pre>
 <p>Here the method is set to <code>pearson</code>, H1 as
 <code>two.sided</code>, and a significant level of <code>0.95</code>
 (default value used by R).</p>
