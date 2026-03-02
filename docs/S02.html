@@ -483,11 +483,11 @@ plots</h1>
 </ul>
 <p>Load the libraries with R:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code></pre></div>
-<pre><code>## Warning: 程序包&#39;tidyr&#39;是用R版本4.5.2 来建造的</code></pre>
+<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 4.5.2</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
-<pre><code>## Warning: 程序包&#39;dplyr&#39;是用R版本4.5.2 来建造的</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.5.2</code></pre>
 <pre><code>## 
-## 载入程序包：&#39;dplyr&#39;</code></pre>
+## Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:stats&#39;:
 ## 
 ##     filter, lag</code></pre>
@@ -495,7 +495,7 @@ plots</h1>
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
-<pre><code>## Warning: 程序包&#39;ggplot2&#39;是用R版本4.5.2 来建造的</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.5.2</code></pre>
 <hr />
 </div>
 <div id="section-example-weather-data-from-baoan-airport"
@@ -582,12 +582,12 @@ assigns default names <code>V1</code>, <code>V2</code>, …,
 <p>Or the end of (last 6 lines) with <code>tail()</code>:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">tail</span>(Keeling_Data)</span></code></pre></div>
 <pre><code>##     year month decimal_date    co2 quality
-## 798 2024     8     2024.625 422.99       1
-## 799 2024     9     2024.708 422.03       1
-## 800 2024    10     2024.792 422.38       1
-## 801 2024    11     2024.875 423.85       1
-## 802 2024    12     2024.958 425.40       1
-## 803 2025     1     2025.042 426.65       1</code></pre>
+## 810 2025     8     2025.625 425.48       1
+## 811 2025     9     2025.708 424.37       1
+## 812 2025    10     2025.792 424.87       1
+## 813 2025    11     2025.875 426.46       1
+## 814 2025    12     2025.958 427.49       1
+## 815 2026     1     2026.042 428.62       1</code></pre>
 <p>The <code>read.table()</code> function is used for reading in
 <strong>tabular data</strong> stored in a text file where the columns of
 data are separated by punctuation characters such as <code>.csv</code>
@@ -607,23 +607,88 @@ delimiting punctuation marks for both <code>read.csv()</code> and
 <p>We can begin exploring our data set right away, pulling out columns
 by specifying them using the <code>$</code> operator:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>Keeling_Data<span class="sc">$</span>co2</span></code></pre></div>
-<pre><code>##   [1] 315.70 317.45 317.51 -99.99 315.86 314.93 313.20 -99.99 313.33 314.67 315.58 316.48 316.65 317.72 318.29 318.15 316.54 314.80 313.84 313.33 314.81 315.58 316.43 316.98 317.58 319.03 320.04 319.59 318.18 315.90 314.17 313.83 315.00 316.19 316.89 317.70 318.54 319.48 320.58 319.77 318.57 316.79 314.99 315.31 316.10 317.01 317.94 318.55 319.68 320.57
-##  [51] 321.02 320.62 319.61 317.40 316.25 315.42 316.69 317.70 318.74 319.07 319.86 321.38 322.25 321.48 319.74 317.77 316.21 315.99 317.07 318.35 319.57 -99.99 -99.99 -99.99 322.26 321.89 320.44 318.69 316.70 316.87 317.68 318.71 319.44 320.44 320.89 322.14 322.17 321.87 321.21 318.87 317.81 317.30 318.87 319.42 320.62 321.60 322.39 323.70 324.08 323.75
-## [101] 322.38 320.36 318.64 318.10 319.78 321.03 322.33 322.50 323.04 324.42 325.00 324.09 322.54 320.92 319.25 319.39 320.73 321.96 322.57 323.15 323.89 325.02 325.57 325.36 324.14 322.11 320.33 320.25 321.32 322.89 324.00 324.42 325.63 326.66 327.38 326.71 325.88 323.66 322.38 321.78 322.86 324.12 325.06 325.98 326.93 328.13 328.08 327.67 326.34 324.69
-## [151] 323.10 323.06 324.01 325.13 326.17 326.68 327.17 327.79 328.93 328.57 327.36 325.43 323.36 323.56 324.80 326.01 326.77 327.63 327.75 329.72 330.07 329.09 328.04 326.32 324.84 325.20 326.50 327.55 328.55 329.56 330.30 331.50 332.48 332.07 330.87 329.31 327.51 327.18 328.16 328.64 329.35 330.71 331.48 332.65 333.18 332.20 331.07 329.15 327.33 327.28
-## [201] 328.31 329.58 330.73 331.46 331.94 333.11 333.95 333.42 331.97 329.95 328.50 328.36 329.38 -99.99 331.56 332.74 333.36 334.74 334.72 333.98 333.08 330.68 328.96 328.72 330.16 331.62 332.68 333.17 334.96 336.14 336.93 336.17 334.89 332.56 331.29 331.28 332.46 333.60 334.94 335.26 336.66 337.69 338.02 338.01 336.50 334.42 332.36 332.45 333.76 334.91
-## [251] 336.14 336.69 338.27 338.82 339.24 339.26 337.54 335.72 333.97 334.24 335.32 336.81 337.90 338.34 340.07 340.93 341.45 341.36 339.45 337.67 336.25 336.14 337.30 338.29 339.29 340.55 341.63 342.60 343.04 342.54 340.82 338.48 336.95 337.05 338.58 339.91 340.93 341.76 342.78 343.96 344.77 343.88 342.42 340.24 338.38 338.41 339.44 340.78 341.57 342.79
-## [301] 343.37 345.39 346.14 345.76 344.32 342.51 340.46 340.53 341.79 343.20 344.21 344.92 345.68 -99.99 347.78 347.16 345.79 343.74 341.59 341.86 343.31 345.00 345.48 346.42 347.91 348.66 349.28 348.65 346.90 345.26 343.47 343.35 344.73 346.12 346.78 347.48 348.25 349.86 350.52 349.98 348.25 346.17 345.48 344.82 346.22 347.49 348.73 348.92 349.81 351.40
-## [351] 352.15 351.58 350.21 348.20 346.66 346.72 348.08 349.28 350.51 351.70 352.50 353.67 354.35 353.88 352.80 350.49 348.97 349.37 350.42 351.62 353.07 353.43 354.08 355.72 355.95 355.44 354.05 351.84 350.09 350.33 351.55 352.91 353.86 355.10 355.75 356.38 357.38 356.39 354.89 353.06 351.38 351.69 353.14 354.41 354.93 355.82 357.33 358.77 359.23 358.23
-## [401] 356.30 353.97 352.34 352.43 353.89 355.21 356.34 357.21 357.97 359.22 359.71 359.44 357.15 354.99 353.01 353.41 354.42 355.68 357.10 357.42 358.59 359.39 360.30 359.64 357.45 355.76 354.14 354.23 355.53 357.03 358.36 359.04 360.11 361.36 361.78 360.94 359.51 357.59 355.86 356.21 357.65 359.10 360.04 361.00 361.98 363.44 363.83 363.33 361.78 359.33
-## [451] 358.32 358.14 359.61 360.82 362.20 363.36 364.28 364.69 365.25 365.06 363.69 361.55 359.69 359.72 361.04 362.39 363.24 364.21 364.65 366.48 366.77 365.73 364.46 362.40 360.44 360.98 362.65 364.51 365.39 366.10 367.36 368.79 369.56 369.13 367.98 366.10 364.16 364.54 365.67 367.30 368.35 369.28 369.84 371.15 371.12 370.46 369.61 367.06 364.95 365.52
-## [501] 366.88 368.26 369.45 369.71 370.75 371.98 371.75 371.87 370.02 368.27 367.15 367.18 368.53 369.83 370.76 371.69 372.63 373.55 374.03 373.40 371.68 369.78 368.34 368.61 369.94 371.42 372.70 373.37 374.30 375.19 375.93 375.69 374.16 372.03 370.92 370.73 372.43 373.98 375.07 375.82 376.64 377.92 378.78 378.46 376.88 374.57 373.34 373.31 374.84 376.17
-## [551] 377.17 378.05 379.06 380.54 380.80 379.87 377.65 376.17 374.43 374.63 376.33 377.68 378.63 379.91 380.95 382.48 382.64 382.40 380.93 378.93 376.89 377.19 378.54 380.31 381.58 382.40 382.86 384.80 385.22 384.24 382.65 380.60 379.04 379.33 380.35 382.02 383.10 384.12 384.81 386.73 386.78 386.33 384.73 382.24 381.20 381.37 382.70 384.19 385.78 386.06
-## [601] 386.28 387.34 388.78 387.99 386.61 384.32 383.41 383.21 384.41 385.79 387.17 387.70 389.04 389.76 390.36 389.70 388.24 386.29 384.95 384.64 386.23 387.63 388.91 390.41 391.37 392.67 393.21 392.38 390.41 388.54 387.03 387.43 388.87 389.99 391.50 392.05 392.80 393.44 394.41 393.95 392.72 390.33 389.28 389.19 390.48 392.06 393.31 394.04 394.59 396.38
-## [651] 396.93 395.91 394.56 392.59 391.32 391.27 393.20 394.57 395.78 397.03 397.66 398.64 400.02 398.81 397.51 395.39 393.72 393.90 395.36 397.03 398.04 398.27 399.91 401.51 401.96 401.43 399.27 397.18 395.54 396.16 397.40 399.08 400.18 400.55 401.74 403.34 404.15 402.97 401.46 399.11 397.82 398.49 400.27 402.06 402.73 404.25 405.06 407.60 407.90 406.99
-## [701] 404.59 402.45 401.23 401.79 403.72 404.64 406.36 406.66 407.54 409.22 409.89 409.08 407.33 405.32 403.57 403.82 405.31 407.00 408.15 408.52 409.59 410.45 411.44 410.99 408.90 407.16 405.71 406.19 408.21 409.27 411.03 411.96 412.18 413.54 414.86 414.15 411.96 410.17 408.76 408.74 410.47 411.97 413.59 414.32 414.71 416.42 417.28 416.58 414.58 412.75
-## [751] 411.49 411.48 413.10 414.23 415.49 416.72 417.61 419.01 419.09 418.92 416.90 414.42 413.26 413.90 414.97 416.67 418.13 419.24 418.76 420.19 420.97 420.94 418.85 417.15 415.91 415.74 417.47 418.99 419.48 420.30 420.98 423.35 424.00 423.68 421.83 419.68 418.51 418.82 420.46 421.86 422.80 424.55 425.38 426.51 426.90 426.91 425.55 422.99 422.03 422.38
-## [801] 423.85 425.40 426.65</code></pre>
+<pre><code>##   [1] 315.70 317.45 317.51 -99.99 315.86 314.93 313.20 -99.99 313.33 314.67
+##  [11] 315.58 316.48 316.65 317.72 318.29 318.15 316.54 314.80 313.84 313.33
+##  [21] 314.81 315.58 316.43 316.98 317.58 319.03 320.04 319.59 318.18 315.90
+##  [31] 314.17 313.83 315.00 316.19 316.89 317.70 318.54 319.48 320.58 319.77
+##  [41] 318.57 316.79 314.99 315.31 316.10 317.01 317.94 318.55 319.68 320.57
+##  [51] 321.02 320.62 319.61 317.40 316.25 315.42 316.69 317.70 318.74 319.07
+##  [61] 319.86 321.38 322.25 321.48 319.74 317.77 316.21 315.99 317.07 318.35
+##  [71] 319.57 -99.99 -99.99 -99.99 322.26 321.89 320.44 318.69 316.70 316.87
+##  [81] 317.68 318.71 319.44 320.44 320.89 322.14 322.17 321.87 321.21 318.87
+##  [91] 317.81 317.30 318.87 319.42 320.62 321.60 322.39 323.70 324.08 323.75
+## [101] 322.38 320.36 318.64 318.10 319.78 321.03 322.33 322.50 323.04 324.42
+## [111] 325.00 324.09 322.54 320.92 319.25 319.39 320.73 321.96 322.57 323.15
+## [121] 323.89 325.02 325.57 325.36 324.14 322.11 320.33 320.25 321.32 322.89
+## [131] 324.00 324.42 325.63 326.66 327.38 326.71 325.88 323.66 322.38 321.78
+## [141] 322.86 324.12 325.06 325.98 326.93 328.13 328.08 327.67 326.34 324.69
+## [151] 323.10 323.06 324.01 325.13 326.17 326.68 327.17 327.79 328.93 328.57
+## [161] 327.36 325.43 323.36 323.56 324.80 326.01 326.77 327.63 327.75 329.72
+## [171] 330.07 329.09 328.04 326.32 324.84 325.20 326.50 327.55 328.55 329.56
+## [181] 330.30 331.50 332.48 332.07 330.87 329.31 327.51 327.18 328.16 328.64
+## [191] 329.35 330.71 331.48 332.65 333.18 332.20 331.07 329.15 327.33 327.28
+## [201] 328.31 329.58 330.73 331.46 331.94 333.11 333.95 333.42 331.97 329.95
+## [211] 328.50 328.36 329.38 -99.99 331.56 332.74 333.36 334.74 334.72 333.98
+## [221] 333.08 330.68 328.96 328.72 330.16 331.62 332.68 333.17 334.96 336.14
+## [231] 336.93 336.17 334.89 332.56 331.29 331.28 332.46 333.60 334.94 335.26
+## [241] 336.66 337.69 338.02 338.01 336.50 334.42 332.36 332.45 333.76 334.91
+## [251] 336.14 336.69 338.27 338.82 339.24 339.26 337.54 335.72 333.97 334.24
+## [261] 335.32 336.81 337.90 338.34 340.07 340.93 341.45 341.36 339.45 337.67
+## [271] 336.25 336.14 337.30 338.29 339.29 340.55 341.63 342.60 343.04 342.54
+## [281] 340.82 338.48 336.95 337.05 338.58 339.91 340.93 341.76 342.78 343.96
+## [291] 344.77 343.88 342.42 340.24 338.38 338.41 339.44 340.78 341.57 342.79
+## [301] 343.37 345.39 346.14 345.76 344.32 342.51 340.46 340.53 341.79 343.20
+## [311] 344.21 344.92 345.68 -99.99 347.78 347.16 345.79 343.74 341.59 341.86
+## [321] 343.31 345.00 345.48 346.42 347.91 348.66 349.28 348.65 346.90 345.26
+## [331] 343.47 343.35 344.73 346.12 346.78 347.48 348.25 349.86 350.52 349.98
+## [341] 348.25 346.17 345.48 344.82 346.22 347.49 348.73 348.92 349.81 351.40
+## [351] 352.15 351.58 350.21 348.20 346.66 346.72 348.08 349.28 350.51 351.70
+## [361] 352.50 353.67 354.35 353.88 352.80 350.49 348.97 349.37 350.42 351.62
+## [371] 353.07 353.43 354.08 355.72 355.95 355.44 354.05 351.84 350.09 350.33
+## [381] 351.55 352.91 353.86 355.10 355.75 356.38 357.38 356.39 354.89 353.06
+## [391] 351.38 351.69 353.14 354.41 354.93 355.82 357.33 358.77 359.23 358.23
+## [401] 356.30 353.97 352.34 352.43 353.89 355.21 356.34 357.21 357.97 359.22
+## [411] 359.71 359.44 357.15 354.99 353.01 353.41 354.42 355.68 357.10 357.42
+## [421] 358.59 359.39 360.30 359.64 357.45 355.76 354.14 354.23 355.53 357.03
+## [431] 358.36 359.04 360.11 361.36 361.78 360.94 359.51 357.59 355.86 356.21
+## [441] 357.65 359.10 360.04 361.00 361.98 363.44 363.83 363.33 361.78 359.33
+## [451] 358.32 358.14 359.61 360.82 362.20 363.36 364.28 364.69 365.25 365.06
+## [461] 363.69 361.55 359.69 359.72 361.04 362.39 363.24 364.21 364.65 366.48
+## [471] 366.77 365.73 364.46 362.40 360.44 360.98 362.65 364.51 365.39 366.10
+## [481] 367.36 368.79 369.56 369.13 367.98 366.10 364.16 364.54 365.67 367.30
+## [491] 368.35 369.28 369.84 371.15 371.12 370.46 369.61 367.06 364.95 365.52
+## [501] 366.88 368.26 369.45 369.71 370.75 371.98 371.75 371.87 370.02 368.27
+## [511] 367.15 367.18 368.53 369.83 370.76 371.69 372.63 373.55 374.03 373.40
+## [521] 371.68 369.78 368.34 368.61 369.94 371.42 372.70 373.37 374.30 375.19
+## [531] 375.93 375.69 374.16 372.03 370.92 370.73 372.43 373.98 375.07 375.82
+## [541] 376.64 377.92 378.78 378.46 376.88 374.57 373.34 373.31 374.84 376.17
+## [551] 377.17 378.05 379.06 380.54 380.80 379.87 377.65 376.17 374.43 374.63
+## [561] 376.33 377.68 378.63 379.91 380.95 382.48 382.64 382.40 380.93 378.93
+## [571] 376.89 377.19 378.54 380.31 381.58 382.40 382.86 384.80 385.22 384.24
+## [581] 382.65 380.60 379.04 379.33 380.35 382.02 383.10 384.12 384.81 386.73
+## [591] 386.78 386.33 384.73 382.24 381.20 381.37 382.70 384.19 385.78 386.06
+## [601] 386.28 387.34 388.78 387.99 386.61 384.32 383.41 383.21 384.41 385.79
+## [611] 387.17 387.70 389.04 389.76 390.36 389.70 388.24 386.29 384.95 384.64
+## [621] 386.23 387.63 388.91 390.41 391.37 392.67 393.21 392.38 390.41 388.54
+## [631] 387.03 387.43 388.87 389.99 391.50 392.05 392.80 393.44 394.41 393.95
+## [641] 392.72 390.33 389.28 389.19 390.48 392.06 393.31 394.04 394.59 396.38
+## [651] 396.93 395.91 394.56 392.59 391.32 391.27 393.20 394.57 395.78 397.03
+## [661] 397.66 398.64 400.02 398.81 397.51 395.39 393.72 393.90 395.36 397.03
+## [671] 398.04 398.27 399.91 401.51 401.96 401.43 399.27 397.18 395.54 396.16
+## [681] 397.40 399.08 400.18 400.55 401.74 403.34 404.15 402.97 401.46 399.11
+## [691] 397.82 398.49 400.27 402.06 402.73 404.25 405.06 407.60 407.90 406.99
+## [701] 404.59 402.45 401.23 401.79 403.72 404.64 406.36 406.66 407.54 409.22
+## [711] 409.89 409.08 407.33 405.32 403.57 403.82 405.31 407.00 408.15 408.52
+## [721] 409.59 410.45 411.44 410.99 408.90 407.16 405.71 406.19 408.21 409.27
+## [731] 411.03 411.96 412.18 413.54 414.86 414.15 411.96 410.17 408.76 408.74
+## [741] 410.47 411.97 413.59 414.32 414.71 416.42 417.28 416.58 414.58 412.75
+## [751] 411.49 411.48 413.10 414.23 415.49 416.72 417.61 419.01 419.09 418.92
+## [761] 416.90 414.42 413.26 413.90 414.97 416.67 418.13 419.24 418.76 420.19
+## [771] 420.97 420.94 418.85 417.15 415.91 415.74 417.47 418.99 419.48 420.30
+## [781] 420.98 423.35 424.00 423.68 421.83 419.68 418.51 418.82 420.46 421.86
+## [791] 422.80 424.55 425.38 426.51 426.90 426.91 425.55 422.99 422.03 422.38
+## [801] 423.85 425.40 426.65 427.09 428.15 429.64 430.51 429.61 427.87 425.48
+## [811] 424.37 424.87 426.46 427.49 428.62</code></pre>
 <p>Let’s do some simple statistical checks with
 <code>Keeling_Data$co2</code>:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Min</span></span>
@@ -631,20 +696,20 @@ by specifying them using the <code>$</code> operator:</p>
 <pre><code>## [1] -99.99</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Max</span></span>
 <span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="fu">max</span>(Keeling_Data<span class="sc">$</span>co2)</span></code></pre></div>
-<pre><code>## [1] 426.91</code></pre>
+<pre><code>## [1] 430.51</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Range</span></span>
 <span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="fu">range</span>(Keeling_Data<span class="sc">$</span>co2)</span></code></pre></div>
-<pre><code>## [1] -99.99 426.91</code></pre>
+<pre><code>## [1] -99.99 430.51</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Mean</span></span>
 <span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="fu">mean</span>(Keeling_Data<span class="sc">$</span>co2)</span></code></pre></div>
-<pre><code>## [1] 356.0731</code></pre>
+<pre><code>## [1] 357.1249</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Median</span></span>
 <span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="fu">median</span>(Keeling_Data<span class="sc">$</span>co2)</span></code></pre></div>
-<pre><code>## [1] 355.68</code></pre>
+<pre><code>## [1] 355.95</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># Show quantiles</span></span>
 <span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a><span class="fu">summary</span>(Keeling_Data<span class="sc">$</span>co2)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  -99.99  330.49  355.68  356.07  385.79  426.91</code></pre>
+##  -99.99  330.80  355.95  357.12  386.90  430.51</code></pre>
 <p>You will find there are some <code>-99.99</code> values, which are
 <em>missing values</em>. We will get back to this later.</p>
 <p>You can use <code>[]</code> to extract elements of a vector by
@@ -687,7 +752,7 @@ older behaviors to make life a little easier.</p>
 using the <code>as_tibble()</code> function:</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a>Keeling_Data_tbl <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(Keeling_Data)</span>
 <span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a>Keeling_Data_tbl</span></code></pre></div>
-<pre><code>## # A tibble: 803 × 5
+<pre><code>## # A tibble: 815 × 5
 ##     year month decimal_date    co2 quality
 ##    &lt;int&gt; &lt;int&gt;        &lt;dbl&gt;  &lt;dbl&gt;   &lt;int&gt;
 ##  1  1958     3        1958.  316.        1
@@ -700,7 +765,7 @@ using the <code>as_tibble()</code> function:</p>
 ##  8  1958    10        1959. -100.0       0
 ##  9  1958    11        1959.  313.        1
 ## 10  1958    12        1959.  315.        1
-## # ℹ 793 more rows</code></pre>
+## # ℹ 805 more rows</code></pre>
 </div>
 <div id="tidy-dataset" class="section level2">
 <h2>Tidy dataset</h2>
@@ -749,7 +814,7 @@ pipes <code>%&gt;%</code> to combine them.</p>
 <p>Use the <code>select()</code> function to keep only the variables
 (columns) you select.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(Keeling_Data_tbl, year, co2, quality)</span></code></pre></div>
-<pre><code>## # A tibble: 803 × 3
+<pre><code>## # A tibble: 815 × 3
 ##     year    co2 quality
 ##    &lt;int&gt;  &lt;dbl&gt;   &lt;int&gt;
 ##  1  1958  316.        1
@@ -762,9 +827,9 @@ pipes <code>%&gt;%</code> to combine them.</p>
 ##  8  1958 -100.0       0
 ##  9  1958  313.        1
 ## 10  1958  315.        1
-## # ℹ 793 more rows</code></pre>
+## # ℹ 805 more rows</code></pre>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(Keeling_Data_tbl, co2)</span></code></pre></div>
-<pre><code>## # A tibble: 803 × 1
+<pre><code>## # A tibble: 815 × 1
 ##       co2
 ##     &lt;dbl&gt;
 ##  1  316. 
@@ -777,7 +842,7 @@ pipes <code>%&gt;%</code> to combine them.</p>
 ##  8 -100.0
 ##  9  313. 
 ## 10  315. 
-## # ℹ 793 more rows</code></pre>
+## # ℹ 805 more rows</code></pre>
 </div>
 <div id="the-pipe-symbol" class="section level2">
 <h2>The pipe symbol <code>%&gt;%</code></h2>
@@ -789,7 +854,7 @@ above using pipes.</p>
 <p><code>x %&gt;% f(y)</code> is the same as <code>f(x, y)</code></p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a>Keeling_Data_tbl <span class="sc">%&gt;%</span> </span>
 <span id="cb45-2"><a href="#cb45-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, co2, quality)</span></code></pre></div>
-<pre><code>## # A tibble: 803 × 3
+<pre><code>## # A tibble: 815 × 3
 ##     year    co2 quality
 ##    &lt;int&gt;  &lt;dbl&gt;   &lt;int&gt;
 ##  1  1958  316.        1
@@ -802,7 +867,7 @@ above using pipes.</p>
 ##  8  1958 -100.0       0
 ##  9  1958  313.        1
 ## 10  1958  315.        1
-## # ℹ 793 more rows</code></pre>
+## # ℹ 805 more rows</code></pre>
 <p>The above lines mean we first call the <code>Keeling_Data_tbl</code>
 tibble and pass it on, using the <strong>pipe symbol</strong>
 <code>%&gt;%</code>, to the next step, which is the
@@ -842,7 +907,7 @@ of pipe later.</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a>Keeling_Data_tbl <span class="sc">%&gt;%</span> </span>
 <span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, co2, quality) <span class="sc">%&gt;%</span> </span>
 <span id="cb49-3"><a href="#cb49-3" tabindex="-1"></a>  <span class="fu">filter</span>(quality <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 796 × 3
+<pre><code>## # A tibble: 808 × 3
 ##     year   co2 quality
 ##    &lt;int&gt; &lt;dbl&gt;   &lt;int&gt;
 ##  1  1958  316.       1
@@ -855,7 +920,7 @@ of pipe later.</p>
 ##  8  1958  315.       1
 ##  9  1959  316.       1
 ## 10  1959  316.       1
-## # ℹ 786 more rows</code></pre>
+## # ℹ 798 more rows</code></pre>
 <p>You see here we have used the pipe twice, and the scripts become
 really clean and easy to follow.</p>
 </div>
@@ -867,7 +932,7 @@ function, notice how the output tibble changes:</p>
 <span id="cb51-2"><a href="#cb51-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, month, co2, quality) <span class="sc">%&gt;%</span> </span>
 <span id="cb51-3"><a href="#cb51-3" tabindex="-1"></a>  <span class="fu">filter</span>(quality <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb51-4"><a href="#cb51-4" tabindex="-1"></a>  <span class="fu">group_by</span>(month)</span></code></pre></div>
-<pre><code>## # A tibble: 796 × 4
+<pre><code>## # A tibble: 808 × 4
 ## # Groups:   month [12]
 ##     year month   co2 quality
 ##    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;   &lt;int&gt;
@@ -881,7 +946,7 @@ function, notice how the output tibble changes:</p>
 ##  8  1958    12  315.       1
 ##  9  1959     1  316.       1
 ## 10  1959     2  316.       1
-## # ℹ 786 more rows</code></pre>
+## # ℹ 798 more rows</code></pre>
 <p>The <code>group_by()</code> function is much more exciting in
 conjunction with the <code>summarize()</code> function. This will allow
 us to create new variable(s) by using functions that repeat for each of
@@ -898,18 +963,18 @@ dataframe into multiple pieces</strong>, then we can run functions
 <pre><code>## # A tibble: 12 × 2
 ##    month monthly_mean
 ##    &lt;int&gt;        &lt;dbl&gt;
-##  1     1         361.
-##  2     2         361.
-##  3     3         361.
-##  4     4         363.
-##  5     5         362.
-##  6     6         363.
-##  7     7         360.
-##  8     8         358.
-##  9     9         357.
-## 10    10         357.
-## 11    11         358.
-## 12    12         360.</code></pre>
+##  1     1         362.
+##  2     2         362.
+##  3     3         362.
+##  4     4         364.
+##  5     5         363.
+##  6     6         364.
+##  7     7         361.
+##  8     8         359.
+##  9     9         358.
+## 10    10         358.
+## 11    11         359.
+## 12    12         361.</code></pre>
 <p>Here we create a new variable (column) <code>monthly_mean</code>, and
 append it to the groups (<code>month</code> in this case). Now, we get a
 so-called <em>monthly climatology</em>.</p>
@@ -924,18 +989,18 @@ sort the data:</p>
 <pre><code>## # A tibble: 12 × 2
 ##    month monthly_mean
 ##    &lt;int&gt;        &lt;dbl&gt;
-##  1     9         357.
-##  2    10         357.
-##  3    11         358.
-##  4     8         358.
-##  5    12         360.
-##  6     7         360.
-##  7     1         361.
-##  8     2         361.
-##  9     3         361.
-## 10     5         362.
-## 11     6         363.
-## 12     4         363.</code></pre>
+##  1     9         358.
+##  2    10         358.
+##  3    11         359.
+##  4     8         359.
+##  5    12         361.
+##  6     7         361.
+##  7     1         362.
+##  8     2         362.
+##  9     3         362.
+## 10     5         363.
+## 11     6         364.
+## 12     4         364.</code></pre>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" tabindex="-1"></a>Keeling_Data_tbl <span class="sc">%&gt;%</span> </span>
 <span id="cb57-2"><a href="#cb57-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, month, co2, quality) <span class="sc">%&gt;%</span> </span>
 <span id="cb57-3"><a href="#cb57-3" tabindex="-1"></a>  <span class="fu">filter</span>(quality <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
@@ -945,18 +1010,18 @@ sort the data:</p>
 <pre><code>## # A tibble: 12 × 2
 ##    month monthly_mean
 ##    &lt;int&gt;        &lt;dbl&gt;
-##  1     4         363.
-##  2     6         363.
-##  3     5         362.
-##  4     3         361.
-##  5     2         361.
-##  6     1         361.
-##  7     7         360.
-##  8    12         360.
-##  9     8         358.
-## 10    11         358.
-## 11    10         357.
-## 12     9         357.</code></pre>
+##  1     4         364.
+##  2     6         364.
+##  3     5         363.
+##  4     3         362.
+##  5     2         362.
+##  6     1         362.
+##  7     7         361.
+##  8    12         361.
+##  9     8         359.
+## 10    11         359.
+## 11    10         358.
+## 12     9         358.</code></pre>
 <p>Let’s add more statistics to the monthly climatology:</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" tabindex="-1"></a>Keeling_Data_tbl <span class="sc">%&gt;%</span> </span>
 <span id="cb59-2"><a href="#cb59-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, month, co2, quality) <span class="sc">%&gt;%</span> </span>
@@ -968,18 +1033,18 @@ sort the data:</p>
 <pre><code>## # A tibble: 12 × 6
 ##    month monthly_mean monthly_sd monthly_min monthly_max monthly_se
 ##    &lt;int&gt;        &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
-##  1     1         361.       32.8        316.        427.       4.00
-##  2     2         361.       31.9        316.        425.       3.96
-##  3     3         361.       32.1        316.        425.       3.95
-##  4     4         363.       32.4        317.        427.       4.02
-##  5     5         362.       32.4        318.        427.       3.96
-##  6     6         363.       32.1        318.        427.       3.96
-##  7     7         360.       32.2        316.        426.       3.93
-##  8     8         358.       32.1        315.        423.       3.92
-##  9     9         357.       32.2        313.        422.       3.94
-## 10    10         357.       32.2        313.        422.       3.96
-## 11    11         358.       32.5        313.        424.       3.98
-## 12    12         360.       32.7        315.        425.       4.03</code></pre>
+##  1     1         362.       33.6        316.        429.       4.07
+##  2     2         362.       32.7        316.        427.       4.02
+##  3     3         362.       32.9        316.        428.       4.02
+##  4     4         364.       33.2        317.        430.       4.09
+##  5     5         363.       33.2        318.        431.       4.03
+##  6     6         364.       32.9        318.        430.       4.02
+##  7     7         361.       33.0        316.        428.       4.00
+##  8     8         359.       32.9        315.        425.       3.99
+##  9     9         358.       33.0        313.        424.       4.00
+## 10    10         358.       33.0        313.        425.       4.03
+## 11    11         359.       33.3        313.        426.       4.04
+## 12    12         361.       33.5        315.        427.       4.09</code></pre>
 <p>Here we call the <code>n()</code> to get the size of a vector.</p>
 </div>
 <div id="using-mutate" class="section level2">
@@ -990,7 +1055,7 @@ sort the data:</p>
 <code>1000</code>.</p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" tabindex="-1"></a>Keeling_Data_tbl <span class="sc">%&gt;%</span> </span>
 <span id="cb61-2"><a href="#cb61-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">co2_ppb =</span> co2 <span class="sc">*</span> <span class="fl">1e3</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 803 × 6
+<pre><code>## # A tibble: 815 × 6
 ##     year month decimal_date    co2 quality co2_ppb
 ##    &lt;int&gt; &lt;int&gt;        &lt;dbl&gt;  &lt;dbl&gt;   &lt;int&gt;   &lt;dbl&gt;
 ##  1  1958     3        1958.  316.        1  315700
@@ -1003,7 +1068,7 @@ sort the data:</p>
 ##  8  1958    10        1959. -100.0       0  -99990
 ##  9  1958    11        1959.  313.        1  313330
 ## 10  1958    12        1959.  315.        1  314670
-## # ℹ 793 more rows</code></pre>
+## # ℹ 805 more rows</code></pre>
 <p>When creating new variables, we can hook this with a logical
 condition. A simple combination of <code>mutate()</code> and
 <code>ifelse()</code> facilitates filtering right where it is needed: in
@@ -1015,7 +1080,7 @@ depending on this given condition.</p>
 <code>NA</code>:</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" tabindex="-1"></a>Keeling_Data_tbl <span class="sc">%&gt;%</span> </span>
 <span id="cb63-2"><a href="#cb63-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">co2_ppb =</span> co2 <span class="sc">*</span> <span class="fl">1e3</span>, <span class="at">co2_new =</span> <span class="fu">ifelse</span>(quality<span class="sc">==</span><span class="dv">1</span>, co2, <span class="cn">NA</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 803 × 7
+<pre><code>## # A tibble: 815 × 7
 ##     year month decimal_date    co2 quality co2_ppb co2_new
 ##    &lt;int&gt; &lt;int&gt;        &lt;dbl&gt;  &lt;dbl&gt;   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;
 ##  1  1958     3        1958.  316.        1  315700    316.
@@ -1028,7 +1093,7 @@ depending on this given condition.</p>
 ##  8  1958    10        1959. -100.0       0  -99990     NA 
 ##  9  1958    11        1959.  313.        1  313330    313.
 ## 10  1958    12        1959.  315.        1  314670    315.
-## # ℹ 793 more rows</code></pre>
+## # ℹ 805 more rows</code></pre>
 </div>
 <div id="combining-dplyr-and-ggplot2" class="section level2">
 <h2>Combining <code>dplyr</code> and <code>ggplot2</code></h2>
@@ -1062,7 +1127,8 @@ data.</p>
 <span id="cb67-4"><a href="#cb67-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>decimal_date, <span class="at">y=</span>co2_new, <span class="at">color=</span>month)) <span class="sc">+</span> </span>
 <span id="cb67-5"><a href="#cb67-5" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb67-6"><a href="#cb67-6" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> month)</span></code></pre></div>
-<pre><code>## Warning: Removed 2 rows containing missing values or values outside the scale range (`geom_line()`).</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values or values outside the scale range
+## (`geom_line()`).</code></pre>
 <p><img src="S02_files/figure-html/unnamed-chunk-24-1.png" alt="" width="672" /></p>
 <p>OK, that is enough for data wrangling We will learn more about
 <code>ggplot2</code> in future sections.</p>
@@ -1187,7 +1253,7 @@ CO<sub>2</sub> since 1959, plot your results.</p>
 <h1>Further reading</h1>
 <ul>
 <li><a
-href="https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data
+href="https://www.washstat.org/seminars/2015/20150428_datascience_docs/data-wrangling-cheatsheet.pdf">Data
 Wrangling with dplyr and tidyr Cheat Sheet</a></li>
 <li><a
 href="https://swcarpentry.github.io/r-novice-gapminder/13-dplyr.html">Dataframe
