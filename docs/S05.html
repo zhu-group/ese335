@@ -662,7 +662,7 @@ the test is done with <code>shapiro.test()</code>.</p>
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sample3
-## W = 0.94569, p-value = 0.2001</code></pre>
+## W = 0.96865, p-value = 0.6111</code></pre>
 <p>From the output, the <code>p-value &gt; 0.05</code> shows that we
 fail to reject the null hypothesis, which means the distribution of our
 data is not significantly different from the normal distribution. In
@@ -673,7 +673,7 @@ other words, the distribution of our data is normal.</p>
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sample4
-## W = 0.95589, p-value = 0.3387</code></pre>
+## W = 0.94436, p-value = 0.1865</code></pre>
 </div>
 <div id="lilliefors-test" class="section level2">
 <h2>Lilliefors test</h2>
@@ -690,14 +690,14 @@ package:</p>
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  sample1
-## D = 0.058199, p-value = 0.09627</code></pre>
+## D = 0.050619, p-value = 0.2411</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Lilliefors test of sample 2</span></span>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">lillie.test</span>(sample2)</span></code></pre></div>
 <pre><code>## 
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  sample2
-## D = 0.069393, p-value = 0.02037</code></pre>
+## D = 0.073372, p-value = 0.01076</code></pre>
 <hr />
 </div>
 </div>
@@ -738,7 +738,7 @@ straightforward to make a logarithmic transformation. Such as:</p>
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  sample6
-## D = 0.038851, p-value = 0.6521</code></pre>
+## D = 0.030606, p-value = 0.9192</code></pre>
 <p>The Box-Cox transformation is commonly used to transfer a non-normal
 dependent variables into a normal shape. The basic idea behind this
 method is to find some value for <span
@@ -766,7 +766,7 @@ package. For example:</p>
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  y
-## D = 0.13302, p-value = 0.07224</code></pre>
+## D = 0.15106, p-value = 0.02211</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># BOX-COX transformation, get lambda</span></span>
 <span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="fu">boxcoxfit</span>(y)<span class="sc">$</span>lambda</span>
 <span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a></span>
@@ -785,7 +785,7 @@ package. For example:</p>
 ##  Lilliefors (Kolmogorov-Smirnov) normality test
 ## 
 ## data:  y_new
-## D = 0.089688, p-value = 0.5768</code></pre>
+## D = 0.068546, p-value = 0.9071</code></pre>
 <hr />
 </div>
 <div id="in-class-exercises" class="section level1">
